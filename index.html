@@ -739,7 +739,8 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   var SUPABASE_URL='https://YOUR-PROJECT-REF.supabase.co';
   var SUPABASE_ANON_KEY='YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
   var configured=SUPABASE_URL.indexOf('YOUR-PROJECT-REF')===-1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_')===-1;
-  window.airSupabaseAnonKey=SUPABASE_ANON_KEY;\n  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+  window.airSupabaseAnonKey=SUPABASE_ANON_KEY;
+  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
   window.airGetAccessToken=async function(){
     if(!window.airSupabaseClient)return null;
     var result=await window.airSupabaseClient.auth.getSession();
