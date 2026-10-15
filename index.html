@@ -372,11 +372,45 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 @media(min-width:601px){.nav-group[open] .nav-subbuttons{position:relative}}
 @media(max-width:600px){.grouped-actions{gap:7px;padding-left:10px;padding-right:10px}.nav-group{min-width:0;flex:1 1 28%}.nav-group>summary{padding:8px 6px;font-size:12px;min-height:40px}.nav-subbuttons{padding:6px;min-width:0}.nav-subbuttons a{font-size:12px;white-space:normal;padding:7px 8px;min-height:34px}}
 </style>
+
+<style id="compact-floating-search-widget">
+.search-widget-launcher{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:1100;display:flex;align-items:center;gap:7px;min-height:42px;padding:8px 13px;border:1px solid var(--blue);border-radius:999px;background:var(--card);color:var(--ink);box-shadow:0 5px 18px rgba(0,0,0,.18);font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.search-widget-launcher:hover{background:var(--sun);color:#14213d}
+.search-widget-panel{position:fixed;left:14px;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:1101;width:min(370px,calc(100vw - 28px));max-height:min(65vh,520px);overflow:auto;padding:13px;border:1px solid var(--blue);border-radius:16px;background:var(--card);color:var(--ink);box-shadow:0 12px 38px rgba(0,0,0,.25)}
+.search-widget-panel[hidden]{display:none!important}
+.search-widget-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.search-widget-head strong{font:600 17px 'Fredoka',sans-serif}
+.search-widget-close{width:32px;height:32px;border:1px solid var(--mute);border-radius:50%;background:var(--bg);color:var(--ink);font-size:22px;cursor:pointer}
+.search-widget-panel input{box-sizing:border-box;width:100%;min-height:40px;padding:9px 11px;border:1px solid var(--mute);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.search-widget-actions{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}
+.search-widget-actions .btn{min-height:32px;padding:5px 8px;font-size:12px}
+.search-widget-panel #searchResults{font-size:12px;line-height:1.4;color:var(--mute);max-height:180px;overflow:auto}
+.search-widget-panel .result-list{display:grid;gap:5px;margin-top:8px}
+.search-widget-panel .result-item{padding:7px 8px;text-align:left;border:1px solid var(--mute);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+@media(max-width:520px){.search-widget-launcher{left:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));min-height:40px;padding:7px 11px}.search-widget-panel{left:8px;bottom:calc(58px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:62vh}}
+</style>
+<script>
+(function(){
+ var panel=document.getElementById('searchWidgetPanel'),launcher=document.getElementById('searchWidgetLauncher'),close=document.getElementById('closeSearchWidget'),input=document.getElementById('noteSearch');
+ if(!panel||!launcher||!close)return;
+ function setOpen(open){panel.hidden=!open;launcher.setAttribute('aria-expanded',String(open));if(open&&input)input.focus({preventScroll:true});}
+ launcher.addEventListener('click',function(){setOpen(panel.hidden);});
+ close.addEventListener('click',function(){setOpen(false);launcher.focus({preventScroll:true});});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden){setOpen(false);launcher.focus({preventScroll:true});}});
+})();
+</script>
+
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
 <header class="top"><div class="bar"><a class="logo" href="#top">IHRM<b>Air</b></a></div>
-<div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div>
+<button class="search-widget-launcher" id="searchWidgetLauncher" type="button" aria-controls="searchWidgetPanel" aria-expanded="false" aria-label="Open note search">⌕ <span>Search notes</span></button>
+<div class="search-widget-panel" id="searchWidgetPanel" aria-label="Search and study tools" hidden>
+  <div class="search-widget-head"><strong>Search your notes</strong><button class="search-widget-close" id="closeSearchWidget" type="button" aria-label="Close search">×</button></div>
+  <label class="sr-only" for="noteSearch">Search all notes</label><input id="noteSearch" type="search" placeholder="Search units, topics or terms…" autocomplete="off">
+  <div class="search-widget-actions"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button></div>
+  <div id="searchResults" role="status" aria-live="polite">Search the full notes, all four units, flashcards and revision tools.</div>
+</div>
 <div class="top-actions grouped-actions" aria-label="Main study navigation">
 <details class="nav-group"><summary>📚 Units</summary><div class="nav-subbuttons"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a></div></details>
 <details class="nav-group"><summary>📝 Practice</summary><div class="nav-subbuttons"><a href="#quiz">Quiz</a><a href="#full-notes">Revision tools</a><a href="#pp">Passport</a></div></details>
