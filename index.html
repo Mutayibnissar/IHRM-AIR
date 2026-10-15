@@ -1414,5 +1414,111 @@ header.top .nav-subbuttons a:focus-visible{background:#ffc83d!important;color:#1
 @media(prefers-reduced-motion:reduce){header.top .nav-group[open] .nav-subbuttons{animation:none!important}}
 </style>
 
+
+<style id="responsive-mobile-desktop-layout">
+/* Responsive layout pass: phones, tablets, laptops and wide screens */
+html{width:100%;max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:clip}
+img,svg,video,canvas,iframe{max-width:100%}
+input,select,textarea,button{max-width:100%;font:inherit}
+button,a,summary{touch-action:manipulation}
+main{width:min(100% - 32px,1180px);margin-inline:auto}
+.dest{min-width:0;width:100%;padding-top:clamp(28px,5vw,56px)}
+.dest>*{min-width:0}
+.tags,details.tag,.tag div,.full-unit-notes,.card,.pp,.quiz,.tool,.panel{min-width:0;max-width:100%}
+p,li,td,th,summary,a{overflow-wrap:anywhere}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+pre,code{max-width:100%;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+main>section,main>.dest{margin-inline:auto}
+.top-actions{width:min(100%,1080px)}
+header.top .bar{width:min(100%,1080px)}
+.search-widget-panel,.search-widget-launcher{max-width:calc(100vw - 24px)}
+/* Keep all nav controls tappable without clipping their dropdowns */
+header.top .top-actions{max-height:none;overflow:visible;min-width:0}
+header.top .nav-group{flex:0 0 auto;min-width:0}
+header.top .nav-group>summary{min-height:44px}
+header.top .nav-subbuttons{white-space:normal}
+@media(min-width:1100px){
+  main{width:min(100% - 56px,1180px)}
+  .hero{padding:58px 28px 72px}
+  .main{padding:34px 36px 38px}
+  .dest{gap:40px}
+  .tags{gap:14px}
+  .top-actions{padding-inline:0}
+}
+@media(max-width:819px){
+  main{width:calc(100% - 28px)}
+  .dest{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:34px}
+  .dest .side{position:relative;top:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:14px;align-items:center}
+  .dest .side h2,.dest .side .tagline{grid-column:1/-1}
+  .dest .side .win{width:94px;height:112px;margin:6px 0 8px;border-width:6px}
+  .dest .side .win svg{width:100%;height:100%}
+  .dest .side .stampbtn{justify-self:start;align-self:center}
+  .tags{gap:10px}
+  .tag div{overflow-wrap:anywhere}
+}
+@media(max-width:600px){
+  html{scroll-padding-top:150px}
+  section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:150px}
+  header.top{padding-left:12px;padding-right:12px}
+  header.top .bar{padding-bottom:5px}
+  .logo{font-size:23px}
+  header.top .top-actions{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 9px;margin-top:7px;justify-content:flex-start}
+  header.top .nav-group{flex:0 0 auto;max-width:100%}
+  header.top .nav-group>summary{font-size:12px;padding:8px 9px;min-height:42px;gap:5px}
+  header.top .nav-subbuttons{top:calc(100% + 5px)!important;left:0!important;width:min(220px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;padding:8px!important}
+  header.top .nav-group:nth-last-child(1) .nav-subbuttons{left:auto!important;right:0!important}
+  .track{height:22px}
+  .track::before{top:10px}
+  .hero{padding:28px 12px 38px}
+  .pass{border-radius:15px}
+  .main{padding:20px 17px 23px}
+  .main h1{font-size:clamp(32px,9vw,46px);line-height:1.12}
+  .main p{font-size:15px;line-height:1.6}
+  .route{font-size:12px;gap:6px;flex-wrap:wrap}
+  .route svg{width:26px}
+  .stub{padding:14px 17px;grid-template-columns:1fr 1fr;gap:10px;font-size:12px}
+  .stub>div:last-child{grid-column:1/-1}
+  .stub b{font-size:18px;overflow-wrap:anywhere}
+  .stats{gap:7px}
+  .stats span{font-size:12px;padding:4px 8px}
+  main{width:calc(100% - 24px)}
+  .dest{padding-top:28px;gap:14px}
+  .dest h2{font-size:clamp(25px,7vw,34px)}
+  .dest .side .win{width:78px;height:94px}
+  details.tag{padding-left:34px;padding-right:12px;border-left-width:5px;border-radius:12px}
+  details.tag::before{left:10px;top:20px;width:11px;height:11px}
+  details.tag summary{font-size:16px;line-height:1.4;padding:13px 0}
+  .tag div{font-size:15px;line-height:1.6}
+  .tag ul{padding-left:18px}
+  .study-tools{margin:12px 0;padding:10px;gap:7px}
+  .study-tools input{flex-basis:100%;width:100%;font-size:16px}
+  .study-tools .btn{flex:1 1 auto;min-height:42px;font-size:12px;padding:7px 8px;white-space:normal}
+  .search-widget-panel{left:12px;bottom:calc(68px + env(safe-area-inset-bottom,0px));width:calc(100vw - 24px);max-height:65dvh}
+  .search-widget-launcher{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:44px}
+  .pol{float:none;margin:8px auto 28px;max-width:100%}
+  .cover{max-width:100%;overflow:hidden}
+  .full-unit-notes{padding:0 12px}
+  .full-unit-notes summary{font-size:15px}
+  .agent-lab input,.agent-lab textarea,.agent-lab select{width:100%;min-width:0}
+  .agent-lab .agent-grid,.agent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){
+  main{width:calc(100% - 18px)}
+  .hero{padding-inline:9px}
+  header.top .nav-group>summary{font-size:11px;padding-inline:7px}
+  .dest .side{grid-template-columns:minmax(0,1fr) auto}
+  .dest .side .win{width:64px;height:78px}
+  .dest .side .stampbtn{font-size:13px;padding:6px 8px}
+  .stub{grid-template-columns:minmax(0,1fr)}
+  .stub>div:last-child{grid-column:auto}
+  .main{padding:17px 13px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+
 </body>
 </html>
