@@ -739,7 +739,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   var SUPABASE_URL='https://YOUR-PROJECT-REF.supabase.co';
   var SUPABASE_ANON_KEY='YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
   var configured=SUPABASE_URL.indexOf('YOUR-PROJECT-REF')===-1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_')===-1;
-  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+  window.airSupabaseAnonKey=SUPABASE_ANON_KEY;\n  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
   window.airGetAccessToken=async function(){
     if(!window.airSupabaseClient)return null;
     var result=await window.airSupabaseClient.auth.getSession();
@@ -831,7 +831,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     var response=await fetch(API_BASE_URL+'/api/agent',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token}:{'Content-Type':'application/json'}})(),\n      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
+      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token,'apikey':window.airSupabaseAnonKey}:{'Content-Type':'application/json','apikey':window.airSupabaseAnonKey||''}})(),\n      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
     });
     var data;
     try{data=await response.json()}catch(_){throw new Error('The AI backend returned an invalid response. Check that the Worker is deployed correctly.')}
