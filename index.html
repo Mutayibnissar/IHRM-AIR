@@ -309,8 +309,8 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
     <div class="agent-actions">
       <button class="btn run" id="runAgent" type="button">Run selected agent</button>
-      <button class="btn run" id="runLiveAI" type="button">Run Gemini Agent</button>
-      <button class="btn run" id="runGeminiTeam" type="button">Run AI Agent Team</button>
+      <button class="btn run" id="runLiveAI" type="button">Run connected AI (backend required)</button>
+      <button class="btn run" id="runGeminiTeam" type="button">Run connected AI team (backend required)</button>
       <button class="btn" id="runAgentTeam" type="button">Run local team workflow</button>
       <button class="btn" id="clearAgentOutput" type="button">Clear output</button>
     </div>
@@ -804,7 +804,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   function esc(v){return String(v||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function findNotes(q){var terms=String(q||'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>2});var nodes=Array.from(d.querySelectorAll('main h2,main h3,main h4,main summary,main li,main .note,main .hint,main button.card'));var scored=nodes.map(function(el){var text=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();var low=text.toLowerCase();var score=terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0);return {el:el,text:text,score:score}}).filter(function(x){return x.score>0&&x.text.length>8});scored.sort(function(a,b){return b.score-a.score});var seen={};return scored.filter(function(x){var k=x.text.slice(0,100);if(seen[k])return false;seen[k]=true;return true}).slice(0,15)}
   function noteList(hits,n,label){if(!hits.length)return '<p>No relevant course notes found.</p>';return '<p><span class="agent-chip">'+esc(label)+'</span></p><ul>'+hits.slice(0,n).map(function(h){var id=h.el.id;var parent=h.el.closest('section[id]');var target=id?'#'+id:(parent?'#'+parent.id:'');return '<li>'+(target?'<a href="'+esc(target)+'">':'')+esc(h.text.slice(0,260))+(target?'</a>':'')+'</li>'}).join('')+'</ul>'}
-  function render(agent,result){out.innerHTML='<h3>'+agent.badge+' '+esc(agent.name)+' · '+esc(result.title)+'</h3>'+result.body;out.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  function render(agent,result){out.innerHTML='<h3>'+agent.badge+' '+esc(agent.name)+' · '+esc(result.title)+'</h3>'+result.body;if(agent.source){var source=document.createElement('p');source.className='agent-status';var link=document.createElement('a');link.href=agent.source;link.target='_blank';link.rel='noopener';link.textContent='Open original agent definition from this repository';source.appendChild(link);out.appendChild(source)}out.scrollIntoView({behavior:'smooth',block:'nearest'})}
   d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
   d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
   d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var result=roster.orchestrator.run(q);render(roster.orchestrator,result);});
