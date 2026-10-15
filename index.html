@@ -487,6 +487,15 @@ header.top{isolation:isolate;z-index:100}
 
 </style>
 
+<style id="study-progress-upgrade">
+.daily-goal-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:12px 0 8px}
+.daily-goal-heading strong{font-size:14px}
+.daily-goal-heading label{font-size:13px;color:var(--mute)}
+.daily-goal-heading select{max-width:125px;border:1px solid var(--frame);border-radius:9px;background:var(--card);color:var(--ink);padding:7px}
+#study-progress .tool-actions input[type=file]{max-width:100%}
+#study-progress .tool-actions .btn{flex:1 1 145px}
+@media(max-width:600px){#study-progress .tool-actions .btn{flex:1 1 100%}}
+</style>
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
@@ -1063,6 +1072,15 @@ header.top{isolation:isolate;z-index:100}
       <div class="recall-question" id="recallQuestion">What are Morgan’s three dimensions of IHRM?</div>
       <p class="recall-answer" id="recallAnswer" hidden>HR activities × countries (host, parent, other) × employee types (HCN, PCN, TCN).</p>
       <div class="tool-actions"><button class="btn" type="button" id="revealRecall">Reveal answer</button><button class="btn" type="button" id="nextRecall">Next prompt</button><button class="btn" type="button" id="shuffleRecall">Shuffle prompts</button></div><div class="recall-confidence"><span class="tool-status">After revealing, rate your recall:</span><div class="tool-actions"><button class="btn" type="button" id="recallAgain">Review again</button><button class="btn" type="button" id="recallGotIt">Got it</button></div><p class="tool-status" id="recallStats" aria-live="polite">0 mastered · 0 to review</p></div>
+    </article>
+    <article class="study-tool-card" id="study-progress">
+      <span class="study-tool-kicker">05 · Progress</span><h3>Daily goal &amp; backup</h3>
+      <p class="tool-muted">Build a consistent routine and keep a portable copy of your study progress.</p>
+      <div class="daily-goal-heading"><strong id="dailyGoalCount">0 / 2 focus sessions today</strong><label for="dailyGoalTarget">Daily goal</label><select id="dailyGoalTarget"><option value="1">1 session</option><option value="2" selected>2 sessions</option><option value="3">3 sessions</option><option value="4">4 sessions</option><option value="5">5 sessions</option><option value="6">6 sessions</option><option value="8">8 sessions</option><option value="10">10 sessions</option><option value="12">12 sessions</option></select></div>
+      <div class="study-progress-track" aria-label="Daily focus goal progress"><span id="dailyGoalBar"></span></div>
+      <p class="tool-status" id="studyStreakStatus" aria-live="polite">Complete a focus session to start your streak.</p>
+      <div class="tool-actions"><button class="btn" type="button" id="exportStudyBackup">Export study backup</button><button class="btn" type="button" id="importStudyBackup">Import backup</button><input class="sr-only" id="studyBackupFile" type="file" accept="application/json,.json" aria-label="Choose an IHRM Air study backup"></div>
+      <p class="tool-status" id="studyBackupStatus" aria-live="polite">Backup includes saved notes, checklist, recall status, unit stamps, theme and daily progress. It does not include account credentials or API keys.</p>
     </article>
   </div>
 </section>
@@ -1713,6 +1731,34 @@ header.top .nav-subbuttons{white-space:normal}
   var shuffle=$('shuffleRecall');if(shuffle)shuffle.addEventListener('click',function(){for(var i=promptOrder.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),tmp=promptOrder[i];promptOrder[i]=promptOrder[j];promptOrder[j]=tmp}promptPosition=0;showPrompt()});
   var again=$('recallAgain');if(again)again.addEventListener('click',function(){var key=String(promptOrder[promptPosition]);reviewAgain[key]=true;delete mastered[key];save('air-recall-review',JSON.stringify(reviewAgain));save('air-recall-mastered',JSON.stringify(mastered));nextPrompt()});
   var gotIt=$('recallGotIt');if(gotIt)gotIt.addEventListener('click',function(){var key=String(promptOrder[promptPosition]);mastered[key]=true;delete reviewAgain[key];save('air-recall-review',JSON.stringify(reviewAgain));save('air-recall-mastered',JSON.stringify(mastered));nextPrompt()});
+  // Daily goal and streak: only completed focus timers count as sessions.
+  var dailyGoalTarget=$('dailyGoalTarget');
+  function localDateKey(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0')}
+  function readDailyLog(){try{var data=JSON.parse(read('air-study-daily-log')||'{}');return data&&typeof data==='object'&&!Array.isArray(data)?data:{}}catch(e){return {}}}
+  function updateDailyGoal(){
+    var log=readDailyLog(),today=localDateKey(new Date()),goal=Math.max(1,Math.min(12,Number(read('air-study-daily-goal'))||2)),count=Math.max(0,Number(log[today])||0);
+    if(dailyGoalTarget)dailyGoalTarget.value=String(goal);
+    var countEl=$('dailyGoalCount'),bar=$('dailyGoalBar'),streakEl=$('studyStreakStatus');
+    if(countEl)countEl.textContent=count+' / '+goal+' focus session'+(goal===1?'':'s')+' today';
+    if(bar)bar.style.width=Math.min(100,count/goal*100)+'%';
+    var cursor=new Date(),streak=0;
+    if(!(Number(log[localDateKey(cursor)])>0))cursor.setDate(cursor.getDate()-1);
+    while(Number(log[localDateKey(cursor)])>0&&streak<366){streak++;cursor.setDate(cursor.getDate()-1)}
+    if(streakEl)streakEl.textContent=(count>=goal?'Daily goal reached — excellent consistency. ':count>0?'Good start. One session at a time. ':'Complete a focus session to build today’s progress. ')+'Current streak: '+streak+' day'+(streak===1?'':'s')+'.';
+  }
+  function recordFocusSession(){var log=readDailyLog(),today=localDateKey(new Date());log[today]=(Number(log[today])||0)+1;save('air-study-daily-log',JSON.stringify(log));updateDailyGoal()}
+  if(dailyGoalTarget){dailyGoalTarget.value=String(Math.max(1,Math.min(12,Number(read('air-study-daily-goal'))||2)));dailyGoalTarget.addEventListener('change',function(){save('air-study-daily-goal',String(Math.max(1,Math.min(12,Number(dailyGoalTarget.value)||2))));updateDailyGoal()})}
+  updateDailyGoal();
+  // Count completed timer sessions toward the daily goal.
+  var originalTimerFinished=timerFinished;
+  timerFinished=function(){originalTimerFinished();recordFocusSession()};
+  // Portable, allowlisted backup: never export credentials or arbitrary browser storage.
+  function isStudyBackupKey(key){return key==='air-theme'||key==='air-personal-study-notes'||key==='air-study-custom-tasks'||key==='air-recall-mastered'||key==='air-recall-review'||key==='air-study-daily-log'||key==='air-study-daily-goal'||/^air-s[1-4]$/.test(key)||/^air-study-task-[a-zA-Z0-9_-]+$/.test(key)}
+  function makeStudyBackup(){var data={};try{for(var i=0;i<localStorage.length;i++){var key=localStorage.key(i);if(key&&isStudyBackupKey(key))data[key]=localStorage.getItem(key)}}catch(e){}return {app:'IHRM Air Study Backup',version:1,exportedAt:new Date().toISOString(),data:data}}
+  var exportBackup=$('exportStudyBackup'),importBackup=$('importStudyBackup'),backupFile=$('studyBackupFile'),backupStatus=$('studyBackupStatus');
+  if(exportBackup)exportBackup.addEventListener('click',function(){var blob=new Blob([JSON.stringify(makeStudyBackup(),null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='IHRM-Air-study-backup-'+localDateKey(new Date())+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000);if(backupStatus)backupStatus.textContent='Backup exported. Keep the JSON file somewhere safe.'});
+  if(importBackup&&backupFile)importBackup.addEventListener('click',function(){backupFile.click()});
+  if(backupFile)backupFile.addEventListener('change',function(){var file=backupFile.files&&backupFile.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(){try{var backup=JSON.parse(String(reader.result||''));if(!backup||backup.app!=='IHRM Air Study Backup'||backup.version!==1||!backup.data||typeof backup.data!=='object'||Array.isArray(backup.data))throw new Error('This is not a supported IHRM Air backup.');var count=0;Object.keys(backup.data).forEach(function(key){if(isStudyBackupKey(key)&&typeof backup.data[key]==='string'){save(key,backup.data[key]);count++}});if(backupStatus)backupStatus.textContent='Imported '+count+' saved items. Reloading the page will apply all restored progress.';if(window.confirm('Study backup imported. Reload now to apply the restored progress?'))location.reload()}catch(e){if(backupStatus)backupStatus.textContent=e.message||'Could not read this backup file.'}finally{backupFile.value=''}};reader.onerror=function(){if(backupStatus)backupStatus.textContent='Could not read the selected file.'};reader.readAsText(file)});
   showPrompt();
 })();
 </script>
