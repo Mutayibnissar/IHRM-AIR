@@ -97,7 +97,67 @@ input,select,textarea{max-width:100%;border-radius:10px}
 .progress-card strong{display:block;font-family:Fredoka,sans-serif;font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.25;margin-top:8px}
 .progress-footnote{font-size:.9rem;color:var(--mute)}
 @media(max-width:650px){.progress-cards{grid-template-columns:1fr}.progress-card{padding:14px}}
-</style></head><body>
+</style><style id="ihrm-air-shared-visual-refresh">
+/* IHRM Air 2026 visual refresh — shared design system */
+:root{--ui-radius:20px;--ui-line:color-mix(in srgb,var(--ink) 14%,transparent);--ui-elev:0 12px 32px rgba(20,33,61,.09);--ui-elev-hover:0 18px 42px rgba(20,33,61,.14)}
+body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--blue) 9%,transparent),transparent 34%),var(--bg);letter-spacing:-.012em}
+h1,h2,h3{letter-spacing:-.035em}
+:where(.top,.topbar,.site-nav-wrap){backdrop-filter:blur(16px) saturate(145%);border-bottom:1px solid var(--ui-line)}
+:where(.top,.topbar){box-shadow:0 6px 28px rgba(20,33,61,.07)}
+:where(.logo){letter-spacing:-.045em}
+:where(.site-page-nav a,.topnav a){border-radius:999px;box-shadow:none;border:1px solid var(--ui-line);padding:10px 15px}
+:where(.site-page-nav a[aria-current="page"]){box-shadow:0 4px 12px rgba(255,200,61,.24)!important}
+:where(.site-nav-toggle,.search-widget-launcher){border-radius:999px;box-shadow:none;transition:transform .18s ease,background .18s ease}
+:where(.page-intro,.hero){position:relative;isolation:isolate;overflow:hidden}
+:where(.page-intro){padding:clamp(46px,7vw,86px) clamp(18px,5vw,64px);background:linear-gradient(125deg,color-mix(in srgb,var(--blue) 15%,var(--bg)),var(--card) 62%,color-mix(in srgb,var(--mint) 12%,var(--bg)));border-bottom:1px solid var(--ui-line)}
+:where(.page-intro)::after{content:"✈";position:absolute;right:clamp(18px,8vw,120px);top:10%;font-size:clamp(5rem,13vw,11rem);line-height:1;opacity:.055;transform:rotate(-12deg);pointer-events:none;z-index:-1}
+:where(.page-intro-inner){max-width:1180px;margin-inline:auto}
+:where(.page-eyebrow,.eyebrow){font-size:.76rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+:where(.page-intro h1){font-size:clamp(2.5rem,6vw,4.8rem);max-width:900px;margin:10px 0 16px;line-height:1.02}
+:where(.page-intro p:not(.page-eyebrow)){max-width:70ch;color:var(--mute);font-size:clamp(1rem,1.6vw,1.18rem)}
+:where(.page-home-cta,.primary,.btn){min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:10px 16px;font-weight:800;text-decoration:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+:where(.page-home-cta){margin-top:10px;background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.primary){background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.btn){background:var(--card);color:var(--ink);border:1px solid var(--ui-line);box-shadow:0 2px 5px rgba(20,33,61,.04)}
+:where(.page-home-cta,.primary,.btn):hover{transform:translateY(-2px);filter:brightness(1.015)}
+:where(.page-home-cta,.primary):active{transform:translate(1px,1px);box-shadow:1px 1px 0 #14213d}
+:where(.section,.content-section,.main-section){scroll-margin-top:100px}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card){border-radius:var(--ui-radius);box-shadow:var(--ui-elev);border-color:var(--ui-line);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card):hover{box-shadow:var(--ui-elev-hover);border-color:color-mix(in srgb,var(--blue) 34%,var(--ui-line))}
+:where(.unit-card,.tool-card,.study-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){min-width:0}
+:where(.top-actions,.grouped-actions){gap:10px}
+:where(.search-widget-launcher){min-height:42px;padding:9px 15px;background:var(--card);border:1px solid var(--ui-line);font-weight:800}
+:where(input,select,textarea){border:1px solid var(--ui-line);background:var(--card);color:var(--ink);padding:10px 12px}
+:where(input,select,textarea):focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+:where(details){border-radius:14px}
+:where(summary){cursor:pointer}
+:where(footer,.site-footer){border-top:1px solid var(--ui-line);background:var(--card)}
+#siteBackTop{box-shadow:0 8px 24px rgba(20,33,61,.2);border-radius:16px}
+@media(max-width:700px){
+ :where(.top,.topbar){gap:10px}
+ :where(.page-intro){padding:42px 18px}
+ :where(.page-intro)::after{right:8px;top:8%;opacity:.04}
+ :where(.page-intro h1){font-size:clamp(2.35rem,11vw,3.6rem)}
+ :where(.site-page-nav a){min-height:44px}
+ :where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.btn,.primary,.page-home-cta){transition:none}}
+
+/* Home flight-deck refinements */
+.hero{background:linear-gradient(125deg,#d6e9ff 0%,#f8fbff 54%,#d8f5e9 100%)}
+.hero-inner{max-width:1180px}
+.hero h1{letter-spacing:-.055em}
+.hero .primary{margin-right:10px}
+.hero .primary.secondary-cta{background:var(--card);color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.meta span{box-shadow:0 3px 0 rgba(20,33,61,.07)}
+.section{padding-top:clamp(38px,5vw,58px);padding-bottom:clamp(38px,5vw,58px)}
+.tile{transition:transform .2s ease,box-shadow .2s ease}
+.tile:hover{transform:translateY(-3px)}
+.tile a{border-radius:999px;box-shadow:2px 2px 0 var(--ink)}
+@media(max-width:650px){.hero .primary{width:100%;margin:8px 0 5px}.hero .primary.secondary-cta{margin-top:7px}.tile a{width:100%}}
+:root[data-theme="dark"] .hero{background:linear-gradient(125deg,#17294a 0%,#15213a 58%,#12352f 100%)}
+</style>
+</head><body>
 <header class="topbar site-nav-wrap"><a class="logo" href="index.html">IHRM<b>Air</b></a><nav class="topnav site-page-nav" id="sitePageNav" aria-label="Main pages"><a href="index.html" data-page="index.html">⌂ Home</a><a href="units.html" data-page="units.html">📚 Units</a><a href="practice.html" data-page="practice.html">📝 Practice</a><a href="tools.html" data-page="tools.html">✦ Study Tools</a></nav><button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="sitePageNav">☰ <span>Menu</span></button></header>
 <main><section class="hero"><div class="plane" aria-hidden="true">✈</div><div class="hero-inner"><p class="eyebrow">IMBA · 9th Semester · International HRM</p><h1>Your course.<br>Your pace.<br><em>Your flight deck.</em></h1><p>Welcome to IHRM Air — a focused study space for International Human Resource Management. Learn unit by unit, practise with questions, and build a revision routine that works for you.</p><a class="primary" href="units.html">Start boarding →</a><div class="meta"><span>4 course units</span><span>Unit-wise MCQs</span><span>Timed mock exams</span><span>Personal study tools</span></div></div></section>
 <section class="section"><h2>Choose your destination</h2><p class="section-intro">Each area now has its own page, so you can move between learning, practice, and planning without scrolling through one long page.</p><div class="grid">
@@ -200,4 +260,17 @@ input,select,textarea{max-width:100%;border-radius:10px}
  });
 })();
 </script>
+
+<script id="home-quick-practice-cta">
+(function(){
+ var first=document.querySelector('.hero .primary');
+ if(!first||document.getElementById('homeQuickPractice'))return;
+ var quick=document.createElement('a');
+ quick.id='homeQuickPractice';quick.className='primary secondary-cta';quick.href='practice.html';
+ quick.textContent='Quick practice ↗';
+ quick.setAttribute('aria-label','Go directly to Practice and Exam Centre');
+ first.insertAdjacentElement('afterend',quick);
+})();
+</script>
+
 </body></html>
