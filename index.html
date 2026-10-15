@@ -446,6 +446,29 @@ header.top{isolation:isolate;z-index:100}
 @media(prefers-reduced-motion:reduce){
   .pol svg,.cover svg,.hero-graphic,.illustration,.motion-reveal{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}
 }
+
+/* Responsive study-tools dashboard */
+.study-tools-hub{scroll-margin-top:150px}
+.study-tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.study-tool-card{min-width:0;padding:20px;border:1px solid var(--frame);border-radius:18px;background:var(--card);box-shadow:0 5px 18px rgba(20,33,61,.07)}
+.study-tool-card h3{font-size:22px;margin:7px 0 8px}
+.study-tool-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.tool-muted{font-size:14px;color:var(--mute);margin:0 0 14px}
+.focus-clock{font:600 clamp(42px,6vw,58px)/1.15 'Arial',sans-serif;letter-spacing:.04em;text-align:center;padding:16px 6px;color:var(--blue);font-variant-numeric:tabular-nums}
+.tool-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.tool-actions .btn{min-height:40px}
+.timer-presets .btn{font-size:12px;padding:7px 10px}
+.tool-status{font-size:12px;color:var(--mute);margin:10px 0 0}
+.study-checklist{display:grid;gap:11px;margin:16px 0}
+.study-checklist label{display:flex;align-items:flex-start;gap:10px;line-height:1.4}
+.study-checklist input{width:18px;height:18px;flex:0 0 18px;margin-top:2px;accent-color:var(--mint)}
+.study-progress-track{height:9px;border-radius:99px;overflow:hidden;background:var(--bg);border:1px solid var(--frame)}
+.study-progress-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .2s ease}
+.study-notes-card textarea{display:block;width:100%;min-height:150px;resize:vertical;padding:12px;border:1px solid var(--frame);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;line-height:1.55}
+.recall-question{padding:18px;border-radius:14px;background:var(--bg);font-size:18px;font-weight:700;min-height:90px;display:flex;align-items:center}
+.recall-answer{padding:12px;border-left:4px solid var(--mint);background:var(--bg);border-radius:0 10px 10px 0}
+@media(max-width:760px){.study-tool-grid{grid-template-columns:minmax(0,1fr);gap:12px}.study-tool-card{padding:16px}.focus-clock{font-size:48px}}
+
 </style>
 
 </head>
@@ -462,7 +485,7 @@ header.top{isolation:isolate;z-index:100}
 <div class="top-actions grouped-actions" aria-label="Main study navigation">
 <details class="nav-group"><summary>📚 Units</summary><div class="nav-subbuttons"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a></div></details>
 <details class="nav-group"><summary>📝 Practice</summary><div class="nav-subbuttons"><a href="#quiz">Quiz</a><a href="#full-notes">Revision tools</a><a href="#pp">Passport</a></div></details>
-<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#practice-panel" id="openPracticeNav">Practice questions</a></div></details>
+<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#study-tools">Study dashboard</a><a href="#focus-timer">Focus timer</a><a href="#study-notes">My study notes</a><a href="#study-plan">Study planner</a></div></details>
 </div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
 <section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
 <div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
@@ -982,7 +1005,51 @@ header.top{isolation:isolate;z-index:100}
 <li>II: EPRG · failure causes · selection model · 5 performance variables.</li>
 <li>III: package · going rate / balance sheet / Local Plus · tax equalisation.</li>
 <li>IV: 4 union constraints · Kennedy's 7 · ILO/OECD · EU social dimension · offshoring.</li>
-</ul><div class="note"><b>Poora course ek line mein:</b> sahi log lao (staffing), perform karwao, sahi pay do, aur unions-laws-culture ke saath tal-mel rakho.</div></section><section class="pp" id="pp"><h2>Your passport</h2><p>Stamp each unit as you finish revising it.</p>
+</ul><div class="note"><b>Poora course ek line mein:</b> sahi log lao (staffing), perform karwao, sahi pay do, aur unions-laws-culture ke saath tal-mel rakho.</div></section>
+<section class="dest study-tools-hub" id="study-tools">
+  <h2>✦ Study Tools Dashboard</h2>
+  <p>Plan a focused session, track your revision, and save personal notes on this device. Your saved checklist and notes stay in this browser.</p>
+  <div class="study-tool-grid">
+    <article class="study-tool-card" id="focus-timer">
+      <span class="study-tool-kicker">01 · Focus</span><h3>Focus timer</h3>
+      <p class="tool-muted">Use a 25-minute focus session or a 5-minute break.</p>
+      <div class="focus-clock" id="focusClock" role="timer" aria-live="polite">25:00</div>
+      <div class="tool-actions"><button class="btn" type="button" id="timerStart">Start</button><button class="btn" type="button" id="timerPause">Pause</button><button class="btn" type="button" id="timerReset">Reset</button></div>
+      <div class="tool-actions timer-presets"><button class="btn" type="button" data-minutes="25">25 min focus</button><button class="btn" type="button" data-minutes="5">5 min break</button><button class="btn" type="button" data-minutes="15">15 min review</button></div>
+      <p class="tool-status" id="timerStatus" aria-live="polite">Ready when you are.</p>
+    </article>
+    <article class="study-tool-card" id="study-plan">
+      <span class="study-tool-kicker">02 · Plan</span><h3>Revision checklist</h3>
+      <p class="tool-muted">Tick tasks as you complete them. Progress is saved automatically.</p>
+      <div class="study-checklist" id="studyChecklist">
+        <label><input type="checkbox" data-task="notes"> Read the unit notes</label>
+        <label><input type="checkbox" data-task="recall"> Recall key models without looking</label>
+        <label><input type="checkbox" data-task="flashcards"> Review the flashcards</label>
+        <label><input type="checkbox" data-task="questions"> Answer practice questions</label>
+        <label><input type="checkbox" data-task="mistakes"> Revisit mistakes and weak topics</label>
+      </div>
+      <div class="study-progress-track" aria-label="Checklist progress"><span id="studyChecklistBar"></span></div>
+      <p class="tool-status" id="studyChecklistStatus" aria-live="polite">0 of 5 tasks complete</p>
+      <button class="btn" type="button" id="resetStudyChecklist">Reset checklist</button>
+    </article>
+    <article class="study-tool-card study-notes-card" id="study-notes">
+      <span class="study-tool-kicker">03 · Capture</span><h3>My study notes</h3>
+      <p class="tool-muted">Write questions, mnemonics, or topics to revisit. Autosaves on this device.</p>
+      <label class="sr-only" for="personalStudyNotes">Your personal study notes</label>
+      <textarea id="personalStudyNotes" rows="7" placeholder="Example: Unit II — compare ethnocentric, polycentric and geocentric staffing…"></textarea>
+      <div class="tool-actions"><span class="tool-status" id="personalNotesStatus" aria-live="polite">Saved locally on this device.</span><button class="btn" type="button" id="clearPersonalNotes">Clear notes</button></div>
+    </article>
+    <article class="study-tool-card" id="quick-recall">
+      <span class="study-tool-kicker">04 · Recall</span><h3>Quick recall prompt</h3>
+      <p class="tool-muted">Test active recall before you reopen your notes.</p>
+      <div class="recall-question" id="recallQuestion">What are Morgan’s three dimensions of IHRM?</div>
+      <p class="recall-answer" id="recallAnswer" hidden>HR activities × countries (host, parent, other) × employee types (HCN, PCN, TCN).</p>
+      <div class="tool-actions"><button class="btn" type="button" id="revealRecall">Reveal answer</button><button class="btn" type="button" id="nextRecall">Next prompt</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="pp" id="pp"><h2>Your passport</h2><p>Stamp each unit as you finish revising it.</p>
 <div class="slots" id="slots"></div><p class="score" id="ptxt"></p></section>
 <section class="quiz" id="quiz"><h2 style="margin-bottom:16px">Boarding quiz</h2><div class="q" id="qbox"></div></section>
 </main>
@@ -1554,6 +1621,53 @@ header.top .nav-subbuttons{white-space:normal}
   .full-unit-notes>summary{padding:10px;font-size:13px}
 }
 </style>
+
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function save(key,value){try{localStorage.setItem(key,value);return true}catch(e){return false}}
+  function read(key){try{return localStorage.getItem(key)}catch(e){return null}}
+  // Focus timer
+  var clock=$('focusClock'),status=$('timerStatus'),remaining=1500,interval=null;
+  function paintClock(){if(clock)clock.textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+  function stopTimer(){if(interval){clearInterval(interval);interval=null}}
+  function setPreset(minutes){stopTimer();remaining=minutes*60;paintClock();if(status)status.textContent=minutes===5?'Break selected. Take a breather.':minutes===15?'15-minute review selected.':'25-minute focus selected.'}
+  if(clock){
+    paintClock();
+    $('timerStart').addEventListener('click',function(){if(interval)return;if(remaining<=0)remaining=1500;status.textContent='Focus session in progress — stay with one task.';interval=setInterval(function(){remaining--;paintClock();if(remaining<=0){stopTimer();remaining=0;paintClock();status.textContent='Session complete. Stretch, then choose a break or start again.';try{if('Notification'in window&&Notification.permission==='granted')new Notification('IHRM Air',{body:'Your study timer is complete.'})}catch(e){}}},1000)});
+    $('timerPause').addEventListener('click',function(){stopTimer();status.textContent='Paused. Resume whenever you are ready.'});
+    $('timerReset').addEventListener('click',function(){setPreset(25);status.textContent='Timer reset to 25 minutes.'});
+    document.querySelectorAll('[data-minutes]').forEach(function(b){b.addEventListener('click',function(){setPreset(Number(b.dataset.minutes))})});
+  }
+  // Checklist saved locally
+  var checks=Array.from(document.querySelectorAll('#studyChecklist [data-task]'));
+  checks.forEach(function(c){c.checked=read('air-study-task-'+c.dataset.task)==='1'});
+  function updateChecklist(){var done=checks.filter(function(c){return c.checked}).length;var bar=$('studyChecklistBar');if(bar)bar.style.width=(done/checks.length*100)+'%';var msg=$('studyChecklistStatus');if(msg)msg.textContent=done+' of '+checks.length+' tasks complete'+(done===checks.length?' — excellent work!':'');checks.forEach(function(c){save('air-study-task-'+c.dataset.task,c.checked?'1':'0')})}
+  checks.forEach(function(c){c.addEventListener('change',updateChecklist)});
+  var reset=$('resetStudyChecklist');if(reset)reset.addEventListener('click',function(){checks.forEach(function(c){c.checked=false});updateChecklist()});updateChecklist();
+  // Personal notes autosave
+  var notes=$('personalStudyNotes'),notesStatus=$('personalNotesStatus'),saveDelay;
+  if(notes){notes.value=read('air-personal-study-notes')||'';notes.addEventListener('input',function(){if(notesStatus)notesStatus.textContent='Saving…';clearTimeout(saveDelay);saveDelay=setTimeout(function(){var ok=save('air-personal-study-notes',notes.value);if(notesStatus)notesStatus.textContent=ok?'Saved locally on this device.':'Browser storage is unavailable; copy your notes before leaving.'},180)})}
+  var clearNotes=$('clearPersonalNotes');if(clearNotes)clearNotes.addEventListener('click',function(){if(notes)notes.value='';save('air-personal-study-notes','');if(notesStatus)notesStatus.textContent='Notes cleared.'});
+  // Quick recall prompts drawn from the existing course revision content
+  var prompts=[
+    ['What are Morgan’s three dimensions of IHRM?','HR activities × countries (host, parent, other) × employee types (HCN, PCN, TCN).'],
+    ['What is the main aim of the balance-sheet approach?','Keep the expatriate whole: preserve the home-country living standard and add an inducement.'],
+    ['What are the three dimensions of expatriate adjustment?','Work adjustment, interaction adjustment, and general adjustment.'],
+    ['Going rate versus balance sheet: what is the key difference?','Going rate focuses on host-country pay; balance sheet uses home-country pay to maintain the expatriate’s standard of living.'],
+    ['Name four ways unions may constrain multinational enterprises.','Wages, employment levels, global integration, and campaigns.'],
+    ['What do emic and etic mean?','Emic is culture-specific; etic is culture-common or universal.'],
+    ['What is tax equalisation intended to do?','Prevent an expatriate’s tax burden from being higher or lower because of the international assignment.'],
+    ['Name six expatriate selection factors from the revision notes.','Technical ability, cross-cultural suitability, family, country rules, MNE needs, and language.']
+  ];
+  var promptIndex=0,question=$('recallQuestion'),answer=$('recallAnswer'),reveal=$('revealRecall');
+  function showPrompt(){if(!question||!answer)return;question.textContent=prompts[promptIndex][0];answer.textContent=prompts[promptIndex][1];answer.hidden=true;if(reveal)reveal.textContent='Reveal answer'}
+  if(reveal)reveal.addEventListener('click',function(){answer.hidden=!answer.hidden;reveal.textContent=answer.hidden?'Reveal answer':'Hide answer'});
+  var next=$('nextRecall');if(next)next.addEventListener('click',function(){promptIndex=(promptIndex+1+Math.floor(Math.random()*(prompts.length-1)))%prompts.length;showPrompt()});
+  showPrompt();
+})();
+</script>
 
 </body>
 </html>
