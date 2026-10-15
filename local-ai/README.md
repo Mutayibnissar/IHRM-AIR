@@ -77,3 +77,15 @@ The starter dataset is intentionally small: it demonstrates the pipeline, not a 
 - Inference prompts are sent to the endpoint you enter. By default, that is your own computer.
 - Do not enter secrets or personal data into model prompts.
 - The website itself cannot install Ollama or train model weights; installation and training run on your computer.
+
+## 4. Load the trained LoRA adapter into Ollama
+
+After training completes, check that `local-ai/training/output/final-adapter/adapter_config.json` exists. From the repository root, create a model using the matching Qwen2.5 3B Instruct base:
+
+```bash
+ollama create ihrm-air-finetuned:local -f local-ai/Modelfile.finetuned
+```
+
+The fine-tuned Modelfile points at the adapter directory. The adapter and Ollama base model must match. If Ollama reports an adapter-format or base-model mismatch, do not force it; use a compatible export/conversion path for your exact model version and verify the model before using it. Then set the website model field to `ihrm-air-finetuned:local`.
+
+The fine-tuned model is only as reliable as the reviewed training examples. Keep a held-out evaluation set and compare it with the untuned model before relying on it.
