@@ -29,11 +29,10 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           required = {
-              "index.html": ["units.html", "practice.html", "tools.html", "id=\\"homeAttempts\\"", "id=\\"homeAccuracy\\"", "id=\\"homeBest\\"", "site-nav-toggle"],
+              "index.html": ["units.html", "practice.html", "tools.html", "id=\"homeAttempts\"", "id=\"homeAccuracy\"", "id=\"homeBest\"", "site-nav-toggle"],
               "units.html": ["id=\"u1\"", "id=\"u2\"", "id=\"u3\"", "id=\"u4\""],
               "practice.html": ["id=\"exam-centre\"", "id=\"quiz\"", "id=\"integrated-cards\""],
               "tools.html": ["id=\"study-tools\"", "id=\"focus-timer\"", "id=\"study-notes\""],
-              "index.html": ["id=\"homeAttempts\"", "id=\"homeAccuracy\"", "id=\"homeBest\"", "site-nav-toggle"],
           }
           for filename, markers in required.items():
               path = Path(filename)
