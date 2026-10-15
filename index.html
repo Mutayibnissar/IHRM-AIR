@@ -285,19 +285,30 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     <button class="agent-card" type="button" data-agent="flashcards" aria-pressed="false"><strong>🗂 Flashcard Maker</strong><small>Creates revision cards from course cards</small></button>
     <button class="agent-card" type="button" data-agent="planner" aria-pressed="false"><strong>🗓 Revision Planner</strong><small>Turns your goal into a short plan</small></button>
     <button class="agent-card" type="button" data-agent="navigator" aria-pressed="false"><strong>🔎 Notes Navigator</strong><small>Finds matching headings and notes</small></button>
+    <button class="agent-card" type="button" data-agent="orchestrator" aria-pressed="false"><strong>🤝 Agent Orchestrator</strong><small>Coordinates specialists into one workflow</small></button>
   </div>
   <div class="agent-controls">
+    <div class="gemini-connect" style="padding:14px;border:2px dashed var(--mint);border-radius:14px;background:var(--bg)">
+      <label for="geminiApiKey">Connect Gemini API key (this tab only)</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <input id="geminiApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini API key here" style="flex:1;min-width:190px;border:2px solid var(--mute);border-radius:10px;padding:10px;background:var(--card);color:var(--ink);font:inherit">
+        <button class="btn" id="toggleGeminiKey" type="button">Show</button>
+        <button class="btn" id="forgetGeminiKey" type="button">Clear key</button>
+      </div>
+      <small id="geminiKeyStatus" class="agent-status">Not connected. Your key is kept in page memory only and disappears when you refresh or close this tab.</small>
+    </div>
     <label for="agentTask">What should your agents do?</label>
     <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
     <div class="agent-actions">
       <button class="btn run" id="runAgent" type="button">Run selected agent</button>
-      <button class="btn run" id="runLiveAI" type="button">Ask Live AI</button>
+      <button class="btn run" id="runLiveAI" type="button">Run Gemini Agent</button>
+      <button class="btn run" id="runGeminiTeam" type="button">Run AI Agent Team</button>
       <button class="btn" id="runAgentTeam" type="button">Run local team workflow</button>
       <button class="btn" id="clearAgentOutput" type="button">Clear output</button>
     </div>
   </div>
   <div class="agent-output" id="agentOutput" aria-live="polite" role="status"><h3>Ready for take-off</h3><p>Select a specialist and enter a study task. The team workflow runs the navigator, explainer and exam setter in sequence.</p></div>
-  <p class="agent-status">Two modes: local notes-based helpers work offline; Live AI uses a secure server-side tutor. Your notes and prompt are sent to the AI service only when you choose Ask Live AI.</p>
+  <p class="agent-status">Local helpers work offline. Gemini-powered agents use the API key you enter in this tab and send your prompt plus relevant course notes directly to Google Gemini. The key is not saved in this repository or browser storage. For a public multi-user product, move the key to a secured server-side proxy.</p>
 </section>
 
 <section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
@@ -734,37 +745,89 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
   d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
   d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var nav=roster.navigator.run(q);var explain=roster.explainer.run(q);var exam=roster.exam.run(q);out.innerHTML='<h3>🤝 Coordinated agent workflow</h3><p><span class="agent-chip">1 · Navigator</span><span class="agent-chip">2 · Explainer</span><span class="agent-chip">3 · Exam Setter</span></p><details open><summary>Step 1 — Find relevant notes</summary>'+nav.body+'</details><details open><summary>Step 2 — Build understanding</summary>'+explain.body+'</details><details open><summary>Step 3 — Test retrieval</summary>'+exam.body+'</details><p class="agent-status">Workflow complete. Each specialist used the local IHRM study material; no external AI service was called.</p>';out.scrollIntoView({behavior:'smooth',block:'nearest'})});
-  d.getElementById('runLiveAI').addEventListener('click',async function(){
-    var q=task.value.trim();
-    if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
-    var roleMap={coach:'study-coach',explainer:'concept-explainer',exam:'exam-setter',flashcards:'flashcard-maker',planner:'revision-planner',navigator:'notes-navigator'};
-    var active=d.querySelector('.agent-card[aria-pressed="true"]');
-    var role=selected==='team'?'coordinated-workflow':(roleMap[selected]||'study-coach');
+  var geminiKeyInput=d.getElementById('geminiApiKey');
+  var geminiKeyStatus=d.getElementById('geminiKeyStatus');
+  var geminiKey='';
+  d.getElementById('toggleGeminiKey').addEventListener('click',function(){
+    var showing=geminiKeyInput.type==='text';geminiKeyInput.type=showing?'password':'text';this.textContent=showing?'Show':'Hide';
+  });
+  d.getElementById('forgetGeminiKey').addEventListener('click',function(){
+    geminiKey='';geminiKeyInput.value='';geminiKeyStatus.textContent='Key cleared from this page.';geminiKeyStatus.style.color='var(--mute)';
+  });
+  geminiKeyInput.addEventListener('input',function(){geminiKey=geminiKeyInput.value.trim();geminiKeyStatus.textContent=geminiKey?'Key entered for this tab. Click Run Gemini Agent to test it.':'Not connected. Key is not saved.';});
+  var agentInstructions={
+    coach:'Act as a supportive MBA study coach. Make a practical, prioritised study plan for the exact task.',
+    explainer:'Act as a patient IHRM professor. Explain concepts in plain English, define terms, give examples, compare similar ideas, and flag limitations.',
+    exam:'Act as a rigorous MBA examiner. Create exam-style MCQs with answer key and explanations, short-answer questions, and long-answer prompts as appropriate to the request.',
+    flashcards:'Act as a spaced-repetition specialist. Produce concise question/answer flashcards, one concept per card, based on the provided notes.',
+    planner:'Act as a revision-planning specialist. Turn the user’s deadline and available time into a realistic schedule with active recall and practice.',
+    navigator:'Act as a course-material research librarian. Identify the most relevant note passages, organise them by heading, and distinguish missing information from supported facts.',
+    orchestrator:'Act as the lead study-agent orchestrator. Complete the task by coordinating a notes navigator, concept explainer, exam setter, and revision coach. Provide a concise unified result with sources from the provided course notes.'
+  };
+  function getCourseContext(q){
     var terms=q.toLowerCase().split(/[^a-z0-9]+/).filter(function(t){return t.length>2});
     var blocks=Array.from(d.querySelectorAll('details.tag, details.full-notes'));
     var scored=blocks.map(function(el){var text=(el.innerText||'').replace(/\\s+/g,' ').trim();var low=text.toLowerCase();return {text:text,score:terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0)}}).filter(function(x){return x.score>0});
     scored.sort(function(a,b){return b.score-a.score});
-    var context=scored.slice(0,12).map(function(x){return x.text}).join('\\n\\n').slice(0,11500);
-    var button=this;button.disabled=true;button.textContent='Thinking…';
-    out.innerHTML='<h3>✈ Live AI tutor is working</h3><p>Sending your request and relevant course notes securely to the study backend…</p>';
+    return scored.slice(0,12).map(function(x){return x.text}).join('\\n\\n').slice(0,12000);
+  }
+  async function callGemini(agentId,q,context){
+    if(!geminiKey)throw new Error('Enter your Gemini API key in the connection box first.');
+    var role=agentInstructions[agentId]||agentInstructions.coach;
+    var prompt='You are one specialist inside IHRM Air, an MBA International Human Resource Management study platform.\\nROLE: '+role+'\\n\\nGROUNDING RULES: Prioritise the supplied course notes. Do not invent course facts or pretend missing information is in the notes. If you add general knowledge, label it clearly. Use accurate academic terminology, examples, clear headings, and exam-ready structure. Answer the user directly.\\n\\nUSER TASK:\\n'+q+'\\n\\nRELEVANT COURSE NOTES (may be incomplete):\\n'+(context||'No matching note passages were found in the local page. State this limitation and answer carefully.')+'\\n\\nReturn readable plain text with headings and numbered lists where useful.';
+    var response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(geminiKey),{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.35,maxOutputTokens:4096}})
+    });
+    var data=await response.json();
+    if(!response.ok){var apiMessage=data&&data.error&&data.error.message?data.error.message:'Gemini request failed ('+response.status+').';throw new Error(apiMessage);}
+    var answer=(data.candidates||[]).map(function(c){return (c.content&&c.content.parts||[]).map(function(p){return p.text||''}).join('')}).join('\\n\\n').trim();
+    if(!answer)throw new Error('Gemini returned no text. Check the key, API access, and quota.');
+    return answer;
+  }
+  function showGeminiAnswer(title,answer,modelLabel){
+    out.innerHTML='';var heading=d.createElement('h3');heading.textContent='✦ '+title;out.appendChild(heading);
+    var body=d.createElement('div');body.style.whiteSpace='pre-wrap';body.style.lineHeight='1.7';body.style.overflowWrap='anywhere';body.textContent=answer;out.appendChild(body);
+    var meta=d.createElement('p');meta.className='agent-status';meta.textContent=modelLabel+' · Verify important points against your prescribed course material.';out.appendChild(meta);
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  async function runGeminiWorkflow(teamMode,button){
+    var q=task.value.trim();
+    if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
+    if(!geminiKey){out.innerHTML='<h3>Connect Gemini first</h3><p>Paste your Gemini API key in the connection box above. It is used from this tab only and is not written to the repository.</p>';geminiKeyInput.focus();return}
+    var oldText=button.textContent;button.disabled=true;button.textContent=teamMode?'Agents working…':'Thinking…';
+    out.innerHTML='<h3>✈ Gemini agents are working</h3><p>Reading relevant course notes and generating an exam-focused response…</p>';
     try{
-      var response=await fetch('https://ihrm-air-ai-study-backend.floot.app/_api/study-assistant',{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=UTF-8'},
-        body:JSON.stringify({role:role,prompt:q,courseContext:context,answerStyle:'exam-ready',questionCount:8})
-      });
-      var data=await response.json();
-      if(!response.ok)throw new Error(data&&data.error?data.error:'The AI request failed.');
-      out.innerHTML='';
-      var heading=d.createElement('h3');heading.textContent='✦ Live AI · '+(active?active.innerText.replace(/\\s+/g,' ').trim():'Study Coach');out.appendChild(heading);
-      var answer=d.createElement('div');answer.style.whiteSpace='pre-wrap';answer.style.lineHeight='1.7';answer.style.overflowWrap='anywhere';answer.textContent=data.answer||'No answer returned.';out.appendChild(answer);
-      var meta=d.createElement('p');meta.className='agent-status';meta.textContent='Model: '+(data.model||'AI tutor')+' · Check important facts against your prescribed course material.';out.appendChild(meta);
-      out.scrollIntoView({behavior:'smooth',block:'nearest'});
+      var context=getCourseContext(q);
+      if(!teamMode){
+        var active=d.querySelector('.agent-card[aria-pressed="true"]');
+        var name=active?active.querySelector('strong').innerText:'Study Coach';
+        var answer=await callGemini(selected,q,context);
+        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash');
+      }else{
+        var stages=[
+          {id:'navigator',name:'Notes Navigator'},
+          {id:'explainer',name:'Concept Explainer'},
+          {id:'exam',name:'Exam Setter'},
+          {id:'planner',name:'Revision Coach'}
+        ];
+        var results=[];
+        for(var i=0;i<stages.length;i++){
+          out.innerHTML='<h3>🤝 AI Agent Team · Step '+(i+1)+' of '+stages.length+'</h3><p><b>'+stages[i].name+'</b> is working on your task…</p>';
+          var stagePrompt=q+'\\n\\nThis is stage '+(i+1)+' of a coordinated team. '+(i===0?'Identify the most relevant supplied note passages and key terms.':i===1?'Explain the concepts using the navigator stage output below.':i===2?'Create exam questions based on the concepts and notes below.':'Give a targeted revision plan based on all previous stages.')+'\\n\\nPREVIOUS TEAM OUTPUTS:\\n'+results.map(function(r){return r.name+':\\n'+r.answer}).join('\\n\\n').slice(0,9000);
+          var stageAnswer=await callGemini(stages[i].id,stagePrompt,context);
+          results.push({name:stages[i].name,answer:stageAnswer});
+        }
+        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\\n'+r.answer}).join('\\n\\n'+'─'.repeat(36)+'\\n\\n'),'4 specialist calls · Gemini 2.5 Flash');
+      }
     }catch(err){
-      out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Live AI is not ready';out.appendChild(heading);
-      var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach the AI service.')+' You can still use the local notes-based agents while the backend/API connection is completed.';out.appendChild(message);
-    }finally{button.disabled=false;button.textContent='Ask Live AI'}
-  });
+      out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
+      var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach Gemini. Check your internet connection, key, API enablement, and quota.');out.appendChild(message);
+      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='Your key has not been saved in the HTML or repository. If this is a key error, create/check the key in Google AI Studio and verify that the Generative Language API is enabled.';out.appendChild(hint);
+    }finally{button.disabled=false;button.textContent=oldText}
+  }
+  d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
+  d.getElementById('runGeminiTeam').addEventListener('click',function(){runGeminiWorkflow(true,this)});
   d.getElementById('clearAgentOutput').addEventListener('click',function(){out.innerHTML='<h3>Ready for take-off</h3><p>Output cleared. Choose a specialist and enter a new task.</p>'});
 })();
 </script>
