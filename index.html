@@ -274,9 +274,10 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <main>
 <div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div></div>
 
-<section class="agent-lab" id="agentic-study-crew" aria-labelledby="agentCrewTitle">
+<button id="agentWidgetLauncher" class="agent-widget-launcher" type="button" aria-controls="agentic-study-crew" aria-expanded="false"><span class="agent-widget-icon" aria-hidden="true">✦</span><span><strong>AI Study Crew</strong><small>7 study specialists</small></span><span class="agent-widget-pulse" aria-hidden="true"></span></button>
+<section class="agent-lab" id="agentic-study-crew" aria-labelledby="agentCrewTitle" aria-hidden="true">
   <span class="tagline" style="--c:var(--mint)">SOURCE: YOUR AGENCY-AGENTS REPOSITORY</span>
-  <h2 id="agentCrewTitle">Repository-Based Agentic Study Crew</h2>
+  <div class="agent-widget-heading"><div><span class="tagline" style="--c:var(--mint)">YOUR SOURCE AGENTS</span><h2 id="agentCrewTitle">AI Study Crew</h2><p class="agent-widget-subtitle">Choose a specialist, enter a task, and run the study workflow.</p></div><button class="agent-widget-close" id="closeAgentWidget" type="button" aria-label="Close AI Study Crew">×</button></div>
   <p class="agent-intro">These specialist profiles are sourced from your <a href="https://github.com/Mutayibnissar/agency-agents" target="_blank" rel="noopener">agency-agents repository</a> and adapted to the IHRM notes on this page. Offline runs use the page's notes; no external AI or cloud storage is called by the local workflow.</p>
   <div class="agent-roster" role="group" aria-label="Choose a repository source agent">
     <button class="agent-card" type="button" data-agent="trainingDesigner" aria-pressed="true"><strong>📚 Corporate Training Designer</strong><small>Builds outcomes, lesson flow and checks</small></button>
@@ -887,6 +888,44 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
   d.getElementById('runGeminiTeam').addEventListener('click',function(){runGeminiWorkflow(true,this)});
   d.getElementById('clearAgentOutput').addEventListener('click',function(){out.innerHTML='<h3>Ready for take-off</h3><p>Output cleared. Choose a repository-backed specialist and enter a new task.</p>'});
+})();
+</script>
+
+
+<style>
+/* Compact floating agent widget: keeps the main study design uncluttered */
+.agent-widget-launcher{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:1000;display:flex;align-items:center;gap:10px;min-height:62px;padding:10px 16px 10px 11px;border:2px solid var(--mint);border-radius:18px;background:var(--card);color:var(--ink);box-shadow:0 8px 28px rgba(0,0,0,.24);cursor:pointer;text-align:left;font:inherit;line-height:1.2}
+.agent-widget-launcher strong,.agent-widget-launcher small{display:block}.agent-widget-launcher strong{font:600 16px 'Fredoka',sans-serif}.agent-widget-launcher small{font-size:12px;color:var(--mute);margin-top:3px}
+.agent-widget-icon{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:13px;background:var(--mint);color:#06281f;font-size:23px}
+.agent-widget-pulse{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px color-mix(in srgb,var(--mint) 20%,transparent)}
+.agent-lab#agentic-study-crew{display:none;position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:999;width:min(680px,calc(100vw - 24px));max-height:min(78vh,760px);overflow:auto;margin:0;padding:18px;background:var(--card);border:2px solid var(--mint);border-radius:20px;box-shadow:0 18px 55px rgba(0,0,0,.32);overscroll-behavior:contain}
+.agent-lab#agentic-study-crew.widget-open{display:block}
+.agent-widget-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
+.agent-widget-heading h2{margin:5px 0 0!important;font-size:clamp(25px,4vw,32px)!important}
+.agent-widget-subtitle{margin:6px 0 0;color:var(--mute);font-size:14px;line-height:1.4}
+.agent-widget-close{flex:0 0 38px;width:38px;height:38px;border:1px solid var(--mute);border-radius:50%;background:var(--bg);color:var(--ink);font-size:26px;line-height:1;cursor:pointer}
+.agent-lab#agentic-study-crew .agent-intro{font-size:13px;line-height:1.45;margin:0 0 12px}
+.agent-lab#agentic-study-crew .agent-roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0 14px}
+.agent-lab#agentic-study-crew .agent-card{padding:9px;font-size:13px}
+.agent-lab#agentic-study-crew .agent-card strong{font-size:14px}
+.agent-lab#agentic-study-crew .agent-card small{font-size:11px}
+.agent-lab#agentic-study-crew .agent-output{max-height:35vh;overflow:auto}
+.agent-lab#agentic-study-crew .gemini-connect{padding:10px!important}
+.agent-lab#agentic-study-crew .gemini-connect p{font-size:12px;line-height:1.4}
+.agent-lab#agentic-study-crew .agent-actions .btn{font-size:12px;padding:7px 9px}
+@media(max-width:520px){.agent-widget-launcher{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:56px;padding:8px 12px 8px 9px}.agent-widget-icon{width:34px;height:34px;flex-basis:34px}.agent-lab#agentic-study-crew{right:8px;bottom:calc(78px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:78vh;padding:13px;border-radius:16px}.agent-lab#agentic-study-crew .agent-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-lab#agentic-study-crew .agent-controls textarea{min-height:76px}}
+@media(prefers-reduced-motion:no-preference){.agent-widget-launcher{animation:agentWidgetIn .35s ease-out}@keyframes agentWidgetIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}}
+</style>
+<script>
+(function(){
+ var panel=document.getElementById('agentic-study-crew');
+ var launcher=document.getElementById('agentWidgetLauncher');
+ var close=document.getElementById('closeAgentWidget');
+ if(!panel||!launcher||!close)return;
+ function setOpen(open){panel.classList.toggle('widget-open',open);panel.setAttribute('aria-hidden',String(!open));launcher.setAttribute('aria-expanded',String(open));if(open){var task=document.getElementById('agentTask');if(task)task.focus({preventScroll:true});}else launcher.focus({preventScroll:true});}
+ launcher.addEventListener('click',function(){setOpen(!panel.classList.contains('widget-open'));});
+ close.addEventListener('click',function(){setOpen(false);});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('widget-open'))setOpen(false);});
 })();
 </script>
 
