@@ -260,6 +260,24 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 @media(max-width:520px){.agent-lab{padding:16px}.agent-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-actions .btn{flex:1 1 auto}}
 @media print{.agent-lab{break-inside:avoid}.agent-controls,.agent-roster{display:none}}
 </style>
+
+<style>
+/* AetherMesh local-model console */
+.local-model-panel{margin:14px 0;padding:16px;border:2px solid var(--blue);border-radius:16px;background:linear-gradient(135deg,var(--card),var(--bg));box-shadow:0 5px 18px rgba(20,40,80,.09)}
+.local-model-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.local-model-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--ink);color:var(--card);font-size:22px}
+.local-model-panel h3{margin:0;font:700 22px 'Fredoka',sans-serif;color:var(--ink)}
+.local-model-panel p{margin:7px 0;color:var(--mute);font-size:14px;line-height:1.5}
+.local-model-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media(min-width:620px){.local-model-grid{grid-template-columns:1fr 1fr}}
+.local-model-panel label{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+.local-model-panel input{width:100%;min-width:0;padding:10px 11px;border:2px solid var(--mute);border-radius:10px;background:var(--card);color:var(--ink);font:500 15px 'DM Sans',sans-serif}
+.local-model-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.local-model-actions .btn{min-height:40px}
+.local-model-status{padding:9px 11px;border-radius:10px;background:var(--card);border:1px solid var(--frame);font-size:13px!important;overflow-wrap:anywhere}
+.local-model-status[data-state="ok"]{border-color:var(--mint);color:var(--mint)}.local-model-status[data-state="error"]{border-color:var(--red);color:var(--red)}
+.local-model-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.07em;font-weight:800;padding:4px 8px;border-radius:99px;background:var(--mint);color:#06281f}
+.local-model-foot{font-size:12px!important}
+</style>
+
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
@@ -289,6 +307,19 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     <button class="agent-card" type="button" data-agent="realityChecker" aria-pressed="false"><strong>🧪 Reality Checker</strong><small>Separates supported notes from gaps</small></button>
     <button class="agent-card" type="button" data-agent="orchestrator" aria-pressed="false"><strong>🤝 Agents Orchestrator</strong><small>Runs a staged specialist workflow</small></button>
   </div>
+
+  <div class="local-model-panel" id="aetherMeshLocalPanel">
+    <div class="local-model-head"><span class="local-model-mark" aria-hidden="true">⌘</span><div><span class="local-model-badge">AETHERMESH · LOCAL INFERENCE</span><h3>Run your own study AI</h3></div></div>
+    <p>Connect this page to a model running on your own computer with Ollama. Your prompt and course context go to that local endpoint—not to a hosted AI provider. Keep Ollama running while you use it.</p>
+    <div class="local-model-grid">
+      <div><label for="localModelEndpoint">Local model endpoint</label><input id="localModelEndpoint" type="url" value="http://localhost:11434" spellcheck="false" autocomplete="url"></div>
+      <div><label for="localModelName">Installed model name</label><input id="localModelName" type="text" value="qwen2.5:3b" spellcheck="false" placeholder="qwen2.5:3b"></div>
+    </div>
+    <div class="local-model-actions"><button class="btn" id="localModelTest" type="button">Test / find models</button><button class="btn" id="runLocalAI" type="button">Run selected local agent</button><button class="btn" id="runLocalAITeam" type="button">Run AetherMesh local team</button></div>
+    <p class="local-model-status" id="localModelStatus" data-state="idle" role="status" aria-live="polite">Not connected yet. Install Ollama, pull a model, then select Test / find models.</p>
+    <p class="local-model-foot">Local inference is real model generation. The optional LoRA training kit in <code>local-ai/</code> is a separate step; browser settings alone do not train model weights.</p>
+  </div>
+
   <div class="agent-controls">
     <div class="gemini-connect" style="padding:14px;border:2px solid var(--mint);border-radius:14px;background:var(--bg)">
       <strong>🔐 Secure AI connection</strong>
@@ -646,5 +677,103 @@ header.top .study-tools .btn{min-height:34px;padding:4px 8px;font-size:12px}
 header.top .study-tools #searchResults{font-size:12px;max-height:90px;overflow:auto}
 @media(max-width:600px){header.top .study-tools{margin:6px 0 8px;padding:6px;gap:5px}header.top .study-tools input{flex-basis:100%;width:100%}header.top .study-tools .btn{flex:1 1 auto}header.top .top-actions{max-height:70px;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}}
 </style>
+
+<script>
+(function(){
+  'use strict';
+  var endpoint=document.getElementById('localModelEndpoint');
+  var model=document.getElementById('localModelName');
+  var status=document.getElementById('localModelStatus');
+  var test=document.getElementById('localModelTest');
+  var run=document.getElementById('runLocalAI');
+  var team=document.getElementById('runLocalAITeam');
+  var task=document.getElementById('agentTask');
+  var output=document.getElementById('agentOutput');
+  if(!endpoint||!model||!status||!task||!output)return;
+  function readSaved(key,fallback){try{return localStorage.getItem(key)||fallback}catch(e){return fallback}}
+  function save(key,value){try{localStorage.setItem(key,value)}catch(e){}}
+  endpoint.value=readSaved('air-local-model-endpoint','http://localhost:11434');
+  model.value=readSaved('air-local-model-name','qwen2.5:3b');
+  function base(){return endpoint.value.trim().replace(/\/+$/,'')}
+  function say(message,state){status.textContent=message;status.dataset.state=state||'idle'}
+  function selectedAgent(){var b=document.querySelector('.agent-card[aria-pressed="true"]');return b?b.dataset.agent:'trainingDesigner'}
+  var roleNames={
+    trainingDesigner:'Corporate Training Designer',academicPsychologist:'Academic Psychologist',statistician:'Academic Statistician',
+    orgPsychologist:'Organizational Psychologist',synthesist:'Research Synthesist',realityChecker:'Reality Checker',orchestrator:'Agents Orchestrator'
+  };
+  var rolePrompts={
+    trainingDesigner:'Act as the Corporate Training Designer from the AetherMesh agent roster. Create measurable learning outcomes, an ordered lesson, active practice, and a short evaluation.',
+    academicPsychologist:'Act as the Academic Psychologist from the AetherMesh agent roster. Teach with retrieval practice, spaced review, clear explanations, and memory cues.',
+    statistician:'Act as the Academic Statistician from the AetherMesh agent roster. Produce structured questions and calculations only when the provided course context supports them. Never invent data.',
+    orgPsychologist:'Act as the Organizational Psychologist from the AetherMesh agent roster. Explain IHRM concepts at individual, team, and organization levels, grounded in the supplied notes.',
+    synthesist:'Act as the Research Synthesist from the AetherMesh agent roster. Synthesize the relevant notes, show themes and evidence gaps, and distinguish supplied content from inference.',
+    realityChecker:'Act as the Reality Checker from the AetherMesh agent roster. Audit each key claim against supplied course context; label missing or unsupported information instead of guessing.',
+    orchestrator:'Act as the AetherMesh Agents Orchestrator. Coordinate a research synthesist, explainer, exam-question designer, and reality checker in that order. Present the final integrated answer and flag gaps.'
+  };
+  function courseContext(query){
+    var blocks=Array.from(document.querySelectorAll('details.tag'));
+    var terms=query.toLowerCase().split(/[^a-z0-9]+/).filter(function(t){return t.length>2});
+    var scored=blocks.map(function(el){var txt=(el.innerText||'').replace(/\s+/g,' ').trim();var low=txt.toLowerCase();return{text:txt,score:terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0)}}).filter(function(x){return x.score>0});
+    scored.sort(function(a,b){return b.score-a.score});
+    var chosen=(scored.length?scored:blocks.map(function(el){return{text:(el.innerText||'').replace(/\s+/g,' ').trim(),score:0}})).slice(0,12);
+    return chosen.map(function(x){return x.text}).filter(Boolean).join('\n\n').slice(0,10000);
+  }
+  async function call(path,body){
+    var res=await fetch(base()+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined});
+    var data;try{data=await res.json()}catch(e){throw new Error('Ollama returned a response that was not JSON.')}
+    if(!res.ok)throw new Error(data.error||('Local model request failed ('+res.status+').'));
+    return data;
+  }
+  function activeModel(){return model.value.trim()}
+  function validate(){
+    if(!/^https?:\/\//i.test(base()))throw new Error('Enter a valid local endpoint, for example http://localhost:11434.');
+    if(!activeModel())throw new Error('Enter an installed Ollama model name, such as qwen2.5:3b.');
+  }
+  async function checkModels(){
+    validate();save('air-local-model-endpoint',base());save('air-local-model-name',activeModel());
+    say('Connecting to Ollama and checking installed models…','idle');
+    var data=await call('/api/tags');
+    var names=(data.models||[]).map(function(m){return m.name}).filter(Boolean);
+    if(names.length&&!names.includes(activeModel()))say('Connected. Installed models: '+names.join(', ')+'. Your selected model "'+activeModel()+'" was not in the list; enter one of the installed names.','ok');
+    else if(names.length)say('Connected to Ollama. '+names.length+' model(s) found: '+names.join(', '),'ok');
+    else say('Ollama answered, but no models are installed. Run: ollama pull qwen2.5:3b','error');
+    return names;
+  }
+  async function runModel(isTeam){
+    var q=task.value.trim();
+    if(!q){say('Enter a study task in the main task box first.','error');task.focus();return}
+    try{
+      validate();save('air-local-model-endpoint',base());save('air-local-model-name',activeModel());
+      run.disabled=true;team.disabled=true;test.disabled=true;
+      say('Running '+(isTeam?'AetherMesh local team':'selected local agent')+' on '+activeModel()+'…','idle');
+      var id=selectedAgent(),role=roleNames[id]||'AetherMesh Study Agent';
+      var system=isTeam
+        ?'You are the AetherMesh multi-agent study team for the IHRM Air platform. Simulate a transparent sequence: (1) Research Synthesist extracts relevant evidence from supplied notes; (2) Corporate Training Designer explains it in a structured way; (3) Academic Psychologist creates active-recall practice; (4) Academic Statistician adds MCQs or short-answer checks; (5) Reality Checker flags claims not supported by the notes. Clearly label each stage. Do not claim that separate models or agents actually ran; this is one local model following a multi-role workflow. Use only supplied context for course facts and state when context is insufficient.'
+        :rolePrompts[id]||rolePrompts.trainingDesigner;
+      var context=courseContext(q);
+      var prompt='USER TASK:\n'+q+'\n\nRELEVANT IHRM COURSE NOTES (treat these as source material; do not invent missing course facts):\n'+(context||'No matching course-note block was found. Ask for the relevant unit or clearly state the evidence gap.');
+      var data=await call('/api/chat',{model:activeModel(),stream:false,messages:[{role:'system',content:system+'\n\nYou are working inside IHRM Air. Be exam-useful, structured, concise, and honest about uncertainty.'},{role:'user',content:prompt}],options:{temperature:0.25}});
+      var answer=data&&data.message&&data.message.content?data.message.content.trim():'';
+      if(!answer)throw new Error('The local model returned an empty answer.');
+      output.innerHTML='';
+      var h=document.createElement('h3');h.textContent='✦ '+(isTeam?'AetherMesh Local Team':role)+' · '+activeModel();output.appendChild(h);
+      var body=document.createElement('div');body.style.whiteSpace='pre-wrap';body.style.lineHeight='1.7';body.style.overflowWrap='anywhere';body.textContent=answer;output.appendChild(body);
+      var meta=document.createElement('p');meta.className='agent-status';meta.textContent='Generated locally via Ollama · '+(isTeam?'one model following a multi-role workflow':'AetherMesh role prompt')+' · Check exam answers against your prescribed text.';output.appendChild(meta);
+      say('Done. Response generated by '+activeModel()+' on your local Ollama service.','ok');
+    }catch(e){
+      var msg=e&&e.message?e.message:String(e);
+      if(/Failed to fetch|NetworkError|Load failed/i.test(msg))msg='Could not reach Ollama. Ensure it is running at '+base()+' and allows this website origin. See local-ai/README.md for the OLLAMA_ORIGINS setup.';
+      say(msg,'error');
+    }finally{run.disabled=false;team.disabled=false;test.disabled=false}
+  }
+  test.addEventListener('click',async function(){try{await checkModels()}catch(e){var msg=e&&e.message?e.message:String(e);if(/Failed to fetch|NetworkError|Load failed/i.test(msg))msg='Could not reach Ollama or the browser blocked CORS. Start Ollama and configure OLLAMA_ORIGINS for https://mutayibnissar.github.io; instructions are in local-ai/README.md.';say(msg,'error')}});
+  run.addEventListener('click',function(){runModel(false)});
+  team.addEventListener('click',function(){runModel(true)});
+  endpoint.addEventListener('change',function(){save('air-local-model-endpoint',base())});
+  model.addEventListener('change',function(){save('air-local-model-name',activeModel())});
+  say('Ready to connect. Local model calls are disabled until Ollama is running on your computer.','idle');
+})();
+</script>
+
 </body>
 </html>
