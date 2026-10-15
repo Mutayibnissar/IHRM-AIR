@@ -264,7 +264,8 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
 <header class="top"><div class="bar"><a class="logo" href="#top">IHRM<b>Air</b></a><nav aria-label="Sections" class="links"><a href="#u1">I</a><a href="#u2">II</a><a href="#u3">III</a><a href="#u4">IV</a><a href="#pp">Passport</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a><button class="btn" id="th" type="button">Theme</button></nav></div>
-<div class="top-actions" aria-label="Main study navigation"><a class="primary" href="#full-notes">Full Notes</a><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
+<div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div>
+<div class="top-actions" aria-label="Main study navigation"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
 <section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
 <div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
 <h1>Manage people <em>across borders</em></h1><p>Your complete IMBA International HRM flight deck: fly through the four destinations, open detailed semester notes, revise with flashcards, test yourself and stamp your passport as you progress.</p>
@@ -272,7 +273,7 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <div class="stats"><span>4 units</span><span>22 topic tags</span><span>5-question quiz</span></div></div>
 <div class="stub"><div>PASSENGER<b>IMBA 9th Sem</b></div><div>COURSE<b>IMBA18914DCE</b></div><div>BOOK<b>Dowling, Festing &amp; Engle</b></div></div></div></section>
 <main>
-<div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div></div>
+</div>
 
 <button id="agentWidgetLauncher" class="agent-widget-launcher" type="button" aria-controls="agentic-study-crew" aria-expanded="false"><span class="agent-widget-icon" aria-hidden="true">✦</span><span><strong>AI Study Crew</strong><small>7 study specialists</small></span><span class="agent-widget-pulse" aria-hidden="true"></span></button>
 <section class="agent-lab" id="agentic-study-crew" aria-labelledby="agentCrewTitle" aria-hidden="true">
@@ -320,7 +321,7 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
   <p class="agent-status">Local helpers work offline. AI-powered agents send study tasks to the secured server-side Gemini proxy. The API key is never included in this website. The backend must be deployed and configured before live AI requests will work.</p>
 </section>
 
-<section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
+<section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><h2>Unit I: Landing in IHRM</h2>
 <div class="win"><svg viewbox="0 0 170 226"><circle cx="85" cy="92" fill="#4f9be8" r="46" stroke="#14213d" stroke-width="3"></circle><path d="M60 78c10-10 20-2 17 8s-14 9-17-8zM90 100c12-7 24 3 16 14s-19 4-16-14z" fill="#59b36b"></path><g stroke="#14213d" stroke-width="3"><circle cx="38" cy="176" fill="#e5484d" r="9"></circle><path d="M38 185v18M26 194h24" fill="none"></path><circle cx="85" cy="184" fill="#ffc83d" r="9"></circle><path d="M85 193v18M73 202h24" fill="none"></path><circle cx="132" cy="176" fill="#1fa77f" r="9"></circle><path d="M132 185v18M120 194h24" fill="none"></path></g></svg></div>
 <button aria-pressed="false" class="stampbtn" data-k="1">Stamp this unit</button></div>
 <div class="tags">
@@ -329,96 +330,8 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <details class="tag"><summary>Domestic vs international: 6 factors</summary><div><ul><li>More HR activities (tax, relocation, permits)</li><li>Broader perspective (equity across nationalities)</li><li>More involvement in personal lives and family</li><li>Changing PCN/HCN mix as subsidiaries mature</li><li>Risk exposure: failure can cost about 3x salary</li><li>Broader external influences (law, economy, custom)</li></ul><span class="hint">Same activities, higher complexity.</span></div></details>
 <details class="tag"><summary>4 moderating variables</summary><div><ul><li><b>Culture</b>: culture shock, emic vs etic, convergence vs divergence</li><li><b>Industry</b>: multidomestic vs global (Porter); Laurent's 5 steps</li><li><b>Home-market reliance</b>: big home market means less global thinking</li><li><b>Senior management attitude</b>: build a global mindset</li></ul></div></details>
 <details class="tag"><summary>Strategic IHRM framework</summary><div>De Cieri and Dowling: external factors (<b>PESTLE</b>, asymmetric events like terrorism) and organisational factors (integration vs local responsiveness, structure, strategy, culture) shape the HR function and MNE performance.</div></details>
-</div><details class="full-notes" id="full-notes-u1"><summary>Open complete Unit I semester notes + quick recaps</summary><h2 id="full-u1">Unit I - Concept of IHRM (full notes)</h2><figure class="pol"><svg viewbox="0 0 156 128"><circle cx="78" cy="52" fill="#6fb0e8" r="36" stroke="#1c3f94" stroke-width="2"></circle><path d="M56 40c8-8 16-2 14 6s-12 8-14-6zM80 56c10-6 20 2 14 12s-16 4-14-12z" fill="#5fae6a"></path><g stroke="#333" stroke-width="2"><circle cx="30" cy="98" fill="#c4302b" r="7"></circle><path d="M30 105v12M20 112h20" fill="none"></path><circle cx="78" cy="104" fill="#2f6fd0" r="7"></circle><path d="M78 111v12M68 118h20" fill="none"></path><circle cx="126" cy="98" fill="#1e7a45" r="7"></circle><path d="M126 105v12M116 112h20" fill="none"></path></g></svg><figcaption>one firm, many nations</figcaption></figure><h3>1.1 Scope of the field - 3 approaches</h3><ul>
-<li><b>Cross-cultural management</b>: human behaviour inside organisations seen from an international angle.</li>
-<li><b>Comparative HR / industrial relations</b>: describing, comparing and analysing HR and IR systems of different countries.</li>
-<li><b>HRM in multinational firms</b>: how internationalisation changes HR activities and policies. <span class="hl">The book follows this third approach.</span></li>
-<li>The 3 overlap: culture (Ch 2), comparative IR (Ch 9), small and family firms still going international (Ch 4).</li>
-</ul><h3>1.2 Defining IHRM</h3><ul>
-<li>HRM = activities an organisation uses to get the best from its people: HR planning, staffing (recruit, select, place), performance management, training and development, compensation and benefits, industrial relations.</li>
-<li><b>Morgan's model</b> shows what changes when HRM goes international. 3 dimensions:
-<ul>
-<li>HR activities: <b>procurement, allocation, utilisation</b>.</li>
-<li>Countries: <b>host</b> (where subsidiary sits), <b>parent</b> (where HQ sits), <b>other</b> (source of labour, finance, inputs).</li>
-<li>Employees: <b>HCNs, PCNs, TCNs</b>.</li>
-</ul></li>
-<li><span class="red">IHRM = interplay of activities x countries x employee types.</span></li>
-<li>Example: IBM employs Britons in Britain (HCNs), sends Americans to Asia-Pacific (PCNs), may send Singaporeans to China (TCNs). Nationality decides the category and often drives pay and contract.</li>
-<li>Domestic HRM deals with employees inside <b>one</b> national boundary. It is now borrowing from IHRM as workforces get multicultural, but diversity practices of one legal and cultural setting may not transfer to a multinational setting without changes.</li>
-</ul><div class="fig"><svg viewbox="0 0 400 224"><circle class="fl" cx="145" cy="88" r="62" style="fill-opacity:.55"></circle><circle class="ln" cx="255" cy="88" r="62"></circle><circle class="rl" cx="200" cy="150" r="62"></circle><text x="92" y="78">HR activities</text><text style="font-size:16px" x="72" y="100">procure, allocate, use</text><text x="262" y="78">Countries</text><text style="font-size:16px" x="250" y="100">host, parent, other</text><text x="162" y="196">Employees</text><text style="font-size:16px" x="150" y="214">PCN, HCN, TCN</text><text class="rt" style="font-size:26px" x="178" y="128">IHRM</text></svg></div><h3>Expatriate vs inpatriate</h3><ul>
-<li><b>Expatriate</b> = employee working and temporarily living in a foreign country (firms prefer 'international assignee'). PCNs are always expatriates. TCNs are too. So are HCNs transferred to parent-country operations outside their own country.</li>
-<li><b>Inpatriate</b> = subsidiary staff transferred into the parent-country (HQ) operations. An inpatriate is also an expatriate, which is why many question whether the term is needed. An HCN becomes an inpatriate only when moved into the parent country.</li>
-<li>Broad definition used (Stahl, Bjorkman and Morris): all issues related to managing the global workforce and its contribution to firm outcomes, plus comparative analysis of HRM across countries.</li>
-</ul><h3>1.3 Domestic vs international HRM</h3><p>Key idea: the <span class="hl">activities are mostly the same; the complexity of working in many countries with different national groups of employees is what differs.</span> Dowling gives 6 reasons:</p><ul>
-<li><b>1. More HR activities.</b>
-<ul>
-<li>International taxation: expatriates may owe home and host tax, so tax-equalisation policies are needed so no assignment carries a tax gain or loss. Tax laws vary and settlement can lag the assignment, so firms hire accounting firms.</li>
-<li>Relocation and orientation: pre-departure training, immigration and travel details, housing, shopping, medical care, schooling info, pay delivery and allowances.</li>
-<li>Administrative services abroad: rules may clash with local conditions. Ethical issue example: a host country demands an HIV test for a work permit but the US parent treats such testing as controversial.</li>
-<li>Host-government relations: work permits are easier with good personal ties, but gifts or dinners to officials may break the US Foreign Corrupt Practices Act.</li>
-<li>Language translation services (often grow to serve the whole company).</li>
-</ul></li>
-<li><b>2. Broader perspective.</b> HR designs for PCN, HCN and TCN groups working together (e.g. a Zurich regional HQ). Example: paying an expatriate premium to PCNs but not to foreign nationals sent to the home country fuels the view that PCNs get preferential treatment. Equity across nationalities is a major challenge.</li>
-<li><b>3. More involvement in employees' personal lives.</b> HR must explain housing, healthcare and the whole package; some countries need a marriage certificate for a spouse visa (so marital status creeps into selection); may support children in boarding schools or run recreation in remote places. Many MNEs have an 'International HR Services' unit. The psychological contract now covers the <b>whole family</b>.</li>
-<li><b>4. Emphasis changes with the PCN/HCN mix.</b> As a subsidiary matures and trained locals appear, effort shifts from expatriate tax, relocation and orientation to local selection, training and development (e.g. bringing high-potential locals to HQ).</li>
-<li><b>5. Risk exposure.</b> Failure costs more: direct cost (salary, training, travel, relocation) can reach <b>about 3x</b> the domestic salary plus relocation; indirect costs are lost market share and damaged host relations. Also terrorism (post-2001) means political-risk planning, evacuation procedures, and pandemics such as SARS, Zika and avian flu.</li>
-<li><b>6. Broader external influences.</b> Government type, economy and business customs. Malaysia's affirmative-action rules for indigenous Malays are an example. Developed countries: costly, organised labour and strong law. Developing countries: cheaper, less organised labour, lighter regulation, but HR spends more time learning local codes (gift giving, hiring family) and running benefits like housing and schooling.</li>
-</ul><div class="tip">Exam tip: 'Distinguish domestic HRM and IHRM' - give the 6 factors, 1 example each.</div><h3>1.4 Variables that moderate the differences</h3><p>Besides complexity, 4 variables <b>diminish or accentuate</b> the gap (Dowling's model). Firms from advanced economies with little international experience often underestimate this; many overseas business failures link to poor HR management.</p><h3>(a) Cultural environment</h3><ul>
-<li>Culture = a shaping process over time creating shared knowledge, values, norms and behaviour patterns. It is subtle; we notice it mostly when meeting a different culture (language, food, dress, hygiene, attitude to time).</li>
-<li><b>Culture shock</b>: many adjustments in a short time challenge a person's frame of reference and sense of identity; misread cues cause disorientation, negative feelings about the host country and a wish to go home.</li>
-<li>Research problems: no agreed definition of culture; 'culture' becomes an omnibus variable used after the fact; nation is wrongly treated as culture. Define culture beforehand and do not assume national difference = cultural difference.</li>
-<li><b>Emic</b> = culture-specific; <b>etic</b> = culture-common. Danger is forcing an etic (universal) view without evidence.</li>
-<li><b>Convergence hypothesis</b> (1950s-60s): sound management is universal, so societies become alike (US model). <b>Divergence</b>: evidence shows differences stay. Child: organisations converge at macro level (structure, technology) but individual behaviour stays culturally specific.</li>
-<li><b>Cultural awareness</b>: attitudes like 'my way is best' or 'what works at home works here' cause failure. Hiring, promoting, rewarding and firing follow host law and values. Example: in Indonesia managers feel bound to employ extended family, which Westerners call nepotism. A firm may appoint an expatriate general manager but a local HR manager. Preparing assignees and families is a key HR task.</li>
-</ul><h3>(b) Industry type (Porter)</h3><ul>
-<li><b>Multidomestic</b> industry: competition in each country is independent (retail, distribution, insurance). International strategy = a set of domestic strategies. HR stays mostly domestic, using consultants for the occasional foreign need.</li>
-<li><b>Global</b> industry: position in one country affects position in others (commercial aircraft, semiconductors, copiers). Needs a firm to integrate worldwide, so HR must be built for <span class="hl">co-ordination</span>.</li>
-<li>HRM supports all primary activities in Porter's value chain, so it cuts across the whole chain.</li>
-<li><b>Laurent's tension</b>: consistency gives a corporate identity, but local effectiveness needs adaptation. 5 steps to a truly international HR view: (1) parent admits its HR ways reflect home values; (2) they are different, not better or worse; (3) subsidiaries may have equally good or better local ways; (4) HQ makes differences <b>discussable</b> and usable; (5) belief that cross-cultural learning creates better ways of managing people. These are mindsets more than behaviours.</li>
-</ul><h3>(c) Reliance on the home-country market</h3><ul>
-<li>A large home market (US plus NAFTA) makes overseas operations seem like extensions of domestic ones, favours an international division, and produces managers with domestic-only experience. Criticising US firms as inward-looking ignores this rational focus.</li>
-<li>Small or medium home markets (Switzerland 8m, Ireland 5m, Australia 24m, Netherlands 17m; also Canada, UK, France) push firms abroad and make them adapt to host norms.</li>
-<li>Data point: in Fortune's 2016 Global 500 top 10 only Walmart, Exxon Mobil and Apple are American.</li>
-</ul><h3>(d) Attitudes of senior management</h3><ul>
-<li>Weak international orientation leads to under-emphasis on overseas operations and the belief that domestic HR practices transfer easily (ethnocentrism, poor information).</li>
-<li>The HR manager must work with top management to build a <b>global mindset</b> and policies that develop globally minded staff.</li>
-</ul><h3>1.5 Managing a global, diverse workforce - implications</h3><ul>
-<li>Equal treatment across PCN, HCN, TCN in pay, premiums and promotion, or morale and retention suffer.</li>
-<li>Learn local law and custom before hiring, rewarding or dismissing.</li>
-<li>Support the family (housing, schooling, spouse work permit).</li>
-<li>Balance integration (one identity) with local responsiveness (Laurent).</li>
-<li>Build cross-cultural learning at headquarters and a global mindset.</li>
-<li>Plan for safety, security and evacuation for a dispersed workforce.</li>
-</ul><h3>1.6 Strategic IHRM - De Cieri and Dowling framework</h3><ul>
-<li><b>External factors</b>: <b>PESTLE</b> (political, economic, sociological, technological, legal, environmental); links with other MNEs and governments (networks built on trust and personal relationships); <b>asymmetric events</b> such as terrorism (unusual, leveraged against our assets, hard to plan for or answer proportionately); environmental dynamics.</li>
-<li><b>Organisational factors</b>: balance of global integration and local responsiveness; MNE structure; firm size and maturity; strategy; corporate governance (HR helps write codes of conduct); HQ's international orientation; organisational culture.</li>
-<li><b>HR function</b>: global corporate HR role, HR practices, crisis management and co-ordination.</li>
-<li><b>Outcomes</b>: financial performance, social performance, enterprise resilience.</li>
-</ul><h3>1.7 Why it matters</h3><ul>
-<li>Desatnick and Bennett: multinational ventures fail mainly from not understanding how HR must differ at every level abroad. These 'human' points are as important as financial and marketing criteria.</li>
-</ul><div class="note"><b>Hinglish samajh:</b> IHRM mein kaam wahi hai, par alag-alag country ke log, law aur culture ek saath sambhalne padte hain. Isliye <span class="red">6 factors + 4 moderators</span> yaad rakho.</div><h3>Quick recap (Unit I)</h3><h3>What is IHRM?</h3><ul>
-<li>HRM activities: planning, staffing, performance, training, pay &amp; benefits, industrial relations.</li>
-<li><span class="hl">Morgan's model</span> = 3 dimensions: HR activities (procurement, allocation, utilisation) × countries (host, parent, other) × employees (HCN, PCN, TCN).</li>
-<li>Book's definition: all issues of managing the <b>global workforce</b> + its link to firm outcomes.</li>
-</ul><div class="note"><b>Hinglish samajh:</b> Kaam wahi (hire, train, pay), par alag-alag countries ke logon ko ek company mein manage karna = <span class="red">complexity</span> zyada. Isi wajah se IHRM alag hai.</div><h3>Domestic vs International: 6 factors (Dowling)</h3><ul>
-<li><b>More HR activities</b>: expatriate tax, relocation, visas, host-govt relations, translation.</li>
-<li><b>Broader perspective</b>: PCN + HCN + TCN together, so equity issues.</li>
-<li><b>More involvement in personal life</b>: housing, schools, spouse visa.</li>
-<li><b>Mix changes</b>: mature subsidiary → more local training, less expatriate admin.</li>
-<li><b>Risk exposure</b>: failure costs up to ~3× salary; terrorism, pandemics.</li>
-<li><b>External influences</b>: govt, economy, local practice (e.g. Malaysia's quotas).</li>
-</ul><h3>Moderating variables (+ complexity)</h3><ul>
-<li><b>Culture</b>: culture shock; emic vs etic; convergence vs divergence (firms converge, people stay different). Example: hiring family in Indonesia.</li>
-<li><b>Industry</b> (Porter): multidomestic (retail, insurance) vs global (aircraft, chips). Global needs co-ordination.</li>
-<li><b>Home-market reliance</b>: big home market (US) = less global thinking.</li>
-<li><b>Senior management attitude</b>: need a <span class="hl">global mindset</span>.</li>
-</ul><p class="eq">Laurent: parent must admit its ways are just different, not better.</p><h3>Diverse global workforce - implications</h3><ul>
-<li>Domestic diversity tools help but don't transfer without change.</li>
-<li>Treat PCN/HCN/TCN fairly; learn local norms; hire local HR head.</li>
-<li>Balance <b>global integration vs local responsiveness</b>.</li>
-<li>Strategic view (De Cieri &amp; Dowling): PESTLE + asymmetric events + internal factors → HR function → performance.</li>
-</ul></details></section>
-<section class="dest" id="u2" style="--c:var(--mint)"><div class="side"><span class="tagline">Destination 2</span><h2>Unit II: Staffing and Performance</h2>
+</div></section>
+<section class="dest" id="u2" style="--c:var(--mint)"><div class="side"><h2>Unit II: Staffing and Performance</h2>
 <div class="win"><svg viewbox="0 0 170 226"><path d="M0 60h50M120 30h50" stroke="#fff" stroke-linecap="round" stroke-width="10"></path><ellipse cx="85" cy="82" fill="#fff" rx="60" ry="12" stroke="#14213d" stroke-width="3"></ellipse><path d="M75 82L48 112h26l16-30zM128 82l14-24h10l-10 24z" fill="#e8eef7" stroke="#14213d" stroke-width="3"></path><rect fill="#e5484d" height="54" rx="8" stroke="#14213d" stroke-width="3" width="74" x="48" y="140"></rect><path d="M76 140v-12h18v12M85 150v34" fill="none" stroke="#14213d" stroke-width="3"></path><circle cx="85" cy="170" fill="#ffc83d" r="8" stroke="#14213d" stroke-width="2"></circle></svg></div>
 <button aria-pressed="false" class="stampbtn" data-k="2">Stamp this unit</button></div>
 <div class="tags">
@@ -427,103 +340,8 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <details class="tag"><summary>International assignments</summary><div>Reasons: <b>position filling</b>, <b>management development</b>, <b>organisation development</b>. Types: short-term, extended, long-term; non-standard: commuter, rotational, contractual, virtual, self-initiated.</div></details>
 <details class="tag"><summary>Expatriate failure and selection</summary><div><ul><li>Failure = premature return (broader: underperformance too)</li><li>Top causes: spouse or manager cannot adjust, poor selection</li><li>Selection: technical ability, cross-cultural suitability, family, country rules, MNE needs, language</li><li>U-curve: honeymoon, culture shock, adjustment, mastery</li></ul><span class="hint">Do not pick on technical skill alone.</span></div></details>
 <details class="tag"><summary>Performance and appraisal</summary><div>Five variables: compensation, task, HQ support, host environment, cultural adjustment. PCN roles cross one cultural boundary, TCN roles two. Appraise with <b>hard</b>, <b>soft</b> and <b>contextual</b> criteria. For HCNs, adapt to culture (Japan: save face) and involve locals.</div></details>
-</div><details class="full-notes" id="full-notes-u2"><summary>Open complete Unit II semester notes + quick recaps</summary><h2 id="full-u2">Unit II - Staffing &amp; Performance (full notes)</h2><figure class="pol l"><svg viewbox="0 0 156 128"><path d="M14 34h28M118 22h26" stroke="#fff" stroke-linecap="round" stroke-width="6"></path><ellipse cx="78" cy="44" fill="#fff" rx="42" ry="9" stroke="#1c3f94" stroke-width="2"></ellipse><path d="M70 44L52 66h18l12-22zM116 44l10-16h8l-8 16z" fill="#e8eef7" stroke="#1c3f94" stroke-width="2"></path><circle cx="60" cy="43" fill="#1c3f94" r="2"></circle><circle cx="72" cy="43" fill="#1c3f94" r="2"></circle><circle cx="84" cy="43" fill="#1c3f94" r="2"></circle><rect fill="#c4302b" height="34" rx="5" stroke="#333" stroke-width="2" width="60" x="48" y="84"></rect><path d="M68 84v-8h20v8M78 90v22" fill="none" stroke="#333" stroke-width="2"></path></svg><figcaption>the expatriate's journey</figcaption></figure><h3>2.1 Staffing policies - Perlmutter's EPRG</h3><p>Example: a US MNE needs a finance director for its Irish unit. It can pick a PCN (from HQ), an HCN (local) or a TCN (from another subsidiary). Top-management attitudes decide: ethnocentric, polycentric, geocentric (Perlmutter), regiocentric added later.</p><ul>
-<li><b>Ethnocentric</b>: few subsidiaries have autonomy; strategy made at HQ; key posts held by PCNs.
-<ul><li>Why: HCNs seem unqualified; need communication, co-ordination and control; cuts perceived risk early in internationalisation or after an acquisition ('assignments as control').</li>
-<li>Drawbacks: blocks HCN promotion (low productivity, high turnover); PCNs take long to adapt and make mistakes; big PCN-HCN pay gap looks unjust; expatriates' new status may dull sensitivity to local staff.</li></ul></li>
-<li><b>Polycentric</b>: each subsidiary is a national entity with some autonomy, run by HCNs who rarely reach HQ; PCNs rarely go abroad.
-<ul><li>Pros: no language barrier, no expatriate adjustment, no costly cultural training, low political profile, often cheaper, continuity.</li>
-<li>Cons: gap between HCN managers and HQ (language, loyalty, values) so the MNE becomes a <span class="hl">'federation'</span>; HCNs cannot grow beyond their subsidiary; HQ managers get little international exposure.</li></ul></li>
-<li><b>Geocentric</b>: global approach; each part adds unique competence; <b>nationality matters less than ability</b> (Vodafone wants an 'international class of managers').
-<ul><li>Pros: international executive team and talent pool; avoids federation; resource sharing.</li>
-<li>Cons: host governments push local jobs via immigration controls and paperwork; costly (training, relocation, international base pay); needs many staff abroad and long lead time; central control reduces subsidiary autonomy.</li></ul></li>
-<li><b>Regiocentric</b>: staff move beyond their country but only inside a region (Europe, Americas, Asia-Pacific); regional autonomy; rarely to HQ.
-<ul><li>Pros: regional managers interact; local sensitivity (subsidiaries mostly HCN).</li>
-<li>Cons: regional 'federalism'; the career barrier just moves up to regional level.</li></ul></li>
-<li><b>Ad hoc</b> = policy by default (inertia or inexperience): reactive, no HR strategy fit.</li>
-<li>In practice firms mix: e.g. regiocentric in Europe, ethnocentric in Asia-Pacific; host governments may force a polycentric result.</li>
-</ul><div class="fig"><svg viewbox="0 0 400 224"><rect class="fl" height="84" rx="14" width="170" x="14" y="14"></rect><rect class="ln" height="84" rx="14" width="170" x="216" y="14"></rect><rect class="gl" height="84" rx="14" width="170" x="14" y="124"></rect><rect class="rl" height="84" rx="14" width="170" x="216" y="124"></rect><text style="font-size:26px" x="30" y="50">Ethnocentric</text><text style="font-size:18px" x="30" y="80">HQ people rule</text><text style="font-size:26px" x="232" y="50">Polycentric</text><text style="font-size:18px" x="232" y="80">locals run units</text><text class="gt" style="font-size:26px" x="30" y="160">Regiocentric</text><text class="gt" style="font-size:18px" x="30" y="190">move in a region</text><text class="rt" style="font-size:26px" x="232" y="160">Geocentric</text><text class="rt" style="font-size:18px" x="232" y="190">best person wins</text></svg></div><h3>2.2 Sources of staffing</h3><ul>
-<li><b>PCNs</b> +: control and co-ordination, international experience for promising managers, special skills, assured compliance. -: limits HCN promotion, slow adaptation, may impose HQ style, pay differences.</li>
-<li><b>TCNs</b> +: lower pay and benefits than PCNs, may know host environment better. -: national animosities (India-Pakistan), host may resent, may not wish to go home after.</li>
-<li><b>HCNs</b> +: no language barrier, lower hiring cost, no work permit, continuity, govt may require, better morale. -: HQ control weaker, limited career outside subsidiary, fewer PCN overseas chances, federation risk.</li>
-</ul><h3>2.3 What determines staffing choice</h3><ul>
-<li><b>Context</b>: culture and institutions (law, education, staff supply), industry. Culturally distant units tend to get PCNs. Country-of-origin effect (home practices exported) vs host-country effect.</li>
-<li><b>Firm</b>: structure, strategy, international experience, governance, culture.</li>
-<li><b>Local unit</b>: greenfield, merger, acquisition or partnership; strategic importance; need for control; who decides.</li>
-<li><b>HR practices</b>: selection, training, pay, career management.</li>
-</ul><h3>2.4 International assignments</h3><ul>
-<li>3 reasons: <b>position filling</b> (managerial gap 28%, technical gap 21%), <b>management development</b>, <b>organisation development</b> (control, knowledge and culture transfer). Many assignments mix goals; German MNEs stress development, US firms fill gaps, Japanese/British stress new operations.</li>
-<li>Duration: short-term up to 3 months, extended up to 1 year, long-term 1-5 years (traditional expatriate). 45% long, 55% short (2015).</li>
-<li>Traditional: 12-36 months, family joins, formal selection, expensive, dual-career issues. Short-term: up to 6-12 months, usually alone, informal, flexible and cheap but tax and permit issues.</li>
-<li>Non-standard: <b>commuter</b> (weekly trips, family stays home, stress); <b>rotational</b> (oil rigs, mining); <b>contractual</b> (6-12 month specialists, R&amp;D); <b>virtual</b> (manage from home by tech; role conflict, dual allegiance, misunderstandings); <b>self-initiated</b> (individual starts it; entrepreneurial, so track and retain).</li>
-</ul><h3>2.5 Recruitment and selection</h3><ul>
-<li><b>Recruitment</b> = finding enough good candidates; <b>selection</b> = evaluating and choosing. Separate, both needed. Employer branding matters in China and India.</li>
-<li>Differences from domestic: firm's EPRG leaning; host rules (must show locals unavailable); mostly <b>internal hires</b> (external only ~8% in 2010, history ~12%) because appraisals reduce risk and protect investment in people.</li>
-<li>External: consultants and headhunters (confidential approach, CV check, interviews, shortlist, client interview, sometimes assessment centre).</li>
-</ul><h3>2.6 Expatriate failure and success</h3><ul>
-<li><b>Failure</b> = premature return, usually a selection error plus weak support. Critics: too narrow; Harzing adds poor performance and leaving soon after return (Forster: 8-28% for UK).</li>
-<li>Brookfield 2015: ~5% of assignments failed; highest in China 12%, UK 10%, India 9%. Tung (1982) found US rates highest; Tungli and Peiperl (2009) found rates converging.</li>
-<li>Costs: <b>direct</b> (fares, relocation, salary, training); <b>indirect</b> (market share, host relations, local morale, pressure to localise); <b>personal</b> (self-esteem, motivation, family strain).</li>
-<li>Causes: spouse or manager cannot adapt, other family problems, immaturity, coping with larger role (Tung); plus firm issues and weak performance (2009). Brookfield: family concerns 14%, poor selection 11%, spouse 10%, adaptation 9%. Support and career management help success.</li>
-</ul><h3>2.7 Selection criteria (two-way process)</h3><ul>
-<li><b>Individual</b>: technical ability, cross-cultural suitability, family requirements. <b>Situation</b>: country/cultural rules, MNE needs, language.</li>
-<li><b>Technical ability</b>: heaviest weight and easiest to measure; but home performance may not predict success abroad.</li>
-<li><b>Cross-cultural suitability</b>: soft skills; <b>intercultural competence</b> (affective, cognitive, ability dimensions; empathy, adaptability, diplomacy, emotional stability); <b>cultural intelligence</b>; global mindset.</li>
-<li><b>U-curve</b>: (1) pre-departure and honeymoon, (2) culture-shock crisis, where early recall may happen, (3) adjustment, (4) mastery. Criticised as normative, with weak evidence.</li>
-<li>Adjustment model: antecedents (individual, work, organisation, non-work) → coping modes → outcomes: <b>work, interaction, general</b> adjustment. Also psychological vs socio-cultural.</li>
-<li><b>Family</b>: spouse gives up career and network, often cannot work; children's schooling, elderly parents, single-parent custody can block moves.</li>
-<li><b>Country</b>: work permits for expatriate only; Permits Foundation (Shell, Unilever, Siemens) lobbies for spouse permits; hardship posts; limits on women in some regions.</li>
-<li><b>MNE</b>: expatriate-local ratio, JV partner's say. <b>Language</b>: host tongue helps but corporate language can bar candidates.</li>
-<li>In practice: informal <span class="hl">'coffee-machine' system</span> (Harris and Brewster); structured interviews (Germany, UK, USA); recommendations and self-selection (Japan); tests of doubtful validity; spouse interviews (13.6% of MNEs); IDI (50 items, ethnocentrism to ethnorelativism); assessment centre scoring tolerance for ambiguity, goal orientation, interpersonal skills, empathy, non-judgmentalism, flexibility, meta-communication (e.g. Mexican supplier arriving late).</li>
-</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M20 70 C50 20 70 30 100 60 C140 110 160 190 200 190 C250 190 290 100 330 80 C350 70 370 70 385 72"></path><circle class="rl" cx="75" cy="38" r="6"></circle><circle class="rl" cx="200" cy="190" r="6"></circle><circle class="gl" cx="330" cy="80" r="6"></circle><text class="rt" x="20" y="22">1 Honeymoon</text><text class="rt" x="125" y="216">2 Culture shock</text><text class="gt" x="250" y="58">3 Adjusting</text><text class="gt" style="font-size:18px" x="300" y="112">4 Mastery</text><text style="font-size:17px" transform="rotate(-90 14 140)" x="10" y="140">mood</text></svg></div><h3>2.8 Factors influencing PCN and TCN performance</h3><ul>
-<li>5 linked variables: <b>compensation</b> (unmet pay or career hopes cut motivation), <b>task</b>, <b>HQ support</b>, <b>host environment</b> (wholly owned unit vs JV with state firm; new vs established operation), <b>cultural adjustment</b> of expatriate and family.</li>
-<li>Task: Hays' 4 roles - CEO, structure reproducer, troubleshooter, operative. Caligiuri's 4 types - technical, developmental, strategic, functional (55-80%). Creating a structure differs from working inside one.</li>
-<li><b>Role theory</b>: parent (role sender) sets the role; host stakeholders add expectations across a cultural boundary, causing <span class="red">role conflict</span>. PCN: expectations from a close-but-distant parent and distant-but-near hosts; may 'go native' and be recalled. <b>TCN</b>: role crosses 2 boundaries, so more complex. Role clarity and discretion matter (clarity = strongest stressor).</li>
-<li>Country styles: China (personal, network-driven); France (legal, centralised, prestige counts); Germany (works councils, consensual, long-term training).</li>
-<li>Non-expatriates (travellers, commuters, virtual): hard to set criteria ('management by remote control'), dual goals, distant feedback, what to reward.</li>
-</ul><h3>2.9 Appraisal of international employees</h3><ul>
-<li>Criteria: <b>hard</b> (ROI, market share), <b>soft</b> (leadership, relations), <b>contextual</b>. Transfer pricing, currency and profit limits distort subsidiary figures, so use all three.</li>
-<li>Raters: boss (home or host), self, HR; 81% of US MNEs used several. Host raters know context but may be biased; HQ raters are distant.</li>
-<li>76% of US firms used the same standard form; context changes abroad. Usually annual; feedback needs to be frequent.</li>
-</ul><h3>2.10 Appraisal of HCNs</h3><ul>
-<li>Appraisal can signal distrust. Japan: avoid direct blame, discuss strengths and consequences to <b>save face</b>.</li>
-<li>Let HCNs help design and run it; localise below top management.</li>
-<li>Role view: parent role crosses a cultural boundary, host expectations do not. HCNs moved to HQ face role conflict and readjustment.</li>
-<li>Problems: PCN boss using HQ standards, 360-degree feedback may offend, same forms as domestic, privacy laws. Across 10 countries appraisal often fails its development purpose.</li>
-</ul><div class="note"><b>Hinglish samajh:</b> Selection mein sirf technical skill nahi, <span class="red">family + culture fit</span> dekho. HCN ka appraisal local style mein karo.</div><h3>Quick recap (Unit II)</h3><h3>Four staffing approaches</h3><div class="row"><div>
-<ul>
-<li><b>Ethnocentric</b>: PCNs run everything, HQ decides.<br/><span class="red">+</span> control, lower risk <span class="red">−</span> HCNs blocked, long adaptation, pay gap.</li>
-<li><b>Polycentric</b>: HCNs run subsidiaries.<br/><span class="red">+</span> no language gap, cheap, continuity <span class="red">−</span> 'federation', HQ isolated.</li>
-</ul></div><div>
-<ul>
-<li><b>Geocentric</b>: best person, any nationality.<br/><span class="red">+</span> global team <span class="red">−</span> costly, visas, long lead time.</li>
-<li><b>Regiocentric</b>: moves only within a region.<br/><span class="red">+</span> regional fit <span class="red">−</span> barrier just moves up to regional level.</li>
-</ul></div></div><p>Ad hoc = policy by default (reactive).</p><h3>Sources: PCN / TCN / HCN</h3><ul>
-<li><b>PCN</b>: control + HQ values, but costly &amp; slow to adapt.</li>
-<li><b>TCN</b>: cheaper, knows region, but national rivalry, host may resent.</li>
-<li><b>HCN</b>: no language/permit issue, cheap, stable, but HQ control weaker.</li>
-</ul><ul>
-<li>Choice depends on: context (culture, law, staff supply), firm (strategy, structure), local unit (greenfield/acquisition, importance), HR practices.</li>
-<li>Assignment reasons: <b>position filling, management development, organisation development</b>.</li>
-<li>Types: short-term (≤3 months), extended (≤1 yr), long-term (1-5 yrs). Non-standard: commuter, rotational, contractual, virtual, self-initiated.</li>
-</ul><h3>Expatriate failure &amp; selection</h3><ul>
-<li><b>Failure</b> = premature return (broader: poor performance + leaving after return).</li>
-<li>Top causes: <span class="hl">spouse/family can't adjust</span>, manager can't adjust, poor selection, firm issues.</li>
-<li>Costs: direct (salary, relocation), indirect (market share, relations), personal (self-esteem).</li>
-<li><b>Selection model</b> - Individual: technical ability, cross-cultural suitability, family. Situation: country rules, MNE needs, language.</li>
-<li><b>U-curve</b>: honeymoon → culture shock → adjustment → mastery.</li>
-<li>Adjustment outcomes: work, interaction, general.</li>
-<li>Practice: 'coffee-machine' informal choice; interviews, IDI, assessment centre (tolerance for ambiguity, empathy, flexibility...), spouse interview.</li>
-</ul><h3>Performance of PCNs &amp; TCNs</h3><ul>
-<li>5 variables: <b>compensation, task, HQ support, host environment, cultural adjustment</b>.</li>
-<li>Role theory: parent + host stakeholders send expectations → <span class="red">role conflict</span>. PCN crosses 1 cultural boundary, <b>TCN crosses 2</b>.</li>
-<li>Hays' tasks: CEO, structure reproducer, troubleshooter, operative.</li>
-</ul><h3>Appraisal</h3><ul>
-<li>Criteria: <b>hard</b> (ROI), <b>soft</b> (leadership), <b>contextual</b>. Use all three.</li>
-<li>Many raters (home + host + self); don't copy the domestic form blindly.</li>
-<li><b>HCN appraisal</b>: culture matters (Japan: avoid direct blame, save face). Let locals help design; localise below top level.</li>
-</ul><div class="note"><b>Hinglish samajh:</b> Failure ka matlab banda assignment adhura chhod ke wapas. Sabse bada reason technical skill dekh ke select karna, <span class="red">family aur culture fit nahi dekhna</span>.</div></details></section>
-<section class="dest" id="u3" style="--c:var(--red)"><div class="side"><span class="tagline">Destination 3</span><h2>Unit III: Paying People Abroad</h2>
+</div></section>
+<section class="dest" id="u3" style="--c:var(--red)"><div class="side"><h2>Unit III: Paying People Abroad</h2>
 <div class="win"><svg viewbox="0 0 170 226"><rect fill="#bfe3c0" height="64" rx="8" stroke="#14213d" stroke-width="3" width="118" x="26" y="40"></rect><circle cx="85" cy="72" fill="none" r="18" stroke="#14213d" stroke-width="3"></circle><text fill="#14213d" font-family="Fredoka,sans-serif" font-size="24" text-anchor="middle" x="85" y="80">$</text><g fill="#ffc83d" stroke="#14213d" stroke-width="3"><ellipse cx="44" cy="196" rx="22" ry="8"></ellipse><ellipse cx="44" cy="184" rx="22" ry="8"></ellipse><ellipse cx="44" cy="172" rx="22" ry="8"></ellipse><ellipse cx="96" cy="196" rx="22" ry="8"></ellipse><ellipse cx="96" cy="184" rx="22" ry="8"></ellipse><ellipse cx="96" cy="172" rx="22" ry="8"></ellipse><ellipse cx="96" cy="160" rx="22" ry="8"></ellipse><ellipse cx="96" cy="148" rx="22" ry="8"></ellipse><ellipse cx="144" cy="196" rx="20" ry="8"></ellipse><ellipse cx="144" cy="184" rx="20" ry="8"></ellipse></g></svg></div>
 <button aria-pressed="false" class="stampbtn" data-k="3">Stamp this unit</button></div>
 <div class="tags">
@@ -532,71 +350,8 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <details class="tag"><summary>Going rate approach</summary><div>Pay follows the <b>host</b> country market. Plus: equal to locals, simple. Minus: pay varies by posting, re-entry problems.</div></details>
 <details class="tag"><summary>Balance sheet approach</summary><div>Most used. Aim: <b>keep the expatriate whole</b> on home pay plus inducement. Four outlays: goods and services, housing, income taxes, reserve (savings). Fair and easy to explain, but creates disparities and is complex to run.</div></details>
 <details class="tag"><summary>Local Plus, tax and pay variables</summary><div><ul><li><b>Local Plus</b>: host pay plus perks; cheaper, but retention risk</li><li><b>Tax equalisation</b> is the most common policy; also tax protection</li><li>Pay is shaped by internal factors (strategy, size, culture) and external ones (law, unions, labour market, culture)</li></ul><span class="hint">Exam favourite: going rate vs balance sheet.</span></div></details>
-</div><details class="full-notes" id="full-notes-u3"><summary>Open complete Unit III semester notes + quick recaps</summary><h2 id="full-u3">Unit III - International Compensation (full notes)</h2><figure class="pol"><svg viewbox="0 0 156 128"><g fill="#f2c94c" stroke="#8a6a00" stroke-width="2"><ellipse cx="34" cy="104" rx="18" ry="6"></ellipse><ellipse cx="34" cy="96" rx="18" ry="6"></ellipse><ellipse cx="34" cy="88" rx="18" ry="6"></ellipse><ellipse cx="78" cy="104" rx="18" ry="6"></ellipse><ellipse cx="78" cy="96" rx="18" ry="6"></ellipse><ellipse cx="78" cy="88" rx="18" ry="6"></ellipse><ellipse cx="78" cy="80" rx="18" ry="6"></ellipse><ellipse cx="78" cy="72" rx="18" ry="6"></ellipse><ellipse cx="122" cy="104" rx="18" ry="6"></ellipse><ellipse cx="122" cy="96" rx="18" ry="6"></ellipse></g><rect fill="#bfe3c0" height="38" rx="4" stroke="#1e7a45" stroke-width="2" width="76" x="40" y="14"></rect><circle cx="78" cy="33" fill="none" r="11" stroke="#1e7a45" stroke-width="2"></circle><text fill="#1e7a45" font-family="Caveat,cursive" font-size="16" text-anchor="middle" x="78" y="39">$ €</text></svg><figcaption>one package, many parts</figcaption></figure><p>Global pay has moved beyond expatriate pay: it builds a global culture, acts as <b>control</b> (linking performance to cost) and sits in the corporate-governance debate. HR must handle messy local detail while keeping one strategic pay pattern. This needs knowledge of tax and employment law, currency and inflation, so firms use consultants. Most of the chapter covers PCN pay; TCN and HCN pay is growing in importance.</p><h3>3.1 Objectives</h3><ul>
-<li><b>MNE wants</b>: fit with strategy and structure; attract and retain staff where needed (competitive: foreign-service incentive, tax equalisation, reimbursing reasonable costs); cost-effective transfers; equity and easy administration.</li>
-<li><b>Employee wants</b>: financial protection (benefits, social security, living costs); financial gain (income or savings); housing, children's education and home leave covered.</li>
-<li>Not all can be maximised together. Milkovich and Bloom: do not assume local conditions dominate. Core balance: <span class="hl">global standardisation vs local customisation</span>.</li>
-</ul><h3>3.2 Key components of an expatriate package</h3><ul>
-<li><b>Base salary</b>: the foundation block; allowances, in-service benefits and pension are tied to it. Paid in home currency, local currency or both; linked to home country or an international rate.</li>
-<li><b>Foreign service inducement and hardship premium</b>: to accept the move and for tough locations. Usually 5-40% of base or a lump sum. Firms must define hardship, eligibility, amount and timing (US firms use State Department hardship guidelines). More common for PCNs than TCNs. A differential may replace overtime where the host work week is longer.</li>
-<li><b>Allowances</b> (6 main):
-<ul>
-<li><b>Cost-of-living (COLA)</b>: covers cost differences (transport, furniture, medical, domestic help); based on family size, with extra per child; data from Mercer or ECA International.</li>
-<li><b>Housing</b>: keeps home standards; set by family size and job level; options: company housing, fixed allowance with top-up, or share of income; help leasing or selling the old home.</li>
-<li><b>Home leave</b>: yearly trips home to renew family and business ties and ease repatriation.</li>
-<li><b>Education</b>: tuition, fees, books, uniforms, transport, boarding; about 95% of MNEs contribute; international schools cost more but follow home curricula and suit 'third-culture kids'; pre-school and university usually excluded.</li>
-<li><b>Relocation</b>: moving, shipping, storage, temporary living, car or appliance subsidies, perquisites (cars, drivers, clubs, servants), often tied to tax equalisation. A driver can be safer and cheaper in developing countries.</li>
-<li><b>Spouse assistance</b>: replaces lost income (capped or one-time) and increasingly job search help, counselling, permit and language help.</li>
-</ul></li>
-<li><b>Benefits</b>: healthcare, pension and social security, life insurance, child allowances, profit sharing or stock options. Issues: stay in home plan or join host plan, fill coverage gaps, portability (very hard). Most US PCNs keep home plans except medical; EU social security is portable. TCNs are often worse planned for (little home coverage, currency problems).</li>
-<li><b>Leave</b>: annual home leave, <b>rest and rehabilitation</b> leave for hard locations, emergency leave.</li>
-</ul><h3>3.3 Approaches</h3><ul>
-<li><b>Going rate (market rate)</b>: base pay follows the <b>host</b> country, using surveys of locals, same-nationality expatriates or all expatriates; low-pay locations get extras.
-<ul><li>+ equality with locals, simple, identifies with host, equity across nationalities.</li>
-<li>- pay varies between assignments and between same-nationality expatriates; rivalry for rich postings; re-entry problems when pay drops back.</li></ul></li>
-<li><b>Balance sheet (build-up)</b>: most widely used. Aim: <span class="red">keep the expatriate whole</span>: home living standard plus an inducement. Built on <b>home</b> pay; extra host costs are shared so purchasing power equals home. 4 outlay groups: goods and services, housing, income taxes, reserve (savings, pension, education, social security).
-<ul><li>Book example: Australian marketing manager in 'New Euphoria' (cost index 150, exchange rate 1.5): base pay + COLA + 20% service premium + 20% hardship, minus 7% notional housing and notional tax, split between home and local currency.</li>
-<li>+ equity across postings and same nationality, easy re-entry, easy to explain.</li>
-<li>- disparities (US PCN vs NZ TCN in Singapore; expatriates vs locals; expatriates underpaid in high-pay USA); complex (taxes, pensions).</li></ul></li>
-<li><b>Local Plus</b>: host salary level and rules plus expatriate-type benefits (housing, transport, schooling), often grossed up for tax; no tax equalisation, COLA, hardship, home leave, training or spouse help. A hybrid of the other two.
-<ul><li>Used for long-term or permanent moves, intra-regional moves (Asia-Pacific), low-pay to high-pay moves, junior managers wanting experience.</li>
-<li>+ cheaper, flexible 'plus' items, works when 'home' is unclear or TCNs have no home payroll.</li>
-<li>- power shifts to employee; weaker ties to firm; <span class="red">retention risk</span> as skills become marketable.</li></ul></li>
-<li>Policies for long-term assignments: <b>Full International</b> (balance sheet, 'full bells and whistles' for high potentials); <b>Expat Lite</b> (reduced balance sheet, up to ~2 years); <b>Local Plus</b> (allowances phased 100%, 50%, 20%); <b>Localisation</b> (phased to full local pay); <b>One-way transfer</b> (self-initiated, local payroll).</li>
-</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M30 110h340M30 100v20M370 100v20"></path><text x="14" y="90">HOST pay</text><text x="296" y="90">HOME pay</text><circle class="fl" cx="70" cy="110" r="13"></circle><circle class="gl" cx="175" cy="110" r="13"></circle><circle class="rl" cx="330" cy="110" r="13"></circle><text x="16" y="160">Going rate</text><text style="font-size:16px" x="16" y="182">same as locals</text><text class="gt" x="128" y="205">Local Plus</text><text class="gt" style="font-size:16px" x="112" y="58">local pay + perks</text><text class="rt" x="268" y="160">Balance sheet</text><text class="rt" style="font-size:16px" x="268" y="182">keep him whole</text></svg></div><h3>3.4 Taxation</h3><ul>
-<li>Biggest worry: tax at home <b>and</b> host (US citizens get a Section 911 deduction but must file in both).</li>
-<li><b>Tax equalisation</b> (most common): firm withholds the home tax amount and pays all actual taxes; premiums and allowances paid tax-free to employee.</li>
-<li><b>Tax protection</b>: employee pays up to the home tax and keeps any windfall. Also ad hoc and laissez-faire (not recommended).</li>
-<li>Firms use international accounting firms. Social security contributions vary widely (about 0% to nearly 60%).</li>
-</ul><h3>3.5 Living-cost data and PCN vs TCN</h3><ul>
-<li>Consultants publish cost-of-living indices; balance-sheet packages need constant updating (lag causes complaints). Currency shocks matter (Indonesian rupiah fell over 50% in 1997). UBS uses the <b>Big Mac index</b> (work minutes per burger). Firms also compare business costs (wages, rents, taxes, corruption).</li>
-<li>Balance sheet uses home base pay, so TCNs from lower-pay countries cost less than PCNs, which is hard to justify as TCNs become valuable.</li>
-<li><b>Match pay to staffing</b>: ethnocentric means keep PCNs whole; geocentric means <b>international base pay</b> for key managers in a reserve currency (USD or euro).</li>
-</ul><h3>3.6 Variables influencing compensation in MNCs</h3><ul>
-<li>3 levels, each with internal and external pulls. <b>Level 1 basic theories</b>: internal (resource-based view, resource dependence, behavioural theory, new institutional economics) vs external (cultural, institutional). <b>Level 2 norms and values</b>: internal (strategy, corporate culture, HR strategy, employment relationships) vs external (IR system, education system, cultural norms). <b>Level 3 practices</b>: internal (size, life cycle, degree of internationalisation, structure) vs external (industry, product and labour markets, law, unions).</li>
-<li>Pay-strategy choices: job vs skill; performance vs seniority; individual vs group vs organisation; risk; <b>hierarchical vs egalitarian</b>; internal equity (job evaluation) vs external equity (market surveys).</li>
-<li>Standardised pay suits monopolistic industry, low internationalisation, simple structure. Localised pay suits strong local values and rules, high internationalisation, decentralised structure.</li>
-<li>Also: staffing philosophy, PCN/TCN/HCN status, assignment type, host cost of living, tax law, MNE goals, executive-pay debate (competitive individualism vs co-operative collectivism).</li>
-</ul><div class="note"><b>Hinglish samajh:</b> Balance sheet = ghar jaisi lifestyle ka hisaab. Going rate = jahan ja rahe ho wahan ka rate. Local Plus = local pay + kuch extra perks.</div><h3>Quick recap (Unit III)</h3><h3>Package parts</h3><ul>
-<li><b>Base salary</b> (foundation, home or local currency).</li>
-<li><b>Foreign service premium + hardship</b>: usually 5-40% of base.</li>
-<li><b>Allowances</b>: cost-of-living, housing, home leave, education, relocation, spouse assistance.</li>
-<li><b>Benefits</b>: health, pension/social security (portability is hard; TCNs worst off), insurance.</li>
-<li><b>Leave</b>: home leave, R&amp;R, emergency.</li>
-</ul><h3>Three approaches</h3><ul>
-<li><b>Going rate</b> (host pay): equal to locals, simple; but pay varies by country, re-entry shock.</li>
-<li><b>Balance sheet</b> (home pay, most used): 'keep expatriate whole'. Outlays: goods &amp; services, housing, taxes, reserve. Fair across postings, easy re-entry; but disparities and complex.</li>
-<li><b>Local Plus</b> (host pay + some perks): cheap, flexible, no COLA/tax equalisation; but <span class="red">retention risk</span>.</li>
-</ul><ul>
-<li>Policies: Full International, Expat Lite, Local Plus, Localisation, One-way transfer.</li>
-<li><b>Tax</b>: equalisation (most common), protection, ad hoc, laissez-faire.</li>
-<li>Match pay to staffing: ethnocentric → keep whole; geocentric → international base pay in USD/EUR.</li>
-</ul><h3>Variables influencing MNC pay</h3><ul>
-<li>Internal: strategy, culture, size, internationalisation, structure.</li>
-<li>External: culture, laws, unions, labour market, industry, cost of living, currency.</li>
-<li>Choices: job vs skill, individual vs group, hierarchical vs egalitarian, standardise vs localise.</li>
-</ul><div class="tip">Exam favourite: compare going rate vs balance sheet, then add Local Plus as the new third option.</div></details></section>
-<section class="dest" id="u4" style="--c:var(--blue)"><div class="side"><span class="tagline">Destination 4</span><h2>Unit IV: Unions, Law and Trends</h2>
+</div></section>
+<section class="dest" id="u4" style="--c:var(--blue)"><div class="side"><h2>Unit IV: Unions, Law and Trends</h2>
 <div class="win"><svg viewbox="0 0 170 226"><path d="M14 190V110l32 18v-18l32 18v-18l32 18V92h44v98z" fill="#b9a58a" stroke="#14213d" stroke-width="3"></path><rect fill="#8a7860" height="30" stroke="#14213d" stroke-width="3" width="16" x="128" y="62"></rect><path d="M136 56c-8-10 8-14 0-24" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="7"></path><path d="M30 190V50" stroke="#14213d" stroke-width="4"></path><path d="M30 50h60v28H30z" fill="#e5484d" stroke="#14213d" stroke-width="3"></path><text fill="#fff" font-family="Fredoka,sans-serif" font-size="18" text-anchor="middle" x="60" y="71">UNION</text></svg></div>
 <button aria-pressed="false" class="stampbtn" data-k="4">Stamp this unit</button></div>
 <div class="tags">
@@ -606,54 +361,7 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <details class="tag"><summary>Union responses and global bodies</summary><div>International trade secretariats (limited success), lobbying for laws, regulation through the <b>ILO</b> and <b>OECD Guidelines</b> (chapeau clause, Badger case), and corporate campaigns (James Hardie). Transnational bargaining stays remote.</div></details>
 <details class="tag"><summary>Regional integration: the EU</summary><div>Rome 1957, Social Charter 1989, Single Market 1992, 2004 enlargement, Lisbon 2009. Worry: <b>social dumping</b>, a race to the bottom on labour costs.</div></details>
 <details class="tag"><summary>Emerging trends</summary><div><ul><li><b>Codes of conduct</b> (SA 8000; Rana Plaza showed weak enforcement)</li><li><b>Offshoring</b>: India (high turnover), China (guanxi), nearshoring</li><li><b>Ethics</b>: relativism vs absolutism vs universalism; bribery laws (FCPA, OECD)</li><li>Safety, security and counter-terrorism now sit with HR</li></ul><span class="hint">Add class notes on framework agreements and employee involvement.</span></div></details>
-</div><details class="full-notes" id="full-notes-u4"><summary>Open complete Unit IV semester notes + quick recaps</summary><h2 id="full-u4">Unit IV - Industrial Relations &amp; Trends (full notes)</h2><figure class="pol l"><svg viewbox="0 0 156 128"><path d="M24 112V62l22 12V62l22 12V62l22 12V50h44v62z" fill="#b9a58a" stroke="#333" stroke-width="2"></path><rect fill="#8a7860" height="26" stroke="#333" stroke-width="2" width="12" x="112" y="26"></rect><path d="M118 22c-6-8 6-12 0-18" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"></path><g fill="#ffe9a8" stroke="#333" stroke-width="1.5"><rect height="12" width="12" x="34" y="88"></rect><rect height="12" width="12" x="62" y="88"></rect><rect height="12" width="12" x="92" y="74"></rect></g><path d="M12 112V40" stroke="#333" stroke-width="3"></path><path d="M12 40h38v18H12z" fill="#c4302b" stroke="#333" stroke-width="2"></path><text fill="#fff" font-family="Caveat,cursive" font-size="13" text-anchor="middle" x="31" y="54">UNION</text></svg><figcaption>labour meets the MNE</figcaption></figure><h3>4.1 Comparative industrial relations</h3><ul>
-<li>Concepts shift across countries. <b>Collective bargaining</b>: USA = local union vs management; Sweden and Germany = employers' organisation vs industry union. Goals differ too: many European unions see class struggle, US unions are pragmatic. Enforceability varies.</li>
-<li>IR mirrors society's history and power relations. Poole's causes of union differences: technology and industry organisation, state regulation of unions, ideological splits, religion, managers' labour strategies.</li>
-<li>Union types: <b>industrial</b> (all grades in an industry), <b>craft</b> (skilled trades across industries), <b>conglomerate</b> (many industries), <b>general</b> (almost all employees), <b>enterprise</b> (one firm; Japan, Asia-Pacific).</li>
-<li>Density (OECD): Sweden, Denmark, Norway highest; France, USA, Korea low; OECD average 18.8% (2005) to 16.9% (2013). Reasons: less public and manufacturing jobs, more competition, decentralised bargaining, law changes, globalised production.</li>
-<li>Case, Hyundai in China: union was a branch of the plant's Party committee (100% membership, weak). Result: hybrid practice - labour-intensive, team-based, flat, one-year contracts - vs automated, centralised, strong-union Korea.</li>
-</ul><h3>4.2 MNE IR policy</h3><ul>
-<li>IR is usually delegated to subsidiaries but HQ co-ordinates because deals set precedents. HQ involvement rises with: <b>production integration</b>, <b>US ownership</b> (more centralised), <b>IHRM approach</b> (ethnocentric = more conflict), <b>prior experience</b> (Europe industry-level, US firm-level), <b>subsidiary traits</b> (acquisitions freer than greenfield; young, strategic, HQ-funded or poor performers controlled), <b>home market</b> size, and <b>management attitude</b> (US union avoidance).</li>
-<li>MNE subsidiaries in Britain had similar strike frequency but larger, longer strikes (Hamill): <span class="hl">type of MNE matters, not multinationality</span>.</li>
-</ul><h3>4.3 Unions and MNEs</h3><ul>
-<li>4 limits on MNEs: (1) wage levels, (2) varying employment (closure and redundancy law), (3) blocking global integration (GM matched investment in Germany to please the union; costs ~15% above optimal), (4) campaigns.</li>
-<li><b>Kennedy's 7 union worries</b>: huge finances, alternative supply, ability to move production, remote head office, many industries, IR expertise, <b>investment strike</b>. Unions also struggle to reach foreign decision-makers and financial data.</li>
-</ul><h3>4.4 Global unions and responses</h3><ul>
-<li><b>International trade secretariats (ITS)</b>: loose world links of national unions per trade; share information; aim at transnational bargaining via research, company conferences, company councils, company-wide talks, co-ordinated bargaining. Limited success: MNEs pay well, resist, labour is divided, laws differ.</li>
-<li><b>Lobbying for national laws</b> to stop job export (AFL-CIO): mostly failed.</li>
-<li><b>International bodies</b>: ETUC lobbies ILO, UNCTAD, OECD, EU. ILO principles: freedom of association, bargaining, no forced labour, non-discrimination; ILO Tripartite Declaration 1977; <b>OECD Guidelines 1976</b> (voluntary). <b>Chapeau clause</b>: employers read it as local law first, unions as a supplement. <b>Badger case</b>: Raytheon's Belgian unit closed; OECD said parent shares responsibility. National Contact Points follow up; 2011 update added human rights and supply chains.</li>
-<li><b>Corporate campaigns</b>: unions ally with NGOs, churches, governments; example James Hardie asbestos campaign (boycott, shareholder pressure, inquiry). UN Global Compact reflects this.</li>
-<li>Transnational bargaining is a remote possibility (Enderwick). Unions should strengthen plant and company bargaining, research MNE weak spots, consolidate ITS work.</li>
-</ul><h3>4.5 Regional integration - EU</h3><ul>
-<li>Social dimension covers labour law, conditions, training, social security, pensions. Milestones: Treaty of Rome 1957; Council of Europe Social Charter 1965; Single European Act 1987 leading to the Single Market (31 Dec 1992); Community Charter of Workers' Social Rights 1989; Treaty of Lisbon 2009 (binding Charter of Fundamental Rights, non-discrimination, right to information and collective action).</li>
-<li>Supporters: social justice. Critics: 'social engineering'.</li>
-<li><b>Social dumping</b> ('race to the bottom'): firms shift to low-cost states or workers accept pay cuts; sharper after the 2004 enlargement and 2009 crisis. APEC is the Asia-Pacific parallel.</li>
-</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M20 112h360"></path><circle class="fl" cx="40" cy="112" r="9"></circle><circle class="fl" cx="120" cy="112" r="9"></circle><circle class="fl" cx="200" cy="112" r="9"></circle><circle class="fl" cx="280" cy="112" r="9"></circle><circle class="rl" cx="360" cy="112" r="9"></circle><text class="rt" x="14" y="84">1957</text><text style="font-size:17px" x="2" y="62">Rome</text><text class="rt" x="94" y="152">1989</text><text style="font-size:17px" x="70" y="174">Social Charter</text><text class="rt" x="174" y="84">1992</text><text style="font-size:17px" x="150" y="62">Single Market</text><text class="rt" x="254" y="152">2004</text><text style="font-size:17px" x="236" y="174">10 new members</text><text class="rt" x="334" y="84">2009</text><text style="font-size:17px" x="326" y="62">Lisbon</text></svg></div><h3>4.6 Emerging trends</h3><ul>
-<li><b>Codes of conduct</b>: rules showing core values, key in supply chains (Nike, Levi's, Adidas faced child-labour and safety charges). SA 8000 is the universal standard. Rana Plaza (2013, 1,100+ dead) showed weak enforcement. HR role: draft and review codes, cost-benefit of compliance, train staff and partners, link reward to compliance. Degussa is the book's example.</li>
-<li><b>NGOs</b>: Greenpeace, Oxfam, BRAC, Red Cross shape MNEs; their HR needs are under-researched.</li>
-<li><b>Offshoring</b>: moves work (call centres, software, R&amp;D) abroad and IR to a third party. India: strong BPO, but 20-80% turnover, 10-20% yearly pay rises, social ties and caste affect HR. China: guanxi, 'iron rice bowl' past, poaching, weak pay-performance link. <b>Nearshoring</b> to Czech Republic, Hungary, Poland. EU data rules limit data offshoring. HR roles (CIPD): consult unions, redeploy staff, communicate, spot training needs, design jobs, flag legal risk. Returning ex-host nationals can turn brain drain into brain gain.</li>
-<li><b>Ethics</b>: relativism (do as locals do), absolutism (home rules everywhere), universalism (some global principles). Bribery: FCPA 1977, OECD Convention in force 1999, UK Bribery Act 2010. Siemens: US$800m US fine, 395m euro German fine, ~2.5bn euro total. HR adds ethics to selection and training.</li>
-<li><b>Safety and security</b>: audit emergency readiness, facility security, espionage and theft, cyber-terrorism, travel and fire risks. Strategy depends on firm risk and place risk.</li>
-<li><b>Employee involvement</b>: the book only touches it: Ford's early policy, German works councils and co-determination, participative goal-setting in Germany and Sweden vs assigned goals in the USA. Add class-note points for framework agreements and fuller involvement.</li>
-</ul><div class="note"><b>Hinglish samajh:</b> Unions MNE ki taakat se darte hain, isliye ILO/OECD, campaigns aur EU rules ka sahara lete hain. Aaj ke trends: codes of conduct, offshoring aur ethics.</div><h3>Quick recap (Unit IV)</h3><h3>Comparative IR</h3><ul>
-<li>Hard to compare: 'collective bargaining' means different things (US local vs Germany/Sweden industry-level). History shapes systems.</li>
-<li>Union types: <b>industrial, craft, conglomerate, general, enterprise</b> (Japan).</li>
-<li>Union density: Sweden/Denmark/Norway high; France, USA low; OECD avg 18.8% (2005) → 16.9% (2013).</li>
-<li>HQ control of IR rises with: production integration, US ownership, young/strategic/dependent subsidiary, poor performance, anti-union attitude.</li>
-</ul><h3>Unions vs MNEs</h3><ul>
-<li>Constrain through: <b>wages, employment levels, global integration, campaigns</b>.</li>
-<li>Kennedy's 7 worries: big finances, alternative supply, can move production, remote authority, many industries, IR expertise, investment strike.</li>
-<li>Responses: <b>trade secretariats (ITS)</b>, lobbying for laws, <b>ILO/OECD</b> rules (OECD guidelines 1976, Badger case), corporate campaigns (James Hardie).</li>
-<li>Transnational bargaining = remote possibility.</li>
-</ul><h3>Regional integration - EU</h3><ul>
-<li>Rome 1957 → Single Market 1992 → Social Charter 1989 → Lisbon 2009.</li>
-<li><span class="hl">Social dumping</span> = 'race to the bottom' on labour cost, worse after 2004 enlargement.</li>
-</ul><div class="note"><b>Check class notes:</b> the book has no separate section on global framework agreements or employee involvement. Add your teacher's points there.</div><h3>Emerging trends</h3><ul>
-<li><b>Codes of conduct</b> (SA 8000, Rana Plaza 2013 showed weak enforcement), <b>NGOs</b>.</li>
-<li><b>Offshoring</b>: India (BPO, 20-80% turnover), China (guanxi, iron rice bowl), nearshoring to Central Europe.</li>
-<li><b>Ethics</b>: relativism vs absolutism vs universalism; bribery (FCPA 1977, OECD 1999, Siemens case).</li>
-<li>Safety, security, counter-terrorism now part of HR's job.</li>
-</ul></details></section>
+</div></section>
 <section class="dest notes-hub" id="full-notes"><h2>Cabin Library: Revision Tools</h2><p>Everything from the separate notes notebook is integrated here, alongside the original aeroplane-style destinations and passport. Open a destination above for its detailed notes, or use these quick revision tools.</p><h3 id="integrated-cards">Flashcards — tap to flip</h3><div class="cards">
 <button class="card" type="button"><span class="q">Morgan's 3 dimensions of IHRM?</span><span class="a">HR activities x countries (host, parent, other) x employee types (HCN, PCN, TCN)</span></button>
 <button class="card" type="button"><span class="q">Why do firms use PCNs?</span><span class="a">Control, co-ordination, HQ values, special skills, assured compliance</span></button>
@@ -929,5 +637,14 @@ results.textContent='Search the full notes, all four units, flashcards and revis
 })();
 </script>
 
+
+<style>
+/* Keep search at the top with the sticky navigation */
+header.top .study-tools{margin:7px auto 9px;padding:7px 9px;gap:6px;border-radius:12px;box-shadow:none;max-width:1040px}
+header.top .study-tools input{flex:1 1 190px;padding:7px 10px;font-size:14px;min-height:38px}
+header.top .study-tools .btn{min-height:34px;padding:4px 8px;font-size:12px}
+header.top .study-tools #searchResults{font-size:12px;max-height:90px;overflow:auto}
+@media(max-width:600px){header.top .study-tools{margin:6px 0 8px;padding:6px;gap:5px}header.top .study-tools input{flex-basis:100%;width:100%}header.top .study-tools .btn{flex:1 1 auto}header.top .top-actions{max-height:70px;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}}
+</style>
 </body>
 </html>
