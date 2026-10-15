@@ -373,6 +373,18 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 @media(max-width:600px){.grouped-actions{gap:7px;padding-left:10px;padding-right:10px}.nav-group{min-width:0;flex:1 1 28%}.nav-group>summary{padding:8px 6px;font-size:12px;min-height:40px}.nav-subbuttons{padding:6px;min-width:0}.nav-subbuttons a{font-size:12px;white-space:normal;padding:7px 8px;min-height:34px}}
 </style>
 
+<style id="navigation-blue-button-overlap-fix">
+/* Keep the blue navigation controls layered above the dark page sections. */
+header.top{isolation:isolate;z-index:100}
+.top-actions.grouped-actions{position:relative;z-index:101;overflow:visible}
+.nav-group{position:relative;z-index:102;background:#10131b;border-color:#10131b;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.nav-group>summary{position:relative;z-index:2;background:#10131b;color:#fff;border-radius:11px}
+.nav-group[open]>summary{background:#10131b;color:#fff;border-bottom-color:#303747}
+.nav-subbuttons{position:absolute;top:calc(100% - 1px);left:-2px;right:-2px;z-index:150;min-width:150px;padding:8px;background:#10131b;border:2px solid #10131b;border-radius:0 0 13px 13px;box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.nav-subbuttons a{position:relative;z-index:151;background:#2f6fd0;border:1px solid #2f6fd0;color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.22)}
+.nav-subbuttons a:hover{background:#ffc83d;border-color:#ffc83d;color:#14213d}
+@media(max-width:600px){.nav-subbuttons{min-width:0;width:max-content;max-width:min(190px,calc(100vw - 28px))}.nav-subbuttons a{white-space:normal}}
+</style>
 <style id="compact-floating-search-widget">
 .search-widget-launcher{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:1100;display:flex;align-items:center;gap:7px;min-height:42px;padding:8px 13px;border:1px solid var(--blue);border-radius:999px;background:var(--card);color:var(--ink);box-shadow:0 5px 18px rgba(0,0,0,.18);font:600 13px 'DM Sans',sans-serif;cursor:pointer}
 .search-widget-launcher:hover{background:var(--sun);color:#14213d}
