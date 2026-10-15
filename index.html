@@ -841,5 +841,109 @@ reset();
 })();
 </script>
 
+
+<div id="ihrmAgentDock">
+  <button id="ihrmAgentToggle" type="button" aria-controls="ihrmAgentPanel" aria-expanded="false">✦ Study Agents</button>
+</div>
+<section id="ihrmAgentPanel" role="dialog" aria-modal="false" aria-labelledby="iaTitle" aria-hidden="true">
+  <div class="ia-head"><h2 id="iaTitle">IHRM Agent Crew</h2><button class="ia-close" id="iaClose" type="button" aria-label="Close study agents">Close</button></div>
+  <p class="ia-sub">Choose a specialist and give it a task. Agents use the notes already loaded in this study hub.</p>
+  <div class="ia-grid" role="group" aria-label="Choose an agent">
+    <button class="ia-agent active" type="button" data-agent="coach"><strong>Study Coach</strong><span>Build a focused study plan</span></button>
+    <button class="ia-agent" type="button" data-agent="explain"><strong>Concept Explainer</strong><span>Find and explain note passages</span></button>
+    <button class="ia-agent" type="button" data-agent="exam"><strong>Exam Setter</strong><span>Generate practice questions</span></button>
+    <button class="ia-agent" type="button" data-agent="flash"><strong>Flashcard Maker</strong><span>Turn headings into recall cards</span></button>
+    <button class="ia-agent" type="button" data-agent="revision"><strong>Revision Planner</strong><span>Structure a revision session</span></button>
+    <button class="ia-agent" type="button" data-agent="navigator"><strong>Notes Navigator</strong><span>Find relevant topics in the notes</span></button>
+  </div>
+  <label class="ia-label" for="iaPrompt">What do you want help with?</label>
+  <textarea id="iaPrompt" placeholder="Example: Explain the EPRG framework or make a 30-minute revision plan."></textarea>
+  <div class="ia-actions"><button class="ia-btn" id="iaRun" type="button">Run selected agent</button></div>
+  <div id="iaOutput" role="status" aria-live="polite">Select an agent and enter a task to begin.</div>
+  <p class="ia-status">Study-agent mode: browser-local, grounded in this page’s notes. Live LLM responses require a secure server/API connection.</p>
+</section>
+
+<script id="ihrm-agent-runtime">
+(function(){
+  const $ = id => document.getElementById(id);
+  const panel = $('ihrmAgentPanel'), toggle = $('ihrmAgentToggle'), prompt = $('iaPrompt'), output = $('iaOutput');
+  if(!panel || !toggle || !prompt || !output) return;
+  let selected = 'coach';
+  const roleButtons = [...document.querySelectorAll('.ia-agent')];
+  const roleNames = {coach:'Study Coach',explain:'Concept Explainer',exam:'Exam Setter',flash:'Flashcard Maker',revision:'Revision Planner',navigator:'Notes Navigator'};
+  toggle.addEventListener('click',()=>{
+    const open = panel.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',String(open));
+    panel.setAttribute('aria-hidden',String(!open));
+    if(open) prompt.focus();
+  });
+  $('iaClose').addEventListener('click',()=>{
+    panel.classList.remove('open');toggle.setAttribute('aria-expanded','false');panel.setAttribute('aria-hidden','true');toggle.focus();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && panel.classList.contains('open')) $('iaClose').click();});
+  roleButtons.forEach(btn=>btn.addEventListener('click',()=>{
+    selected=btn.dataset.agent;
+    roleButtons.forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+    output.textContent=roleNames[selected]+' selected. Enter a task and run the agent.';
+  }));
+  function safeText(el){return (el?.innerText||el?.textContent||'').replace(/\\s+/g,' ').trim();}
+  function getUnit(text){
+    const m=(text+' '+prompt.value).match(/\\bunit\\s*(iv|iii|ii|i|4|3|2|1)\\b/i);
+    if(!m)return null;
+    return ({i:'u1',ii:'u2',iii:'u3',iv:'u4',1:'u1',2:'u2',3:'u3',4:'u4'})[m[1].toLowerCase()]||null;
+  }
+  function courseArea(text){
+    const unitId=getUnit(text);
+    if(unitId){const el=document.getElementById(unitId);if(el)return el;}
+    return document.querySelector('.sheet')||document.querySelector('main')||document.body;
+  }
+  function linesFor(text){
+    const area=courseArea(text);
+    return (area.innerText||area.textContent||'').split(/\\n+/).map(s=>s.replace(/\\s+/g,' ').trim()).filter(s=>s.length>18 && s.length<420);
+  }
+  function termsFor(text){
+    return (text.toLowerCase().match(/[a-z][a-z-]{3,}/g)||[]).filter(w=>!['about','please','make','with','from','that','this','explain','create','give','help','need','want','unit','notes','topic','what','when','where','have','into','your','study','agent','revision'].includes(w));
+  }
+  function relevantLines(text,limit=6){
+    const lines=linesFor(text), terms=termsFor(text);
+    const scored=lines.map((line,i)=>({line,i,score:terms.reduce((n,t)=>n+(line.toLowerCase().includes(t)?1:0),0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.i-b.i);
+    const seen=new Set();return scored.filter(x=>{const k=x.line.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,limit).map(x=>x.line);
+  }
+  function headings(text){
+    const unitId=getUnit(text), root=unitId?document.getElementById(unitId):(document.querySelector('.sheet')||document);
+    return [...root.querySelectorAll('h2,h3,h4,strong')].map(safeText).filter(t=>t.length>3&&t.length<110&&!/^(unit [ivx]+|ihrm semester notes)$/i.test(t)).filter((t,i,a)=>a.indexOf(t)===i).slice(0,18);
+  }
+  function run(){
+    const task=prompt.value.trim();
+    if(!task){output.textContent='Please enter a topic, question, or study goal first.';prompt.focus();return;}
+    const source=relevantLines(task,7), hs=headings(task), unit=getUnit(task);
+    const unitLabel=unit?('Unit '+({u1:'I',u2:'II',u3:'III',u4:'IV'}[unit])):'all available notes';
+    let result='';
+    if(selected==='coach'){
+      result='STUDY COACH · '+unitLabel+'\n\n1. Start by reading the most relevant note headings below.\n2. Explain each concept aloud without looking.\n3. Write a short answer from memory.\n4. Test yourself with the platform quiz.\n5. Revisit anything you could not explain clearly.';
+      if(source.length)result+='\n\nFOCUS FROM YOUR NOTES\n• '+source.slice(0,4).join('\n• ');
+      result+='\n\nTask: '+task;
+    }else if(selected==='explain'){
+      result='CONCEPT EXPLAINER · '+unitLabel+'\n\nI found these matching passages in the loaded notes. Use them as the source before expanding your answer:\n\n'+(source.length?source.map((s,i)=>(i+1)+'. '+s).join('\n\n'):'No close text match was found. Try the exact concept or a key term from your notes.')+'\n\nFor an exam answer, define the concept, explain its main elements, and add an example only where your course notes support it.';
+    }else if(selected==='exam'){
+      const topics=(hs.length?hs:source.slice(0,8)).slice(0,8);
+      result='EXAM SETTER · Practice set\n\nSHORT ANSWER\n'+(topics.slice(0,4).map((t,i)=>(i+1)+'. Define or briefly explain '+t+'.').join('\n')||'1. Define the key concept in your selected topic.')+'\n\nLONG ANSWER\n'+(topics.slice(4,7).map((t,i)=>(i+1)+'. Discuss '+t+' with suitable examples from the notes.').join('\n')||'1. Discuss the main ideas, implications and limitations of the selected topic.')+'\n\nUse the existing Quiz for auto-marked MCQs and true/false questions.';
+    }else if(selected==='flash'){
+      const topics=(hs.length?hs:source.slice(0,8)).slice(0,8);
+      result='FLASHCARD MAKER · Active recall\n\n'+(topics.length?topics.map((t,i)=>'CARD '+(i+1)+'\nFront: What should you remember about '+t+'?\nBack: Review the matching section in your notes and state its definition, key points and one supported example.').join('\n\n'):'No headings found for this request. Try specifying a unit or a concept title.')+'\n\nTip: answer each front before opening your notes.';
+    }else if(selected==='revision'){
+      const m=task.match(/(\\d{1,3})\\s*(?:min|minute|minutes|m)\\b/i), minutes=Math.max(15,Math.min(240,m?Number(m[1]):45));
+      const a=Math.round(minutes*.5),b=Math.round(minutes*.3),c=minutes-a-b;
+      result='REVISION PLANNER · '+minutes+' minutes\n\n'+a+' min — Review the relevant notes and mark the core definitions/frameworks.\n'+b+' min — Practise closed-book answers and attempt quiz questions.\n'+c+' min — Check weak areas, correct mistakes and summarise from memory.\n\nSuggested focus:\n• '+(source.slice(0,4).join('\n• ')||hs.slice(0,4).join('\n• ')||'Select one unit and identify its main headings.')+'\n\nKeep the final few minutes for active recall, not rereading.';
+    }else{
+      result='NOTES NAVIGATOR · Search results\n\n'+(source.length?source.map((s,i)=>(i+1)+'. '+s).join('\n\n'):'No close matches found. Try a distinctive phrase or a shorter keyword.')+'\n\nSearch scope: '+unitLabel+'.';
+    }
+    output.textContent=result;
+  }
+  $('iaRun').addEventListener('click',run);
+  prompt.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')run();});
+})();
+</script>
+
 </body>
 </html>
