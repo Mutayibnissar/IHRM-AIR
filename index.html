@@ -776,8 +776,8 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     if(!geminiKey)throw new Error('Enter your Gemini API key in the connection box first.');
     var role=agentInstructions[agentId]||agentInstructions.coach;
     var prompt='You are one specialist inside IHRM Air, an MBA International Human Resource Management study platform.\nROLE: '+role+'\n\nGROUNDING RULES: Prioritise the supplied course notes. Do not invent course facts or pretend missing information is in the notes. If you add general knowledge, label it clearly. Use accurate academic terminology, examples, clear headings, and exam-ready structure. Answer the user directly.\n\nUSER TASK:\n'+q+'\n\nRELEVANT COURSE NOTES (may be incomplete):\n'+(context||'No matching note passages were found in the local page. State this limitation and answer carefully.')+'\n\nReturn readable plain text with headings and numbered lists where useful.';
-    var response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(geminiKey),{
-      method:'POST',headers:{'Content-Type':'application/json'},
+    var response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent',{
+      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiKey},
       body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.35,maxOutputTokens:4096}})
     });
     var data=await response.json();
@@ -804,7 +804,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
         var active=d.querySelector('.agent-card[aria-pressed="true"]');
         var name=active?active.querySelector('strong').innerText:'Study Coach';
         var answer=await callGemini(selected,q,context);
-        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash');
+        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 3.8 Flash');
       }else{
         var stages=[
           {id:'navigator',name:'Notes Navigator'},
@@ -819,7 +819,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
           var stageAnswer=await callGemini(stages[i].id,stagePrompt,context);
           results.push({name:stages[i].name,answer:stageAnswer});
         }
-        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 2.5 Flash');
+        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 3.8 Flash');
       }
     }catch(err){
       out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
