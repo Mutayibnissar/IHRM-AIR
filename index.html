@@ -147,6 +147,30 @@ body{font-family:'Kalam','Segoe Print',cursive}
 @media print{.hub,.toolshelf,#searchstatus,#continueBtn{display:none!important}}
 
 .flight-deck{max-width:1100px;margin:22px auto;padding:clamp(22px,5vw,48px);border-radius:24px;color:#f5f8ff;background:radial-gradient(circle at 85% 10%,#294e83,transparent 32%),linear-gradient(135deg,#071426,#173d5a);font-family:system-ui,sans-serif;box-shadow:0 20px 55px #0005}.flight-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#c5d7f2;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.flight-title{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;margin:28px 0}.flight-title h1{font:800 clamp(40px,6vw,68px)/.98 system-ui,sans-serif;color:white;text-decoration:none;margin:0 0 14px}.flight-title p{color:#d6e3f7;line-height:1.6}.flight-plane{width:100%;max-height:190px}.flight-units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.flight-unit{display:block;color:white;text-decoration:none;border:1px solid #ffffff25;background:#ffffff0c;border-radius:15px;padding:16px}.flight-unit small{display:block;color:#a9c5e9;font-size:10px;letter-spacing:.12em;text-transform:uppercase}.flight-unit strong{display:block;margin:8px 0;font-size:17px}.flight-unit span{font-size:12px;color:#cfdef2}.flight-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.flight-btn{border:1px solid #91b7e9;border-radius:99px;padding:12px 16px;color:white;text-decoration:none;font-size:13px}.flight-btn.primary{background:#f4c66a;color:#17233a;border-color:#f4c66a}.flight-note{font-size:12px;color:#a9c5e9;margin-top:15px}@media(max-width:700px){.flight-title{grid-template-columns:1fr}.flight-plane{max-height:120px}.flight-units{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.flight-units{grid-template-columns:1fr}}</style>
+
+<style id="ihrm-agentic-upgrade">
+/* Agentic IHRM cockpit */
+#ihrmAgentDock{position:fixed;right:18px;bottom:18px;z-index:9999;font-family:inherit}
+#ihrmAgentToggle{border:0;border-radius:999px;padding:14px 18px;background:#102f46;color:#fff;box-shadow:0 10px 35px #102f4650;font-weight:800;cursor:pointer}
+#ihrmAgentPanel{display:none;position:fixed;z-index:9998;right:18px;bottom:78px;width:min(440px,calc(100vw - 24px));max-height:min(78vh,760px);overflow:auto;background:var(--card,#fff);color:var(--text,#172b3a);border:1px solid #9db3c5;border-radius:20px;box-shadow:0 20px 60px #0a203044;padding:18px}
+#ihrmAgentPanel.open{display:block}
+.ia-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.ia-head h2{font-size:1.25rem;margin:0}.ia-sub{font-size:.86rem;opacity:.75;margin:0 0 14px}
+.ia-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.ia-agent{border:1px solid #c7d5df;border-radius:12px;background:transparent;padding:10px;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.ia-agent strong{display:block;font-size:.9rem}.ia-agent span{font-size:.76rem;opacity:.75}
+.ia-agent.active{background:#e7f3f7;border-color:#28738a;color:#123c50}
+.ia-label{display:block;font-size:.84rem;font-weight:700;margin:12px 0 6px}
+#iaPrompt{width:100%;min-height:88px;resize:vertical;box-sizing:border-box;border:1px solid #bdcbd5;border-radius:12px;padding:11px;background:transparent;color:inherit;font:inherit}
+.ia-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.ia-btn{border:0;border-radius:10px;padding:10px 13px;cursor:pointer;font:inherit;font-weight:750;background:#174b65;color:white}
+.ia-btn.secondary{background:transparent;border:1px solid #9db3c5;color:inherit}
+#iaOutput{white-space:pre-wrap;line-height:1.55;border:1px solid #d3dfe6;border-radius:12px;padding:12px;min-height:60px;margin-top:10px;font-size:.9rem}
+.ia-status{font-size:.78rem;opacity:.7;margin-top:8px}
+.ia-close{border:1px solid #b6c7d2;background:transparent;color:inherit;border-radius:8px;padding:5px 9px;cursor:pointer}
+@media(max-width:480px){#ihrmAgentDock{right:12px;bottom:12px}#ihrmAgentPanel{right:12px;bottom:70px;padding:14px}.ia-grid{gap:6px}.ia-agent{padding:8px}}
+@media print{#ihrmAgentDock,#ihrmAgentPanel{display:none!important}}
+</style>
 </head>
 <body><section class="flight-deck" id="flight-deck"><div class="flight-top"><span>University of Kashmir · IMBA</span><span>✦ Study flight ready</span></div><div class="flight-title"><div><h1>IHRM AIR<br><span style="color:#f4c66a">Study flight.</span></h1><p>Your International Human Resource Management study hub. Choose a unit, review notes, test recall, and track revision from one flight deck.</p></div><svg class="flight-plane" viewBox="0 0 360 220" role="img" aria-label="Aeroplane illustration"><circle cx="265" cy="48" r="31" fill="#f4c66a" opacity=".18"/><path d="M12 157 Q93 132 148 151 T350 134" fill="none" stroke="#8db7e9" stroke-width="2" stroke-dasharray="5 9"/><g transform="translate(23 25) rotate(-9 155 90)"><path d="M20 96 L132 83 L184 23 Q194 15 199 24 L180 79 L292 68 Q316 68 320 82 Q318 93 291 96 L180 108 L149 154 Q143 162 133 157 L139 108 L35 113 Q15 111 20 96Z" fill="#f4c66a" stroke="#fff0bf" stroke-width="2"/><path d="M42 99 L286 82" stroke="#fff7db" stroke-width="3"/></g></svg></div><div class="flight-units"><a class="flight-unit" href="#u1"><small>01 · Departure</small><strong>Unit I</strong><span>Concept of IHRM</span></a><a class="flight-unit" href="#u2"><small>02 · En route</small><strong>Unit II</strong><span>International staffing &amp; people</span></a><a class="flight-unit" href="#u3"><small>03 · Cruise</small><strong>Unit III</strong><span>International compensation</span></a><a class="flight-unit" href="#u4"><small>04 · Arrival</small><strong>Unit IV</strong><span>Industrial relations &amp; trends</span></a></div><div class="flight-actions"><a class="flight-btn primary" href="#u1">Enter study cabin →</a><a class="flight-btn" href="#cards">Open flashcards</a><a class="flight-btn" href="#quiz">Take boarding quiz</a><a class="flight-btn" href="#rev">Quick revision</a></div><div class="flight-note">Your notes remain below the flight deck.</div></section>
 <main class="sheet">
