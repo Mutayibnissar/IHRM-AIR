@@ -288,14 +288,9 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     <button class="agent-card" type="button" data-agent="orchestrator" aria-pressed="false"><strong>🤝 Agent Orchestrator</strong><small>Coordinates specialists into one workflow</small></button>
   </div>
   <div class="agent-controls">
-    <div class="gemini-connect" style="padding:14px;border:2px dashed var(--mint);border-radius:14px;background:var(--bg)">
-      <label for="geminiApiKey">Connect Gemini API key (this tab only)</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
-        <input id="geminiApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini API key here" style="flex:1;min-width:190px;border:2px solid var(--mute);border-radius:10px;padding:10px;background:var(--card);color:var(--ink);font:inherit">
-        <button class="btn" id="toggleGeminiKey" type="button">Show</button>
-        <button class="btn" id="forgetGeminiKey" type="button">Clear key</button>
-      </div>
-      <small id="geminiKeyStatus" class="agent-status">Not connected. Your key is kept in page memory only and disappears when you refresh or close this tab.</small>
+    <div class="gemini-connect" style="padding:14px;border:2px solid var(--mint);border-radius:14px;background:var(--bg)">
+      <strong>🔐 Secure AI connection</strong>
+      <p id="geminiKeyStatus" class="agent-status" style="margin:.35rem 0 0">AI backend setup required once. Your API key will be stored as a server-side secret, never in this page.</p>
     </div>
     <label for="agentTask">What should your agents do?</label>
     <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
@@ -308,7 +303,7 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     </div>
   </div>
   <div class="agent-output" id="agentOutput" aria-live="polite" role="status"><h3>Ready for take-off</h3><p>Select a specialist and enter a study task. The team workflow runs the navigator, explainer and exam setter in sequence.</p></div>
-  <p class="agent-status">Local helpers work offline. Gemini-powered agents use the API key you enter in this tab and send your prompt plus relevant course notes directly to Google Gemini. The key is not saved in this repository or browser storage. For a public multi-user product, move the key to a secured server-side proxy.</p>
+  <p class="agent-status">Local helpers work offline. AI-powered agents send study tasks to the secured server-side Gemini proxy. The API key is never included in this website. The backend must be deployed and configured before live AI requests will work.</p>
 </section>
 
 <section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
@@ -746,16 +741,8 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
   d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
   d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var nav=roster.navigator.run(q);var explain=roster.explainer.run(q);var exam=roster.exam.run(q);out.innerHTML='<h3>🤝 Coordinated agent workflow</h3><p><span class="agent-chip">1 · Navigator</span><span class="agent-chip">2 · Explainer</span><span class="agent-chip">3 · Exam Setter</span></p><details open><summary>Step 1 — Find relevant notes</summary>'+nav.body+'</details><details open><summary>Step 2 — Build understanding</summary>'+explain.body+'</details><details open><summary>Step 3 — Test retrieval</summary>'+exam.body+'</details><p class="agent-status">Workflow complete. Each specialist used the local IHRM study material; no external AI service was called.</p>';out.scrollIntoView({behavior:'smooth',block:'nearest'})});
-  var geminiKeyInput=d.getElementById('geminiApiKey');
   var geminiKeyStatus=d.getElementById('geminiKeyStatus');
-  var geminiKey='';
-  d.getElementById('toggleGeminiKey').addEventListener('click',function(){
-    var showing=geminiKeyInput.type==='text';geminiKeyInput.type=showing?'password':'text';this.textContent=showing?'Show':'Hide';
-  });
-  d.getElementById('forgetGeminiKey').addEventListener('click',function(){
-    geminiKey='';geminiKeyInput.value='';geminiKeyStatus.textContent='Key cleared from this page.';geminiKeyStatus.style.color='var(--mute)';
-  });
-  geminiKeyInput.addEventListener('input',function(){geminiKey=geminiKeyInput.value.trim();geminiKeyStatus.textContent=geminiKey?'Key entered for this tab. Click Run Gemini Agent to test it.':'Not connected. Key is not saved.';});
+  var API_BASE_URL='https://ihrm-air-api.REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN.workers.dev';
   var agentInstructions={
     coach:'Act as a supportive MBA study coach. Make a practical, prioritised study plan for the exact task.',
     explainer:'Act as a patient IHRM professor. Explain concepts in plain English, define terms, give examples, compare similar ideas, and flag limitations.',
@@ -773,18 +760,19 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     return scored.slice(0,12).map(function(x){return x.text}).join('\n\n').slice(0,12000);
   }
   async function callGemini(agentId,q,context){
-    if(!geminiKey)throw new Error('Enter your Gemini API key in the connection box first.');
-    var role=agentInstructions[agentId]||agentInstructions.coach;
-    var prompt='You are one specialist inside IHRM Air, an MBA International Human Resource Management study platform.\nROLE: '+role+'\n\nGROUNDING RULES: Prioritise the supplied course notes. Do not invent course facts or pretend missing information is in the notes. If you add general knowledge, label it clearly. Use accurate academic terminology, examples, clear headings, and exam-ready structure. Answer the user directly.\n\nUSER TASK:\n'+q+'\n\nRELEVANT COURSE NOTES (may be incomplete):\n'+(context||'No matching note passages were found in the local page. State this limitation and answer carefully.')+'\n\nReturn readable plain text with headings and numbered lists where useful.';
-    var response=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent',{
-      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':geminiKey},
-      body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.35,maxOutputTokens:4096}})
+    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){
+      throw new Error('The secure AI backend has not been connected yet. Deploy backend/worker.js and set API_BASE_URL in index.html to your Cloudflare Worker URL.');
+    }
+    var response=await fetch(API_BASE_URL+'/api/agent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
     });
-    var data=await response.json();
-    if(!response.ok){var apiMessage=data&&data.error&&data.error.message?data.error.message:'Gemini request failed ('+response.status+').';throw new Error(apiMessage);}
-    var answer=(data.candidates||[]).map(function(c){return (c.content&&c.content.parts||[]).map(function(p){return p.text||''}).join('')}).join('\n\n').trim();
-    if(!answer)throw new Error('Gemini returned no text. Check the key, API access, and quota.');
-    return answer;
+    var data;
+    try{data=await response.json()}catch(_){throw new Error('The AI backend returned an invalid response. Check that the Worker is deployed correctly.')}
+    if(!response.ok)throw new Error(data&&data.error?data.error:'AI backend request failed ('+response.status+').');
+    if(!data||typeof data.answer!=='string'||!data.answer.trim())throw new Error('The AI backend returned no answer.');
+    return data.answer.trim();
   }
   function showGeminiAnswer(title,answer,modelLabel){
     out.innerHTML='';var heading=d.createElement('h3');heading.textContent='✦ '+title;out.appendChild(heading);
@@ -795,7 +783,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   async function runGeminiWorkflow(teamMode,button){
     var q=task.value.trim();
     if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
-    if(!geminiKey){out.innerHTML='<h3>Connect Gemini first</h3><p>Paste your Gemini API key in the connection box above. It is used from this tab only and is not written to the repository.</p>';geminiKeyInput.focus();return}
+    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Deploy the Cloudflare Worker from the repository, add your Gemini key as a Worker secret, then set the Worker URL in index.html.</p>';return}
     var oldText=button.textContent;button.disabled=true;button.textContent=teamMode?'Agents working…':'Thinking…';
     out.innerHTML='<h3>✈ Gemini agents are working</h3><p>Reading relevant course notes and generating an exam-focused response…</p>';
     try{
@@ -804,7 +792,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
         var active=d.querySelector('.agent-card[aria-pressed="true"]');
         var name=active?active.querySelector('strong').innerText:'Study Coach';
         var answer=await callGemini(selected,q,context);
-        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 3.8 Flash');
+        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash via secure backend');
       }else{
         var stages=[
           {id:'navigator',name:'Notes Navigator'},
@@ -819,12 +807,12 @@ results.textContent='Search the full notes, all four units, flashcards and revis
           var stageAnswer=await callGemini(stages[i].id,stagePrompt,context);
           results.push({name:stages[i].name,answer:stageAnswer});
         }
-        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 3.8 Flash');
+        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 2.5 Flash via secure backend');
       }
     }catch(err){
       out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
       var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach Gemini. Check your internet connection, key, API enablement, and quota.');out.appendChild(message);
-      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='Your key has not been saved in the HTML or repository. If this is a key error, create/check the key in Google AI Studio and verify that the Generative Language API is enabled.';out.appendChild(hint);
+      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The API key is stored server-side as a Cloudflare Worker secret. Check the Worker deployment, GEMINI_API_KEY secret, allowed site origin, and Gemini API quota.';out.appendChild(hint);
     }finally{button.disabled=false;button.textContent=oldText}
   }
   d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
