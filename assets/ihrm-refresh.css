@@ -39,3 +39,7 @@ input,textarea,select{border-radius:12px}
 @media(min-width:900px){.grid{gap:22px}.section{padding-block:clamp(34px,5vw,64px)}}
 @media(max-width:760px){.topbar{padding:10px 14px}.topnav,.site-page-nav{gap:5px}.site-page-nav{padding:10px;border-radius:18px;background:var(--air-surface);border:1px solid var(--air-line);box-shadow:var(--air-shadow)}.site-page-nav a{width:100%;justify-content:flex-start}.air-theme-toggle{padding:8px 10px}.hero{border-radius:0 0 22px 22px}.hero .primary,.hero .secondary-cta{margin:5px 5px 4px 0}.tile{border-radius:18px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Mobile menu state and consistent active-page affordance */
+.site-page-nav a[aria-current="page"]{background:var(--air-yellow)!important;color:#17233c!important;border-color:transparent!important}
+@media(max-width:760px){.site-page-nav.is-open{display:flex!important;flex-direction:column;align-items:stretch}.site-page-nav:not(.is-open){display:none!important}.site-nav-wrap{flex-wrap:wrap}.air-theme-toggle{white-space:nowrap}}
