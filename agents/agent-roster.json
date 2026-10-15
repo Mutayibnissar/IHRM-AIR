@@ -1,0 +1,43 @@
+{
+  "project": "IHRM Air Agentic Study Crew",
+  "architecture_source": "https://github.com/Mutayibnissar/agency-agents",
+  "mode": "browser-local-specialist-workflows",
+  "note": "These roles currently operate locally on the study hub's existing notes. They are not connected to a hosted LLM. Do not put API secrets in GitHub Pages client-side code.",
+  "agents": [
+    {
+      "id": "coach",
+      "name": "Study Coach",
+      "purpose": "Choose a practical next study action and retrieval routine."
+    },
+    {
+      "id": "explainer",
+      "name": "Concept Explainer",
+      "purpose": "Retrieve matching course notes and provide a study scaffold grounded in those notes."
+    },
+    {
+      "id": "exam",
+      "name": "Exam Setter",
+      "purpose": "Turn matching course notes into practice prompts and self-check criteria."
+    },
+    {
+      "id": "flashcards",
+      "name": "Flashcard Maker",
+      "purpose": "Create a quick revision deck from existing question-and-answer cards."
+    },
+    {
+      "id": "planner",
+      "name": "Revision Planner",
+      "purpose": "Build a time-boxed revision sprint around the learner's stated goal."
+    },
+    {
+      "id": "navigator",
+      "name": "Notes Navigator",
+      "purpose": "Search course headings, summaries, cards and notes, then link to relevant material."
+    }
+  ],
+  "team_workflow": [
+    "navigator",
+    "explainer",
+    "exam"
+  ]
+}
