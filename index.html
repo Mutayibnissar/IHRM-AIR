@@ -462,7 +462,7 @@ header.top{isolation:isolate;z-index:100}
 <div class="top-actions grouped-actions" aria-label="Main study navigation">
 <details class="nav-group"><summary>📚 Units</summary><div class="nav-subbuttons"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a></div></details>
 <details class="nav-group"><summary>📝 Practice</summary><div class="nav-subbuttons"><a href="#quiz">Quiz</a><a href="#full-notes">Revision tools</a><a href="#pp">Passport</a></div></details>
-<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#agentic-study-crew">AI Crew</a><a href="#practice-panel" id="openPracticeNav">Practice questions</a></div></details>
+<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#practice-panel" id="openPracticeNav">Practice questions</a></div></details>
 </div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
 <section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
 <div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
@@ -473,64 +473,7 @@ header.top{isolation:isolate;z-index:100}
 <main>
 </div>
 
-<button id="agentWidgetLauncher" class="agent-widget-launcher" type="button" aria-controls="agentic-study-crew" aria-expanded="false"><span class="agent-widget-icon" aria-hidden="true">✦</span><span><strong>AI Study Crew</strong><small>7 study specialists</small></span><span class="agent-widget-pulse" aria-hidden="true"></span></button>
-<section class="agent-lab" id="agentic-study-crew" aria-labelledby="agentCrewTitle" aria-hidden="true">
-  <span class="tagline" style="--c:var(--mint)">SOURCE: YOUR AGENCY-AGENTS REPOSITORY</span>
-  <div class="agent-widget-heading"><div><span class="tagline" style="--c:var(--mint)">YOUR SOURCE AGENTS</span><h2 id="agentCrewTitle">AI Study Crew</h2><p class="agent-widget-subtitle">Choose a specialist, enter a task, and run the study workflow.</p></div><button class="agent-widget-close" id="closeAgentWidget" type="button" aria-label="Close AI Study Crew">×</button></div>
-  <p class="agent-intro">These specialist profiles are sourced from your <a href="https://github.com/Mutayibnissar/agency-agents" target="_blank" rel="noopener">agency-agents repository</a> and adapted to the IHRM notes on this page. Offline runs use the page's notes; no external AI or cloud storage is called by the local workflow.</p>
-  <div class="agent-roster" role="group" aria-label="Choose a repository source agent">
-    <button class="agent-card" type="button" data-agent="trainingDesigner" aria-pressed="true"><strong>📚 Corporate Training Designer</strong><small>Builds outcomes, lesson flow and checks</small></button>
-    <button class="agent-card" type="button" data-agent="academicPsychologist" aria-pressed="false"><strong>🧠 Academic Psychologist</strong><small>Plans active recall and learning practice</small></button>
-    <button class="agent-card" type="button" data-agent="statistician" aria-pressed="false"><strong>📊 Academic Statistician</strong><small>Creates structured practice and checks</small></button>
-    <button class="agent-card" type="button" data-agent="orgPsychologist" aria-pressed="false"><strong>👥 Organizational Psychologist</strong><small>Connects IHRM concepts to workplace behavior</small></button>
-    <button class="agent-card" type="button" data-agent="synthesist" aria-pressed="false"><strong>🔬 Research Synthesist</strong><small>Organizes evidence from course notes</small></button>
-    <button class="agent-card" type="button" data-agent="realityChecker" aria-pressed="false"><strong>🧪 Reality Checker</strong><small>Separates supported notes from gaps</small></button>
-    <button class="agent-card" type="button" data-agent="orchestrator" aria-pressed="false"><strong>🤝 Agents Orchestrator</strong><small>Runs a staged specialist workflow</small></button>
-  </div>
 
-  <div class="local-model-panel" id="aetherMeshLocalPanel">
-    <div class="local-model-head"><span class="local-model-mark" aria-hidden="true">⌘</span><div><span class="local-model-badge">AETHERMESH · LOCAL INFERENCE</span><h3>Run your own study AI</h3></div></div>
-    <p>Connect this page to a model running on your own computer with Ollama. Your prompt and course context go to that local endpoint—not to a hosted AI provider. Keep Ollama running while you use it.</p>
-    <div class="local-model-grid">
-      <div><label for="localModelEndpoint">Local model endpoint</label><input id="localModelEndpoint" type="url" value="http://localhost:11434" spellcheck="false" autocomplete="url"></div>
-      <div><label for="localModelName">Installed model name</label><input id="localModelName" type="text" value="qwen2.5:3b" spellcheck="false" placeholder="qwen2.5:3b"></div>
-    </div>
-    <div class="local-model-actions"><button class="btn" id="localModelTest" type="button">Test / find models</button><button class="btn" id="runLocalAI" type="button">Run selected local agent</button><button class="btn" id="runLocalAITeam" type="button">Run AetherMesh local team</button></div>
-    <p class="local-model-status" id="localModelStatus" data-state="idle" role="status" aria-live="polite">Not connected yet. Install Ollama, pull a model, then select Test / find models.</p>
-    <p class="local-model-foot">Local inference is real model generation. The optional LoRA training kit in <code>local-ai/</code> is a separate step; browser settings alone do not train model weights.</p>
-  </div>
-
-  <div class="agent-controls">
-    <div class="gemini-connect" style="padding:14px;border:2px solid var(--mint);border-radius:14px;background:var(--bg)">
-      <strong>🔐 Secure AI connection</strong>
-      <p id="geminiKeyStatus" class="agent-status" style="margin:.35rem 0 0">AI backend setup required once. Your API key will be stored as a server-side secret, never in this page.</p>
-    </div>
-    <div class="gemini-connect" style="padding:14px;border:2px solid var(--blue);border-radius:14px;background:var(--bg)">
-      <strong>☁️ Study Cloud Sync (Supabase)</strong>
-      <p class="agent-status">Sign in with an email magic link to save your unit stamps, theme and saved study output to your private cloud snapshot.</p>
-      <label for="airCloudEmail">Email</label>
-      <input id="airCloudEmail" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;padding:10px;border:2px solid var(--mute);border-radius:10px;background:var(--card);color:var(--ink);font:inherit">
-      <div class="agent-actions" style="margin-top:8px">
-        <button class="btn" id="airCloudSignIn" type="button">Email me a sign-in link</button>
-        <button class="btn" id="airCloudSave" type="button">Save to cloud</button>
-        <button class="btn" id="airCloudLoad" type="button">Restore from cloud</button>
-        <button class="btn" id="airCloudSignOut" type="button">Sign out</button>
-      </div>
-      <p id="airCloudStatus" class="agent-status" aria-live="polite">Cloud sync requires Supabase project URL and publishable/anon key setup.</p>
-    </div>
-    <label for="agentTask">What should your agents do?</label>
-    <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
-    <div class="agent-actions">
-      <button class="btn run" id="runAgent" type="button">Run selected agent</button>
-      <button class="btn run" id="runLiveAI" type="button">Run connected AI (backend required)</button>
-      <button class="btn run" id="runGeminiTeam" type="button">Run connected AI team (backend required)</button>
-      <button class="btn" id="runAgentTeam" type="button">Run local team workflow</button>
-      <button class="btn" id="clearAgentOutput" type="button">Clear output</button>
-    </div>
-  </div>
-  <div class="agent-output" id="agentOutput" aria-live="polite" role="status"><h3>Ready for take-off</h3><p>Select a specialist and enter a study task. The team workflow runs the navigator, explainer and exam setter in sequence.</p></div>
-  <p class="agent-status">Local helpers work offline. AI-powered agents send study tasks to the secured server-side Gemini proxy. The API key is never included in this website. The backend must be deployed and configured before live AI requests will work.</p>
-</section>
 
 <section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><h2>Unit I: Landing in IHRM</h2>
 <div class="win"><svg viewbox="0 0 170 226"><circle cx="85" cy="92" fill="#4f9be8" r="46" stroke="#14213d" stroke-width="3"></circle><path d="M60 78c10-10 20-2 17 8s-14 9-17-8zM90 100c12-7 24 3 16 14s-19 4-16-14z" fill="#59b36b"></path><g stroke="#14213d" stroke-width="3"><circle cx="38" cy="176" fill="#e5484d" r="9"></circle><path d="M38 185v18M26 194h24" fill="none"></path><circle cx="85" cy="184" fill="#ffc83d" r="9"></circle><path d="M85 193v18M73 202h24" fill="none"></path><circle cx="132" cy="176" fill="#1fa77f" r="9"></circle><path d="M132 185v18M120 194h24" fill="none"></path></g></svg></div>
