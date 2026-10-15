@@ -421,6 +421,33 @@ header.top{isolation:isolate;z-index:100}
 })();
 </script>
 
+
+<style id="data-visual-motion-enhancement">
+/* Gentle motion for illustrations, progress graphics, study cards and quiz content */
+:root{--air-motion-duration:560ms}
+@media(prefers-reduced-motion:no-preference){
+  .pol svg,.cover svg,.hero-graphic,.illustration{transform-origin:50% 50%;animation:airGraphicFloat 5.5s ease-in-out infinite}
+  .pol:nth-of-type(even) svg{animation-delay:-2.4s}
+  .card,.agent-card,.slot,.q,.quiz,.dest,.pp{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+  .card:hover,.agent-card:hover,.slot:hover,.q:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(25,55,95,.13)}
+  .agent-card[aria-pressed="true"]{box-shadow:0 0 0 2px var(--blue, #2f6fd0),0 8px 22px rgba(47,111,208,.14)}
+  .track .fill{transition:width .7s cubic-bezier(.2,.8,.2,1)}
+  .nav-group[open] .nav-subbuttons{animation:airDropdownEnter .2s ease-out both}
+  .search-widget-panel,.agent-lab{transition:opacity .2s ease,transform .2s ease}
+  .motion-reveal{opacity:0;transform:translateY(16px) scale(.99);transition:opacity var(--air-motion-duration) ease,transform var(--air-motion-duration) cubic-bezier(.2,.75,.25,1)}
+  .motion-reveal.motion-visible{opacity:1;transform:translateY(0) scale(1)}
+  .motion-reveal[data-motion-order="1"]{transition-delay:55ms}
+  .motion-reveal[data-motion-order="2"]{transition-delay:100ms}
+  .motion-reveal[data-motion-order="3"]{transition-delay:145ms}
+  .motion-reveal[data-motion-order="4"]{transition-delay:190ms}
+  @keyframes airGraphicFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+  @keyframes airDropdownEnter{from{opacity:0;translate:0 -5px}to{opacity:1;translate:0 0}}
+}
+@media(prefers-reduced-motion:reduce){
+  .pol svg,.cover svg,.hero-graphic,.illustration,.motion-reveal{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}
+}
+</style>
+
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
@@ -1366,6 +1393,32 @@ header.top .study-tools #searchResults{font-size:12px;max-height:90px;overflow:a
   endpoint.addEventListener('change',function(){save('air-local-model-endpoint',base())});
   model.addEventListener('change',function(){save('air-local-model-name',activeModel())});
   say('Ready to connect. Local model calls are disabled until Ollama is running on your computer.','idle');
+})();
+</script>
+
+
+<script id="air-visual-motion-controller">
+(function(){
+  'use strict';
+  var root=document.documentElement;
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  root.classList.add('air-motion-enabled');
+  var selectors='.pol, .card, .agent-card, .slot, .q, .dest, .pp, .full-unit-notes';
+  var items=Array.from(document.querySelectorAll(selectors));
+  items.forEach(function(el,i){
+    if(el.closest('.agent-lab')||el.classList.contains('motion-reveal'))return;
+    el.classList.add('motion-reveal');
+    el.setAttribute('data-motion-order',String(i%5));
+  });
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('motion-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+  items.forEach(function(el){if(el.classList.contains('motion-reveal'))observer.observe(el)});
 })();
 </script>
 
