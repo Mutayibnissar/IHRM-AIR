@@ -1612,3 +1612,63 @@ header.top .nav-subbuttons{white-space:normal}
   .embedded-notes{column-count:1!important}
 }
 </style>
+
+
+<style id="notes-match-main-website-layout">
+/* Keep expanded notes aligned with the normal unit content: one full-width,
+   left-aligned reading surface, not newspaper columns or floating side layouts. */
+.full-unit-notes,
+.full-unit-notes[open]{
+  display:block;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:18px 0 4px!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+.full-unit-notes>summary{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+}
+.embedded-notes{
+  display:flow-root!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  columns:auto!important;
+  column-count:1!important;
+  column-width:auto!important;
+  column-span:none!important;
+  padding:clamp(16px,2.2vw,28px)!important;
+  box-sizing:border-box!important;
+  text-align:left;
+}
+.embedded-notes h3,
+.embedded-notes h4,
+.embedded-notes p,
+.embedded-notes ul,
+.embedded-notes ol{
+  column-span:none!important;
+  max-width:100%;
+}
+.embedded-notes figure,
+.embedded-notes .fig,
+.embedded-notes table{
+  column-span:none!important;
+  max-width:100%;
+}
+.embedded-notes figure.pol{
+  float:right!important;
+  width:min(176px,28%)!important;
+  margin:4px 0 16px 20px!important;
+}
+@media(max-width:899px){
+  .embedded-notes{padding:14px!important}
+}
+@media(max-width:600px){
+  .embedded-notes{padding:12px!important;font-size:15px;line-height:1.65}
+  .embedded-notes figure.pol{float:none!important;width:min(176px,100%)!important;margin:12px auto 22px!important}
+}
+</style>
