@@ -33,6 +33,7 @@ jobs:
               "units.html": ["id=\"u1\"", "id=\"u2\"", "id=\"u3\"", "id=\"u4\""],
               "practice.html": ["id=\"exam-centre\"", "id=\"quiz\"", "id=\"integrated-cards\""],
               "tools.html": ["id=\"study-tools\"", "id=\"focus-timer\"", "id=\"study-notes\""],
+              "index.html": ["id=\"homeAttempts\"", "id=\"homeAccuracy\"", "id=\"homeBest\"", "site-nav-toggle"],
           }
           for filename, markers in required.items():
               path = Path(filename)
@@ -42,6 +43,10 @@ jobs:
               for marker in markers:
                   if marker not in source:
                       raise SystemExit(f"{filename} is missing required marker: {marker}")
+              if filename != "index.html" and source.count('id="sitePageNav"') != 1:
+                  raise SystemExit(f"{filename} must contain exactly one main navigation.")
+              if source.count('class="site-footer"') > 0:
+                  raise SystemExit(f"{filename} contains an unexpected duplicate footer.")
           print("All IHRM Air pages and required sections are present.")
           PY
 
