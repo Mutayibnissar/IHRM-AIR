@@ -1,11 +1,98 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>IHRM Air — International HRM Study Hub</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>IHRM Air — Complete Flight Deck &amp; Study Hub</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=DM+Sans:wght@400;500;700&amp;family=Patrick+Hand&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#e6f1ff;--card:#fff;--ink:#14213d;--mute:#4b5d7e;--red:#e5484d;--blue:#2f6fd0;--sun:#ffc83d;--mint:#1fa77f;--sky1:#9fd0ff;--sky2:#e9f5ff;--frame:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1322;--card:#15213a;--ink:#eef3ff;--mute:#a8b8d8;--red:#ff6b70;--blue:#6fa3ff;--mint:#4fd6ad;--sky1:#27406e;--sky2:#14223f;--frame:#2a3c60}}
+:root[data-theme="dark"]{--bg:#0b1322;--card:#15213a;--ink:#eef3ff;--mute:#a8b8d8;--red:#ff6b70;--blue:#6fa3ff;--mint:#4fd6ad;--sky1:#27406e;--sky2:#14223f;--frame:#2a3c60}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 'DM Sans',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.1;margin:0}
+a{color:inherit}
+.air{background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#fff 14px 28px,var(--blue) 28px 42px,#fff 42px 56px)}
+header.top{position:sticky;top:0;z-index:30;background:var(--card);padding:calc(8px + env(safe-area-inset-top,0px)) 16px 0;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.bar{display:flex;align-items:center;gap:12px;max-width:1040px;margin:0 auto;padding-bottom:8px}
+.logo{font-family:'Fredoka';font-size:24px;font-weight:600;text-decoration:none}
+.logo b{color:var(--red)}
+.links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.links a,.btn{font:600 15px 'DM Sans';text-decoration:none;border:2px solid var(--ink);border-radius:99px;padding:3px 12px;background:none;color:var(--ink);cursor:pointer}
+.links a:hover,.btn:hover{background:var(--sun);color:#14213d}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.track{position:relative;height:26px;max-width:1040px;margin:0 auto}
+.track::before{content:"";position:absolute;left:0;right:0;top:12px;border-top:3px dashed var(--mute);opacity:.5}
+.track .fill{position:absolute;left:0;top:11px;height:5px;width:0;background:var(--red);border-radius:5px}
+.track .p{position:absolute;top:0;left:0;width:38px;height:26px;color:var(--ink);transform:translateX(-50%)}
+.air.strip{height:8px;margin:0 -16px}
+.hero{position:relative;overflow:hidden;padding:48px 16px 64px;background:linear-gradient(var(--sky1),var(--sky2))}
+.cloud{position:absolute;width:150px;height:46px;border-radius:99px;background:#fff;opacity:.85;filter:blur(1px);animation:drift 40s linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:62px;height:62px;left:24px;top:-30px}.cloud::after{width:48px;height:48px;left:72px;top:-20px}
+.c1{top:30px;left:-160px}.c2{top:150px;left:-160px;animation-duration:58s;animation-delay:-20s;transform:scale(.7)}.c3{top:260px;left:-160px;animation-duration:70s;animation-delay:-45s;transform:scale(1.1)}
+@keyframes drift{to{translate:calc(100vw + 340px) 0}}
+.fly{position:absolute;top:70px;left:-120px;width:110px;color:#fff;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2));animation:fly 14s ease-in-out infinite}
+@keyframes fly{0%{translate:0 20px;rotate:-5deg}50%{translate:calc(50vw + 60px) -14px;rotate:2deg}100%{translate:calc(100vw + 160px) 20px;rotate:-5deg}}
+.pass{position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr;background:var(--card);border-radius:20px;box-shadow:0 14px 30px rgba(10,30,70,.3);overflow:hidden}
+@media(min-width:760px){.pass{grid-template-columns:1fr 230px}.stub{border-left:3px dashed var(--mute)}}
+.pass .air{height:12px;grid-column:1/-1}
+.main{padding:26px 26px 30px}
+.main h1{font-size:clamp(36px,7vw,62px);margin:10px 0 12px}
+.main h1 em{font-style:normal;color:var(--red)}
+.route{display:flex;align-items:center;gap:10px;font:600 15px 'DM Sans';color:var(--mute)}
+.route svg{width:36px}
+.stub{padding:22px;background:var(--bg);display:grid;gap:6px;align-content:center;font-size:14px;color:var(--mute)}
+.stub b{display:block;font:600 24px 'Fredoka';color:var(--ink)}
+.go{display:inline-block;margin-top:14px;background:var(--red);color:#fff;font:600 18px 'Fredoka';padding:10px 24px;border-radius:99px;text-decoration:none;box-shadow:0 5px 0 #a12a2e;transition:transform .1s}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 #a12a2e}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stats span{background:var(--bg);border-radius:12px;padding:4px 12px;font-weight:700;font-size:14px}
+main{max-width:1040px;margin:0 auto;padding:0 16px}
+.dest{display:grid;gap:22px;padding:56px 0 8px;grid-template-columns:1fr}
+@media(min-width:820px){.dest{grid-template-columns:260px 1fr;gap:36px}.dest .side{position:sticky;top:110px;align-self:start}}
+.tagline{display:inline-block;background:var(--c);color:#14213d;font:700 14px 'DM Sans';padding:2px 12px;border-radius:99px}
+.dest h2{font-size:clamp(28px,5vw,40px);margin:10px 0 14px}
+.win{width:170px;height:226px;margin:0 0 16px;border-radius:50%/42%;border:9px solid var(--frame);outline:3px solid var(--mute);background:linear-gradient(var(--sky1),var(--sky2));overflow:hidden;box-shadow:inset 0 6px 16px rgba(0,0,0,.25)}
+.win svg{width:100%;height:100%;display:block;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.stampbtn{display:inline-flex;align-items:center;gap:8px;font:600 16px 'Fredoka';background:var(--card);color:var(--ink);border:3px solid var(--c);border-radius:14px;padding:6px 14px;cursor:pointer}
+.stampbtn[aria-pressed="true"]{background:var(--c);color:#14213d}
+.tags{display:grid;gap:12px;align-content:start}
+details.tag{position:relative;background:var(--card);border-radius:16px;padding:0 18px 0 46px;box-shadow:0 3px 0 rgba(0,0,0,.14);border-left:8px solid var(--c);transition:box-shadow .2s}
+details.tag::before{content:"";position:absolute;left:16px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 3px rgba(0,0,0,.3)}
+details.tag[open]{box-shadow:0 8px 20px rgba(0,0,0,.18)}
+summary{list-style:none;cursor:pointer;font:600 19px 'Fredoka';padding:14px 0}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;font-size:26px;line-height:1;color:var(--c);transition:rotate .25s}
+details[open] summary::after{rotate:45deg}
+.tag div{padding:0 0 16px;color:var(--ink)}
+.tag ul{margin:6px 0 0;padding-left:20px}
+.tag li{margin:3px 0}
+.hint{background:var(--sun);color:#14213d;border-radius:12px;padding:8px 14px;font-weight:700;font-size:15px;margin-top:8px;display:block}
+.pp{margin:72px 0 0;background:var(--card);border-radius:22px;padding:28px 22px;box-shadow:0 8px 24px rgba(0,0,0,.15);border:4px solid var(--blue)}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-top:18px}
+.slot{aspect-ratio:1;border:3px dashed var(--mute);border-radius:16px;display:grid;place-items:center;font:600 14px 'Fredoka';color:var(--mute);text-align:center;padding:6px}
+.slot svg{width:90%;display:none}
+.slot.on{border-style:solid;border-color:transparent}.slot.on span{display:none}.slot.on svg{display:block;animation:pop .6s cubic-bezier(.2,1.8,.4,1)}
+@keyframes pop{from{scale:2.4;rotate:-40deg;opacity:0}to{scale:1;rotate:-8deg;opacity:1}}
+.quiz{margin:56px 0 72px}
+.q{background:var(--card);border-radius:18px;padding:20px;box-shadow:0 4px 0 rgba(0,0,0,.14)}
+.q h3{font-size:22px;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;font:500 17px 'DM Sans';background:var(--bg);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:10px 14px;margin:8px 0;cursor:pointer}
+.opt:hover{border-color:var(--blue)}
+.opt.ok{background:var(--mint);color:#06281f;animation:pop2 .4s}.opt.no{background:var(--red);color:#fff;animation:shake .35s}
+@keyframes pop2{50%{transform:scale(1.04)}}@keyframes shake{25%{translate:-6px 0}75%{translate:6px 0}}
+.score{font:600 22px 'Fredoka';margin-top:12px}
+footer{text-align:center;padding:0 16px 40px;color:var(--mute);font-size:14px}
+footer .air{height:10px;margin:0 -16px 24px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
 <style>
 :root{
   --desk:#c9b79c; --paper:#fffef8; --rule:#bcd6ee; --margin:#e58a8a;
@@ -53,7 +140,7 @@ b,strong{font-weight:700}
 .hl{background:linear-gradient(transparent 22%,var(--hl) 22%,var(--hl) 88%,transparent 88%);padding:0 2px}
 .red{color:var(--red);font-weight:700}
 .sub{font-size:17px;color:var(--green)}
-nav{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 32px}
+body nav:not(.links){display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 32px}
 nav a{font-family:'Caveat',cursive;font-size:25px;line-height:32px;color:var(--ink);text-decoration:none;
   border:2px solid var(--ink);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;padding:0 14px}
 .note{background:var(--note);color:var(--notetext);transform:rotate(-1deg);padding:16px 16px;margin:0 0 32px;
@@ -81,7 +168,7 @@ nav a{font-family:'Caveat',cursive;font-size:25px;line-height:32px;color:var(--i
 .tool:focus-visible,nav a:focus-visible,.card:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
 .prog{margin:0 0 32px;display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
 .prog label{cursor:pointer;white-space:nowrap}.prog input{accent-color:var(--green);width:18px;height:18px;vertical-align:-3px}
-.bar{height:14px;flex:1 1 100%;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin:9px 0 9px}
+.study-tools .bar{height:14px;flex:1 1 100%;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin:9px 0 9px}
 .bar i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
 .cards{display:grid;grid-template-columns:1fr;gap:16px 16px;margin:0 0 32px}
 @media(min-width:620px){.cards{grid-template-columns:1fr 1fr}}
@@ -111,112 +198,69 @@ body{background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,tran
 .pol svg{display:block;width:156px;height:128px;background:#dcecf7}
 .pol figcaption{font-family:'Caveat',cursive;font-size:22px;line-height:32px;color:#2b2b2b;text-align:center}
 @media(max-width:480px){.pol{float:none;margin:0 auto 32px}.cover{padding:12px}.cover h1{font-size:32px;line-height:34px}.cover svg{flex-basis:72px;width:72px;height:72px}}
+</style><style>
+.integration-link{display:inline-flex;align-items:center;justify-content:center;margin:.3rem .35rem .2rem 0;padding:.55rem .85rem;border:1px solid rgba(255,255,255,.24);border-radius:999px;text-decoration:none;font-weight:700;font-size:.9rem;background:rgba(255,255,255,.08);color:inherit;}
+.full-notes{margin:1.1rem 0 0;padding:1rem 1.1rem;border:1px solid var(--line,rgba(120,130,150,.28));border-radius:18px;background:rgba(127,145,165,.07);}
+.full-notes>summary{cursor:pointer;font-weight:800;padding:.4rem .1rem;}
+.full-notes[open]>summary{margin-bottom:1rem;color:var(--accent,#2c8fbd);}
+.notes-hub{margin-top:2rem;}
+.notes-hub h3{margin-top:1.5rem;}
+.notes-hub .cards{display:grid;gap:.7rem;}
+@media(max-width:600px){.integration-link{font-size:.82rem;padding:.5rem .65rem}.full-notes{padding:.75rem}}
 
-/* IHRM Air study-hub upgrade */
-:root{--hub-blue:#2563eb;--hub-coral:#ff6257;--hub-yellow:#ffd65a;--hub-mint:#55d6ad}
-body{font-family:'Kalam','Segoe Print',cursive}
-.hub{position:relative;overflow:hidden;margin:0 0 28px;padding:24px;border-radius:18px;color:#152344;background:linear-gradient(135deg,#bfe4ff 0%,#eef8ff 56%,#ffe9b0 100%);box-shadow:0 8px 0 rgba(21,35,68,.12);border:2px solid #fff}
-.hub:after{content:"✈";position:absolute;right:26px;top:14px;font:56px/1 sans-serif;transform:rotate(-10deg);color:#2563eb;opacity:.85}
-.hub .eyebrow{font:700 12px/1.4 system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#2454a6}
-.hub h2{font:700 clamp(32px,6vw,54px)/.98 'Caveat',cursive;text-decoration:none;color:#16264a;margin:8px 0 10px}
-.hub p{max-width:620px;margin:0 0 15px;font:500 15px/1.6 system-ui,sans-serif;color:#304465}
-.hub .chips{display:flex;gap:8px;flex-wrap:wrap}
-.hub .chips span{background:#fff;color:#20345b;border:1px solid #d5e4ff;border-radius:999px;padding:5px 11px;font:700 12px system-ui,sans-serif}
-.toolshelf{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 26px}
-@media(min-width:620px){.toolshelf{grid-template-columns:1.3fr .7fr}}
-.searchbox,.jumpbox{background:var(--paper);border:2px solid var(--ink);border-radius:14px;padding:12px 14px;box-shadow:3px 4px 0 rgba(28,63,148,.12)}
-.searchbox label{display:block;font:700 12px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
-.searchbox input{width:100%;border:0;border-bottom:2px solid var(--rule);background:transparent;color:var(--ink);font:18px 'Kalam',cursive;padding:6px 2px;outline-offset:3px}
-.jumpbox{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.jumpbox strong{font:700 13px system-ui,sans-serif}
-.jumpbox a{font:700 13px system-ui,sans-serif;text-decoration:none;border-radius:999px;background:#e2efff;color:#1c3f94;padding:7px 10px}
-.hubstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 24px}
-@media(min-width:620px){.hubstats{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.hubstat{background:var(--paper);border:1px solid var(--rule);border-radius:13px;padding:12px;box-shadow:2px 3px 0 rgba(0,0,0,.08)}
-.hubstat b{display:block;font:700 25px/1.1 'Caveat',cursive;color:var(--red)}
-.hubstat span{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase}
-#searchstatus{font:14px system-ui,sans-serif;color:var(--green);margin:-12px 0 18px}
-.search-hidden{display:none!important}
-#continueBtn{cursor:pointer;border:0;border-radius:999px;padding:8px 14px;background:#1d3a73;color:#fff;font:700 13px system-ui,sans-serif}
-@media(prefers-color-scheme:dark){.hub{background:linear-gradient(135deg,#1c355c,#1d2a43 60%,#50412a);border-color:#30435f}.hub h2{color:#f2f6ff}.hub p{color:#d0ddf6}.hub .chips span{background:#1f2c43;color:#e9f1ff;border-color:#405578}.jumpbox a{background:#263d62;color:#e9f1ff}}
-:root[data-theme="dark"] .hub{background:linear-gradient(135deg,#1c355c,#1d2a43 60%,#50412a);border-color:#30435f}
-:root[data-theme="dark"] .hub h2{color:#f2f6ff}
-:root[data-theme="dark"] .hub p{color:#d0ddf6}
-:root[data-theme="dark"] .hub .chips span{background:#1f2c43;color:#e9f1ff;border-color:#405578}
-:root[data-theme="dark"] .jumpbox a{background:#263d62;color:#e9f1ff}
-@media print{.hub,.toolshelf,#searchstatus,#continueBtn{display:none!important}}
+/* Study controls, accessibility and responsive fixes */
+.study-tools{position:relative;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1040px;margin:18px auto;padding:12px;background:var(--card);border:1px solid var(--frame);border-radius:16px;box-shadow:0 4px 14px rgba(10,30,70,.08)}
+.study-tools input{flex:1 1 220px;min-width:0;padding:10px 12px;border:2px solid var(--mute);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.study-tools .btn{padding:7px 11px;min-height:40px;white-space:nowrap}
+#searchResults{flex-basis:100%;font-size:.92rem;color:var(--mute)}
+.search-hit{outline:3px solid var(--sun)!important;outline-offset:3px;border-radius:5px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.result-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.result-item{border:1px solid var(--mute);border-radius:9px;padding:6px 9px;background:var(--bg);color:var(--ink);font:inherit;text-align:left;cursor:pointer;max-width:100%}.result-item:hover{background:var(--sun);color:#14213d}
+/* Gentle handwritten accent, deliberately upright and readable */
+.hint,.note,.stampbtn,.slot>span{font-family:'Patrick Hand','DM Sans',sans-serif;font-style:normal}
+button{touch-action:manipulation}
+button:disabled{cursor:not-allowed;opacity:.7}
+@media(max-width:600px){.study-tools{margin:12px 10px;padding:10px}.study-tools .btn{flex:1 1 auto;font-size:13px}.bar{align-items:flex-start;flex-wrap:wrap}.links{margin-left:0;width:100%;justify-content:flex-start}.links a,.links .btn{padding:5px 10px}.main{padding:20px 17px}.hero{padding:30px 12px 42px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{header.top,.hero,.study-tools,.stampbtn,.quiz,.pp,footer{display:none!important}body{background:#fff!important;color:#111!important;font-size:11pt}.dest,.notes-hub{break-inside:avoid;border:0!important;box-shadow:none!important;background:#fff!important;color:#111!important}.dest details{display:block}.dest details>div{display:block!important}a{color:#111!important;text-decoration:none}}
 
-.flight-deck{max-width:1100px;margin:22px auto;padding:clamp(22px,5vw,48px);border-radius:24px;color:#f5f8ff;background:radial-gradient(circle at 85% 10%,#294e83,transparent 32%),linear-gradient(135deg,#071426,#173d5a);font-family:system-ui,sans-serif;box-shadow:0 20px 55px #0005}.flight-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#c5d7f2;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.flight-title{display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center;margin:28px 0}.flight-title h1{font:800 clamp(40px,6vw,68px)/.98 system-ui,sans-serif;color:white;text-decoration:none;margin:0 0 14px}.flight-title p{color:#d6e3f7;line-height:1.6}.flight-plane{width:100%;max-height:190px}.flight-units{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.flight-unit{display:block;color:white;text-decoration:none;border:1px solid #ffffff25;background:#ffffff0c;border-radius:15px;padding:16px}.flight-unit small{display:block;color:#a9c5e9;font-size:10px;letter-spacing:.12em;text-transform:uppercase}.flight-unit strong{display:block;margin:8px 0;font-size:17px}.flight-unit span{font-size:12px;color:#cfdef2}.flight-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.flight-btn{border:1px solid #91b7e9;border-radius:99px;padding:12px 16px;color:white;text-decoration:none;font-size:13px}.flight-btn.primary{background:#f4c66a;color:#17233a;border-color:#f4c66a}.flight-note{font-size:12px;color:#a9c5e9;margin-top:15px}@media(max-width:700px){.flight-title{grid-template-columns:1fr}.flight-plane{max-height:120px}.flight-units{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:380px){.flight-units{grid-template-columns:1fr}}</style>
+/* Top navigation/action rail: responsive, readable, and above all study content */
+.top-actions{max-width:1040px;margin:10px auto 0;padding:0 16px 10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.top-actions a,.top-actions button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:7px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--bg);color:var(--ink);font:700 14px 'DM Sans',sans-serif;text-decoration:none;cursor:pointer;white-space:nowrap}
+.top-actions a.primary{background:var(--red);border-color:var(--red);color:#fff}
+.top-actions a:hover,.top-actions button:hover{background:var(--sun);color:#14213d}
+.study-tools{scroll-margin-top:120px}
+section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
+@media(max-width:600px){.top-actions{padding:0 10px 10px;gap:6px}.top-actions a{font-size:12px;min-height:38px;padding:6px 9px}}
 
-<style id="ihrm-agentic-upgrade">
-/* Agentic IHRM cockpit */
-#ihrmAgentDock{position:fixed;right:18px;bottom:18px;z-index:9999;font-family:inherit}
-#ihrmAgentToggle{border:0;border-radius:999px;padding:14px 18px;background:#102f46;color:#fff;box-shadow:0 10px 35px #102f4650;font-weight:800;cursor:pointer}
-#ihrmAgentPanel{display:none;position:fixed;z-index:9998;right:18px;bottom:78px;width:min(440px,calc(100vw - 24px));max-height:min(78vh,760px);overflow:auto;background:var(--card,#fff);color:var(--text,#172b3a);border:1px solid #9db3c5;border-radius:20px;box-shadow:0 20px 60px #0a203044;padding:18px}
-#ihrmAgentPanel.open{display:block}
-.ia-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
-.ia-head h2{font-size:1.25rem;margin:0}.ia-sub{font-size:.86rem;opacity:.75;margin:0 0 14px}
-.ia-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
-.ia-agent{border:1px solid #c7d5df;border-radius:12px;background:transparent;padding:10px;text-align:left;cursor:pointer;color:inherit;font:inherit}
-.ia-agent strong{display:block;font-size:.9rem}.ia-agent span{font-size:.76rem;opacity:.75}
-.ia-agent.active{background:#e7f3f7;border-color:#28738a;color:#123c50}
-.ia-label{display:block;font-size:.84rem;font-weight:700;margin:12px 0 6px}
-#iaPrompt{width:100%;min-height:88px;resize:vertical;box-sizing:border-box;border:1px solid #bdcbd5;border-radius:12px;padding:11px;background:transparent;color:inherit;font:inherit}
-.ia-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.ia-btn{border:0;border-radius:10px;padding:10px 13px;cursor:pointer;font:inherit;font-weight:750;background:#174b65;color:white}
-.ia-btn.secondary{background:transparent;border:1px solid #9db3c5;color:inherit}
-#iaOutput{white-space:pre-wrap;line-height:1.55;border:1px solid #d3dfe6;border-radius:12px;padding:12px;min-height:60px;margin-top:10px;font-size:.9rem}
-.ia-status{font-size:.78rem;opacity:.7;margin-top:8px}
-.ia-close{border:1px solid #b6c7d2;background:transparent;color:inherit;border-radius:8px;padding:5px 9px;cursor:pointer}
-@media(max-width:480px){#ihrmAgentDock{right:12px;bottom:12px}#ihrmAgentPanel{right:12px;bottom:70px;padding:14px}.ia-grid{gap:6px}.ia-agent{padding:8px}}
-@media print{#ihrmAgentDock,#ihrmAgentPanel{display:none!important}}
-</style>
-</head>
-<body><section class="flight-deck" id="flight-deck"><div class="flight-top"><span>University of Kashmir · IMBA</span><span>✦ Study flight ready</span></div><div class="flight-title"><div><h1>IHRM AIR<br><span style="color:#f4c66a">Study flight.</span></h1><p>Your International Human Resource Management study hub. Choose a unit, review notes, test recall, and track revision from one flight deck.</p></div><svg class="flight-plane" viewBox="0 0 360 220" role="img" aria-label="Aeroplane illustration"><circle cx="265" cy="48" r="31" fill="#f4c66a" opacity=".18"/><path d="M12 157 Q93 132 148 151 T350 134" fill="none" stroke="#8db7e9" stroke-width="2" stroke-dasharray="5 9"/><g transform="translate(23 25) rotate(-9 155 90)"><path d="M20 96 L132 83 L184 23 Q194 15 199 24 L180 79 L292 68 Q316 68 320 82 Q318 93 291 96 L180 108 L149 154 Q143 162 133 157 L139 108 L35 113 Q15 111 20 96Z" fill="#f4c66a" stroke="#fff0bf" stroke-width="2"/><path d="M42 99 L286 82" stroke="#fff7db" stroke-width="3"/></g></svg></div><div class="flight-units"><a class="flight-unit" href="#u1"><small>01 · Departure</small><strong>Unit I</strong><span>Concept of IHRM</span></a><a class="flight-unit" href="#u2"><small>02 · En route</small><strong>Unit II</strong><span>International staffing &amp; people</span></a><a class="flight-unit" href="#u3"><small>03 · Cruise</small><strong>Unit III</strong><span>International compensation</span></a><a class="flight-unit" href="#u4"><small>04 · Arrival</small><strong>Unit IV</strong><span>Industrial relations &amp; trends</span></a></div><div class="flight-actions"><a class="flight-btn primary" href="#u1">Enter study cabin →</a><a class="flight-btn" href="#cards">Open flashcards</a><a class="flight-btn" href="#quiz">Take boarding quiz</a><a class="flight-btn" href="#rev">Quick revision</a></div><div class="flight-note">Your notes remain below the flight deck.</div></section>
-<main class="sheet">
-<svg class="globe" viewBox="0 0 120 128" aria-hidden="true"><circle cx="60" cy="64" r="44"/><ellipse cx="60" cy="64" rx="18" ry="44"/><path d="M16 64h88M24 40h72M24 88h72"/><path style="stroke:var(--red)" d="M8 20l10 6-10 6 4-6zM100 14l4 8M96 18l8-4"/><path style="stroke:var(--green)" d="M100 108l-14-6 8-8"/></svg>
-<div id="rp"></div>
-<header class="cover"><i class="rib"></i><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="46"/><ellipse cx="60" cy="60" rx="19" ry="46"/><path d="M14 60h92M22 38h76M22 82h76"/></svg><div><h1>IHRM Semester Notes</h1><p>International Human Resource Management</p><p>IMBA 9th Sem &middot; IMBA18914DCE &middot; University of Kashmir</p><p>Based on Dowling, Festing &amp; Engle, 7th ed.</p></div></header>
-<section class="hub" aria-label="Study hub">
-  <div class="eyebrow">✦ Your semester flight deck · University of Kashmir</div>
-  <h2>Big course. Small steps.<br>Let's take off.</h2>
-  <p>Four units, full notes, flip-to-reveal flashcards, revision checklist and a self-test — all in one playful study space. Your progress stays saved on this device.</p>
-  <div class="chips"><span>🧭 4 destinations</span><span>🗂️ Full notes</span><span>🃏 Flashcards</span><span>🎯 Self-test</span></div>
-</section>
-<div class="hubstats" aria-label="Study dashboard">
-  <div class="hubstat"><b>04</b><span>Course units</span></div>
-  <div class="hubstat"><b>12</b><span>Flashcards</span></div>
-  <div class="hubstat"><b id="dashProgress">0/4</b><span>Units revised</span></div>
-  <div class="hubstat"><b id="dashTopics">—</b><span>Topics & concepts</span></div>
-</div>
-<div class="toolshelf">
-  <div class="searchbox"><label for="noteSearch">🔎 Search across your notes</label><input id="noteSearch" type="search" placeholder="Try “balance sheet”, “EPRG”, “culture shock”…" autocomplete="off"></div>
-  <div class="jumpbox"><strong>Ready to continue?</strong><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><button id="continueBtn" type="button">Continue where I left off ↗</button></div>
-</div>
-<div id="searchstatus" aria-live="polite">Showing all notes. Search a concept to find it fast.</div>
-<nav><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="#cards">Flashcards</a><a href="#quiz">Self-test</a><a href="#rev">Revise</a><button class="tool" id="theme" type="button">Dark / Light</button></nav>
-<h3>My progress</h3>
-<div class="prog" id="prog"><label><input type="checkbox" data-k="u1"> Unit I</label><label><input type="checkbox" data-k="u2"> Unit II</label><label><input type="checkbox" data-k="u3"> Unit III</label><label><input type="checkbox" data-k="u4"> Unit IV</label><div class="bar"><i id="fill"></i></div><span id="ptxt">Tick a unit when you finish revising it.</span></div>
-
-<h3>Words to know first</h3>
-<ul>
-<li><b>PCN</b> = citizen of HQ country. <b>HCN</b> = citizen of host country. <b>TCN</b> = neither (e.g. Singaporean in China for a US firm).</li>
-<li><b>Expatriate</b> = works &amp; lives temporarily abroad. <b>Inpatriate</b> = subsidiary staff moved to HQ.</li>
-<li><b>EPRG</b> = Ethno, Poly, Regio, Geo (Perlmutter).</li>
-</ul>
-
-<h2 id="u1">Unit I - Concept of IHRM (full notes)</h2>
-<figure class="pol"><svg viewBox="0 0 156 128"><circle cx="78" cy="52" r="36" fill="#6fb0e8" stroke="#1c3f94" stroke-width="2"/><path d="M56 40c8-8 16-2 14 6s-12 8-14-6zM80 56c10-6 20 2 14 12s-16 4-14-12z" fill="#5fae6a"/><g stroke="#333" stroke-width="2"><circle cx="30" cy="98" r="7" fill="#c4302b"/><path d="M30 105v12M20 112h20" fill="none"/><circle cx="78" cy="104" r="7" fill="#2f6fd0"/><path d="M78 111v12M68 118h20" fill="none"/><circle cx="126" cy="98" r="7" fill="#1e7a45"/><path d="M126 105v12M116 112h20" fill="none"/></g></svg><figcaption>one firm, many nations</figcaption></figure>
-<h3>1.1 Scope of the field - 3 approaches</h3>
-<ul>
+</style></head>
+<body>
+<svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
+<header class="top"><div class="bar"><a class="logo" href="#top">IHRM<b>Air</b></a><nav aria-label="Sections" class="links"><a href="#u1">I</a><a href="#u2">II</a><a href="#u3">III</a><a href="#u4">IV</a><a href="#pp">Passport</a><a href="#quiz">Quiz</a><button class="btn" id="th" type="button">Theme</button></nav></div>
+<div class="top-actions" aria-label="Main study navigation"><a class="primary" href="#full-notes">Full Notes</a><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="#quiz">Quiz</a></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
+<section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
+<div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
+<h1>Manage people <em>across borders</em></h1><p>Your complete IMBA International HRM flight deck: fly through the four destinations, open detailed semester notes, revise with flashcards, test yourself and stamp your passport as you progress.</p>
+<a class="go" href="#u1">Start boarding</a>
+<div class="stats"><span>4 units</span><span>22 topic tags</span><span>5-question quiz</span></div></div>
+<div class="stub"><div>PASSENGER<b>IMBA 9th Sem</b></div><div>COURSE<b>IMBA18914DCE</b></div><div>BOOK<b>Dowling, Festing &amp; Engle</b></div></div></div></section>
+<main>
+<div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div></div>
+<section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
+<div class="win"><svg viewbox="0 0 170 226"><circle cx="85" cy="92" fill="#4f9be8" r="46" stroke="#14213d" stroke-width="3"></circle><path d="M60 78c10-10 20-2 17 8s-14 9-17-8zM90 100c12-7 24 3 16 14s-19 4-16-14z" fill="#59b36b"></path><g stroke="#14213d" stroke-width="3"><circle cx="38" cy="176" fill="#e5484d" r="9"></circle><path d="M38 185v18M26 194h24" fill="none"></path><circle cx="85" cy="184" fill="#ffc83d" r="9"></circle><path d="M85 193v18M73 202h24" fill="none"></path><circle cx="132" cy="176" fill="#1fa77f" r="9"></circle><path d="M132 185v18M120 194h24" fill="none"></path></g></svg></div>
+<button aria-pressed="false" class="stampbtn" data-k="1">Stamp this unit</button></div>
+<div class="tags">
+<details class="tag" open=""><summary>Morgan's model of IHRM</summary><div>IHRM is the interplay of three things: <b>HR activities</b> (procurement, allocation, utilisation), <b>countries</b> (host, parent, other) and <b>employee types</b> (HCN, PCN, TCN). Example: IBM employs Britons in Britain (HCNs) and sends Americans to Asia (PCNs).</div></details>
+<details class="tag"><summary>PCN, HCN, TCN and expatriates</summary><div>PCN = citizen of HQ country; HCN = host-country citizen; TCN = neither. An <b>expatriate</b> works temporarily abroad; an <b>inpatriate</b> is subsidiary staff moved to HQ.</div></details>
+<details class="tag"><summary>Domestic vs international: 6 factors</summary><div><ul><li>More HR activities (tax, relocation, permits)</li><li>Broader perspective (equity across nationalities)</li><li>More involvement in personal lives and family</li><li>Changing PCN/HCN mix as subsidiaries mature</li><li>Risk exposure: failure can cost about 3x salary</li><li>Broader external influences (law, economy, custom)</li></ul><span class="hint">Same activities, higher complexity.</span></div></details>
+<details class="tag"><summary>4 moderating variables</summary><div><ul><li><b>Culture</b>: culture shock, emic vs etic, convergence vs divergence</li><li><b>Industry</b>: multidomestic vs global (Porter); Laurent's 5 steps</li><li><b>Home-market reliance</b>: big home market means less global thinking</li><li><b>Senior management attitude</b>: build a global mindset</li></ul></div></details>
+<details class="tag"><summary>Strategic IHRM framework</summary><div>De Cieri and Dowling: external factors (<b>PESTLE</b>, asymmetric events like terrorism) and organisational factors (integration vs local responsiveness, structure, strategy, culture) shape the HR function and MNE performance.</div></details>
+</div><details class="full-notes" id="full-notes-u1"><summary>Open complete Unit I semester notes + quick recaps</summary><h2 id="full-u1">Unit I - Concept of IHRM (full notes)</h2><figure class="pol"><svg viewbox="0 0 156 128"><circle cx="78" cy="52" fill="#6fb0e8" r="36" stroke="#1c3f94" stroke-width="2"></circle><path d="M56 40c8-8 16-2 14 6s-12 8-14-6zM80 56c10-6 20 2 14 12s-16 4-14-12z" fill="#5fae6a"></path><g stroke="#333" stroke-width="2"><circle cx="30" cy="98" fill="#c4302b" r="7"></circle><path d="M30 105v12M20 112h20" fill="none"></path><circle cx="78" cy="104" fill="#2f6fd0" r="7"></circle><path d="M78 111v12M68 118h20" fill="none"></path><circle cx="126" cy="98" fill="#1e7a45" r="7"></circle><path d="M126 105v12M116 112h20" fill="none"></path></g></svg><figcaption>one firm, many nations</figcaption></figure><h3>1.1 Scope of the field - 3 approaches</h3><ul>
 <li><b>Cross-cultural management</b>: human behaviour inside organisations seen from an international angle.</li>
 <li><b>Comparative HR / industrial relations</b>: describing, comparing and analysing HR and IR systems of different countries.</li>
 <li><b>HRM in multinational firms</b>: how internationalisation changes HR activities and policies. <span class="hl">The book follows this third approach.</span></li>
 <li>The 3 overlap: culture (Ch 2), comparative IR (Ch 9), small and family firms still going international (Ch 4).</li>
-</ul>
-
-<h3>1.2 Defining IHRM</h3>
-<ul>
+</ul><h3>1.2 Defining IHRM</h3><ul>
 <li>HRM = activities an organisation uses to get the best from its people: HR planning, staffing (recruit, select, place), performance management, training and development, compensation and benefits, industrial relations.</li>
 <li><b>Morgan's model</b> shows what changes when HRM goes international. 3 dimensions:
 <ul>
@@ -227,18 +271,11 @@ body{font-family:'Kalam','Segoe Print',cursive}
 <li><span class="red">IHRM = interplay of activities x countries x employee types.</span></li>
 <li>Example: IBM employs Britons in Britain (HCNs), sends Americans to Asia-Pacific (PCNs), may send Singaporeans to China (TCNs). Nationality decides the category and often drives pay and contract.</li>
 <li>Domestic HRM deals with employees inside <b>one</b> national boundary. It is now borrowing from IHRM as workforces get multicultural, but diversity practices of one legal and cultural setting may not transfer to a multinational setting without changes.</li>
-</ul>
-<div class="fig"><svg viewBox="0 0 400 224"><circle class="fl" cx="145" cy="88" r="62" style="fill-opacity:.55"/><circle class="ln" cx="255" cy="88" r="62"/><circle class="rl" cx="200" cy="150" r="62"/><text x="92" y="78">HR activities</text><text x="72" y="100" style="font-size:16px">procure, allocate, use</text><text x="262" y="78">Countries</text><text x="250" y="100" style="font-size:16px">host, parent, other</text><text x="162" y="196">Employees</text><text x="150" y="214" style="font-size:16px">PCN, HCN, TCN</text><text class="rt" x="178" y="128" style="font-size:26px">IHRM</text></svg></div>
-<h3>Expatriate vs inpatriate</h3>
-<ul>
+</ul><div class="fig"><svg viewbox="0 0 400 224"><circle class="fl" cx="145" cy="88" r="62" style="fill-opacity:.55"></circle><circle class="ln" cx="255" cy="88" r="62"></circle><circle class="rl" cx="200" cy="150" r="62"></circle><text x="92" y="78">HR activities</text><text style="font-size:16px" x="72" y="100">procure, allocate, use</text><text x="262" y="78">Countries</text><text style="font-size:16px" x="250" y="100">host, parent, other</text><text x="162" y="196">Employees</text><text style="font-size:16px" x="150" y="214">PCN, HCN, TCN</text><text class="rt" style="font-size:26px" x="178" y="128">IHRM</text></svg></div><h3>Expatriate vs inpatriate</h3><ul>
 <li><b>Expatriate</b> = employee working and temporarily living in a foreign country (firms prefer 'international assignee'). PCNs are always expatriates. TCNs are too. So are HCNs transferred to parent-country operations outside their own country.</li>
 <li><b>Inpatriate</b> = subsidiary staff transferred into the parent-country (HQ) operations. An inpatriate is also an expatriate, which is why many question whether the term is needed. An HCN becomes an inpatriate only when moved into the parent country.</li>
 <li>Broad definition used (Stahl, Bjorkman and Morris): all issues related to managing the global workforce and its contribution to firm outcomes, plus comparative analysis of HRM across countries.</li>
-</ul>
-
-<h3>1.3 Domestic vs international HRM</h3>
-<p>Key idea: the <span class="hl">activities are mostly the same; the complexity of working in many countries with different national groups of employees is what differs.</span> Dowling gives 6 reasons:</p>
-<ul>
+</ul><h3>1.3 Domestic vs international HRM</h3><p>Key idea: the <span class="hl">activities are mostly the same; the complexity of working in many countries with different national groups of employees is what differs.</span> Dowling gives 6 reasons:</p><ul>
 <li><b>1. More HR activities.</b>
 <ul>
 <li>International taxation: expatriates may owe home and host tax, so tax-equalisation policies are needed so no assignment carries a tax gain or loss. Tax laws vary and settlement can lag the assignment, so firms hire accounting firms.</li>
@@ -252,102 +289,71 @@ body{font-family:'Kalam','Segoe Print',cursive}
 <li><b>4. Emphasis changes with the PCN/HCN mix.</b> As a subsidiary matures and trained locals appear, effort shifts from expatriate tax, relocation and orientation to local selection, training and development (e.g. bringing high-potential locals to HQ).</li>
 <li><b>5. Risk exposure.</b> Failure costs more: direct cost (salary, training, travel, relocation) can reach <b>about 3x</b> the domestic salary plus relocation; indirect costs are lost market share and damaged host relations. Also terrorism (post-2001) means political-risk planning, evacuation procedures, and pandemics such as SARS, Zika and avian flu.</li>
 <li><b>6. Broader external influences.</b> Government type, economy and business customs. Malaysia's affirmative-action rules for indigenous Malays are an example. Developed countries: costly, organised labour and strong law. Developing countries: cheaper, less organised labour, lighter regulation, but HR spends more time learning local codes (gift giving, hiring family) and running benefits like housing and schooling.</li>
-</ul>
-<div class="tip">Exam tip: 'Distinguish domestic HRM and IHRM' - give the 6 factors, 1 example each.</div>
-
-<h3>1.4 Variables that moderate the differences</h3>
-<p>Besides complexity, 4 variables <b>diminish or accentuate</b> the gap (Dowling's model). Firms from advanced economies with little international experience often underestimate this; many overseas business failures link to poor HR management.</p>
-<h3>(a) Cultural environment</h3>
-<ul>
+</ul><div class="tip">Exam tip: 'Distinguish domestic HRM and IHRM' - give the 6 factors, 1 example each.</div><h3>1.4 Variables that moderate the differences</h3><p>Besides complexity, 4 variables <b>diminish or accentuate</b> the gap (Dowling's model). Firms from advanced economies with little international experience often underestimate this; many overseas business failures link to poor HR management.</p><h3>(a) Cultural environment</h3><ul>
 <li>Culture = a shaping process over time creating shared knowledge, values, norms and behaviour patterns. It is subtle; we notice it mostly when meeting a different culture (language, food, dress, hygiene, attitude to time).</li>
 <li><b>Culture shock</b>: many adjustments in a short time challenge a person's frame of reference and sense of identity; misread cues cause disorientation, negative feelings about the host country and a wish to go home.</li>
 <li>Research problems: no agreed definition of culture; 'culture' becomes an omnibus variable used after the fact; nation is wrongly treated as culture. Define culture beforehand and do not assume national difference = cultural difference.</li>
 <li><b>Emic</b> = culture-specific; <b>etic</b> = culture-common. Danger is forcing an etic (universal) view without evidence.</li>
 <li><b>Convergence hypothesis</b> (1950s-60s): sound management is universal, so societies become alike (US model). <b>Divergence</b>: evidence shows differences stay. Child: organisations converge at macro level (structure, technology) but individual behaviour stays culturally specific.</li>
 <li><b>Cultural awareness</b>: attitudes like 'my way is best' or 'what works at home works here' cause failure. Hiring, promoting, rewarding and firing follow host law and values. Example: in Indonesia managers feel bound to employ extended family, which Westerners call nepotism. A firm may appoint an expatriate general manager but a local HR manager. Preparing assignees and families is a key HR task.</li>
-</ul>
-<h3>(b) Industry type (Porter)</h3>
-<ul>
+</ul><h3>(b) Industry type (Porter)</h3><ul>
 <li><b>Multidomestic</b> industry: competition in each country is independent (retail, distribution, insurance). International strategy = a set of domestic strategies. HR stays mostly domestic, using consultants for the occasional foreign need.</li>
 <li><b>Global</b> industry: position in one country affects position in others (commercial aircraft, semiconductors, copiers). Needs a firm to integrate worldwide, so HR must be built for <span class="hl">co-ordination</span>.</li>
 <li>HRM supports all primary activities in Porter's value chain, so it cuts across the whole chain.</li>
 <li><b>Laurent's tension</b>: consistency gives a corporate identity, but local effectiveness needs adaptation. 5 steps to a truly international HR view: (1) parent admits its HR ways reflect home values; (2) they are different, not better or worse; (3) subsidiaries may have equally good or better local ways; (4) HQ makes differences <b>discussable</b> and usable; (5) belief that cross-cultural learning creates better ways of managing people. These are mindsets more than behaviours.</li>
-</ul>
-<h3>(c) Reliance on the home-country market</h3>
-<ul>
+</ul><h3>(c) Reliance on the home-country market</h3><ul>
 <li>A large home market (US plus NAFTA) makes overseas operations seem like extensions of domestic ones, favours an international division, and produces managers with domestic-only experience. Criticising US firms as inward-looking ignores this rational focus.</li>
 <li>Small or medium home markets (Switzerland 8m, Ireland 5m, Australia 24m, Netherlands 17m; also Canada, UK, France) push firms abroad and make them adapt to host norms.</li>
 <li>Data point: in Fortune's 2016 Global 500 top 10 only Walmart, Exxon Mobil and Apple are American.</li>
-</ul>
-<h3>(d) Attitudes of senior management</h3>
-<ul>
+</ul><h3>(d) Attitudes of senior management</h3><ul>
 <li>Weak international orientation leads to under-emphasis on overseas operations and the belief that domestic HR practices transfer easily (ethnocentrism, poor information).</li>
 <li>The HR manager must work with top management to build a <b>global mindset</b> and policies that develop globally minded staff.</li>
-</ul>
-
-<h3>1.5 Managing a global, diverse workforce - implications</h3>
-<ul>
+</ul><h3>1.5 Managing a global, diverse workforce - implications</h3><ul>
 <li>Equal treatment across PCN, HCN, TCN in pay, premiums and promotion, or morale and retention suffer.</li>
 <li>Learn local law and custom before hiring, rewarding or dismissing.</li>
 <li>Support the family (housing, schooling, spouse work permit).</li>
 <li>Balance integration (one identity) with local responsiveness (Laurent).</li>
 <li>Build cross-cultural learning at headquarters and a global mindset.</li>
 <li>Plan for safety, security and evacuation for a dispersed workforce.</li>
-</ul>
-
-<h3>1.6 Strategic IHRM - De Cieri and Dowling framework</h3>
-<ul>
+</ul><h3>1.6 Strategic IHRM - De Cieri and Dowling framework</h3><ul>
 <li><b>External factors</b>: <b>PESTLE</b> (political, economic, sociological, technological, legal, environmental); links with other MNEs and governments (networks built on trust and personal relationships); <b>asymmetric events</b> such as terrorism (unusual, leveraged against our assets, hard to plan for or answer proportionately); environmental dynamics.</li>
 <li><b>Organisational factors</b>: balance of global integration and local responsiveness; MNE structure; firm size and maturity; strategy; corporate governance (HR helps write codes of conduct); HQ's international orientation; organisational culture.</li>
 <li><b>HR function</b>: global corporate HR role, HR practices, crisis management and co-ordination.</li>
 <li><b>Outcomes</b>: financial performance, social performance, enterprise resilience.</li>
-</ul>
-<h3>1.7 Why it matters</h3>
-<ul>
+</ul><h3>1.7 Why it matters</h3><ul>
 <li>Desatnick and Bennett: multinational ventures fail mainly from not understanding how HR must differ at every level abroad. These 'human' points are as important as financial and marketing criteria.</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> IHRM mein kaam wahi hai, par alag-alag country ke log, law aur culture ek saath sambhalne padte hain. Isliye <span class="red">6 factors + 4 moderators</span> yaad rakho.</div>
-<h3>Quick recap (Unit I)</h3>
-<h3>What is IHRM?</h3>
-<ul>
+</ul><div class="note"><b>Hinglish samajh:</b> IHRM mein kaam wahi hai, par alag-alag country ke log, law aur culture ek saath sambhalne padte hain. Isliye <span class="red">6 factors + 4 moderators</span> yaad rakho.</div><h3>Quick recap (Unit I)</h3><h3>What is IHRM?</h3><ul>
 <li>HRM activities: planning, staffing, performance, training, pay &amp; benefits, industrial relations.</li>
-<li><span class="hl">Morgan's model</span> = 3 dimensions: HR activities (procurement, allocation, utilisation) &times; countries (host, parent, other) &times; employees (HCN, PCN, TCN).</li>
+<li><span class="hl">Morgan's model</span> = 3 dimensions: HR activities (procurement, allocation, utilisation) × countries (host, parent, other) × employees (HCN, PCN, TCN).</li>
 <li>Book's definition: all issues of managing the <b>global workforce</b> + its link to firm outcomes.</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> Kaam wahi (hire, train, pay), par alag-alag countries ke logon ko ek company mein manage karna = <span class="red">complexity</span> zyada. Isi wajah se IHRM alag hai.</div>
-
-<h3>Domestic vs International: 6 factors (Dowling)</h3>
-<ul>
+</ul><div class="note"><b>Hinglish samajh:</b> Kaam wahi (hire, train, pay), par alag-alag countries ke logon ko ek company mein manage karna = <span class="red">complexity</span> zyada. Isi wajah se IHRM alag hai.</div><h3>Domestic vs International: 6 factors (Dowling)</h3><ul>
 <li><b>More HR activities</b>: expatriate tax, relocation, visas, host-govt relations, translation.</li>
 <li><b>Broader perspective</b>: PCN + HCN + TCN together, so equity issues.</li>
 <li><b>More involvement in personal life</b>: housing, schools, spouse visa.</li>
-<li><b>Mix changes</b>: mature subsidiary &rarr; more local training, less expatriate admin.</li>
-<li><b>Risk exposure</b>: failure costs up to ~3&times; salary; terrorism, pandemics.</li>
+<li><b>Mix changes</b>: mature subsidiary → more local training, less expatriate admin.</li>
+<li><b>Risk exposure</b>: failure costs up to ~3× salary; terrorism, pandemics.</li>
 <li><b>External influences</b>: govt, economy, local practice (e.g. Malaysia's quotas).</li>
-</ul>
-
-<h3>Moderating variables (+ complexity)</h3>
-<ul>
+</ul><h3>Moderating variables (+ complexity)</h3><ul>
 <li><b>Culture</b>: culture shock; emic vs etic; convergence vs divergence (firms converge, people stay different). Example: hiring family in Indonesia.</li>
 <li><b>Industry</b> (Porter): multidomestic (retail, insurance) vs global (aircraft, chips). Global needs co-ordination.</li>
 <li><b>Home-market reliance</b>: big home market (US) = less global thinking.</li>
 <li><b>Senior management attitude</b>: need a <span class="hl">global mindset</span>.</li>
-</ul>
-<p class="eq">Laurent: parent must admit its ways are just different, not better.</p>
-
-<h3>Diverse global workforce - implications</h3>
-<ul>
+</ul><p class="eq">Laurent: parent must admit its ways are just different, not better.</p><h3>Diverse global workforce - implications</h3><ul>
 <li>Domestic diversity tools help but don't transfer without change.</li>
 <li>Treat PCN/HCN/TCN fairly; learn local norms; hire local HR head.</li>
 <li>Balance <b>global integration vs local responsiveness</b>.</li>
-<li>Strategic view (De Cieri &amp; Dowling): PESTLE + asymmetric events + internal factors &rarr; HR function &rarr; performance.</li>
-</ul>
-
-<h2 id="u2">Unit II - Staffing &amp; Performance (full notes)</h2>
-<figure class="pol l"><svg viewBox="0 0 156 128"><path d="M14 34h28M118 22h26" stroke="#fff" stroke-width="6" stroke-linecap="round"/><ellipse cx="78" cy="44" rx="42" ry="9" fill="#fff" stroke="#1c3f94" stroke-width="2"/><path d="M70 44L52 66h18l12-22zM116 44l10-16h8l-8 16z" fill="#e8eef7" stroke="#1c3f94" stroke-width="2"/><circle cx="60" cy="43" r="2" fill="#1c3f94"/><circle cx="72" cy="43" r="2" fill="#1c3f94"/><circle cx="84" cy="43" r="2" fill="#1c3f94"/><rect x="48" y="84" width="60" height="34" rx="5" fill="#c4302b" stroke="#333" stroke-width="2"/><path d="M68 84v-8h20v8M78 90v22" fill="none" stroke="#333" stroke-width="2"/></svg><figcaption>the expatriate's journey</figcaption></figure>
-<h3>2.1 Staffing policies - Perlmutter's EPRG</h3>
-<p>Example: a US MNE needs a finance director for its Irish unit. It can pick a PCN (from HQ), an HCN (local) or a TCN (from another subsidiary). Top-management attitudes decide: ethnocentric, polycentric, geocentric (Perlmutter), regiocentric added later.</p>
-<ul>
+<li>Strategic view (De Cieri &amp; Dowling): PESTLE + asymmetric events + internal factors → HR function → performance.</li>
+</ul></details></section>
+<section class="dest" id="u2" style="--c:var(--mint)"><div class="side"><span class="tagline">Destination 2</span><h2>Unit II: Staffing and Performance</h2>
+<div class="win"><svg viewbox="0 0 170 226"><path d="M0 60h50M120 30h50" stroke="#fff" stroke-linecap="round" stroke-width="10"></path><ellipse cx="85" cy="82" fill="#fff" rx="60" ry="12" stroke="#14213d" stroke-width="3"></ellipse><path d="M75 82L48 112h26l16-30zM128 82l14-24h10l-10 24z" fill="#e8eef7" stroke="#14213d" stroke-width="3"></path><rect fill="#e5484d" height="54" rx="8" stroke="#14213d" stroke-width="3" width="74" x="48" y="140"></rect><path d="M76 140v-12h18v12M85 150v34" fill="none" stroke="#14213d" stroke-width="3"></path><circle cx="85" cy="170" fill="#ffc83d" r="8" stroke="#14213d" stroke-width="2"></circle></svg></div>
+<button aria-pressed="false" class="stampbtn" data-k="2">Stamp this unit</button></div>
+<div class="tags">
+<details class="tag" open=""><summary>EPRG staffing approaches</summary><div><ul><li><b>Ethnocentric</b>: PCNs run key posts; strong control, blocks HCN careers</li><li><b>Polycentric</b>: HCNs run units; cheap and stable, risk of a 'federation'</li><li><b>Geocentric</b>: best person, any nationality; costly and slow</li><li><b>Regiocentric</b>: moves within a region only</li></ul></div></details>
+<details class="tag"><summary>PCN vs TCN vs HCN</summary><div>PCNs give control but cost more; TCNs can be cheaper and regionally savvy but face rivalries; HCNs avoid language and permit issues but loosen HQ control.</div></details>
+<details class="tag"><summary>International assignments</summary><div>Reasons: <b>position filling</b>, <b>management development</b>, <b>organisation development</b>. Types: short-term, extended, long-term; non-standard: commuter, rotational, contractual, virtual, self-initiated.</div></details>
+<details class="tag"><summary>Expatriate failure and selection</summary><div><ul><li>Failure = premature return (broader: underperformance too)</li><li>Top causes: spouse or manager cannot adjust, poor selection</li><li>Selection: technical ability, cross-cultural suitability, family, country rules, MNE needs, language</li><li>U-curve: honeymoon, culture shock, adjustment, mastery</li></ul><span class="hint">Do not pick on technical skill alone.</span></div></details>
+<details class="tag"><summary>Performance and appraisal</summary><div>Five variables: compensation, task, HQ support, host environment, cultural adjustment. PCN roles cross one cultural boundary, TCN roles two. Appraise with <b>hard</b>, <b>soft</b> and <b>contextual</b> criteria. For HCNs, adapt to culture (Japan: save face) and involve locals.</div></details>
+</div><details class="full-notes" id="full-notes-u2"><summary>Open complete Unit II semester notes + quick recaps</summary><h2 id="full-u2">Unit II - Staffing &amp; Performance (full notes)</h2><figure class="pol l"><svg viewbox="0 0 156 128"><path d="M14 34h28M118 22h26" stroke="#fff" stroke-linecap="round" stroke-width="6"></path><ellipse cx="78" cy="44" fill="#fff" rx="42" ry="9" stroke="#1c3f94" stroke-width="2"></ellipse><path d="M70 44L52 66h18l12-22zM116 44l10-16h8l-8 16z" fill="#e8eef7" stroke="#1c3f94" stroke-width="2"></path><circle cx="60" cy="43" fill="#1c3f94" r="2"></circle><circle cx="72" cy="43" fill="#1c3f94" r="2"></circle><circle cx="84" cy="43" fill="#1c3f94" r="2"></circle><rect fill="#c4302b" height="34" rx="5" stroke="#333" stroke-width="2" width="60" x="48" y="84"></rect><path d="M68 84v-8h20v8M78 90v22" fill="none" stroke="#333" stroke-width="2"></path></svg><figcaption>the expatriate's journey</figcaption></figure><h3>2.1 Staffing policies - Perlmutter's EPRG</h3><p>Example: a US MNE needs a finance director for its Irish unit. It can pick a PCN (from HQ), an HCN (local) or a TCN (from another subsidiary). Top-management attitudes decide: ethnocentric, polycentric, geocentric (Perlmutter), regiocentric added later.</p><ul>
 <li><b>Ethnocentric</b>: few subsidiaries have autonomy; strategy made at HQ; key posts held by PCNs.
 <ul><li>Why: HCNs seem unqualified; need communication, co-ordination and control; cuts perceived risk early in internationalisation or after an acquisition ('assignments as control').</li>
 <li>Drawbacks: blocks HCN promotion (low productivity, high turnover); PCNs take long to adapt and make mistakes; big PCN-HCN pay gap looks unjust; expatriates' new status may dull sensitivity to local staff.</li></ul></li>
@@ -362,137 +368,101 @@ body{font-family:'Kalam','Segoe Print',cursive}
 <li>Cons: regional 'federalism'; the career barrier just moves up to regional level.</li></ul></li>
 <li><b>Ad hoc</b> = policy by default (inertia or inexperience): reactive, no HR strategy fit.</li>
 <li>In practice firms mix: e.g. regiocentric in Europe, ethnocentric in Asia-Pacific; host governments may force a polycentric result.</li>
-</ul>
-<div class="fig"><svg viewBox="0 0 400 224"><rect class="fl" x="14" y="14" width="170" height="84" rx="14"/><rect class="ln" x="216" y="14" width="170" height="84" rx="14"/><rect class="gl" x="14" y="124" width="170" height="84" rx="14"/><rect class="rl" x="216" y="124" width="170" height="84" rx="14"/><text x="30" y="50" style="font-size:26px">Ethnocentric</text><text x="30" y="80" style="font-size:18px">HQ people rule</text><text x="232" y="50" style="font-size:26px">Polycentric</text><text x="232" y="80" style="font-size:18px">locals run units</text><text class="gt" x="30" y="160" style="font-size:26px">Regiocentric</text><text class="gt" x="30" y="190" style="font-size:18px">move in a region</text><text class="rt" x="232" y="160" style="font-size:26px">Geocentric</text><text class="rt" x="232" y="190" style="font-size:18px">best person wins</text></svg></div>
-<h3>2.2 Sources of staffing</h3>
-<ul>
+</ul><div class="fig"><svg viewbox="0 0 400 224"><rect class="fl" height="84" rx="14" width="170" x="14" y="14"></rect><rect class="ln" height="84" rx="14" width="170" x="216" y="14"></rect><rect class="gl" height="84" rx="14" width="170" x="14" y="124"></rect><rect class="rl" height="84" rx="14" width="170" x="216" y="124"></rect><text style="font-size:26px" x="30" y="50">Ethnocentric</text><text style="font-size:18px" x="30" y="80">HQ people rule</text><text style="font-size:26px" x="232" y="50">Polycentric</text><text style="font-size:18px" x="232" y="80">locals run units</text><text class="gt" style="font-size:26px" x="30" y="160">Regiocentric</text><text class="gt" style="font-size:18px" x="30" y="190">move in a region</text><text class="rt" style="font-size:26px" x="232" y="160">Geocentric</text><text class="rt" style="font-size:18px" x="232" y="190">best person wins</text></svg></div><h3>2.2 Sources of staffing</h3><ul>
 <li><b>PCNs</b> +: control and co-ordination, international experience for promising managers, special skills, assured compliance. -: limits HCN promotion, slow adaptation, may impose HQ style, pay differences.</li>
 <li><b>TCNs</b> +: lower pay and benefits than PCNs, may know host environment better. -: national animosities (India-Pakistan), host may resent, may not wish to go home after.</li>
 <li><b>HCNs</b> +: no language barrier, lower hiring cost, no work permit, continuity, govt may require, better morale. -: HQ control weaker, limited career outside subsidiary, fewer PCN overseas chances, federation risk.</li>
-</ul>
-<h3>2.3 What determines staffing choice</h3>
-<ul>
+</ul><h3>2.3 What determines staffing choice</h3><ul>
 <li><b>Context</b>: culture and institutions (law, education, staff supply), industry. Culturally distant units tend to get PCNs. Country-of-origin effect (home practices exported) vs host-country effect.</li>
 <li><b>Firm</b>: structure, strategy, international experience, governance, culture.</li>
 <li><b>Local unit</b>: greenfield, merger, acquisition or partnership; strategic importance; need for control; who decides.</li>
 <li><b>HR practices</b>: selection, training, pay, career management.</li>
-</ul>
-<h3>2.4 International assignments</h3>
-<ul>
+</ul><h3>2.4 International assignments</h3><ul>
 <li>3 reasons: <b>position filling</b> (managerial gap 28%, technical gap 21%), <b>management development</b>, <b>organisation development</b> (control, knowledge and culture transfer). Many assignments mix goals; German MNEs stress development, US firms fill gaps, Japanese/British stress new operations.</li>
 <li>Duration: short-term up to 3 months, extended up to 1 year, long-term 1-5 years (traditional expatriate). 45% long, 55% short (2015).</li>
 <li>Traditional: 12-36 months, family joins, formal selection, expensive, dual-career issues. Short-term: up to 6-12 months, usually alone, informal, flexible and cheap but tax and permit issues.</li>
 <li>Non-standard: <b>commuter</b> (weekly trips, family stays home, stress); <b>rotational</b> (oil rigs, mining); <b>contractual</b> (6-12 month specialists, R&amp;D); <b>virtual</b> (manage from home by tech; role conflict, dual allegiance, misunderstandings); <b>self-initiated</b> (individual starts it; entrepreneurial, so track and retain).</li>
-</ul>
-<h3>2.5 Recruitment and selection</h3>
-<ul>
+</ul><h3>2.5 Recruitment and selection</h3><ul>
 <li><b>Recruitment</b> = finding enough good candidates; <b>selection</b> = evaluating and choosing. Separate, both needed. Employer branding matters in China and India.</li>
 <li>Differences from domestic: firm's EPRG leaning; host rules (must show locals unavailable); mostly <b>internal hires</b> (external only ~8% in 2010, history ~12%) because appraisals reduce risk and protect investment in people.</li>
 <li>External: consultants and headhunters (confidential approach, CV check, interviews, shortlist, client interview, sometimes assessment centre).</li>
-</ul>
-<h3>2.6 Expatriate failure and success</h3>
-<ul>
+</ul><h3>2.6 Expatriate failure and success</h3><ul>
 <li><b>Failure</b> = premature return, usually a selection error plus weak support. Critics: too narrow; Harzing adds poor performance and leaving soon after return (Forster: 8-28% for UK).</li>
 <li>Brookfield 2015: ~5% of assignments failed; highest in China 12%, UK 10%, India 9%. Tung (1982) found US rates highest; Tungli and Peiperl (2009) found rates converging.</li>
 <li>Costs: <b>direct</b> (fares, relocation, salary, training); <b>indirect</b> (market share, host relations, local morale, pressure to localise); <b>personal</b> (self-esteem, motivation, family strain).</li>
 <li>Causes: spouse or manager cannot adapt, other family problems, immaturity, coping with larger role (Tung); plus firm issues and weak performance (2009). Brookfield: family concerns 14%, poor selection 11%, spouse 10%, adaptation 9%. Support and career management help success.</li>
-</ul>
-<h3>2.7 Selection criteria (two-way process)</h3>
-<ul>
+</ul><h3>2.7 Selection criteria (two-way process)</h3><ul>
 <li><b>Individual</b>: technical ability, cross-cultural suitability, family requirements. <b>Situation</b>: country/cultural rules, MNE needs, language.</li>
 <li><b>Technical ability</b>: heaviest weight and easiest to measure; but home performance may not predict success abroad.</li>
 <li><b>Cross-cultural suitability</b>: soft skills; <b>intercultural competence</b> (affective, cognitive, ability dimensions; empathy, adaptability, diplomacy, emotional stability); <b>cultural intelligence</b>; global mindset.</li>
 <li><b>U-curve</b>: (1) pre-departure and honeymoon, (2) culture-shock crisis, where early recall may happen, (3) adjustment, (4) mastery. Criticised as normative, with weak evidence.</li>
-<li>Adjustment model: antecedents (individual, work, organisation, non-work) &rarr; coping modes &rarr; outcomes: <b>work, interaction, general</b> adjustment. Also psychological vs socio-cultural.</li>
+<li>Adjustment model: antecedents (individual, work, organisation, non-work) → coping modes → outcomes: <b>work, interaction, general</b> adjustment. Also psychological vs socio-cultural.</li>
 <li><b>Family</b>: spouse gives up career and network, often cannot work; children's schooling, elderly parents, single-parent custody can block moves.</li>
 <li><b>Country</b>: work permits for expatriate only; Permits Foundation (Shell, Unilever, Siemens) lobbies for spouse permits; hardship posts; limits on women in some regions.</li>
 <li><b>MNE</b>: expatriate-local ratio, JV partner's say. <b>Language</b>: host tongue helps but corporate language can bar candidates.</li>
 <li>In practice: informal <span class="hl">'coffee-machine' system</span> (Harris and Brewster); structured interviews (Germany, UK, USA); recommendations and self-selection (Japan); tests of doubtful validity; spouse interviews (13.6% of MNEs); IDI (50 items, ethnocentrism to ethnorelativism); assessment centre scoring tolerance for ambiguity, goal orientation, interpersonal skills, empathy, non-judgmentalism, flexibility, meta-communication (e.g. Mexican supplier arriving late).</li>
-</ul>
-<div class="fig"><svg viewBox="0 0 400 224"><path class="ln" d="M20 70 C50 20 70 30 100 60 C140 110 160 190 200 190 C250 190 290 100 330 80 C350 70 370 70 385 72"/><circle class="rl" cx="75" cy="38" r="6"/><circle class="rl" cx="200" cy="190" r="6"/><circle class="gl" cx="330" cy="80" r="6"/><text class="rt" x="20" y="22">1 Honeymoon</text><text class="rt" x="125" y="216">2 Culture shock</text><text class="gt" x="250" y="58">3 Adjusting</text><text class="gt" x="300" y="112" style="font-size:18px">4 Mastery</text><text x="10" y="140" style="font-size:17px" transform="rotate(-90 14 140)">mood</text></svg></div>
-<h3>2.8 Factors influencing PCN and TCN performance</h3>
-<ul>
+</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M20 70 C50 20 70 30 100 60 C140 110 160 190 200 190 C250 190 290 100 330 80 C350 70 370 70 385 72"></path><circle class="rl" cx="75" cy="38" r="6"></circle><circle class="rl" cx="200" cy="190" r="6"></circle><circle class="gl" cx="330" cy="80" r="6"></circle><text class="rt" x="20" y="22">1 Honeymoon</text><text class="rt" x="125" y="216">2 Culture shock</text><text class="gt" x="250" y="58">3 Adjusting</text><text class="gt" style="font-size:18px" x="300" y="112">4 Mastery</text><text style="font-size:17px" transform="rotate(-90 14 140)" x="10" y="140">mood</text></svg></div><h3>2.8 Factors influencing PCN and TCN performance</h3><ul>
 <li>5 linked variables: <b>compensation</b> (unmet pay or career hopes cut motivation), <b>task</b>, <b>HQ support</b>, <b>host environment</b> (wholly owned unit vs JV with state firm; new vs established operation), <b>cultural adjustment</b> of expatriate and family.</li>
 <li>Task: Hays' 4 roles - CEO, structure reproducer, troubleshooter, operative. Caligiuri's 4 types - technical, developmental, strategic, functional (55-80%). Creating a structure differs from working inside one.</li>
 <li><b>Role theory</b>: parent (role sender) sets the role; host stakeholders add expectations across a cultural boundary, causing <span class="red">role conflict</span>. PCN: expectations from a close-but-distant parent and distant-but-near hosts; may 'go native' and be recalled. <b>TCN</b>: role crosses 2 boundaries, so more complex. Role clarity and discretion matter (clarity = strongest stressor).</li>
 <li>Country styles: China (personal, network-driven); France (legal, centralised, prestige counts); Germany (works councils, consensual, long-term training).</li>
 <li>Non-expatriates (travellers, commuters, virtual): hard to set criteria ('management by remote control'), dual goals, distant feedback, what to reward.</li>
-</ul>
-<h3>2.9 Appraisal of international employees</h3>
-<ul>
+</ul><h3>2.9 Appraisal of international employees</h3><ul>
 <li>Criteria: <b>hard</b> (ROI, market share), <b>soft</b> (leadership, relations), <b>contextual</b>. Transfer pricing, currency and profit limits distort subsidiary figures, so use all three.</li>
 <li>Raters: boss (home or host), self, HR; 81% of US MNEs used several. Host raters know context but may be biased; HQ raters are distant.</li>
 <li>76% of US firms used the same standard form; context changes abroad. Usually annual; feedback needs to be frequent.</li>
-</ul>
-<h3>2.10 Appraisal of HCNs</h3>
-<ul>
+</ul><h3>2.10 Appraisal of HCNs</h3><ul>
 <li>Appraisal can signal distrust. Japan: avoid direct blame, discuss strengths and consequences to <b>save face</b>.</li>
 <li>Let HCNs help design and run it; localise below top management.</li>
 <li>Role view: parent role crosses a cultural boundary, host expectations do not. HCNs moved to HQ face role conflict and readjustment.</li>
 <li>Problems: PCN boss using HQ standards, 360-degree feedback may offend, same forms as domestic, privacy laws. Across 10 countries appraisal often fails its development purpose.</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> Selection mein sirf technical skill nahi, <span class="red">family + culture fit</span> dekho. HCN ka appraisal local style mein karo.</div>
-<h3>Quick recap (Unit II)</h3>
-<h3>Four staffing approaches</h3>
-<div class="row"><div>
+</ul><div class="note"><b>Hinglish samajh:</b> Selection mein sirf technical skill nahi, <span class="red">family + culture fit</span> dekho. HCN ka appraisal local style mein karo.</div><h3>Quick recap (Unit II)</h3><h3>Four staffing approaches</h3><div class="row"><div>
 <ul>
-<li><b>Ethnocentric</b>: PCNs run everything, HQ decides.<br><span class="red">+</span> control, lower risk <span class="red">&minus;</span> HCNs blocked, long adaptation, pay gap.</li>
-<li><b>Polycentric</b>: HCNs run subsidiaries.<br><span class="red">+</span> no language gap, cheap, continuity <span class="red">&minus;</span> 'federation', HQ isolated.</li>
+<li><b>Ethnocentric</b>: PCNs run everything, HQ decides.<br/><span class="red">+</span> control, lower risk <span class="red">−</span> HCNs blocked, long adaptation, pay gap.</li>
+<li><b>Polycentric</b>: HCNs run subsidiaries.<br/><span class="red">+</span> no language gap, cheap, continuity <span class="red">−</span> 'federation', HQ isolated.</li>
 </ul></div><div>
 <ul>
-<li><b>Geocentric</b>: best person, any nationality.<br><span class="red">+</span> global team <span class="red">&minus;</span> costly, visas, long lead time.</li>
-<li><b>Regiocentric</b>: moves only within a region.<br><span class="red">+</span> regional fit <span class="red">&minus;</span> barrier just moves up to regional level.</li>
-</ul></div></div>
-<p>Ad hoc = policy by default (reactive).</p>
-
-<h3>Sources: PCN / TCN / HCN</h3>
-<ul>
+<li><b>Geocentric</b>: best person, any nationality.<br/><span class="red">+</span> global team <span class="red">−</span> costly, visas, long lead time.</li>
+<li><b>Regiocentric</b>: moves only within a region.<br/><span class="red">+</span> regional fit <span class="red">−</span> barrier just moves up to regional level.</li>
+</ul></div></div><p>Ad hoc = policy by default (reactive).</p><h3>Sources: PCN / TCN / HCN</h3><ul>
 <li><b>PCN</b>: control + HQ values, but costly &amp; slow to adapt.</li>
 <li><b>TCN</b>: cheaper, knows region, but national rivalry, host may resent.</li>
 <li><b>HCN</b>: no language/permit issue, cheap, stable, but HQ control weaker.</li>
-</ul>
-<ul>
+</ul><ul>
 <li>Choice depends on: context (culture, law, staff supply), firm (strategy, structure), local unit (greenfield/acquisition, importance), HR practices.</li>
 <li>Assignment reasons: <b>position filling, management development, organisation development</b>.</li>
-<li>Types: short-term (&le;3 months), extended (&le;1 yr), long-term (1-5 yrs). Non-standard: commuter, rotational, contractual, virtual, self-initiated.</li>
-</ul>
-
-<h3>Expatriate failure &amp; selection</h3>
-<ul>
+<li>Types: short-term (≤3 months), extended (≤1 yr), long-term (1-5 yrs). Non-standard: commuter, rotational, contractual, virtual, self-initiated.</li>
+</ul><h3>Expatriate failure &amp; selection</h3><ul>
 <li><b>Failure</b> = premature return (broader: poor performance + leaving after return).</li>
 <li>Top causes: <span class="hl">spouse/family can't adjust</span>, manager can't adjust, poor selection, firm issues.</li>
 <li>Costs: direct (salary, relocation), indirect (market share, relations), personal (self-esteem).</li>
 <li><b>Selection model</b> - Individual: technical ability, cross-cultural suitability, family. Situation: country rules, MNE needs, language.</li>
-<li><b>U-curve</b>: honeymoon &rarr; culture shock &rarr; adjustment &rarr; mastery.</li>
+<li><b>U-curve</b>: honeymoon → culture shock → adjustment → mastery.</li>
 <li>Adjustment outcomes: work, interaction, general.</li>
 <li>Practice: 'coffee-machine' informal choice; interviews, IDI, assessment centre (tolerance for ambiguity, empathy, flexibility...), spouse interview.</li>
-</ul>
-
-<h3>Performance of PCNs &amp; TCNs</h3>
-<ul>
+</ul><h3>Performance of PCNs &amp; TCNs</h3><ul>
 <li>5 variables: <b>compensation, task, HQ support, host environment, cultural adjustment</b>.</li>
-<li>Role theory: parent + host stakeholders send expectations &rarr; <span class="red">role conflict</span>. PCN crosses 1 cultural boundary, <b>TCN crosses 2</b>.</li>
+<li>Role theory: parent + host stakeholders send expectations → <span class="red">role conflict</span>. PCN crosses 1 cultural boundary, <b>TCN crosses 2</b>.</li>
 <li>Hays' tasks: CEO, structure reproducer, troubleshooter, operative.</li>
-</ul>
-<h3>Appraisal</h3>
-<ul>
+</ul><h3>Appraisal</h3><ul>
 <li>Criteria: <b>hard</b> (ROI), <b>soft</b> (leadership), <b>contextual</b>. Use all three.</li>
 <li>Many raters (home + host + self); don't copy the domestic form blindly.</li>
 <li><b>HCN appraisal</b>: culture matters (Japan: avoid direct blame, save face). Let locals help design; localise below top level.</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> Failure ka matlab banda assignment adhura chhod ke wapas. Sabse bada reason technical skill dekh ke select karna, <span class="red">family aur culture fit nahi dekhna</span>.</div>
-
-<h2 id="u3">Unit III - International Compensation (full notes)</h2>
-<figure class="pol"><svg viewBox="0 0 156 128"><g fill="#f2c94c" stroke="#8a6a00" stroke-width="2"><ellipse cx="34" cy="104" rx="18" ry="6"/><ellipse cx="34" cy="96" rx="18" ry="6"/><ellipse cx="34" cy="88" rx="18" ry="6"/><ellipse cx="78" cy="104" rx="18" ry="6"/><ellipse cx="78" cy="96" rx="18" ry="6"/><ellipse cx="78" cy="88" rx="18" ry="6"/><ellipse cx="78" cy="80" rx="18" ry="6"/><ellipse cx="78" cy="72" rx="18" ry="6"/><ellipse cx="122" cy="104" rx="18" ry="6"/><ellipse cx="122" cy="96" rx="18" ry="6"/></g><rect x="40" y="14" width="76" height="38" rx="4" fill="#bfe3c0" stroke="#1e7a45" stroke-width="2"/><circle cx="78" cy="33" r="11" fill="none" stroke="#1e7a45" stroke-width="2"/><text x="78" y="39" text-anchor="middle" font-size="16" font-family="Caveat,cursive" fill="#1e7a45">$ &#8364;</text></svg><figcaption>one package, many parts</figcaption></figure>
-<p>Global pay has moved beyond expatriate pay: it builds a global culture, acts as <b>control</b> (linking performance to cost) and sits in the corporate-governance debate. HR must handle messy local detail while keeping one strategic pay pattern. This needs knowledge of tax and employment law, currency and inflation, so firms use consultants. Most of the chapter covers PCN pay; TCN and HCN pay is growing in importance.</p>
-<h3>3.1 Objectives</h3>
-<ul>
+</ul><div class="note"><b>Hinglish samajh:</b> Failure ka matlab banda assignment adhura chhod ke wapas. Sabse bada reason technical skill dekh ke select karna, <span class="red">family aur culture fit nahi dekhna</span>.</div></details></section>
+<section class="dest" id="u3" style="--c:var(--red)"><div class="side"><span class="tagline">Destination 3</span><h2>Unit III: Paying People Abroad</h2>
+<div class="win"><svg viewbox="0 0 170 226"><rect fill="#bfe3c0" height="64" rx="8" stroke="#14213d" stroke-width="3" width="118" x="26" y="40"></rect><circle cx="85" cy="72" fill="none" r="18" stroke="#14213d" stroke-width="3"></circle><text fill="#14213d" font-family="Fredoka,sans-serif" font-size="24" text-anchor="middle" x="85" y="80">$</text><g fill="#ffc83d" stroke="#14213d" stroke-width="3"><ellipse cx="44" cy="196" rx="22" ry="8"></ellipse><ellipse cx="44" cy="184" rx="22" ry="8"></ellipse><ellipse cx="44" cy="172" rx="22" ry="8"></ellipse><ellipse cx="96" cy="196" rx="22" ry="8"></ellipse><ellipse cx="96" cy="184" rx="22" ry="8"></ellipse><ellipse cx="96" cy="172" rx="22" ry="8"></ellipse><ellipse cx="96" cy="160" rx="22" ry="8"></ellipse><ellipse cx="96" cy="148" rx="22" ry="8"></ellipse><ellipse cx="144" cy="196" rx="20" ry="8"></ellipse><ellipse cx="144" cy="184" rx="20" ry="8"></ellipse></g></svg></div>
+<button aria-pressed="false" class="stampbtn" data-k="3">Stamp this unit</button></div>
+<div class="tags">
+<details class="tag" open=""><summary>Objectives: firm vs employee</summary><div>The firm wants strategy fit, attraction and retention, cost-effective transfers and equity. The employee wants protection (benefits, living costs), financial gain, and housing, schooling and home leave covered. Core tension: <b>global standardisation vs local customisation</b>.</div></details>
+<details class="tag"><summary>The expatriate package</summary><div><ul><li><b>Base salary</b> (the foundation)</li><li><b>Foreign service premium and hardship</b>: usually 5-40% of base</li><li><b>Allowances</b>: cost-of-living, housing, home leave, education, relocation, spouse assistance</li><li><b>Benefits</b> and <b>leave</b> (home leave, R&amp;R)</li></ul></div></details>
+<details class="tag"><summary>Going rate approach</summary><div>Pay follows the <b>host</b> country market. Plus: equal to locals, simple. Minus: pay varies by posting, re-entry problems.</div></details>
+<details class="tag"><summary>Balance sheet approach</summary><div>Most used. Aim: <b>keep the expatriate whole</b> on home pay plus inducement. Four outlays: goods and services, housing, income taxes, reserve (savings). Fair and easy to explain, but creates disparities and is complex to run.</div></details>
+<details class="tag"><summary>Local Plus, tax and pay variables</summary><div><ul><li><b>Local Plus</b>: host pay plus perks; cheaper, but retention risk</li><li><b>Tax equalisation</b> is the most common policy; also tax protection</li><li>Pay is shaped by internal factors (strategy, size, culture) and external ones (law, unions, labour market, culture)</li></ul><span class="hint">Exam favourite: going rate vs balance sheet.</span></div></details>
+</div><details class="full-notes" id="full-notes-u3"><summary>Open complete Unit III semester notes + quick recaps</summary><h2 id="full-u3">Unit III - International Compensation (full notes)</h2><figure class="pol"><svg viewbox="0 0 156 128"><g fill="#f2c94c" stroke="#8a6a00" stroke-width="2"><ellipse cx="34" cy="104" rx="18" ry="6"></ellipse><ellipse cx="34" cy="96" rx="18" ry="6"></ellipse><ellipse cx="34" cy="88" rx="18" ry="6"></ellipse><ellipse cx="78" cy="104" rx="18" ry="6"></ellipse><ellipse cx="78" cy="96" rx="18" ry="6"></ellipse><ellipse cx="78" cy="88" rx="18" ry="6"></ellipse><ellipse cx="78" cy="80" rx="18" ry="6"></ellipse><ellipse cx="78" cy="72" rx="18" ry="6"></ellipse><ellipse cx="122" cy="104" rx="18" ry="6"></ellipse><ellipse cx="122" cy="96" rx="18" ry="6"></ellipse></g><rect fill="#bfe3c0" height="38" rx="4" stroke="#1e7a45" stroke-width="2" width="76" x="40" y="14"></rect><circle cx="78" cy="33" fill="none" r="11" stroke="#1e7a45" stroke-width="2"></circle><text fill="#1e7a45" font-family="Caveat,cursive" font-size="16" text-anchor="middle" x="78" y="39">$ €</text></svg><figcaption>one package, many parts</figcaption></figure><p>Global pay has moved beyond expatriate pay: it builds a global culture, acts as <b>control</b> (linking performance to cost) and sits in the corporate-governance debate. HR must handle messy local detail while keeping one strategic pay pattern. This needs knowledge of tax and employment law, currency and inflation, so firms use consultants. Most of the chapter covers PCN pay; TCN and HCN pay is growing in importance.</p><h3>3.1 Objectives</h3><ul>
 <li><b>MNE wants</b>: fit with strategy and structure; attract and retain staff where needed (competitive: foreign-service incentive, tax equalisation, reimbursing reasonable costs); cost-effective transfers; equity and easy administration.</li>
 <li><b>Employee wants</b>: financial protection (benefits, social security, living costs); financial gain (income or savings); housing, children's education and home leave covered.</li>
 <li>Not all can be maximised together. Milkovich and Bloom: do not assume local conditions dominate. Core balance: <span class="hl">global standardisation vs local customisation</span>.</li>
-</ul>
-<h3>3.2 Key components of an expatriate package</h3>
-<ul>
+</ul><h3>3.2 Key components of an expatriate package</h3><ul>
 <li><b>Base salary</b>: the foundation block; allowances, in-service benefits and pension are tied to it. Paid in home currency, local currency or both; linked to home country or an international rate.</li>
 <li><b>Foreign service inducement and hardship premium</b>: to accept the move and for tough locations. Usually 5-40% of base or a lump sum. Firms must define hardship, eligibility, amount and timing (US firms use State Department hardship guidelines). More common for PCNs than TCNs. A differential may replace overtime where the host work week is longer.</li>
 <li><b>Allowances</b> (6 main):
@@ -506,9 +476,7 @@ body{font-family:'Kalam','Segoe Print',cursive}
 </ul></li>
 <li><b>Benefits</b>: healthcare, pension and social security, life insurance, child allowances, profit sharing or stock options. Issues: stay in home plan or join host plan, fill coverage gaps, portability (very hard). Most US PCNs keep home plans except medical; EU social security is portable. TCNs are often worse planned for (little home coverage, currency problems).</li>
 <li><b>Leave</b>: annual home leave, <b>rest and rehabilitation</b> leave for hard locations, emergency leave.</li>
-</ul>
-<h3>3.3 Approaches</h3>
-<ul>
+</ul><h3>3.3 Approaches</h3><ul>
 <li><b>Going rate (market rate)</b>: base pay follows the <b>host</b> country, using surveys of locals, same-nationality expatriates or all expatriates; low-pay locations get extras.
 <ul><li>+ equality with locals, simple, identifies with host, equity across nationalities.</li>
 <li>- pay varies between assignments and between same-nationality expatriates; rivalry for rich postings; re-entry problems when pay drops back.</li></ul></li>
@@ -521,133 +489,98 @@ body{font-family:'Kalam','Segoe Print',cursive}
 <li>+ cheaper, flexible 'plus' items, works when 'home' is unclear or TCNs have no home payroll.</li>
 <li>- power shifts to employee; weaker ties to firm; <span class="red">retention risk</span> as skills become marketable.</li></ul></li>
 <li>Policies for long-term assignments: <b>Full International</b> (balance sheet, 'full bells and whistles' for high potentials); <b>Expat Lite</b> (reduced balance sheet, up to ~2 years); <b>Local Plus</b> (allowances phased 100%, 50%, 20%); <b>Localisation</b> (phased to full local pay); <b>One-way transfer</b> (self-initiated, local payroll).</li>
-</ul>
-<div class="fig"><svg viewBox="0 0 400 224"><path class="ln" d="M30 110h340M30 100v20M370 100v20"/><text x="14" y="90">HOST pay</text><text x="296" y="90">HOME pay</text><circle class="fl" cx="70" cy="110" r="13"/><circle class="gl" cx="175" cy="110" r="13"/><circle class="rl" cx="330" cy="110" r="13"/><text x="16" y="160">Going rate</text><text x="16" y="182" style="font-size:16px">same as locals</text><text class="gt" x="128" y="205">Local Plus</text><text class="gt" x="112" y="58" style="font-size:16px">local pay + perks</text><text class="rt" x="268" y="160">Balance sheet</text><text class="rt" x="268" y="182" style="font-size:16px">keep him whole</text></svg></div>
-<h3>3.4 Taxation</h3>
-<ul>
+</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M30 110h340M30 100v20M370 100v20"></path><text x="14" y="90">HOST pay</text><text x="296" y="90">HOME pay</text><circle class="fl" cx="70" cy="110" r="13"></circle><circle class="gl" cx="175" cy="110" r="13"></circle><circle class="rl" cx="330" cy="110" r="13"></circle><text x="16" y="160">Going rate</text><text style="font-size:16px" x="16" y="182">same as locals</text><text class="gt" x="128" y="205">Local Plus</text><text class="gt" style="font-size:16px" x="112" y="58">local pay + perks</text><text class="rt" x="268" y="160">Balance sheet</text><text class="rt" style="font-size:16px" x="268" y="182">keep him whole</text></svg></div><h3>3.4 Taxation</h3><ul>
 <li>Biggest worry: tax at home <b>and</b> host (US citizens get a Section 911 deduction but must file in both).</li>
 <li><b>Tax equalisation</b> (most common): firm withholds the home tax amount and pays all actual taxes; premiums and allowances paid tax-free to employee.</li>
 <li><b>Tax protection</b>: employee pays up to the home tax and keeps any windfall. Also ad hoc and laissez-faire (not recommended).</li>
 <li>Firms use international accounting firms. Social security contributions vary widely (about 0% to nearly 60%).</li>
-</ul>
-<h3>3.5 Living-cost data and PCN vs TCN</h3>
-<ul>
+</ul><h3>3.5 Living-cost data and PCN vs TCN</h3><ul>
 <li>Consultants publish cost-of-living indices; balance-sheet packages need constant updating (lag causes complaints). Currency shocks matter (Indonesian rupiah fell over 50% in 1997). UBS uses the <b>Big Mac index</b> (work minutes per burger). Firms also compare business costs (wages, rents, taxes, corruption).</li>
 <li>Balance sheet uses home base pay, so TCNs from lower-pay countries cost less than PCNs, which is hard to justify as TCNs become valuable.</li>
 <li><b>Match pay to staffing</b>: ethnocentric means keep PCNs whole; geocentric means <b>international base pay</b> for key managers in a reserve currency (USD or euro).</li>
-</ul>
-<h3>3.6 Variables influencing compensation in MNCs</h3>
-<ul>
+</ul><h3>3.6 Variables influencing compensation in MNCs</h3><ul>
 <li>3 levels, each with internal and external pulls. <b>Level 1 basic theories</b>: internal (resource-based view, resource dependence, behavioural theory, new institutional economics) vs external (cultural, institutional). <b>Level 2 norms and values</b>: internal (strategy, corporate culture, HR strategy, employment relationships) vs external (IR system, education system, cultural norms). <b>Level 3 practices</b>: internal (size, life cycle, degree of internationalisation, structure) vs external (industry, product and labour markets, law, unions).</li>
 <li>Pay-strategy choices: job vs skill; performance vs seniority; individual vs group vs organisation; risk; <b>hierarchical vs egalitarian</b>; internal equity (job evaluation) vs external equity (market surveys).</li>
 <li>Standardised pay suits monopolistic industry, low internationalisation, simple structure. Localised pay suits strong local values and rules, high internationalisation, decentralised structure.</li>
 <li>Also: staffing philosophy, PCN/TCN/HCN status, assignment type, host cost of living, tax law, MNE goals, executive-pay debate (competitive individualism vs co-operative collectivism).</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> Balance sheet = ghar jaisi lifestyle ka hisaab. Going rate = jahan ja rahe ho wahan ka rate. Local Plus = local pay + kuch extra perks.</div>
-<h3>Quick recap (Unit III)</h3>
-<h3>Package parts</h3>
-<ul>
+</ul><div class="note"><b>Hinglish samajh:</b> Balance sheet = ghar jaisi lifestyle ka hisaab. Going rate = jahan ja rahe ho wahan ka rate. Local Plus = local pay + kuch extra perks.</div><h3>Quick recap (Unit III)</h3><h3>Package parts</h3><ul>
 <li><b>Base salary</b> (foundation, home or local currency).</li>
 <li><b>Foreign service premium + hardship</b>: usually 5-40% of base.</li>
 <li><b>Allowances</b>: cost-of-living, housing, home leave, education, relocation, spouse assistance.</li>
 <li><b>Benefits</b>: health, pension/social security (portability is hard; TCNs worst off), insurance.</li>
 <li><b>Leave</b>: home leave, R&amp;R, emergency.</li>
-</ul>
-<h3>Three approaches</h3>
-<ul>
+</ul><h3>Three approaches</h3><ul>
 <li><b>Going rate</b> (host pay): equal to locals, simple; but pay varies by country, re-entry shock.</li>
 <li><b>Balance sheet</b> (home pay, most used): 'keep expatriate whole'. Outlays: goods &amp; services, housing, taxes, reserve. Fair across postings, easy re-entry; but disparities and complex.</li>
 <li><b>Local Plus</b> (host pay + some perks): cheap, flexible, no COLA/tax equalisation; but <span class="red">retention risk</span>.</li>
-</ul>
-<ul>
+</ul><ul>
 <li>Policies: Full International, Expat Lite, Local Plus, Localisation, One-way transfer.</li>
 <li><b>Tax</b>: equalisation (most common), protection, ad hoc, laissez-faire.</li>
-<li>Match pay to staffing: ethnocentric &rarr; keep whole; geocentric &rarr; international base pay in USD/EUR.</li>
-</ul>
-<h3>Variables influencing MNC pay</h3>
-<ul>
+<li>Match pay to staffing: ethnocentric → keep whole; geocentric → international base pay in USD/EUR.</li>
+</ul><h3>Variables influencing MNC pay</h3><ul>
 <li>Internal: strategy, culture, size, internationalisation, structure.</li>
 <li>External: culture, laws, unions, labour market, industry, cost of living, currency.</li>
 <li>Choices: job vs skill, individual vs group, hierarchical vs egalitarian, standardise vs localise.</li>
-</ul>
-<div class="tip">Exam favourite: compare going rate vs balance sheet, then add Local Plus as the new third option.</div>
-
-<h2 id="u4">Unit IV - Industrial Relations &amp; Trends (full notes)</h2>
-<figure class="pol l"><svg viewBox="0 0 156 128"><path d="M24 112V62l22 12V62l22 12V62l22 12V50h44v62z" fill="#b9a58a" stroke="#333" stroke-width="2"/><rect x="112" y="26" width="12" height="26" fill="#8a7860" stroke="#333" stroke-width="2"/><path d="M118 22c-6-8 6-12 0-18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><g fill="#ffe9a8" stroke="#333" stroke-width="1.5"><rect x="34" y="88" width="12" height="12"/><rect x="62" y="88" width="12" height="12"/><rect x="92" y="74" width="12" height="12"/></g><path d="M12 112V40" stroke="#333" stroke-width="3"/><path d="M12 40h38v18H12z" fill="#c4302b" stroke="#333" stroke-width="2"/><text x="31" y="54" text-anchor="middle" font-size="13" font-family="Caveat,cursive" fill="#fff">UNION</text></svg><figcaption>labour meets the MNE</figcaption></figure>
-<h3>4.1 Comparative industrial relations</h3>
-<ul>
+</ul><div class="tip">Exam favourite: compare going rate vs balance sheet, then add Local Plus as the new third option.</div></details></section>
+<section class="dest" id="u4" style="--c:var(--blue)"><div class="side"><span class="tagline">Destination 4</span><h2>Unit IV: Unions, Law and Trends</h2>
+<div class="win"><svg viewbox="0 0 170 226"><path d="M14 190V110l32 18v-18l32 18v-18l32 18V92h44v98z" fill="#b9a58a" stroke="#14213d" stroke-width="3"></path><rect fill="#8a7860" height="30" stroke="#14213d" stroke-width="3" width="16" x="128" y="62"></rect><path d="M136 56c-8-10 8-14 0-24" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="7"></path><path d="M30 190V50" stroke="#14213d" stroke-width="4"></path><path d="M30 50h60v28H30z" fill="#e5484d" stroke="#14213d" stroke-width="3"></path><text fill="#fff" font-family="Fredoka,sans-serif" font-size="18" text-anchor="middle" x="60" y="71">UNION</text></svg></div>
+<button aria-pressed="false" class="stampbtn" data-k="4">Stamp this unit</button></div>
+<div class="tags">
+<details class="tag" open=""><summary>Comparative industrial relations</summary><div>Concepts differ by country (collective bargaining in the USA is local; in Germany and Sweden it is industry-wide). Union types: <b>industrial, craft, conglomerate, general, enterprise</b>. Density is high in Sweden, Denmark, Norway and low in France and the USA; OECD average fell from 18.8% to 16.9% (2005-2013).</div></details>
+<details class="tag"><summary>MNE industrial relations policy</summary><div>IR is usually delegated, but HQ steps in more with high production integration, US ownership, young or strategic subsidiaries, poor performance and anti-union attitudes. The type of MNE matters, not multinationality itself.</div></details>
+<details class="tag"><summary>How unions limit MNEs</summary><div><ul><li>Four limits: <b>wages, employment levels, global integration, campaigns</b></li><li>Kennedy's concerns: huge finances, alternative supply, mobility, remote HQ, many industries, IR expertise, <b>investment strike</b></li></ul></div></details>
+<details class="tag"><summary>Union responses and global bodies</summary><div>International trade secretariats (limited success), lobbying for laws, regulation through the <b>ILO</b> and <b>OECD Guidelines</b> (chapeau clause, Badger case), and corporate campaigns (James Hardie). Transnational bargaining stays remote.</div></details>
+<details class="tag"><summary>Regional integration: the EU</summary><div>Rome 1957, Social Charter 1989, Single Market 1992, 2004 enlargement, Lisbon 2009. Worry: <b>social dumping</b>, a race to the bottom on labour costs.</div></details>
+<details class="tag"><summary>Emerging trends</summary><div><ul><li><b>Codes of conduct</b> (SA 8000; Rana Plaza showed weak enforcement)</li><li><b>Offshoring</b>: India (high turnover), China (guanxi), nearshoring</li><li><b>Ethics</b>: relativism vs absolutism vs universalism; bribery laws (FCPA, OECD)</li><li>Safety, security and counter-terrorism now sit with HR</li></ul><span class="hint">Add class notes on framework agreements and employee involvement.</span></div></details>
+</div><details class="full-notes" id="full-notes-u4"><summary>Open complete Unit IV semester notes + quick recaps</summary><h2 id="full-u4">Unit IV - Industrial Relations &amp; Trends (full notes)</h2><figure class="pol l"><svg viewbox="0 0 156 128"><path d="M24 112V62l22 12V62l22 12V62l22 12V50h44v62z" fill="#b9a58a" stroke="#333" stroke-width="2"></path><rect fill="#8a7860" height="26" stroke="#333" stroke-width="2" width="12" x="112" y="26"></rect><path d="M118 22c-6-8 6-12 0-18" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"></path><g fill="#ffe9a8" stroke="#333" stroke-width="1.5"><rect height="12" width="12" x="34" y="88"></rect><rect height="12" width="12" x="62" y="88"></rect><rect height="12" width="12" x="92" y="74"></rect></g><path d="M12 112V40" stroke="#333" stroke-width="3"></path><path d="M12 40h38v18H12z" fill="#c4302b" stroke="#333" stroke-width="2"></path><text fill="#fff" font-family="Caveat,cursive" font-size="13" text-anchor="middle" x="31" y="54">UNION</text></svg><figcaption>labour meets the MNE</figcaption></figure><h3>4.1 Comparative industrial relations</h3><ul>
 <li>Concepts shift across countries. <b>Collective bargaining</b>: USA = local union vs management; Sweden and Germany = employers' organisation vs industry union. Goals differ too: many European unions see class struggle, US unions are pragmatic. Enforceability varies.</li>
 <li>IR mirrors society's history and power relations. Poole's causes of union differences: technology and industry organisation, state regulation of unions, ideological splits, religion, managers' labour strategies.</li>
 <li>Union types: <b>industrial</b> (all grades in an industry), <b>craft</b> (skilled trades across industries), <b>conglomerate</b> (many industries), <b>general</b> (almost all employees), <b>enterprise</b> (one firm; Japan, Asia-Pacific).</li>
 <li>Density (OECD): Sweden, Denmark, Norway highest; France, USA, Korea low; OECD average 18.8% (2005) to 16.9% (2013). Reasons: less public and manufacturing jobs, more competition, decentralised bargaining, law changes, globalised production.</li>
 <li>Case, Hyundai in China: union was a branch of the plant's Party committee (100% membership, weak). Result: hybrid practice - labour-intensive, team-based, flat, one-year contracts - vs automated, centralised, strong-union Korea.</li>
-</ul>
-<h3>4.2 MNE IR policy</h3>
-<ul>
+</ul><h3>4.2 MNE IR policy</h3><ul>
 <li>IR is usually delegated to subsidiaries but HQ co-ordinates because deals set precedents. HQ involvement rises with: <b>production integration</b>, <b>US ownership</b> (more centralised), <b>IHRM approach</b> (ethnocentric = more conflict), <b>prior experience</b> (Europe industry-level, US firm-level), <b>subsidiary traits</b> (acquisitions freer than greenfield; young, strategic, HQ-funded or poor performers controlled), <b>home market</b> size, and <b>management attitude</b> (US union avoidance).</li>
 <li>MNE subsidiaries in Britain had similar strike frequency but larger, longer strikes (Hamill): <span class="hl">type of MNE matters, not multinationality</span>.</li>
-</ul>
-<h3>4.3 Unions and MNEs</h3>
-<ul>
+</ul><h3>4.3 Unions and MNEs</h3><ul>
 <li>4 limits on MNEs: (1) wage levels, (2) varying employment (closure and redundancy law), (3) blocking global integration (GM matched investment in Germany to please the union; costs ~15% above optimal), (4) campaigns.</li>
 <li><b>Kennedy's 7 union worries</b>: huge finances, alternative supply, ability to move production, remote head office, many industries, IR expertise, <b>investment strike</b>. Unions also struggle to reach foreign decision-makers and financial data.</li>
-</ul>
-<h3>4.4 Global unions and responses</h3>
-<ul>
+</ul><h3>4.4 Global unions and responses</h3><ul>
 <li><b>International trade secretariats (ITS)</b>: loose world links of national unions per trade; share information; aim at transnational bargaining via research, company conferences, company councils, company-wide talks, co-ordinated bargaining. Limited success: MNEs pay well, resist, labour is divided, laws differ.</li>
 <li><b>Lobbying for national laws</b> to stop job export (AFL-CIO): mostly failed.</li>
 <li><b>International bodies</b>: ETUC lobbies ILO, UNCTAD, OECD, EU. ILO principles: freedom of association, bargaining, no forced labour, non-discrimination; ILO Tripartite Declaration 1977; <b>OECD Guidelines 1976</b> (voluntary). <b>Chapeau clause</b>: employers read it as local law first, unions as a supplement. <b>Badger case</b>: Raytheon's Belgian unit closed; OECD said parent shares responsibility. National Contact Points follow up; 2011 update added human rights and supply chains.</li>
 <li><b>Corporate campaigns</b>: unions ally with NGOs, churches, governments; example James Hardie asbestos campaign (boycott, shareholder pressure, inquiry). UN Global Compact reflects this.</li>
 <li>Transnational bargaining is a remote possibility (Enderwick). Unions should strengthen plant and company bargaining, research MNE weak spots, consolidate ITS work.</li>
-</ul>
-<h3>4.5 Regional integration - EU</h3>
-<ul>
+</ul><h3>4.5 Regional integration - EU</h3><ul>
 <li>Social dimension covers labour law, conditions, training, social security, pensions. Milestones: Treaty of Rome 1957; Council of Europe Social Charter 1965; Single European Act 1987 leading to the Single Market (31 Dec 1992); Community Charter of Workers' Social Rights 1989; Treaty of Lisbon 2009 (binding Charter of Fundamental Rights, non-discrimination, right to information and collective action).</li>
 <li>Supporters: social justice. Critics: 'social engineering'.</li>
 <li><b>Social dumping</b> ('race to the bottom'): firms shift to low-cost states or workers accept pay cuts; sharper after the 2004 enlargement and 2009 crisis. APEC is the Asia-Pacific parallel.</li>
-</ul>
-<div class="fig"><svg viewBox="0 0 400 224"><path class="ln" d="M20 112h360"/><circle class="fl" cx="40" cy="112" r="9"/><circle class="fl" cx="120" cy="112" r="9"/><circle class="fl" cx="200" cy="112" r="9"/><circle class="fl" cx="280" cy="112" r="9"/><circle class="rl" cx="360" cy="112" r="9"/><text class="rt" x="14" y="84">1957</text><text x="2" y="62" style="font-size:17px">Rome</text><text class="rt" x="94" y="152">1989</text><text x="70" y="174" style="font-size:17px">Social Charter</text><text class="rt" x="174" y="84">1992</text><text x="150" y="62" style="font-size:17px">Single Market</text><text class="rt" x="254" y="152">2004</text><text x="236" y="174" style="font-size:17px">10 new members</text><text class="rt" x="334" y="84">2009</text><text x="326" y="62" style="font-size:17px">Lisbon</text></svg></div>
-<h3>4.6 Emerging trends</h3>
-<ul>
+</ul><div class="fig"><svg viewbox="0 0 400 224"><path class="ln" d="M20 112h360"></path><circle class="fl" cx="40" cy="112" r="9"></circle><circle class="fl" cx="120" cy="112" r="9"></circle><circle class="fl" cx="200" cy="112" r="9"></circle><circle class="fl" cx="280" cy="112" r="9"></circle><circle class="rl" cx="360" cy="112" r="9"></circle><text class="rt" x="14" y="84">1957</text><text style="font-size:17px" x="2" y="62">Rome</text><text class="rt" x="94" y="152">1989</text><text style="font-size:17px" x="70" y="174">Social Charter</text><text class="rt" x="174" y="84">1992</text><text style="font-size:17px" x="150" y="62">Single Market</text><text class="rt" x="254" y="152">2004</text><text style="font-size:17px" x="236" y="174">10 new members</text><text class="rt" x="334" y="84">2009</text><text style="font-size:17px" x="326" y="62">Lisbon</text></svg></div><h3>4.6 Emerging trends</h3><ul>
 <li><b>Codes of conduct</b>: rules showing core values, key in supply chains (Nike, Levi's, Adidas faced child-labour and safety charges). SA 8000 is the universal standard. Rana Plaza (2013, 1,100+ dead) showed weak enforcement. HR role: draft and review codes, cost-benefit of compliance, train staff and partners, link reward to compliance. Degussa is the book's example.</li>
 <li><b>NGOs</b>: Greenpeace, Oxfam, BRAC, Red Cross shape MNEs; their HR needs are under-researched.</li>
 <li><b>Offshoring</b>: moves work (call centres, software, R&amp;D) abroad and IR to a third party. India: strong BPO, but 20-80% turnover, 10-20% yearly pay rises, social ties and caste affect HR. China: guanxi, 'iron rice bowl' past, poaching, weak pay-performance link. <b>Nearshoring</b> to Czech Republic, Hungary, Poland. EU data rules limit data offshoring. HR roles (CIPD): consult unions, redeploy staff, communicate, spot training needs, design jobs, flag legal risk. Returning ex-host nationals can turn brain drain into brain gain.</li>
 <li><b>Ethics</b>: relativism (do as locals do), absolutism (home rules everywhere), universalism (some global principles). Bribery: FCPA 1977, OECD Convention in force 1999, UK Bribery Act 2010. Siemens: US$800m US fine, 395m euro German fine, ~2.5bn euro total. HR adds ethics to selection and training.</li>
 <li><b>Safety and security</b>: audit emergency readiness, facility security, espionage and theft, cyber-terrorism, travel and fire risks. Strategy depends on firm risk and place risk.</li>
 <li><b>Employee involvement</b>: the book only touches it: Ford's early policy, German works councils and co-determination, participative goal-setting in Germany and Sweden vs assigned goals in the USA. Add class-note points for framework agreements and fuller involvement.</li>
-</ul>
-<div class="note"><b>Hinglish samajh:</b> Unions MNE ki taakat se darte hain, isliye ILO/OECD, campaigns aur EU rules ka sahara lete hain. Aaj ke trends: codes of conduct, offshoring aur ethics.</div>
-<h3>Quick recap (Unit IV)</h3>
-<h3>Comparative IR</h3>
-<ul>
+</ul><div class="note"><b>Hinglish samajh:</b> Unions MNE ki taakat se darte hain, isliye ILO/OECD, campaigns aur EU rules ka sahara lete hain. Aaj ke trends: codes of conduct, offshoring aur ethics.</div><h3>Quick recap (Unit IV)</h3><h3>Comparative IR</h3><ul>
 <li>Hard to compare: 'collective bargaining' means different things (US local vs Germany/Sweden industry-level). History shapes systems.</li>
 <li>Union types: <b>industrial, craft, conglomerate, general, enterprise</b> (Japan).</li>
-<li>Union density: Sweden/Denmark/Norway high; France, USA low; OECD avg 18.8% (2005) &rarr; 16.9% (2013).</li>
+<li>Union density: Sweden/Denmark/Norway high; France, USA low; OECD avg 18.8% (2005) → 16.9% (2013).</li>
 <li>HQ control of IR rises with: production integration, US ownership, young/strategic/dependent subsidiary, poor performance, anti-union attitude.</li>
-</ul>
-<h3>Unions vs MNEs</h3>
-<ul>
+</ul><h3>Unions vs MNEs</h3><ul>
 <li>Constrain through: <b>wages, employment levels, global integration, campaigns</b>.</li>
 <li>Kennedy's 7 worries: big finances, alternative supply, can move production, remote authority, many industries, IR expertise, investment strike.</li>
 <li>Responses: <b>trade secretariats (ITS)</b>, lobbying for laws, <b>ILO/OECD</b> rules (OECD guidelines 1976, Badger case), corporate campaigns (James Hardie).</li>
 <li>Transnational bargaining = remote possibility.</li>
-</ul>
-<h3>Regional integration - EU</h3>
-<ul>
-<li>Rome 1957 &rarr; Single Market 1992 &rarr; Social Charter 1989 &rarr; Lisbon 2009.</li>
+</ul><h3>Regional integration - EU</h3><ul>
+<li>Rome 1957 → Single Market 1992 → Social Charter 1989 → Lisbon 2009.</li>
 <li><span class="hl">Social dumping</span> = 'race to the bottom' on labour cost, worse after 2004 enlargement.</li>
-</ul>
-<div class="note"><b>Check class notes:</b> the book has no separate section on global framework agreements or employee involvement. Add your teacher's points there.</div>
-<h3>Emerging trends</h3>
-<ul>
+</ul><div class="note"><b>Check class notes:</b> the book has no separate section on global framework agreements or employee involvement. Add your teacher's points there.</div><h3>Emerging trends</h3><ul>
 <li><b>Codes of conduct</b> (SA 8000, Rana Plaza 2013 showed weak enforcement), <b>NGOs</b>.</li>
 <li><b>Offshoring</b>: India (BPO, 20-80% turnover), China (guanxi, iron rice bowl), nearshoring to Central Europe.</li>
 <li><b>Ethics</b>: relativism vs absolutism vs universalism; bribery (FCPA 1977, OECD 1999, Siemens case).</li>
 <li>Safety, security, counter-terrorism now part of HR's job.</li>
-</ul>
-
-<h2 id="cards">Flashcards - tap to flip</h2>
-<div class="cards">
+</ul></details></section>
+<section class="dest notes-hub" id="full-notes"><h2>Cabin Library: Revision Tools</h2><p>Everything from the separate notes notebook is integrated here, alongside the original aeroplane-style destinations and passport. Open a destination above for its detailed notes, or use these quick revision tools.</p><h3 id="integrated-cards">Flashcards — tap to flip</h3><div class="cards">
 <button class="card" type="button"><span class="q">Morgan's 3 dimensions of IHRM?</span><span class="a">HR activities x countries (host, parent, other) x employee types (HCN, PCN, TCN)</span></button>
 <button class="card" type="button"><span class="q">Why do firms use PCNs?</span><span class="a">Control, co-ordination, HQ values, special skills, assured compliance</span></button>
 <button class="card" type="button"><span class="q">Top cause of expatriate failure?</span><span class="a">Spouse / family or the manager cannot adjust, plus poor selection</span></button>
@@ -660,290 +593,69 @@ body{font-family:'Kalam','Segoe Print',cursive}
 <button class="card" type="button"><span class="q">Social dumping?</span><span class="a">'Race to the bottom': work moves to low-cost states or workers accept pay cuts</span></button>
 <button class="card" type="button"><span class="q">Emic vs etic?</span><span class="a">Emic = culture-specific; etic = culture-common (universal)</span></button>
 <button class="card" type="button"><span class="q">Ethical relativism?</span><span class="a">'When in Rome, do as the Romans do'; no universal right and wrong</span></button>
-</div>
-<h2 id="quiz">Self-test - think, then tap</h2>
-<ul>
+</div><h3 id="integrated-self-test">Self-test — think, then reveal</h3><ul>
 <li><details><summary>Name the 6 factors that make IHRM more complex.</summary><p>More activities, broader perspective, personal-life involvement, changing PCN/HCN mix, risk exposure, external influences.</p></details></li>
 <li><details><summary>Compare ethnocentric and polycentric staffing.</summary><p>Ethno: PCNs, HQ control, but blocks HCNs. Poly: HCNs run units, cheap and stable, but the firm becomes a federation.</p></details></li>
 <li><details><summary>List 6 expatriate selection factors.</summary><p>Technical ability, cross-cultural suitability, family, country rules, MNE needs, language.</p></details></li>
 <li><details><summary>Going rate vs balance sheet?</summary><p>Going rate uses host pay and equals locals; balance sheet uses home pay to keep the expatriate whole.</p></details></li>
 <li><details><summary>4 ways unions limit MNEs?</summary><p>Wage levels, employment levels, global integration, campaigns.</p></details></li>
 <li><details><summary>Why is offshoring an HR issue?</summary><p>Turnover, skill shortages, culture and language, control, plus consulting unions and redeploying staff.</p></details></li>
-</ul>
-<h2 id="rev">Last-minute revision</h2>
-<ul>
-<li>I: Morgan's 3 dimensions &middot; 6 factors &middot; 5 moderators.</li>
-<li>II: EPRG &middot; failure causes &middot; selection model &middot; 5 performance variables.</li>
-<li>III: package &middot; going rate / balance sheet / Local Plus &middot; tax equalisation.</li>
-<li>IV: 4 union constraints &middot; Kennedy's 7 &middot; ILO/OECD &middot; EU social dimension &middot; offshoring.</li>
-</ul>
-<div class="note"><b>Poora course ek line mein:</b> sahi log lao (staffing), perform karwao, sahi pay do, aur unions-laws-culture ke saath tal-mel rakho.</div>
+</ul><h3 id="integrated-revision">Last-minute revision</h3><ul>
+<li>I: Morgan's 3 dimensions · 6 factors · 5 moderators.</li>
+<li>II: EPRG · failure causes · selection model · 5 performance variables.</li>
+<li>III: package · going rate / balance sheet / Local Plus · tax equalisation.</li>
+<li>IV: 4 union constraints · Kennedy's 7 · ILO/OECD · EU social dimension · offshoring.</li>
+</ul><div class="note"><b>Poora course ek line mein:</b> sahi log lao (staffing), perform karwao, sahi pay do, aur unions-laws-culture ke saath tal-mel rakho.</div></section><section class="pp" id="pp"><h2>Your passport</h2><p>Stamp each unit as you finish revising it.</p>
+<div class="slots" id="slots"></div><p class="score" id="ptxt"></p></section>
+<section class="quiz" id="quiz"><h2 style="margin-bottom:16px">Boarding quiz</h2><div class="q" id="qbox"></div></section>
 </main>
-<button class="tool" id="top" type="button" aria-label="Back to top">&uarr;</button>
+<footer><div class="air"></div>Built from Dowling, Festing &amp; Engle, International Human Resource Management (7th ed.) · IMBA 9th Semester</footer>
 <script>
 (function(){
-var r=document.documentElement;
-function st(a,k,v){try{if(v===undefined)return a.getItem(k);a.setItem(k,v)}catch(e){return null}}
-var t=st(localStorage,'ihrm-theme');if(t)r.setAttribute('data-theme',t);
-document.getElementById('theme').onclick=function(){
- var dark=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);
- var n=dark?'light':'dark';r.setAttribute('data-theme',n);st(localStorage,'ihrm-theme',n)};
-var boxes=document.querySelectorAll('#prog input');
-function upd(){var c=0;boxes.forEach(function(b){if(b.checked)c++});
- document.getElementById('fill').style.width=(c*25)+'%';
- document.getElementById('ptxt').textContent=c===4?'All 4 units revised. Great work!':c+' of 4 units revised';
- var dp=document.getElementById('dashProgress');if(dp)dp.textContent=c+'/4';}
-boxes.forEach(function(b){b.checked=st(localStorage,'ihrm-'+b.dataset.k)==='1';
- b.onchange=function(){st(localStorage,'ihrm-'+b.dataset.k,b.checked?'1':'0');upd()}});
-upd();
-document.querySelectorAll('.card').forEach(function(c){c.onclick=function(){c.classList.toggle('on')}});
-
-var search=document.getElementById('noteSearch'), status=document.getElementById('searchstatus');
-var searchable=Array.from(document.querySelectorAll('main h2[id], main h3, main p, main li, main .note, main .tip, main .eq, main .card, main details'));
-var unitSections=['u1','u2','u3','u4'].map(function(id){return document.getElementById(id)}).filter(Boolean);
-var topicCount=document.querySelectorAll('main h3').length;
-var dt=document.getElementById('dashTopics');if(dt)dt.textContent=topicCount;
-function applySearch(){
- var q=(search.value||'').trim().toLowerCase(), shown=0;
- searchable.forEach(function(el){
-   var hit=!q||el.textContent.toLowerCase().includes(q);
-   el.classList.toggle('search-hidden',!hit);
-   if(hit&&q)shown++;
- });
- // Keep section headings visible when a matching descendant exists.
- unitSections.forEach(function(sec){
-   if(!sec)return;
-   var matches=sec.querySelectorAll(':scope h3:not(.search-hidden), :scope li:not(.search-hidden), :scope p:not(.search-hidden), :scope .note:not(.search-hidden), :scope .tip:not(.search-hidden), :scope .eq:not(.search-hidden), :scope details:not(.search-hidden)');
-   sec.classList.toggle('search-hidden',!!q&&matches.length===0);
- });
- status.textContent=q?(shown+' matching note blocks for “'+q+'”. Clear search to see everything.'): 'Showing all notes. Search a concept to find it fast.';
-}
-if(search)search.addEventListener('input',applySearch);
-document.getElementById('continueBtn').onclick=function(){
- var last=st(localStorage,'ihrm-last-unit')||'u1';var target=document.getElementById(last)||document.getElementById('u1');
- if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
-};
-unitSections.forEach(function(sec){if(sec){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)st(localStorage,'ihrm-last-unit',e.target.id)})},{threshold:.25});obs.observe(sec)}});
-
-document.getElementById('top').onclick=function(){scrollTo({top:0,behavior:'smooth'})};
-var rp=document.getElementById('rp');
-addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;rp.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
+var d=document,r=d.documentElement;
+function S(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var t=S('air-theme');if(t)r.setAttribute('data-theme',t);
+d.getElementById('th').onclick=function(){var dk=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);var n=dk?'light':'dark';r.setAttribute('data-theme',n);S('air-theme',n)};
+var f=d.getElementById('fill'),pn=d.getElementById('pn'),tr=d.querySelector('.track');
+function sc(){var m=r.scrollHeight-r.clientHeight,p=m>0?r.scrollTop/m:0,w=tr.clientWidth;f.style.width=(p*100)+'%';pn.style.left=Math.max(19,Math.min(w-19,p*w))+'px'}
+addEventListener('scroll',sc,{passive:true});addEventListener('resize',sc);sc();
+var cols=['#ffc83d','#1fa77f','#e5484d','#2f6fd0'],names=['I','II','III','IV'],st={};
+var sl=d.getElementById('slots');
+names.forEach(function(n,i){var s=d.createElement('div');s.className='slot';s.dataset.k=i+1;
+s.innerHTML='<span>Unit '+n+'</span><svg viewBox="0 0 120 120"><g fill="none" stroke="'+cols[i]+'" stroke-width="5"><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="44" stroke-width="2"/></g><text x="60" y="52" text-anchor="middle" font-family="Fredoka,sans-serif" font-size="15" fill="'+cols[i]+'">VISITED</text><text x="60" y="84" text-anchor="middle" font-family="Fredoka,sans-serif" font-size="30" fill="'+cols[i]+'">'+n+'</text></svg>';sl.appendChild(s)});
+function pt(){var c=0;for(var k in st)if(st[k])c++;d.getElementById('ptxt').textContent=c===4?'Fully stamped. Ready for take-off!':c+' of 4 stamps collected'}
+d.querySelectorAll('.stampbtn').forEach(function(b){var k=b.dataset.k;st[k]=S('air-s'+k)==='1';
+function ap(){b.setAttribute('aria-pressed',st[k]);b.textContent=st[k]?'Stamped':'Stamp this unit';d.querySelector('.slot[data-k="'+k+'"]').classList.toggle('on',st[k]);pt()}
+ap();b.onclick=function(){st[k]=!st[k];S('air-s'+k,st[k]?'1':'0');ap()}});
+var Q=[['Which staffing approach keeps PCNs in key posts and decisions at HQ?',['Ethnocentric','Polycentric','Geocentric'],0],
+['A TCN is a citizen of...',['The HQ country','The host country','Neither HQ nor host country'],2],
+['The balance sheet approach aims to...',['Match local pay','Keep the expatriate whole','Cut all allowances'],1],
+['The most common international tax policy is...',['Tax equalisation','Laissez-faire','Ad hoc'],0],
+['An investment strike is one of Kennedy\'s worries. It means...',['Workers stop work','The MNE stops investing so a plant becomes obsolete','Unions buy shares'],1]];
+var qi=0,sc2=0,box=d.getElementById('qbox');
+function show(){if(qi>=Q.length){box.innerHTML='<h3>Landed!</h3><p class="score">You scored '+sc2+' / '+Q.length+'</p><button class="btn" id="rs" type="button">Fly again</button>';d.getElementById('rs').onclick=function(){qi=0;sc2=0;show()};return}
+var q=Q[qi];box.innerHTML='<h3>Q'+(qi+1)+'. '+q[0]+'</h3>';
+q[1].forEach(function(o,i){var b=d.createElement('button');b.className='opt';b.type='button';b.textContent=o;b.onclick=function(){
+box.querySelectorAll('.opt').forEach(function(x){x.disabled=true});
+if(i===q[2]){b.classList.add('ok');sc2++}else{b.classList.add('no');box.querySelectorAll('.opt')[q[2]].classList.add('ok')}
+setTimeout(function(){qi++;show()},1100)};box.appendChild(b)})}
+show();
+// Search headings and note blocks without hiding course content.
+var search=d.getElementById('noteSearch'),results=d.getElementById('searchResults'),lastHit=null;
+function clearHits(){d.querySelectorAll('.search-hit').forEach(function(x){x.classList.remove('search-hit')});lastHit=null}
+function runSearch(){clearHits();var term=(search.value||'').trim().toLowerCase();if(!term){results.textContent='Search the full notes, all four units, flashcards and revision tools.';return}
+var nodes=Array.from(d.querySelectorAll('main h2,main h3,main h4,main summary,main li,main .note,main .hint,main .card'));
+var hits=nodes.filter(function(el){return el.textContent.toLowerCase().includes(term)}).slice(0,30);
+results.textContent=hits.length?hits.length+' matching result(s) shown (maximum 30). Select a result to jump to it.':'No matches found. Try a shorter keyword.';
+if(hits.length){var list=d.createElement('div');list.className='result-list';hits.forEach(function(el,i){var a=d.createElement('button');a.type='button';a.className='result-item';a.textContent=(i+1)+'. '+el.textContent.trim().replace(/\s+/g,' ').slice(0,110);a.addEventListener('click',function(){clearHits();el.classList.add('search-hit');lastHit=el;el.scrollIntoView({behavior:'smooth',block:'center'});if(el.tagName==='SUMMARY'&&el.parentElement.tagName==='DETAILS')el.parentElement.open=true;});list.appendChild(a)});results.appendChild(list)} }
+search.addEventListener('input',function(){runSearch()});
+d.getElementById('searchClear').onclick=function(){search.value='';clearHits();results.textContent='Search cleared. All notes remain visible.';search.focus()};
+d.getElementById('expandAll').onclick=function(){d.querySelectorAll('main details').forEach(function(x){x.open=true})};
+d.getElementById('collapseAll').onclick=function(){d.querySelectorAll('main details').forEach(function(x){x.open=false})};
+d.getElementById('printPage').onclick=function(){window.print()};
+d.getElementById('toTop').onclick=function(){d.getElementById('top').scrollIntoView({behavior:'smooth'})};
+results.textContent='Search the full notes, all four units, flashcards and revision tools.';
 })();
 </script>
-
-<style>
-#ihrmQuizLauncher{position:fixed;left:16px;bottom:18px;z-index:9998;border:0;border-radius:999px;padding:12px 16px;background:#173d8f;color:#fff;font:700 14px system-ui;box-shadow:0 5px 22px #0003;cursor:pointer}
-#ihrmQuiz{position:fixed;inset:0;z-index:9999;background:#101827a8;display:none;align-items:center;justify-content:center;padding:14px;font:15px/1.5 system-ui;color:#172033}
-#ihrmQuiz.open{display:flex}#ihrmQuiz .iq-card{background:#fffef8;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:20px;padding:22px;box-shadow:0 20px 70px #0005}
-#ihrmQuiz .iq-top{display:flex;justify-content:space-between;gap:12px;align-items:center}#ihrmQuiz h2{margin:0;color:#173d8f}
-#ihrmQuiz button,#ihrmQuiz select{font:inherit;cursor:pointer;border-radius:10px;border:1px solid #ccd3df;padding:9px 12px;background:white;color:#172033}
-#ihrmQuiz .iq-primary{background:#173d8f;color:white;border-color:#173d8f}#ihrmQuiz .iq-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
-#ihrmQuiz .iq-tabs button.active{background:#173d8f;color:#fff}#ihrmQuiz .iq-meta{color:#5b6474;font-size:13px}
-#ihrmQuiz .iq-option{display:block;width:100%;text-align:left;margin:8px 0;padding:12px!important;background:#fff;border:1px solid #d8deea!important}
-#ihrmQuiz .iq-option.correct{border-color:#16834a!important;background:#e8f8ee!important}#ihrmQuiz .iq-option.wrong{border-color:#bd3434!important;background:#fff0f0!important}
-#ihrmQuiz .iq-feedback{padding:12px;border-radius:12px;background:#edf3ff;margin-top:12px}#ihrmQuiz .iq-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
-#ihrmQuiz .iq-progress{height:7px;background:#e3e7ef;border-radius:99px;overflow:hidden;margin:12px 0}#ihrmQuiz .iq-progress span{display:block;height:100%;background:#1b8752;width:0}
-#ihrmQuiz .iq-answer{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccd3df;border-radius:10px;font:inherit}
-@media(max-width:520px){#ihrmQuiz .iq-card{padding:16px}#ihrmQuizLauncher{left:10px;bottom:10px}}
-</style>
-<button id="ihrmQuizLauncher" type="button" aria-haspopup="dialog" aria-controls="ihrmQuiz">✈ Practice & MCQs</button>
-<div id="ihrmQuiz" role="dialog" aria-modal="true" aria-labelledby="iqTitle">
- <div class="iq-card">
-  <div class="iq-top"><div><h2 id="iqTitle">IHRM Air · Practice Deck</h2><div class="iq-meta">Practice from the Unit I–IV course themes</div></div><button id="iqClose" aria-label="Close practice">✕</button></div>
-  <div class="iq-tabs" role="tablist"><button data-mode="mcq" class="active">MCQs</button><button data-mode="tf">True / False</button><button data-mode="short">Short answer</button><button data-mode="cards">Flashcards</button></div>
-  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label for="iqUnit">Unit:</label><select id="iqUnit"><option value="all">All units</option><option value="I">Unit I · Foundations</option><option value="II">Unit II · Staffing & performance</option><option value="III">Unit III · Compensation</option><option value="IV">Unit IV · Industrial relations</option></select><button id="iqRestart">Restart / Shuffle</button></div>
-  <div class="iq-progress"><span id="iqBar"></span></div><div class="iq-meta" id="iqStatus" aria-live="polite">Ready to practise</div>
-  <div id="iqBody" style="margin-top:12px"></div>
-  <div class="iq-actions"><button class="iq-primary" id="iqNext">Next question →</button><button id="iqReveal">Reveal answer</button></div>
-  <div id="iqResult" class="iq-feedback" hidden></div>
-  <p class="iq-meta">Study aid, not an official exam paper. Check every answer against your course notes; short answers are self-assessed.</p>
- </div>
-</div>
-<script>
-(function(){
-const bank=[
-{u:'I',q:'Which three dimensions are associated with Morgan’s definition of international HRM in these notes?',o:['HR activities, employee categories, countries of operation','Recruitment, training, retirement','Home country, host country, third country only','Culture, law, technology only'],a:0,e:'The course summary highlights Morgan’s three dimensions: HR activities, employee categories and countries of operation.'},
-{u:'I',q:'Which is a common reason international HRM is more complex than domestic HRM?',o:['It removes cultural differences','It involves multiple national contexts and employee groups','It uses no local laws','It eliminates coordination'],a:1,e:'International operations must account for multiple country contexts and employee categories.'},
-{u:'I',q:'Which is best treated as a contextual influence on international HRM?',o:['Host-country culture and institutions','The colour of a company logo','A random page number','A personal favourite subject'],a:0,e:'Culture and institutional context shape international HR practices.'},
-{u:'I',q:'A multinational company needs to balance global consistency with local responsiveness. This is primarily a challenge of:',o:['International HR coordination','Office decoration','Payroll arithmetic only','Product packaging only'],a:0,e:'MNEs coordinate policies across countries while adapting to local requirements.'},
-{u:'I',q:'Which statement best describes a multinational enterprise (MNE)?',o:['A firm operating only within one town','A firm with business operations across national borders','A government department only','A firm that never hires employees'],a:1,e:'MNEs conduct business across more than one country.'},
-{u:'II',q:'In the EPRG framework, ethnocentric staffing generally prioritises:',o:['Host-country nationals for all key roles','Parent-country nationals for key positions','Only third-country nationals','No international transfers'],a:1,e:'Ethnocentric staffing commonly places parent-country nationals in key positions.'},
-{u:'II',q:'Polycentric staffing generally relies most on:',o:['Host-country nationals to manage local subsidiaries','Parent-country nationals in every role','External auditors as managers','No local employees'],a:0,e:'Polycentric staffing uses host-country nationals to run subsidiaries.'},
-{u:'II',q:'Geocentric staffing aims to select people primarily based on:',o:['Nationality alone','Best fit and capability regardless of nationality','Only the lowest salary','Family connections'],a:1,e:'Geocentric staffing seeks the best person for the role across nationalities.'},
-{u:'II',q:'Which can contribute to expatriate assignment failure?',o:['Cross-cultural adjustment difficulties','Clear role expectations always','Adequate family support','Strong preparation'],a:0,e:'Adjustment difficulties, family issues and inadequate preparation can contribute to failure.'},
-{u:'II',q:'Which is a sensible expatriate selection consideration?',o:['Technical ability and cross-cultural suitability','Favourite colour','Nationality as the only criterion','Ignoring family circumstances'],a:0,e:'The notes identify technical ability, cross-cultural suitability, family, country rules, MNE needs and language.'},
-{u:'II',q:'Performance management in an international assignment should consider:',o:['Only the home-country manager’s opinion','Context, objectives and multiple performance influences','Only the employee’s passport','No feedback'],a:1,e:'International performance is influenced by contextual factors as well as individual results.'},
-{u:'III',q:'The going-rate approach to expatriate compensation mainly benchmarks pay against:',o:['Host-country/local market rates','The employee’s old home salary only','A random global average','No market information'],a:0,e:'The going-rate approach uses host-country pay levels and local comparators.'},
-{u:'III',q:'The balance-sheet approach is designed mainly to:',o:['Keep the expatriate’s purchasing power and home-country living standard broadly whole','Pay every employee identically worldwide','Remove all allowances','Pay only in the host currency without adjustment'],a:0,e:'The approach typically protects the employee against assignment-related changes in living costs and purchasing power.'},
-{u:'III',q:'Local Plus compensation generally means:',o:['Local host-country pay with selected expatriate benefits','Only home-country salary with no benefits','No salary during assignment','A universal fixed salary for every country'],a:0,e:'Local Plus combines local pay with selected additional benefits.'},
-{u:'III',q:'Tax equalisation is intended to:',o:['Make assignment tax impact broadly comparable to what the employee would have paid at home','Eliminate all taxes legally','Increase taxes without calculation','Replace employment contracts'],a:0,e:'Tax equalisation aims to neutralise differences in tax burden for the employee, subject to policy and law.'},
-{u:'III',q:'Which may form part of an expatriate compensation package?',o:['Base salary, allowances and benefits','Only a company slogan','Only office furniture','No benefits or support'],a:0,e:'Packages can include salary, allowances, benefits and assignment-related support.'},
-{u:'IV',q:'Which is a way unions can constrain multinational management?',o:['Influencing wage and employment levels','Choosing the company logo only','Removing all national labour laws','Guaranteeing identical laws everywhere'],a:0,e:'The course revision notes identify wage levels, employment levels, global integration and campaigns.'},
-{u:'IV',q:'The ILO is primarily associated with:',o:['International labour standards and decent work','Setting all company product prices','Managing every MNE directly','Issuing passports'],a:0,e:'The International Labour Organization focuses on labour standards and decent work.'},
-{u:'IV',q:'Why can offshoring create HR challenges?',o:['It may affect turnover, skills, culture, language and employee relations','It guarantees no employee impact','It removes the need for communication','It always eliminates training needs'],a:0,e:'Offshoring can raise issues involving people, skills, communication, control and unions.'},
-{u:'IV',q:'Which is a useful response when a multinational restructures work across borders?',o:['Communicate, consult relevant stakeholders and plan redeployment where appropriate','Ignore local law','Avoid all employee communication','Assume all countries have identical labour systems'],a:0,e:'Consultation, legal compliance and workforce planning help manage cross-border change.'}
-];
-const tf=[
-{u:'I',q:'International HRM deals only with employees who are sent abroad.',a:false,e:'It also covers local employees, multiple employee categories and HR activity across countries.'},
-{u:'I',q:'Culture and national institutions can influence HR policies.',a:true,e:'National contexts can affect employment practices and expectations.'},
-{u:'II',q:'Polycentric staffing generally gives host-country nationals important subsidiary leadership roles.',a:true,e:'That is the core idea of polycentric staffing.'},
-{u:'II',q:'Ethnocentric staffing always guarantees expatriate success.',a:false,e:'Staffing orientation does not guarantee success; selection, preparation and context matter.'},
-{u:'III',q:'The going-rate approach uses host-country market pay as a reference.',a:true,e:'It benchmarks against local market rates.'},
-{u:'III',q:'Tax equalisation means employees never pay tax.',a:false,e:'It seeks to equalise the employee’s tax burden, not abolish tax.'},
-{u:'IV',q:'Offshoring can raise questions about skills, turnover and employee relations.',a:true,e:'These are among the HR issues identified in the course revision notes.'},
-{u:'IV',q:'Labour law and union influence are identical in every country.',a:false,e:'National labour institutions and union environments vary.'}
-];
-const shorts=[
-{u:'I',q:'Name the three dimensions in Morgan’s IHRM framework.',a:'HR activities; employee categories; countries of operation.'},
-{u:'II',q:'What is the key difference between ethnocentric and polycentric staffing?',a:'Ethnocentric prioritises parent-country nationals for key roles; polycentric relies on host-country nationals to manage local subsidiaries.'},
-{u:'II',q:'Give three factors to consider when selecting an expatriate.',a:'Examples from the notes: technical ability, cross-cultural suitability, family, country rules, MNE needs and language.'},
-{u:'III',q:'Distinguish the going-rate and balance-sheet approaches.',a:'Going-rate benchmarks host-country/local pay; balance-sheet aims to preserve the expatriate’s home-country purchasing power and living standard.'},
-{u:'III',q:'What is the purpose of tax equalisation?',a:'To make the assignment tax impact broadly comparable to what the employee would have paid at home.'},
-{u:'IV',q:'List two ways unions may constrain MNEs.',a:'Examples: wage levels, employment levels, global integration and campaigns.'},
-{u:'IV',q:'Give three HR challenges linked to offshoring.',a:'Examples: turnover, skills shortages, culture/language, control, union consultation and redeployment.'}
-];
-const flash=[
-{u:'I',q:'Morgan’s three IHRM dimensions',a:'HR activities · employee categories · countries of operation'},
-{u:'II',q:'EPRG staffing orientations',a:'Ethnocentric · Polycentric · Regiocentric · Geocentric'},
-{u:'II',q:'Six expatriate selection considerations in the notes',a:'Technical ability · cross-cultural suitability · family · country rules · MNE needs · language'},
-{u:'III',q:'Going-rate vs balance-sheet',a:'Going-rate: host-country/local pay benchmark. Balance-sheet: aims to preserve home-country purchasing power/living standard.'},
-{u:'III',q:'Local Plus',a:'Local host-country pay plus selected expatriate benefits.'},
-{u:'III',q:'Tax equalisation',a:'A policy intended to make assignment tax impact broadly comparable to the employee’s home-country tax burden.'},
-{u:'IV',q:'Four union constraints listed in the notes',a:'Wage levels · employment levels · global integration · campaigns'},
-{u:'IV',q:'Offshoring: HR issue checklist',a:'Turnover · skill shortages · culture/language · control · union consultation · redeployment'}
-];
-const $=id=>document.getElementById(id);let mode='mcq',items=[],idx=0,score=0,answered=false,seen=0;
-function pool(){return mode==='mcq'?bank:mode==='tf'?tf:mode==='short'?shorts:flash}
-function reset(){let unit=$('iqUnit').value;items=pool().filter(x=>unit==='all'||x.u===unit).sort(()=>Math.random()-.5);idx=0;score=0;seen=0;render()}
-function render(){answered=false;$('iqResult').hidden=true;$('iqNext').textContent=mode==='cards'?'Show answer →':'Next question →';$('iqReveal').style.display=mode==='mcq'||mode==='tf'?'none':'inline-block';
-$('iqBar').style.width=(items.length?idx/items.length*100:0)+'%';
-$('iqStatus').textContent=items.length?'Question '+Math.min(idx+1,items.length)+' of '+items.length+' · Score '+score+'/'+seen:'No items for this unit.';
-if(idx>=items.length){$('iqBody').innerHTML='<h3>Practice complete ✈</h3><p>You scored <b>'+score+' / '+seen+'</b> on auto-marked questions.</p><p>Review the explanations and revisit any weak unit.</p>'; $('iqNext').textContent='Try again';$('iqReveal').style.display='none';$('iqBar').style.width='100%';return}
-const x=items[idx];let h='<div class="iq-meta">UNIT '+x.u+'</div><h3>'+x.q+'</h3>';
-if(mode==='mcq'){h+='<div>'+x.o.map((v,i)=>'<button class="iq-option" data-i="'+i+'">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div>'}
-else if(mode==='tf'){h+='<div><button class="iq-option" data-i="true">True</button><button class="iq-option" data-i="false">False</button></div>'}
-else if(mode==='short'){h+='<textarea class="iq-answer" id="iqTyped" rows="3" placeholder="Write your answer in your own words…"></textarea>'}
-else{h+='<p class="iq-meta">Try to recall the answer before revealing it.</p>'}
-$('iqBody').innerHTML=h;
-$('iqBody').querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>check(b));
-}
-function feedback(ok,msg){$('iqResult').hidden=false;$('iqResult').innerHTML='<b>'+(ok?'Correct ✓':'Review this')+'</b><br>'+msg}
-function check(btn){if(answered)return;answered=true;seen++;const x=items[idx];let ok=false;if(mode==='mcq'){ok=Number(btn.dataset.i)===x.a;$('iqBody').querySelectorAll('[data-i]').forEach(b=>{if(Number(b.dataset.i)===x.a)b.classList.add('correct');else if(b===btn)b.classList.add('wrong');b.disabled=true})}else{ok=btn.dataset.i===String(x.a);$('iqBody').querySelectorAll('[data-i]').forEach(b=>{if(b.dataset.i===String(x.a))b.classList.add('correct');else if(b===btn)b.classList.add('wrong');b.disabled=true})}if(ok)score++;feedback(ok,x.e);$('iqStatus').textContent='Question '+(idx+1)+' of '+items.length+' · Score '+score+'/'+seen}
-function reveal(){const x=items[idx];if(mode==='short'){feedback(false,'Suggested answer: '+x.a+' — compare it with your own response.');seen++;answered=true}else if(mode==='cards'){feedback(false,x.a);answered=true}else if(mode==='tf'||mode==='mcq'){feedback(false,'Answer: '+(mode==='tf'?(x.a?'True':'False'):String.fromCharCode(65+x.a)+'. '+x.o[x.a])+'. '+x.e);answered=true}}
-$('ihrmQuizLauncher').onclick=()=>{$('ihrmQuiz').classList.add('open');reset();$('iqClose').focus()};
-$('iqClose').onclick=()=>{$('ihrmQuiz').classList.remove('open')};
-$('ihrmQuiz').addEventListener('click',e=>{if(e.target===$('ihrmQuiz'))$('ihrmQuiz').classList.remove('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('ihrmQuiz').classList.remove('open')});
-document.querySelectorAll('#ihrmQuiz [data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('#ihrmQuiz [data-mode]').forEach(x=>x.classList.toggle('active',x===b));reset()});
-$('iqUnit').onchange=reset;$('iqRestart').onclick=reset;$('iqReveal').onclick=reveal;
-$('iqNext').onclick=()=>{if(idx>=items.length){reset();return}if(!answered&&(mode==='mcq'||mode==='tf')){feedback(false,'Choose an answer or reveal the answer before moving on.');return}if(!answered&&(mode==='short'||mode==='cards'))reveal();else{idx++;render()}};
-reset();
-})();
-</script>
-
-
-<div id="ihrmAgentDock">
-  <button id="ihrmAgentToggle" type="button" aria-controls="ihrmAgentPanel" aria-expanded="false">✦ Study Agents</button>
-</div>
-<section id="ihrmAgentPanel" role="dialog" aria-modal="false" aria-labelledby="iaTitle" aria-hidden="true">
-  <div class="ia-head"><h2 id="iaTitle">IHRM Agent Crew</h2><button class="ia-close" id="iaClose" type="button" aria-label="Close study agents">Close</button></div>
-  <p class="ia-sub">Choose a specialist and give it a task. Agents use the notes already loaded in this study hub.</p>
-  <div class="ia-grid" role="group" aria-label="Choose an agent">
-    <button class="ia-agent active" type="button" data-agent="coach"><strong>Study Coach</strong><span>Build a focused study plan</span></button>
-    <button class="ia-agent" type="button" data-agent="explain"><strong>Concept Explainer</strong><span>Find and explain note passages</span></button>
-    <button class="ia-agent" type="button" data-agent="exam"><strong>Exam Setter</strong><span>Generate practice questions</span></button>
-    <button class="ia-agent" type="button" data-agent="flash"><strong>Flashcard Maker</strong><span>Turn headings into recall cards</span></button>
-    <button class="ia-agent" type="button" data-agent="revision"><strong>Revision Planner</strong><span>Structure a revision session</span></button>
-    <button class="ia-agent" type="button" data-agent="navigator"><strong>Notes Navigator</strong><span>Find relevant topics in the notes</span></button>
-  </div>
-  <label class="ia-label" for="iaPrompt">What do you want help with?</label>
-  <textarea id="iaPrompt" placeholder="Example: Explain the EPRG framework or make a 30-minute revision plan."></textarea>
-  <div class="ia-actions"><button class="ia-btn" id="iaRun" type="button">Run selected agent</button></div>
-  <div id="iaOutput" role="status" aria-live="polite">Select an agent and enter a task to begin.</div>
-  <p class="ia-status">Study-agent mode: browser-local, grounded in this page’s notes. Live LLM responses require a secure server/API connection.</p>
-</section>
-
-<script id="ihrm-agent-runtime">
-(function(){
-  const $ = id => document.getElementById(id);
-  const panel = $('ihrmAgentPanel'), toggle = $('ihrmAgentToggle'), prompt = $('iaPrompt'), output = $('iaOutput');
-  if(!panel || !toggle || !prompt || !output) return;
-  let selected = 'coach';
-  const roleButtons = [...document.querySelectorAll('.ia-agent')];
-  const roleNames = {coach:'Study Coach',explain:'Concept Explainer',exam:'Exam Setter',flash:'Flashcard Maker',revision:'Revision Planner',navigator:'Notes Navigator'};
-  toggle.addEventListener('click',()=>{
-    const open = panel.classList.toggle('open');
-    toggle.setAttribute('aria-expanded',String(open));
-    panel.setAttribute('aria-hidden',String(!open));
-    if(open) prompt.focus();
-  });
-  $('iaClose').addEventListener('click',()=>{
-    panel.classList.remove('open');toggle.setAttribute('aria-expanded','false');panel.setAttribute('aria-hidden','true');toggle.focus();
-  });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape' && panel.classList.contains('open')) $('iaClose').click();});
-  roleButtons.forEach(btn=>btn.addEventListener('click',()=>{
-    selected=btn.dataset.agent;
-    roleButtons.forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
-    output.textContent=roleNames[selected]+' selected. Enter a task and run the agent.';
-  }));
-  function safeText(el){return (el?.innerText||el?.textContent||'').replace(/\s+/g,' ').trim();}
-  function getUnit(text){
-    const m=(text+' '+prompt.value).match(/\bunit\s*(iv|iii|ii|i|4|3|2|1)\b/i);
-    if(!m)return null;
-    return ({i:'u1',ii:'u2',iii:'u3',iv:'u4',1:'u1',2:'u2',3:'u3',4:'u4'})[m[1].toLowerCase()]||null;
-  }
-  function courseArea(text){
-    const unitId=getUnit(text);
-    if(unitId){const el=document.getElementById(unitId);if(el)return el;}
-    return document.querySelector('.sheet')||document.querySelector('main')||document.body;
-  }
-  function linesFor(text){
-    const area=courseArea(text);
-    return (area.innerText||area.textContent||'').split(/\n+/).map(s=>s.replace(/\s+/g,' ').trim()).filter(s=>s.length>18 && s.length<420);
-  }
-  function termsFor(text){
-    return (text.toLowerCase().match(/[a-z][a-z-]{3,}/g)||[]).filter(w=>!['about','please','make','with','from','that','this','explain','create','give','help','need','want','unit','notes','topic','what','when','where','have','into','your','study','agent','revision'].includes(w));
-  }
-  function relevantLines(text,limit=6){
-    const lines=linesFor(text), terms=termsFor(text);
-    const scored=lines.map((line,i)=>({line,i,score:terms.reduce((n,t)=>n+(line.toLowerCase().includes(t)?1:0),0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.i-b.i);
-    const seen=new Set();return scored.filter(x=>{const k=x.line.toLowerCase();if(seen.has(k))return false;seen.add(k);return true;}).slice(0,limit).map(x=>x.line);
-  }
-  function headings(text){
-    const unitId=getUnit(text), root=unitId?document.getElementById(unitId):(document.querySelector('.sheet')||document);
-    return [...root.querySelectorAll('h2,h3,h4,strong')].map(safeText).filter(t=>t.length>3&&t.length<110&&!/^(unit [ivx]+|ihrm semester notes)$/i.test(t)).filter((t,i,a)=>a.indexOf(t)===i).slice(0,18);
-  }
-  function run(){
-    const task=prompt.value.trim();
-    if(!task){output.textContent='Please enter a topic, question, or study goal first.';prompt.focus();return;}
-    const source=relevantLines(task,7), hs=headings(task), unit=getUnit(task);
-    const unitLabel=unit?('Unit '+({u1:'I',u2:'II',u3:'III',u4:'IV'}[unit])):'all available notes';
-    let result='';
-    if(selected==='coach'){
-      result='STUDY COACH · '+unitLabel+'\n\n1. Start by reading the most relevant note headings below.\n2. Explain each concept aloud without looking.\n3. Write a short answer from memory.\n4. Test yourself with the platform quiz.\n5. Revisit anything you could not explain clearly.';
-      if(source.length)result+='\n\nFOCUS FROM YOUR NOTES\n• '+source.slice(0,4).join('\n• ');
-      result+='\n\nTask: '+task;
-    }else if(selected==='explain'){
-      result='CONCEPT EXPLAINER · '+unitLabel+'\n\nI found these matching passages in the loaded notes. Use them as the source before expanding your answer:\n\n'+(source.length?source.map((s,i)=>(i+1)+'. '+s).join('\n\n'):'No close text match was found. Try the exact concept or a key term from your notes.')+'\n\nFor an exam answer, define the concept, explain its main elements, and add an example only where your course notes support it.';
-    }else if(selected==='exam'){
-      const topics=(hs.length?hs:source.slice(0,8)).slice(0,8);
-      result='EXAM SETTER · Practice set\n\nSHORT ANSWER\n'+(topics.slice(0,4).map((t,i)=>(i+1)+'. Define or briefly explain '+t+'.').join('\n')||'1. Define the key concept in your selected topic.')+'\n\nLONG ANSWER\n'+(topics.slice(4,7).map((t,i)=>(i+1)+'. Discuss '+t+' with suitable examples from the notes.').join('\n')||'1. Discuss the main ideas, implications and limitations of the selected topic.')+'\n\nUse the existing Quiz for auto-marked MCQs and true/false questions.';
-    }else if(selected==='flash'){
-      const topics=(hs.length?hs:source.slice(0,8)).slice(0,8);
-      result='FLASHCARD MAKER · Active recall\n\n'+(topics.length?topics.map((t,i)=>'CARD '+(i+1)+'\nFront: What should you remember about '+t+'?\nBack: Review the matching section in your notes and state its definition, key points and one supported example.').join('\n\n'):'No headings found for this request. Try specifying a unit or a concept title.')+'\n\nTip: answer each front before opening your notes.';
-    }else if(selected==='revision'){
-      const m=task.match(/(\d{1,3})\s*(?:min|minute|minutes|m)\b/i), minutes=Math.max(15,Math.min(240,m?Number(m[1]):45));
-      const a=Math.round(minutes*.5),b=Math.round(minutes*.3),c=minutes-a-b;
-      result='REVISION PLANNER · '+minutes+' minutes\n\n'+a+' min — Review the relevant notes and mark the core definitions/frameworks.\n'+b+' min — Practise closed-book answers and attempt quiz questions.\n'+c+' min — Check weak areas, correct mistakes and summarise from memory.\n\nSuggested focus:\n• '+(source.slice(0,4).join('\n• ')||hs.slice(0,4).join('\n• ')||'Select one unit and identify its main headings.')+'\n\nKeep the final few minutes for active recall, not rereading.';
-    }else{
-      result='NOTES NAVIGATOR · Search results\n\n'+(source.length?source.map((s,i)=>(i+1)+'. '+s).join('\n\n'):'No close matches found. Try a distinctive phrase or a shorter keyword.')+'\n\nSearch scope: '+unitLabel+'.';
-    }
-    output.textContent=result;
-  }
-  $('iaRun').addEventListener('click',run);
-  prompt.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')run();});
-})();
-</script>
-
-</body>
+<script>(function(){document.querySelectorAll('.card').forEach(function(c){c.setAttribute('aria-pressed','false');c.addEventListener('click',function(){var on=c.classList.toggle('on');c.setAttribute('aria-pressed',String(on));});});})();</script></body>
 </html>
