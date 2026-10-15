@@ -233,7 +233,34 @@ button:disabled{cursor:not-allowed;opacity:.7}
 section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 @media(max-width:600px){.top-actions{padding:0 10px 10px;gap:6px}.top-actions a{font-size:12px;min-height:38px;padding:6px 9px}}
 
-</style></head>
+</style><style>
+/* Agentic Study Crew — adapted specialist-role architecture from agency-agents */
+.agent-lab{margin:34px 0 18px;padding:24px;background:var(--card);border:3px solid var(--mint);border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.13)}
+.agent-lab h2{font-family:'Fredoka',sans-serif;color:var(--ink);text-decoration:none;font-size:clamp(28px,5vw,38px);line-height:1.15;margin:0 0 8px}
+.agent-intro{color:var(--mute);margin:0 0 18px}
+.agent-roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:14px 0 18px}
+.agent-card{background:var(--bg);border:2px solid transparent;border-radius:14px;padding:12px;text-align:left;color:var(--ink);cursor:pointer;font:inherit;line-height:1.35}
+.agent-card strong{display:block;font-family:'Fredoka',sans-serif;font-size:17px;margin-bottom:4px}
+.agent-card small{color:var(--mute);font-size:13px}
+.agent-card[aria-pressed="true"]{border-color:var(--mint);box-shadow:inset 0 0 0 1px var(--mint)}
+.agent-controls{display:grid;gap:10px}
+.agent-controls label{font-weight:700}
+.agent-controls textarea{width:100%;min-height:94px;resize:vertical;border:2px solid var(--mute);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);font:inherit}
+.agent-actions{display:flex;flex-wrap:wrap;gap:8px}
+.agent-actions .btn{padding:8px 14px}
+.agent-actions .run{background:var(--mint);border-color:var(--mint);color:#06281f}
+.agent-output{margin-top:18px;padding:16px;border-radius:14px;background:var(--bg);min-height:90px;overflow-wrap:anywhere}
+.agent-output h3{font-family:'Fredoka',sans-serif;color:var(--ink);font-size:22px;margin:0 0 10px}
+.agent-output p{margin:8px 0}
+.agent-output ul,.agent-output ol{margin:8px 0;padding-left:24px}
+.agent-output li{margin:5px 0}
+.agent-output li::before{content:none}
+.agent-status{font-size:13px;color:var(--mute);margin-top:10px}
+.agent-output .agent-chip{display:inline-block;border-radius:99px;background:var(--mint);color:#06281f;font-size:12px;font-weight:700;padding:3px 9px;margin:0 4px 6px 0}
+@media(max-width:520px){.agent-lab{padding:16px}.agent-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-actions .btn{flex:1 1 auto}}
+@media print{.agent-lab{break-inside:avoid}.agent-controls,.agent-roster{display:none}}
+</style>
+</head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
 <header class="top"><div class="bar"><a class="logo" href="#top">IHRM<b>Air</b></a><nav aria-label="Sections" class="links"><a href="#u1">I</a><a href="#u2">II</a><a href="#u3">III</a><a href="#u4">IV</a><a href="#pp">Passport</a><a href="#quiz">Quiz</a><button class="btn" id="th" type="button">Theme</button></nav></div>
@@ -246,6 +273,32 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 <div class="stub"><div>PASSENGER<b>IMBA 9th Sem</b></div><div>COURSE<b>IMBA18914DCE</b></div><div>BOOK<b>Dowling, Festing &amp; Engle</b></div></div></div></section>
 <main>
 <div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div></div>
+
+<section class="agent-lab" id="agentic-study-crew" aria-labelledby="agentCrewTitle">
+  <span class="tagline" style="--c:var(--mint)">AGENCY-AGENTS INSPIRED</span>
+  <h2 id="agentCrewTitle">Agentic Study Crew</h2>
+  <p class="agent-intro">Choose a specialist, give it a task, or run a coordinated study workflow. The agents work against the IHRM notes already on this page and keep your study material in your browser.</p>
+  <div class="agent-roster" role="group" aria-label="Choose a specialist agent">
+    <button class="agent-card" type="button" data-agent="coach" aria-pressed="true"><strong>🧭 Study Coach</strong><small>Chooses the next useful study action</small></button>
+    <button class="agent-card" type="button" data-agent="explainer" aria-pressed="false"><strong>💡 Concept Explainer</strong><small>Finds course material and explains it</small></button>
+    <button class="agent-card" type="button" data-agent="exam" aria-pressed="false"><strong>📝 Exam Setter</strong><small>Builds practice questions from notes</small></button>
+    <button class="agent-card" type="button" data-agent="flashcards" aria-pressed="false"><strong>🗂 Flashcard Maker</strong><small>Creates revision cards from course cards</small></button>
+    <button class="agent-card" type="button" data-agent="planner" aria-pressed="false"><strong>🗓 Revision Planner</strong><small>Turns your goal into a short plan</small></button>
+    <button class="agent-card" type="button" data-agent="navigator" aria-pressed="false"><strong>🔎 Notes Navigator</strong><small>Finds matching headings and notes</small></button>
+  </div>
+  <div class="agent-controls">
+    <label for="agentTask">What should your agents do?</label>
+    <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
+    <div class="agent-actions">
+      <button class="btn run" id="runAgent" type="button">Run selected agent</button>
+      <button class="btn" id="runAgentTeam" type="button">Run team workflow</button>
+      <button class="btn" id="clearAgentOutput" type="button">Clear output</button>
+    </div>
+  </div>
+  <div class="agent-output" id="agentOutput" aria-live="polite" role="status"><h3>Ready for take-off</h3><p>Select a specialist and enter a study task. The team workflow runs the navigator, explainer and exam setter in sequence.</p></div>
+  <p class="agent-status">Mode: browser-based specialist agents · No API key needed · No external AI model is called from this public static site.</p>
+</section>
+
 <section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
 <div class="win"><svg viewbox="0 0 170 226"><circle cx="85" cy="92" fill="#4f9be8" r="46" stroke="#14213d" stroke-width="3"></circle><path d="M60 78c10-10 20-2 17 8s-14 9-17-8zM90 100c12-7 24 3 16 14s-19 4-16-14z" fill="#59b36b"></path><g stroke="#14213d" stroke-width="3"><circle cx="38" cy="176" fill="#e5484d" r="9"></circle><path d="M38 185v18M26 194h24" fill="none"></path><circle cx="85" cy="184" fill="#ffc83d" r="9"></circle><path d="M85 193v18M73 202h24" fill="none"></path><circle cx="132" cy="176" fill="#1fa77f" r="9"></circle><path d="M132 185v18M120 194h24" fill="none"></path></g></svg></div>
 <button aria-pressed="false" class="stampbtn" data-k="1">Stamp this unit</button></div>
@@ -658,5 +711,31 @@ results.textContent='Search the full notes, all four units, flashcards and revis
 })();
 </script>
 <script>(function(){document.querySelectorAll('.card').forEach(function(c){c.setAttribute('aria-pressed','false');c.addEventListener('click',function(){var on=c.classList.toggle('on');c.setAttribute('aria-pressed',String(on));});});})();</script><!-- IHRM-AIR deploy refresh: 2026-10-15T14:50Z -->
+
+<script>
+(function(){
+  'use strict';
+  var d=document, selected='coach';
+  var task=d.getElementById('agentTask'), out=d.getElementById('agentOutput');
+  if(!task||!out)return;
+  var roster={
+    coach:{name:'Study Coach',badge:'🧭',run:function(q){var unit=q.match(/unit\s*(i{1,3}|iv|[1-4])/i);var next=unit?('Open Unit '+unit[1].toUpperCase()+' and revise its key concepts first.'):'Start with Unit I (IHRM foundations), then move through staffing, compensation and industrial relations.';return {title:'Your next best study move',body:'<p>'+esc(next)+'</p><ol><li>Read one topic in the course notes.</li><li>Explain it aloud in your own words.</li><li>Answer two practice questions without looking.</li><li>Mark the weak point and revisit it.</li></ol><p><b>Coach focus:</b> '+esc(q||'Build understanding before memorising definitions.')+'</p>'}}},
+    explainer:{name:'Concept Explainer',badge:'💡',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('IHRM staffing expatriate compensation unions');return {title:'Course-grounded explanation',body:noteList(hits,5,'Relevant notes')+'<p><b>Study method:</b> define the concept, explain why it matters to an MNE, then add one example and one limitation. Use the source notes above as your anchor.</p>'}}},
+    exam:{name:'Exam Setter',badge:'📝',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('IHRM staffing expatriate compensation unions');var prompts=hits.slice(0,5).map(function(h,i){return '<li><b>'+(['Define and explain','Compare and contrast','Discuss with examples','Evaluate the advantages and limitations','Write a short note on'][i%5])+'</b> '+esc(h.text.slice(0,130))+'</li>'}).join('');return {title:'Practice paper — answer without notes',body:'<p>Attempt these as short-answer questions. Add a definition, 3–5 key points and a relevant example.</p><ol>'+prompts+'</ol><p><b>Self-check:</b> Did you define the term, use correct IHRM terminology, apply it to an MNE, and include a limitation or example?</p>'}}},
+    flashcards:{name:'Flashcard Maker',badge:'🗂',run:function(q){var cards=Array.from(d.querySelectorAll('main button.card')).filter(function(c){return !q||c.innerText.toLowerCase().includes(q.toLowerCase())||q.toLowerCase().split(/\s+/).some(function(w){return w.length>3&&c.innerText.toLowerCase().includes(w)})}).slice(0,8);if(!cards.length)cards=Array.from(d.querySelectorAll('main button.card')).slice(0,8);return {title:'Quick flashcard deck',body:cards.map(function(c){var a=c.querySelector('.a'),question=c.querySelector('.q');return '<details><summary>'+esc(question?question.innerText:c.innerText)+'</summary><p>'+esc(a?a.innerText:'Review this item in the notes.')+'</p></details>'}).join('')+'<p>Try to answer each prompt before opening its card.</p>'}}},
+    planner:{name:'Revision Planner',badge:'🗓',run:function(q){var hours=(q.match(/(\d+(?:\.\d+)?)\s*hours?/i)||[])[1];var days=(q.match(/(\d+)\s*days?/i)||[])[1];return {title:'Personal revision sprint',body:'<ol><li><b>Map (10% of time):</b> scan the four unit headings and identify weak topics.</li><li><b>Learn (35%):</b> revise one topic at a time and write a 3-line summary.</li><li><b>Retrieve (35%):</b> close the notes and answer questions from memory.</li><li><b>Repair (20%):</b> check mistakes, revisit the source notes, and retry.</li></ol><p><b>Goal received:</b> '+esc(q||'Revise all four units efficiently.')+'</p><p>'+ (hours?'Time available: '+esc(hours)+' hour(s). ': '')+(days?'Deadline: '+esc(days)+' day(s). ':'')+'Keep the final session for active recall, not rereading alone.</p>'}}},
+    navigator:{name:'Notes Navigator',badge:'🔎',run:function(q){var hits=findNotes(q);return {title:'Matching course material',body:hits.length?noteList(hits,12,'Search results'):'<p>No exact match was found. Try a shorter term such as “staffing”, “expatriate”, “compensation”, “unions” or “culture”.</p>'}}}
+  };
+  function esc(v){return String(v||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function findNotes(q){var terms=String(q||'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>2});var nodes=Array.from(d.querySelectorAll('main h2,main h3,main h4,main summary,main li,main .note,main .hint,main button.card'));var scored=nodes.map(function(el){var text=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();var low=text.toLowerCase();var score=terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0);return {el:el,text:text,score:score}}).filter(function(x){return x.score>0&&x.text.length>8});scored.sort(function(a,b){return b.score-a.score});var seen={};return scored.filter(function(x){var k=x.text.slice(0,100);if(seen[k])return false;seen[k]=true;return true}).slice(0,15)}
+  function noteList(hits,n,label){if(!hits.length)return '<p>No relevant course notes found.</p>';return '<p><span class="agent-chip">'+esc(label)+'</span></p><ul>'+hits.slice(0,n).map(function(h){var id=h.el.id;var parent=h.el.closest('section[id]');var target=id?'#'+id:(parent?'#'+parent.id:'');return '<li>'+(target?'<a href="'+esc(target)+'">':'')+esc(h.text.slice(0,260))+(target?'</a>':'')+'</li>'}).join('')+'</ul>'}
+  function render(agent,result){out.innerHTML='<h3>'+agent.badge+' '+esc(agent.name)+' · '+esc(result.title)+'</h3>'+result.body;out.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
+  d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
+  d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var nav=roster.navigator.run(q);var explain=roster.explainer.run(q);var exam=roster.exam.run(q);out.innerHTML='<h3>🤝 Coordinated agent workflow</h3><p><span class="agent-chip">1 · Navigator</span><span class="agent-chip">2 · Explainer</span><span class="agent-chip">3 · Exam Setter</span></p><details open><summary>Step 1 — Find relevant notes</summary>'+nav.body+'</details><details open><summary>Step 2 — Build understanding</summary>'+explain.body+'</details><details open><summary>Step 3 — Test retrieval</summary>'+exam.body+'</details><p class="agent-status">Workflow complete. Each specialist used the local IHRM study material; no external AI service was called.</p>';out.scrollIntoView({behavior:'smooth',block:'nearest'})});
+  d.getElementById('clearAgentOutput').addEventListener('click',function(){out.innerHTML='<h3>Ready for take-off</h3><p>Output cleared. Choose a specialist and enter a new task.</p>'});
+})();
+</script>
+
 </body>
 </html>
