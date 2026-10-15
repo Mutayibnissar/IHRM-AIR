@@ -1581,3 +1581,34 @@ header.top .nav-subbuttons{white-space:normal}
   .embedded-notes{padding:12px!important;font-size:15px;line-height:1.65}
 }
 </style>
+
+
+<style id="desktop-notes-two-column-correction">
+/* Correct desktop reading flow: let text and lists continue into the second column.
+   Only diagrams/tables span the full width; headings must not force each section into one long column. */
+@media(min-width:900px){
+  .embedded-notes{
+    column-count:2!important;
+    column-width:auto!important;
+    column-gap:38px!important;
+    column-fill:balance!important;
+  }
+  .embedded-notes h3,.embedded-notes h4{
+    column-span:none!important;
+    break-after:avoid-column;
+    page-break-after:avoid;
+  }
+  .embedded-notes p,.embedded-notes ul,.embedded-notes ol,.embedded-notes li{
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+  }
+  .embedded-notes figure,.embedded-notes .fig,.embedded-notes table{
+    column-span:all!important;
+    break-inside:avoid!important;
+  }
+  .embedded-notes .pol{float:none!important;width:min(176px,100%);margin:12px auto 20px!important}
+}
+@media(max-width:899px){
+  .embedded-notes{column-count:1!important}
+}
+</style>
