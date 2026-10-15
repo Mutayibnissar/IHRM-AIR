@@ -278,12 +278,67 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
 .local-model-foot{font-size:12px!important}
 </style>
 
+
+<style id="compact-study-crew-overrides">
+/* Keep the floating study helper small, fixed and out of the way. */
+.agent-widget-launcher{
+  right:12px!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  min-height:44px!important;padding:7px 11px!important;gap:7px!important;
+  border-radius:13px!important;box-shadow:0 4px 16px rgba(0,0,0,.2)!important
+}
+.agent-widget-launcher strong{font-size:13px!important}
+.agent-widget-launcher small,.agent-widget-pulse{display:none!important}
+.agent-widget-icon{width:28px!important;height:28px!important;flex-basis:28px!important;border-radius:9px!important;font-size:18px!important}
+.agent-lab#agentic-study-crew{
+  right:12px!important;bottom:calc(64px + env(safe-area-inset-bottom,0px))!important;
+  width:min(340px,calc(100vw - 24px))!important;
+  max-height:min(58vh,440px)!important;overflow-y:auto!important;
+  padding:12px!important;border-radius:15px!important;border-width:1px!important
+}
+.agent-widget-heading{margin-bottom:8px!important;gap:8px!important}
+.agent-widget-heading h2{font-size:21px!important}
+.agent-widget-subtitle{font-size:12px!important}
+.agent-widget-close{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:21px!important}
+.agent-lab#agentic-study-crew>.tagline,
+.agent-lab#agentic-study-crew .agent-intro,
+.agent-lab#agentic-study-crew .local-model-panel,
+.agent-lab#agentic-study-crew .gemini-connect,
+.agent-lab#agentic-study-crew #runLiveAI,
+.agent-lab#agentic-study-crew #runGeminiTeam,
+.agent-lab#agentic-study-crew #runLocalAI,
+.agent-lab#agentic-study-crew #runLocalAITeam,
+.agent-lab#agentic-study-crew #localModelTest,
+.agent-lab#agentic-study-crew #airCloudSignIn,
+.agent-lab#agentic-study-crew #airCloudSave,
+.agent-lab#agentic-study-crew #airCloudLoad,
+.agent-lab#agentic-study-crew #airCloudSignOut,
+.agent-lab#agentic-study-crew .agent-controls>.agent-status,
+.agent-lab#agentic-study-crew .agent-status{display:none!important}
+.agent-lab#agentic-study-crew .agent-roster{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin:8px 0!important}
+.agent-lab#agentic-study-crew .agent-card{padding:8px!important;border-radius:10px!important;font-size:12px!important}
+.agent-lab#agentic-study-crew .agent-card strong{font-size:12px!important;line-height:1.2!important}
+.agent-lab#agentic-study-crew .agent-card small{display:none!important}
+.agent-lab#agentic-study-crew .agent-card:nth-child(n+4){display:none!important}
+.agent-lab#agentic-study-crew .agent-controls{margin-top:8px!important}
+.agent-lab#agentic-study-crew .agent-controls>label{font-size:12px!important}
+.agent-lab#agentic-study-crew #agentTask{min-height:62px!important;max-height:88px!important;font-size:13px!important;padding:8px!important}
+.agent-lab#agentic-study-crew .agent-actions{gap:6px!important;margin-top:7px!important}
+.agent-lab#agentic-study-crew .agent-actions .btn{font-size:11px!important;padding:6px 8px!important}
+.agent-lab#agentic-study-crew .agent-output{max-height:18vh!important;overflow:auto!important;font-size:12px!important;padding:8px!important;margin-top:8px!important}
+.agent-lab#agentic-study-crew .agent-output h3{font-size:15px!important;margin:2px 0!important}
+.agent-lab#agentic-study-crew .agent-output p{font-size:12px!important;line-height:1.35!important}
+.agent-lab#agentic-study-crew .agent-controls .agent-actions #clearAgentOutput{display:none!important}
+@media(max-width:520px){
+ .agent-lab#agentic-study-crew{right:8px!important;bottom:calc(58px + env(safe-area-inset-bottom,0px))!important;width:calc(100vw - 16px)!important;max-height:55vh!important;padding:10px!important}
+}
+</style>
+
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
 <header class="top"><div class="bar"><a class="logo" href="#top">IHRM<b>Air</b></a><nav aria-label="Sections" class="links"><a href="#u1">I</a><a href="#u2">II</a><a href="#u3">III</a><a href="#u4">IV</a><a href="#pp">Passport</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a><button class="btn" id="th" type="button">Theme</button></nav></div>
 <div class="study-tools" aria-label="Study tools"><label for="noteSearch">⌕ <span class="sr-only">Search notes</span></label><input id="noteSearch" type="search" placeholder="Search all notes, topics or terms…" autocomplete="off"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button><div id="searchResults" role="status" aria-live="polite"></div>
-<div class="top-actions" aria-label="Main study navigation"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="full-notes.html">Full Unit Notes</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
+<div class="top-actions" aria-label="Main study navigation"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a><a href="#quiz">Quiz</a><a href="#agentic-study-crew">AI Crew</a></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
 <section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
 <div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
 <h1>Manage people <em>across borders</em></h1><p>Your complete IMBA International HRM flight deck: fly through the four destinations, open detailed semester notes, revise with flashcards, test yourself and stamp your passport as you progress.</p>
