@@ -67,6 +67,13 @@ input,select,textarea{max-width:100%;border-radius:10px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+
+/* Home page action-button reliability and tap targets */
+.primary,.tile a,.site-page-nav a,.logo{position:relative;z-index:2;pointer-events:auto;cursor:pointer}
+.primary,.tile a{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.tile a:focus-visible,.primary:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.tile{position:relative}
+@media(max-width:700px){.primary,.tile a{min-height:46px}.tile a{width:100%;justify-content:center}}
 </style><style id="unified-site-navigation">
 .site-nav-wrap{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap}
 .site-nav-toggle{display:none;align-items:center;gap:8px;padding:9px 13px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink);font:800 15px Arial,sans-serif;box-shadow:3px 3px 0 var(--ink);cursor:pointer}
@@ -111,6 +118,33 @@ input,select,textarea{max-width:100%;border-radius:10px}
  }catch(e){}
  var toggle=document.querySelector('.site-nav-toggle'),nav=document.getElementById('sitePageNav'),bar=toggle&&toggle.parentElement;
  if(toggle&&nav){var page=location.pathname.split('/').pop()||'index.html';nav.querySelectorAll('a[data-page]').forEach(function(a){if(a.dataset.page===page)a.setAttribute('aria-current','page')});toggle.addEventListener('click',function(){var open=bar.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('span').textContent=open?'Close menu':'Menu'});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bar.classList.contains('nav-open')){bar.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false');toggle.querySelector('span').textContent='Menu';toggle.focus()}})}
+})();
+</script>
+
+<script id="home-button-navigation-fix">
+(function(){
+ 'use strict';
+ var destinations={'index.html':'index.html','units.html':'units.html','practice.html':'practice.html','tools.html':'tools.html'};
+ document.querySelectorAll('a[href]').forEach(function(link){
+   var raw=link.getAttribute('href')||'';
+   var clean=raw.split('?')[0].split('#')[0];
+   if(clean.indexOf('./')===0)clean=clean.slice(2);
+   if(!destinations[clean])return;
+   link.style.pointerEvents='auto';
+   link.addEventListener('click',function(event){
+     if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+     event.preventDefault();
+     window.location.assign(new URL(destinations[clean],window.location.href).href);
+   });
+ });
+ var nav=document.getElementById('sitePageNav'),toggle=document.querySelector('.site-nav-toggle');
+ if(nav&&toggle)nav.querySelectorAll('a[href]').forEach(function(link){
+   link.addEventListener('click',function(){
+     var bar=toggle.parentElement;if(bar)bar.classList.remove('nav-open');
+     toggle.setAttribute('aria-expanded','false');
+     var label=toggle.querySelector('span');if(label)label.textContent='Menu';
+   });
+ });
 })();
 </script>
 
