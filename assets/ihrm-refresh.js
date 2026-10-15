@@ -66,6 +66,11 @@
     var target=nav||wrap;target.appendChild(theme);
   }
   if(theme){
+    /* Keep Menu and Dark/Light side by side; do not bury the theme control in the collapsed menu. */
+    if(wrap&&toggle&&theme.parentElement!==wrap){
+      wrap.insertBefore(theme,nav||null);
+      theme.classList.add('site-theme-toggle');
+    }
     function paintTheme(){
       var dark=root.getAttribute('data-theme')==='dark';
       if(theme.id==='siteThemeToggle'||theme.classList.contains('site-theme-toggle'))theme.innerHTML=dark?'☀️ <span>Light</span>':'🌙 <span>Dark</span>';
