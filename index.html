@@ -292,6 +292,19 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
       <strong>🔐 Secure AI connection</strong>
       <p id="geminiKeyStatus" class="agent-status" style="margin:.35rem 0 0">AI backend setup required once. Your API key will be stored as a server-side secret, never in this page.</p>
     </div>
+    <div class="gemini-connect" style="padding:14px;border:2px solid var(--blue);border-radius:14px;background:var(--bg)">
+      <strong>☁️ Study Cloud Sync (Supabase)</strong>
+      <p class="agent-status">Sign in with an email magic link to save your unit stamps, theme and saved study output to your private cloud snapshot.</p>
+      <label for="airCloudEmail">Email</label>
+      <input id="airCloudEmail" type="email" autocomplete="email" placeholder="you@example.com" style="width:100%;padding:10px;border:2px solid var(--mute);border-radius:10px;background:var(--card);color:var(--ink);font:inherit">
+      <div class="agent-actions" style="margin-top:8px">
+        <button class="btn" id="airCloudSignIn" type="button">Email me a sign-in link</button>
+        <button class="btn" id="airCloudSave" type="button">Save to cloud</button>
+        <button class="btn" id="airCloudLoad" type="button">Restore from cloud</button>
+        <button class="btn" id="airCloudSignOut" type="button">Sign out</button>
+      </div>
+      <p id="airCloudStatus" class="agent-status" aria-live="polite">Cloud sync requires Supabase project URL and publishable/anon key setup.</p>
+    </div>
     <label for="agentTask">What should your agents do?</label>
     <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
     <div class="agent-actions">
@@ -719,6 +732,58 @@ results.textContent='Search the full notes, all four units, flashcards and revis
 </script>
 <script>(function(){document.querySelectorAll('.card').forEach(function(c){c.setAttribute('aria-pressed','false');c.addEventListener('click',function(){var on=c.classList.toggle('on');c.setAttribute('aria-pressed',String(on));});});})();</script><!-- IHRM-AIR deploy refresh: 2026-10-15T14:50Z -->
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  // Replace these two public browser configuration values after creating your Supabase project.
+  var SUPABASE_URL='https://YOUR-PROJECT-REF.supabase.co';
+  var SUPABASE_ANON_KEY='YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
+  var configured=SUPABASE_URL.indexOf('YOUR-PROJECT-REF')===-1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_')===-1;
+  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+  window.airGetAccessToken=async function(){
+    if(!window.airSupabaseClient)return null;
+    var result=await window.airSupabaseClient.auth.getSession();
+    return result.data&&result.data.session?result.data.session.access_token:null;
+  };
+  var status=document.getElementById('airCloudStatus');
+  function msg(s){if(status)status.textContent=s}
+  if(!window.airSupabaseClient){msg('Not configured yet: add your Supabase URL and publishable/anon key in index.html.');return}
+  var client=window.airSupabaseClient;
+  client.auth.onAuthStateChange(function(event,session){
+    msg(session?'Signed in as '+session.user.email+'. Your snapshot is private to this account.':(event==='SIGNED_OUT'?'Signed out.':'Use email magic-link sign-in to enable cloud sync.'));
+  });
+  document.getElementById('airCloudSignIn').onclick=async function(){
+    var email=document.getElementById('airCloudEmail').value.trim();
+    if(!email){msg('Enter your email first.');return}
+    var r=await client.auth.signInWithOtp({email:email,options:{emailRedirectTo:location.origin+location.pathname}});
+    msg(r.error?'Sign-in email failed: '+r.error.message:'Magic link sent. Check your inbox, then return to this page.');
+  };
+  function snapshot(){
+    var data={schema:1,savedAt:new Date().toISOString(),study:{}};
+    try{Object.keys(localStorage).filter(function(k){return k.indexOf('air-')===0}).forEach(function(k){data.study[k]=localStorage.getItem(k)})}catch(e){}
+    var output=document.getElementById('agentOutput');
+    if(output)data.study['air-last-agent-output']=output.innerText;
+    return data;
+  }
+  document.getElementById('airCloudSave').onclick=async function(){
+    var token=await window.airGetAccessToken();if(!token){msg('Please sign in with the email link first.');return}
+    var userResult=await client.auth.getUser();var user=userResult.data.user;
+    if(!user){msg('Session unavailable. Sign in again.');return}
+    var result=await client.from('study_snapshots').upsert({user_id:user.id,snapshot:snapshot(),updated_at:new Date().toISOString()},{onConflict:'user_id'});
+    msg(result.error?'Save failed: '+result.error.message:'Study snapshot saved securely to your Supabase account.');
+  };
+  document.getElementById('airCloudLoad').onclick=async function(){
+    var token=await window.airGetAccessToken();if(!token){msg('Please sign in with the email link first.');return}
+    var result=await client.from('study_snapshots').select('snapshot').maybeSingle();
+    if(result.error){msg('Restore failed: '+result.error.message);return}
+    if(!result.data||!result.data.snapshot){msg('No cloud snapshot found for this account yet.');return}
+    var study=result.data.snapshot.study||{};
+    try{Object.keys(study).filter(function(k){return k.indexOf('air-')===0&&k!=='air-last-agent-output'}).forEach(function(k){localStorage.setItem(k,study[k])})}catch(e){}
+    msg('Snapshot restored. Reload the page to refresh unit stamps/theme. Saved output: '+(study['air-last-agent-output']?'available in cloud snapshot':'none'));
+  };
+  document.getElementById('airCloudSignOut').onclick=async function(){var r=await client.auth.signOut();msg(r.error?'Sign-out failed: '+r.error.message:'Signed out.')};
+})();
+</script>
 <script>
 (function(){
   'use strict';
@@ -760,13 +825,13 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     return scored.slice(0,12).map(function(x){return x.text}).join('\n\n').slice(0,12000);
   }
   async function callGemini(agentId,q,context){
-    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){
+    if(!API_BASE_URL||API_BASE_URL.includes('YOUR-PROJECT-REF')){
       throw new Error('The secure AI backend has not been connected yet. Deploy the Supabase Edge Function and set API_BASE_URL in index.html to its URL.');
     }
     var response=await fetch(API_BASE_URL+'/api/agent',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
+      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token}:{'Content-Type':'application/json'}})(),\n      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
     });
     var data;
     try{data=await response.json()}catch(_){throw new Error('The AI backend returned an invalid response. Check that the Worker is deployed correctly.')}
@@ -783,7 +848,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   async function runGeminiWorkflow(teamMode,button){
     var q=task.value.trim();
     if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
-    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Deploy the Supabase Edge Function, add GEMINI_API_KEY as a Supabase function secret, then set the function URL in index.html.</p>';return}
+    if(!API_BASE_URL||API_BASE_URL.includes('YOUR-PROJECT-REF')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Configure Supabase URL and anon key, sign in, deploy the Supabase Edge Function, add GEMINI_API_KEY as a Supabase function secret, then set the function URL in index.html.</p>';return}
     var oldText=button.textContent;button.disabled=true;button.textContent=teamMode?'Agents working…':'Thinking…';
     out.innerHTML='<h3>✈ Gemini agents are working</h3><p>Reading relevant course notes and generating an exam-focused response…</p>';
     try{
@@ -812,7 +877,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     }catch(err){
       out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
       var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach Gemini. Check your internet connection, key, API enablement, and quota.');out.appendChild(message);
-      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The Gemini key must be stored as a Supabase Edge Function secret. Check function deployment, GEMINI_API_KEY, allowed site origin, and Gemini API quota.';out.appendChild(hint);
+      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The Gemini key must be stored as a Supabase Edge Function secret. Check Supabase config, sign-in session, function deployment, GEMINI_API_KEY, allowed site origin, and Gemini API quota.';out.appendChild(hint);
     }finally{button.disabled=false;button.textContent=oldText}
   }
   d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
