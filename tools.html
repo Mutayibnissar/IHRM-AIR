@@ -2062,19 +2062,7 @@ finish.addEventListener('click',finishCurrent);
 $('resetExamStats').addEventListener('click',function(){if(!window.confirm('Reset your saved exam statistics on this device?'))return;writeStats({attempts:0,correct:0,best:0});updateStats()});
 updateStats();
 })();
-</script><script id="unified-site-navigation-controller">
-(function(){
- var wrap=document.querySelector('.site-nav-wrap'),toggle=document.querySelector('.site-nav-toggle'),nav=document.getElementById('sitePageNav');
- if(!wrap||!toggle||!nav)return;
- var page=location.pathname.split('/').pop()||'index.html';
- nav.querySelectorAll('a[data-page]').forEach(function(a){if(a.getAttribute('data-page')===page){a.setAttribute('aria-current','page')}else{a.removeAttribute('aria-current')}});
- toggle.addEventListener('click',function(){var open=wrap.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('span').textContent=open?'Close menu':'Menu';});
- document.addEventListener('keydown',function(e){if(e.key==='Escape'&&wrap.classList.contains('nav-open')){wrap.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false');toggle.querySelector('span').textContent='Menu';toggle.focus();}});
- window.addEventListener('resize',function(){if(window.innerWidth>700){wrap.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false');toggle.querySelector('span').textContent='Menu';}});
-})();
-</script>
-
-<style id="wide-reading-notes-layout">
+</script><style id="wide-reading-notes-layout">
 /* Make opened notes use the screen width instead of becoming a narrow, tall column. */
 .full-unit-notes{padding:0!important;width:100%!important;max-width:100%!important}
 .full-unit-notes[open]{width:100%!important;max-width:100%!important}
