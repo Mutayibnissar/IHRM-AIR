@@ -730,5 +730,116 @@ var rp=document.getElementById('rp');
 addEventListener('scroll',function(){var h=document.documentElement;var m=h.scrollHeight-h.clientHeight;rp.style.width=(m>0?h.scrollTop/m*100:0)+'%'},{passive:true});
 })();
 </script>
+
+<style>
+#ihrmQuizLauncher{position:fixed;left:16px;bottom:18px;z-index:9998;border:0;border-radius:999px;padding:12px 16px;background:#173d8f;color:#fff;font:700 14px system-ui;box-shadow:0 5px 22px #0003;cursor:pointer}
+#ihrmQuiz{position:fixed;inset:0;z-index:9999;background:#101827a8;display:none;align-items:center;justify-content:center;padding:14px;font:15px/1.5 system-ui;color:#172033}
+#ihrmQuiz.open{display:flex}#ihrmQuiz .iq-card{background:#fffef8;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:20px;padding:22px;box-shadow:0 20px 70px #0005}
+#ihrmQuiz .iq-top{display:flex;justify-content:space-between;gap:12px;align-items:center}#ihrmQuiz h2{margin:0;color:#173d8f}
+#ihrmQuiz button,#ihrmQuiz select{font:inherit;cursor:pointer;border-radius:10px;border:1px solid #ccd3df;padding:9px 12px;background:white;color:#172033}
+#ihrmQuiz .iq-primary{background:#173d8f;color:white;border-color:#173d8f}#ihrmQuiz .iq-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+#ihrmQuiz .iq-tabs button.active{background:#173d8f;color:#fff}#ihrmQuiz .iq-meta{color:#5b6474;font-size:13px}
+#ihrmQuiz .iq-option{display:block;width:100%;text-align:left;margin:8px 0;padding:12px!important;background:#fff;border:1px solid #d8deea!important}
+#ihrmQuiz .iq-option.correct{border-color:#16834a!important;background:#e8f8ee!important}#ihrmQuiz .iq-option.wrong{border-color:#bd3434!important;background:#fff0f0!important}
+#ihrmQuiz .iq-feedback{padding:12px;border-radius:12px;background:#edf3ff;margin-top:12px}#ihrmQuiz .iq-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+#ihrmQuiz .iq-progress{height:7px;background:#e3e7ef;border-radius:99px;overflow:hidden;margin:12px 0}#ihrmQuiz .iq-progress span{display:block;height:100%;background:#1b8752;width:0}
+#ihrmQuiz .iq-answer{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccd3df;border-radius:10px;font:inherit}
+@media(max-width:520px){#ihrmQuiz .iq-card{padding:16px}#ihrmQuizLauncher{left:10px;bottom:10px}}
+</style>
+<button id="ihrmQuizLauncher" type="button" aria-haspopup="dialog" aria-controls="ihrmQuiz">✈ Practice & MCQs</button>
+<div id="ihrmQuiz" role="dialog" aria-modal="true" aria-labelledby="iqTitle">
+ <div class="iq-card">
+  <div class="iq-top"><div><h2 id="iqTitle">IHRM Air · Practice Deck</h2><div class="iq-meta">Practice from the Unit I–IV course themes</div></div><button id="iqClose" aria-label="Close practice">✕</button></div>
+  <div class="iq-tabs" role="tablist"><button data-mode="mcq" class="active">MCQs</button><button data-mode="tf">True / False</button><button data-mode="short">Short answer</button><button data-mode="cards">Flashcards</button></div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label for="iqUnit">Unit:</label><select id="iqUnit"><option value="all">All units</option><option value="I">Unit I · Foundations</option><option value="II">Unit II · Staffing & performance</option><option value="III">Unit III · Compensation</option><option value="IV">Unit IV · Industrial relations</option></select><button id="iqRestart">Restart / Shuffle</button></div>
+  <div class="iq-progress"><span id="iqBar"></span></div><div class="iq-meta" id="iqStatus" aria-live="polite">Ready to practise</div>
+  <div id="iqBody" style="margin-top:12px"></div>
+  <div class="iq-actions"><button class="iq-primary" id="iqNext">Next question →</button><button id="iqReveal">Reveal answer</button></div>
+  <div id="iqResult" class="iq-feedback" hidden></div>
+  <p class="iq-meta">Study aid, not an official exam paper. Check every answer against your course notes; short answers are self-assessed.</p>
+ </div>
+</div>
+<script>
+(function(){
+const bank=[
+{u:'I',q:'Which three dimensions are associated with Morgan’s definition of international HRM in these notes?',o:['HR activities, employee categories, countries of operation','Recruitment, training, retirement','Home country, host country, third country only','Culture, law, technology only'],a:0,e:'The course summary highlights Morgan’s three dimensions: HR activities, employee categories and countries of operation.'},
+{u:'I',q:'Which is a common reason international HRM is more complex than domestic HRM?',o:['It removes cultural differences','It involves multiple national contexts and employee groups','It uses no local laws','It eliminates coordination'],a:1,e:'International operations must account for multiple country contexts and employee categories.'},
+{u:'I',q:'Which is best treated as a contextual influence on international HRM?',o:['Host-country culture and institutions','The colour of a company logo','A random page number','A personal favourite subject'],a:0,e:'Culture and institutional context shape international HR practices.'},
+{u:'I',q:'A multinational company needs to balance global consistency with local responsiveness. This is primarily a challenge of:',o:['International HR coordination','Office decoration','Payroll arithmetic only','Product packaging only'],a:0,e:'MNEs coordinate policies across countries while adapting to local requirements.'},
+{u:'I',q:'Which statement best describes a multinational enterprise (MNE)?',o:['A firm operating only within one town','A firm with business operations across national borders','A government department only','A firm that never hires employees'],a:1,e:'MNEs conduct business across more than one country.'},
+{u:'II',q:'In the EPRG framework, ethnocentric staffing generally prioritises:',o:['Host-country nationals for all key roles','Parent-country nationals for key positions','Only third-country nationals','No international transfers'],a:1,e:'Ethnocentric staffing commonly places parent-country nationals in key positions.'},
+{u:'II',q:'Polycentric staffing generally relies most on:',o:['Host-country nationals to manage local subsidiaries','Parent-country nationals in every role','External auditors as managers','No local employees'],a:0,e:'Polycentric staffing uses host-country nationals to run subsidiaries.'},
+{u:'II',q:'Geocentric staffing aims to select people primarily based on:',o:['Nationality alone','Best fit and capability regardless of nationality','Only the lowest salary','Family connections'],a:1,e:'Geocentric staffing seeks the best person for the role across nationalities.'},
+{u:'II',q:'Which can contribute to expatriate assignment failure?',o:['Cross-cultural adjustment difficulties','Clear role expectations always','Adequate family support','Strong preparation'],a:0,e:'Adjustment difficulties, family issues and inadequate preparation can contribute to failure.'},
+{u:'II',q:'Which is a sensible expatriate selection consideration?',o:['Technical ability and cross-cultural suitability','Favourite colour','Nationality as the only criterion','Ignoring family circumstances'],a:0,e:'The notes identify technical ability, cross-cultural suitability, family, country rules, MNE needs and language.'},
+{u:'II',q:'Performance management in an international assignment should consider:',o:['Only the home-country manager’s opinion','Context, objectives and multiple performance influences','Only the employee’s passport','No feedback'],a:1,e:'International performance is influenced by contextual factors as well as individual results.'},
+{u:'III',q:'The going-rate approach to expatriate compensation mainly benchmarks pay against:',o:['Host-country/local market rates','The employee’s old home salary only','A random global average','No market information'],a:0,e:'The going-rate approach uses host-country pay levels and local comparators.'},
+{u:'III',q:'The balance-sheet approach is designed mainly to:',o:['Keep the expatriate’s purchasing power and home-country living standard broadly whole','Pay every employee identically worldwide','Remove all allowances','Pay only in the host currency without adjustment'],a:0,e:'The approach typically protects the employee against assignment-related changes in living costs and purchasing power.'},
+{u:'III',q:'Local Plus compensation generally means:',o:['Local host-country pay with selected expatriate benefits','Only home-country salary with no benefits','No salary during assignment','A universal fixed salary for every country'],a:0,e:'Local Plus combines local pay with selected additional benefits.'},
+{u:'III',q:'Tax equalisation is intended to:',o:['Make assignment tax impact broadly comparable to what the employee would have paid at home','Eliminate all taxes legally','Increase taxes without calculation','Replace employment contracts'],a:0,e:'Tax equalisation aims to neutralise differences in tax burden for the employee, subject to policy and law.'},
+{u:'III',q:'Which may form part of an expatriate compensation package?',o:['Base salary, allowances and benefits','Only a company slogan','Only office furniture','No benefits or support'],a:0,e:'Packages can include salary, allowances, benefits and assignment-related support.'},
+{u:'IV',q:'Which is a way unions can constrain multinational management?',o:['Influencing wage and employment levels','Choosing the company logo only','Removing all national labour laws','Guaranteeing identical laws everywhere'],a:0,e:'The course revision notes identify wage levels, employment levels, global integration and campaigns.'},
+{u:'IV',q:'The ILO is primarily associated with:',o:['International labour standards and decent work','Setting all company product prices','Managing every MNE directly','Issuing passports'],a:0,e:'The International Labour Organization focuses on labour standards and decent work.'},
+{u:'IV',q:'Why can offshoring create HR challenges?',o:['It may affect turnover, skills, culture, language and employee relations','It guarantees no employee impact','It removes the need for communication','It always eliminates training needs'],a:0,e:'Offshoring can raise issues involving people, skills, communication, control and unions.'},
+{u:'IV',q:'Which is a useful response when a multinational restructures work across borders?',o:['Communicate, consult relevant stakeholders and plan redeployment where appropriate','Ignore local law','Avoid all employee communication','Assume all countries have identical labour systems'],a:0,e:'Consultation, legal compliance and workforce planning help manage cross-border change.'}
+];
+const tf=[
+{u:'I',q:'International HRM deals only with employees who are sent abroad.',a:false,e:'It also covers local employees, multiple employee categories and HR activity across countries.'},
+{u:'I',q:'Culture and national institutions can influence HR policies.',a:true,e:'National contexts can affect employment practices and expectations.'},
+{u:'II',q:'Polycentric staffing generally gives host-country nationals important subsidiary leadership roles.',a:true,e:'That is the core idea of polycentric staffing.'},
+{u:'II',q:'Ethnocentric staffing always guarantees expatriate success.',a:false,e:'Staffing orientation does not guarantee success; selection, preparation and context matter.'},
+{u:'III',q:'The going-rate approach uses host-country market pay as a reference.',a:true,e:'It benchmarks against local market rates.'},
+{u:'III',q:'Tax equalisation means employees never pay tax.',a:false,e:'It seeks to equalise the employee’s tax burden, not abolish tax.'},
+{u:'IV',q:'Offshoring can raise questions about skills, turnover and employee relations.',a:true,e:'These are among the HR issues identified in the course revision notes.'},
+{u:'IV',q:'Labour law and union influence are identical in every country.',a:false,e:'National labour institutions and union environments vary.'}
+];
+const shorts=[
+{u:'I',q:'Name the three dimensions in Morgan’s IHRM framework.',a:'HR activities; employee categories; countries of operation.'},
+{u:'II',q:'What is the key difference between ethnocentric and polycentric staffing?',a:'Ethnocentric prioritises parent-country nationals for key roles; polycentric relies on host-country nationals to manage local subsidiaries.'},
+{u:'II',q:'Give three factors to consider when selecting an expatriate.',a:'Examples from the notes: technical ability, cross-cultural suitability, family, country rules, MNE needs and language.'},
+{u:'III',q:'Distinguish the going-rate and balance-sheet approaches.',a:'Going-rate benchmarks host-country/local pay; balance-sheet aims to preserve the expatriate’s home-country purchasing power and living standard.'},
+{u:'III',q:'What is the purpose of tax equalisation?',a:'To make the assignment tax impact broadly comparable to what the employee would have paid at home.'},
+{u:'IV',q:'List two ways unions may constrain MNEs.',a:'Examples: wage levels, employment levels, global integration and campaigns.'},
+{u:'IV',q:'Give three HR challenges linked to offshoring.',a:'Examples: turnover, skills shortages, culture/language, control, union consultation and redeployment.'}
+];
+const flash=[
+{u:'I',q:'Morgan’s three IHRM dimensions',a:'HR activities · employee categories · countries of operation'},
+{u:'II',q:'EPRG staffing orientations',a:'Ethnocentric · Polycentric · Regiocentric · Geocentric'},
+{u:'II',q:'Six expatriate selection considerations in the notes',a:'Technical ability · cross-cultural suitability · family · country rules · MNE needs · language'},
+{u:'III',q:'Going-rate vs balance-sheet',a:'Going-rate: host-country/local pay benchmark. Balance-sheet: aims to preserve home-country purchasing power/living standard.'},
+{u:'III',q:'Local Plus',a:'Local host-country pay plus selected expatriate benefits.'},
+{u:'III',q:'Tax equalisation',a:'A policy intended to make assignment tax impact broadly comparable to the employee’s home-country tax burden.'},
+{u:'IV',q:'Four union constraints listed in the notes',a:'Wage levels · employment levels · global integration · campaigns'},
+{u:'IV',q:'Offshoring: HR issue checklist',a:'Turnover · skill shortages · culture/language · control · union consultation · redeployment'}
+];
+const $=id=>document.getElementById(id);let mode='mcq',items=[],idx=0,score=0,answered=false,seen=0;
+function pool(){return mode==='mcq'?bank:mode==='tf'?tf:mode==='short'?shorts:flash}
+function reset(){let unit=$('iqUnit').value;items=pool().filter(x=>unit==='all'||x.u===unit).sort(()=>Math.random()-.5);idx=0;score=0;seen=0;render()}
+function render(){answered=false;$('iqResult').hidden=true;$('iqNext').textContent=mode==='cards'?'Show answer →':'Next question →';$('iqReveal').style.display=mode==='mcq'||mode==='tf'?'none':'inline-block';
+$('iqBar').style.width=(items.length?idx/items.length*100:0)+'%';
+$('iqStatus').textContent=items.length?'Question '+Math.min(idx+1,items.length)+' of '+items.length+' · Score '+score+'/'+seen:'No items for this unit.';
+if(idx>=items.length){$('iqBody').innerHTML='<h3>Practice complete ✈</h3><p>You scored <b>'+score+' / '+seen+'</b> on auto-marked questions.</p><p>Review the explanations and revisit any weak unit.</p>'; $('iqNext').textContent='Try again';$('iqReveal').style.display='none';$('iqBar').style.width='100%';return}
+const x=items[idx];let h='<div class="iq-meta">UNIT '+x.u+'</div><h3>'+x.q+'</h3>';
+if(mode==='mcq'){h+='<div>'+x.o.map((v,i)=>'<button class="iq-option" data-i="'+i+'">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div>'}
+else if(mode==='tf'){h+='<div><button class="iq-option" data-i="true">True</button><button class="iq-option" data-i="false">False</button></div>'}
+else if(mode==='short'){h+='<textarea class="iq-answer" id="iqTyped" rows="3" placeholder="Write your answer in your own words…"></textarea>'}
+else{h+='<p class="iq-meta">Try to recall the answer before revealing it.</p>'}
+$('iqBody').innerHTML=h;
+$('iqBody').querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>check(b));
+}
+function feedback(ok,msg){$('iqResult').hidden=false;$('iqResult').innerHTML='<b>'+(ok?'Correct ✓':'Review this')+'</b><br>'+msg}
+function check(btn){if(answered)return;answered=true;seen++;const x=items[idx];let ok=false;if(mode==='mcq'){ok=Number(btn.dataset.i)===x.a;$('iqBody').querySelectorAll('[data-i]').forEach(b=>{if(Number(b.dataset.i)===x.a)b.classList.add('correct');else if(b===btn)b.classList.add('wrong');b.disabled=true})}else{ok=btn.dataset.i===String(x.a);$('iqBody').querySelectorAll('[data-i]').forEach(b=>{if(b.dataset.i===String(x.a))b.classList.add('correct');else if(b===btn)b.classList.add('wrong');b.disabled=true})}if(ok)score++;feedback(ok,x.e);$('iqStatus').textContent='Question '+(idx+1)+' of '+items.length+' · Score '+score+'/'+seen}
+function reveal(){const x=items[idx];if(mode==='short'){feedback(false,'Suggested answer: '+x.a+' — compare it with your own response.');seen++;answered=true}else if(mode==='cards'){feedback(false,x.a);answered=true}else if(mode==='tf'||mode==='mcq'){feedback(false,'Answer: '+(mode==='tf'?(x.a?'True':'False'):String.fromCharCode(65+x.a)+'. '+x.o[x.a])+'. '+x.e);answered=true}}
+$('ihrmQuizLauncher').onclick=()=>{$('ihrmQuiz').classList.add('open');reset();$('iqClose').focus()};
+$('iqClose').onclick=()=>{$('ihrmQuiz').classList.remove('open')};
+$('ihrmQuiz').addEventListener('click',e=>{if(e.target===$('ihrmQuiz'))$('ihrmQuiz').classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('ihrmQuiz').classList.remove('open')});
+document.querySelectorAll('#ihrmQuiz [data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('#ihrmQuiz [data-mode]').forEach(x=>x.classList.toggle('active',x===b));reset()});
+$('iqUnit').onchange=reset;$('iqRestart').onclick=reset;$('iqReveal').onclick=reveal;
+$('iqNext').onclick=()=>{if(idx>=items.length){reset();return}if(!answered&&(mode==='mcq'||mode==='tf')){feedback(false,'Choose an answer or reveal the answer before moving on.');return}if(!answered&&(mode==='short'||mode==='cards'))reveal();else{idx++;render()}};
+reset();
+})();
+</script>
+
 </body>
 </html>
