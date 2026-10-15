@@ -623,7 +623,53 @@ header.top{isolation:isolate;z-index:100}
 .site-page-nav a{padding:10px 8px;font-size:.9rem;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){.site-page-nav a{transition:none}}
-</style></head>
+</style><style id="ihrm-air-shared-visual-refresh">
+/* IHRM Air 2026 visual refresh — shared design system */
+:root{--ui-radius:20px;--ui-line:color-mix(in srgb,var(--ink) 14%,transparent);--ui-elev:0 12px 32px rgba(20,33,61,.09);--ui-elev-hover:0 18px 42px rgba(20,33,61,.14)}
+body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--blue) 9%,transparent),transparent 34%),var(--bg);letter-spacing:-.012em}
+h1,h2,h3{letter-spacing:-.035em}
+:where(.top,.topbar,.site-nav-wrap){backdrop-filter:blur(16px) saturate(145%);border-bottom:1px solid var(--ui-line)}
+:where(.top,.topbar){box-shadow:0 6px 28px rgba(20,33,61,.07)}
+:where(.logo){letter-spacing:-.045em}
+:where(.site-page-nav a,.topnav a){border-radius:999px;box-shadow:none;border:1px solid var(--ui-line);padding:10px 15px}
+:where(.site-page-nav a[aria-current="page"]){box-shadow:0 4px 12px rgba(255,200,61,.24)!important}
+:where(.site-nav-toggle,.search-widget-launcher){border-radius:999px;box-shadow:none;transition:transform .18s ease,background .18s ease}
+:where(.page-intro,.hero){position:relative;isolation:isolate;overflow:hidden}
+:where(.page-intro){padding:clamp(46px,7vw,86px) clamp(18px,5vw,64px);background:linear-gradient(125deg,color-mix(in srgb,var(--blue) 15%,var(--bg)),var(--card) 62%,color-mix(in srgb,var(--mint) 12%,var(--bg)));border-bottom:1px solid var(--ui-line)}
+:where(.page-intro)::after{content:"✈";position:absolute;right:clamp(18px,8vw,120px);top:10%;font-size:clamp(5rem,13vw,11rem);line-height:1;opacity:.055;transform:rotate(-12deg);pointer-events:none;z-index:-1}
+:where(.page-intro-inner){max-width:1180px;margin-inline:auto}
+:where(.page-eyebrow,.eyebrow){font-size:.76rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+:where(.page-intro h1){font-size:clamp(2.5rem,6vw,4.8rem);max-width:900px;margin:10px 0 16px;line-height:1.02}
+:where(.page-intro p:not(.page-eyebrow)){max-width:70ch;color:var(--mute);font-size:clamp(1rem,1.6vw,1.18rem)}
+:where(.page-home-cta,.primary,.btn){min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:10px 16px;font-weight:800;text-decoration:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+:where(.page-home-cta){margin-top:10px;background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.primary){background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.btn){background:var(--card);color:var(--ink);border:1px solid var(--ui-line);box-shadow:0 2px 5px rgba(20,33,61,.04)}
+:where(.page-home-cta,.primary,.btn):hover{transform:translateY(-2px);filter:brightness(1.015)}
+:where(.page-home-cta,.primary):active{transform:translate(1px,1px);box-shadow:1px 1px 0 #14213d}
+:where(.section,.content-section,.main-section){scroll-margin-top:100px}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card){border-radius:var(--ui-radius);box-shadow:var(--ui-elev);border-color:var(--ui-line);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card):hover{box-shadow:var(--ui-elev-hover);border-color:color-mix(in srgb,var(--blue) 34%,var(--ui-line))}
+:where(.unit-card,.tool-card,.study-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){min-width:0}
+:where(.top-actions,.grouped-actions){gap:10px}
+:where(.search-widget-launcher){min-height:42px;padding:9px 15px;background:var(--card);border:1px solid var(--ui-line);font-weight:800}
+:where(input,select,textarea){border:1px solid var(--ui-line);background:var(--card);color:var(--ink);padding:10px 12px}
+:where(input,select,textarea):focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+:where(details){border-radius:14px}
+:where(summary){cursor:pointer}
+:where(footer,.site-footer){border-top:1px solid var(--ui-line);background:var(--card)}
+#siteBackTop{box-shadow:0 8px 24px rgba(20,33,61,.2);border-radius:16px}
+@media(max-width:700px){
+ :where(.top,.topbar){gap:10px}
+ :where(.page-intro){padding:42px 18px}
+ :where(.page-intro)::after{right:8px;top:8%;opacity:.04}
+ :where(.page-intro h1){font-size:clamp(2.35rem,11vw,3.6rem)}
+ :where(.site-page-nav a){min-height:44px}
+ :where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.btn,.primary,.page-home-cta){transition:none}}
+</style>
+</head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
 <header class="top"><div class="bar"><a class="logo" href="index.html">IHRM<b>Air</b></a></div>
