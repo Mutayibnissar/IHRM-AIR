@@ -742,7 +742,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
   d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var nav=roster.navigator.run(q);var explain=roster.explainer.run(q);var exam=roster.exam.run(q);out.innerHTML='<h3>🤝 Coordinated agent workflow</h3><p><span class="agent-chip">1 · Navigator</span><span class="agent-chip">2 · Explainer</span><span class="agent-chip">3 · Exam Setter</span></p><details open><summary>Step 1 — Find relevant notes</summary>'+nav.body+'</details><details open><summary>Step 2 — Build understanding</summary>'+explain.body+'</details><details open><summary>Step 3 — Test retrieval</summary>'+exam.body+'</details><p class="agent-status">Workflow complete. Each specialist used the local IHRM study material; no external AI service was called.</p>';out.scrollIntoView({behavior:'smooth',block:'nearest'})});
   var geminiKeyStatus=d.getElementById('geminiKeyStatus');
-  var API_BASE_URL='https://ihrm-air-api.REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN.workers.dev';
+  var API_BASE_URL='https://YOUR-PROJECT-REF.supabase.co/functions/v1/agent';
   var agentInstructions={
     coach:'Act as a supportive MBA study coach. Make a practical, prioritised study plan for the exact task.',
     explainer:'Act as a patient IHRM professor. Explain concepts in plain English, define terms, give examples, compare similar ideas, and flag limitations.',
@@ -761,7 +761,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   }
   async function callGemini(agentId,q,context){
     if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){
-      throw new Error('The secure AI backend has not been connected yet. Deploy backend/worker.js and set API_BASE_URL in index.html to your Cloudflare Worker URL.');
+      throw new Error('The secure AI backend has not been connected yet. Deploy the Supabase Edge Function and set API_BASE_URL in index.html to its URL.');
     }
     var response=await fetch(API_BASE_URL+'/api/agent',{
       method:'POST',
@@ -783,7 +783,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   async function runGeminiWorkflow(teamMode,button){
     var q=task.value.trim();
     if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
-    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Deploy the Cloudflare Worker from the repository, add your Gemini key as a Worker secret, then set the Worker URL in index.html.</p>';return}
+    if(!API_BASE_URL||API_BASE_URL.includes('REPLACE-WITH-YOUR-CLOUDFLARE-SUBDOMAIN')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Deploy the Supabase Edge Function, add GEMINI_API_KEY as a Supabase function secret, then set the function URL in index.html.</p>';return}
     var oldText=button.textContent;button.disabled=true;button.textContent=teamMode?'Agents working…':'Thinking…';
     out.innerHTML='<h3>✈ Gemini agents are working</h3><p>Reading relevant course notes and generating an exam-focused response…</p>';
     try{
@@ -792,7 +792,7 @@ results.textContent='Search the full notes, all four units, flashcards and revis
         var active=d.querySelector('.agent-card[aria-pressed="true"]');
         var name=active?active.querySelector('strong').innerText:'Study Coach';
         var answer=await callGemini(selected,q,context);
-        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash via secure backend');
+        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash via Supabase Edge Function');
       }else{
         var stages=[
           {id:'navigator',name:'Notes Navigator'},
@@ -807,12 +807,12 @@ results.textContent='Search the full notes, all four units, flashcards and revis
           var stageAnswer=await callGemini(stages[i].id,stagePrompt,context);
           results.push({name:stages[i].name,answer:stageAnswer});
         }
-        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 2.5 Flash via secure backend');
+        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'4 specialist calls · Gemini 2.5 Flash via Supabase Edge Function');
       }
     }catch(err){
       out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
       var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach Gemini. Check your internet connection, key, API enablement, and quota.');out.appendChild(message);
-      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The API key is stored server-side as a Cloudflare Worker secret. Check the Worker deployment, GEMINI_API_KEY secret, allowed site origin, and Gemini API quota.';out.appendChild(hint);
+      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The Gemini key must be stored as a Supabase Edge Function secret. Check function deployment, GEMINI_API_KEY, allowed site origin, and Gemini API quota.';out.appendChild(hint);
     }finally{button.disabled=false;button.textContent=oldText}
   }
   d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
