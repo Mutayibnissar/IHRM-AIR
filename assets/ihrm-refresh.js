@@ -40,6 +40,18 @@
     window.addEventListener('resize',function(){if(window.innerWidth>700)closeMenu(false);},{passive:true});
   }
 
+
+  // Add subtle entrance motion to content cards without hiding content when JS fails.
+  try{
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var motionItems=document.querySelectorAll('main section, main article, .hero, .card, .unit-card, .tool-card, .feature-card, .destination-card, .panel, .question-card, .study-card');
+      motionItems.forEach(function(el){
+        if(!el.classList.contains('air-reveal'))el.classList.add('air-reveal');
+      });
+      document.body.classList.add('air-motion-ready');
+    }
+  }catch(e){}
+
   // Add a safe in-site Back control to secondary pages. If opened directly,
   // it returns to Home rather than sending the learner to an unrelated site.
   if(path!=='index.html'&&wrap&&!wrap.querySelector('.site-back-button')){
