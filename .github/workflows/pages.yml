@@ -42,9 +42,9 @@ jobs:
               for marker in markers:
                   if marker not in source:
                       raise SystemExit(f"{filename} is missing required marker: {marker}")
-              if filename != "index.html" and source.count('id="sitePageNav"') != 1:
+              if source.count('id="sitePageNav"') != 1:
                   raise SystemExit(f"{filename} must contain exactly one main navigation.")
-              if source.count('class="site-footer"') > 1:
+              if source.count("<footer") > 1:
                   raise SystemExit(f"{filename} contains an unexpected duplicate footer.")
           print("All IHRM Air pages and required sections are present.")
           PY
