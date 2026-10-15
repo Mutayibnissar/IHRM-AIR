@@ -496,6 +496,42 @@ header.top{isolation:isolate;z-index:100}
 #study-progress .tool-actions .btn{flex:1 1 145px}
 @media(max-width:600px){#study-progress .tool-actions .btn{flex:1 1 100%}}
 </style>
+<style id="exam-centre-styles">
+.exam-centre{scroll-margin-top:130px}
+.exam-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.exam-controls label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700}
+.exam-controls select{min-width:0;width:100%;padding:11px;border:1px solid var(--frame);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.exam-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.exam-stats>div{display:flex;flex-direction:column;gap:4px;padding:13px;border:1px solid var(--frame);border-radius:12px;background:var(--card)}
+.exam-stats strong{font-size:23px}.exam-stats span{font-size:12px;color:var(--mute)}
+.exam-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.exam-actions .btn{flex:0 1 auto}
+.exam-workspace{margin-top:20px;padding:clamp(12px,2.5vw,24px);border:1px solid var(--frame);border-radius:18px;background:var(--card);color:var(--ink)}
+.exam-session-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;margin-bottom:10px}
+.exam-session-bar strong{font-size:18px;font-variant-numeric:tabular-nums}
+.exam-progress-track{height:8px;overflow:hidden;background:var(--frame);border-radius:99px;margin:10px 0 20px}
+.exam-progress-track span{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
+.exam-question-area h3{font-size:clamp(18px,2.5vw,24px);line-height:1.4;margin:8px 0 16px}
+.exam-question-meta{font-size:12px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+.exam-option{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:12px 14px;margin:9px 0;border:1px solid var(--frame);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.exam-option:hover:not(:disabled){border-color:var(--blue)}
+.exam-option:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.exam-option.correct{border-color:#18865a;background:#d8f5e8;color:#123d2d}
+.exam-option.incorrect{border-color:#c83939;background:#ffe0e0;color:#6e1717}
+.exam-option:disabled{cursor:default;opacity:1}
+.exam-option-key{font-weight:800;min-width:1.2em}
+.exam-feedback{line-height:1.65;margin-top:12px}
+.exam-feedback .feedback-box{padding:12px;border-radius:12px;background:var(--bg);border-left:4px solid var(--blue)}
+.exam-feedback .feedback-box.correct-feedback{border-left-color:#18865a}
+.exam-feedback .feedback-box.incorrect-feedback{border-left-color:#c83939}
+.exam-review-item{border-top:1px solid var(--frame);padding:12px 0}
+.exam-review-item h4{margin:4px 0 8px}
+.exam-review-item p{margin:5px 0}
+.exam-review-pill{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:3px 8px;background:var(--bg);margin-right:6px}
+.exam-empty{padding:16px;border-radius:12px;background:var(--bg)}
+@media(max-width:720px){.exam-controls{grid-template-columns:1fr}.exam-stats strong{font-size:20px}.exam-stats span{font-size:11px}.exam-actions .btn{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){.exam-progress-track span{transition:none}}
+</style>
 </head>
 <body>
 <svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
@@ -510,7 +546,7 @@ header.top{isolation:isolate;z-index:100}
 <div class="top-actions grouped-actions" aria-label="Main study navigation">
 <details class="nav-group"><summary>📚 Units</summary><div class="nav-subbuttons"><a href="#u1">Unit I</a><a href="#u2">Unit II</a><a href="#u3">Unit III</a><a href="#u4">Unit IV</a></div></details>
 <details class="nav-group"><summary>📝 Practice</summary><div class="nav-subbuttons"><a href="#quiz">Quiz</a><a href="#full-notes">Revision tools</a><a href="#pp">Passport</a></div></details>
-<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#study-tools">Study dashboard</a><a href="#focus-timer">Focus timer</a><a href="#study-notes">My study notes</a><a href="#study-plan">Study planner</a></div></details>
+<details class="nav-group"><summary>✦ Study tools</summary><div class="nav-subbuttons"><a href="#study-tools">Study dashboard</a><a href="#focus-timer">Focus timer</a><a href="#study-notes">My study notes</a><a href="#study-plan">Study planner</a><a href="#exam-centre">Exam Centre</a></div></details>
 </div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
 <section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
 <div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
@@ -1087,6 +1123,25 @@ header.top{isolation:isolate;z-index:100}
 
 <section class="pp" id="pp"><h2>Your passport</h2><p>Stamp each unit as you finish revising it.</p>
 <div class="slots" id="slots"></div><p class="score" id="ptxt"></p></section>
+<section class="dest exam-centre" id="exam-centre">
+  <h2>🎓 Exam Centre</h2>
+  <p>Practise unit-wise, learn from every mistake, or sit a timed mock exam. Your results are saved on this device.</p>
+  <div class="exam-controls">
+    <label for="examUnit">Question bank<select id="examUnit"><option value="all">All four units</option><option value="1">Unit I · IHRM foundations</option><option value="2">Unit II · Staffing &amp; performance</option><option value="3">Unit III · International compensation</option><option value="4">Unit IV · Unions, law &amp; trends</option></select></label>
+    <label for="examMode">Practice mode<select id="examMode"><option value="practice">Learn as you go</option><option value="mock">Timed mock exam</option></select></label>
+    <label for="examLength">Mock length<select id="examLength"><option value="10">10 questions · 10 min</option><option value="20" selected>20 questions · 20 min</option><option value="30">30 questions · 30 min</option></select></label>
+  </div>
+  <div class="exam-stats" id="examStats" aria-live="polite"><div><strong id="examAttemptCount">0</strong><span>Questions answered</span></div><div><strong id="examAccuracy">—</strong><span>Accuracy</span></div><div><strong id="examBest">—</strong><span>Best mock score</span></div></div>
+  <div class="exam-actions"><button class="btn" type="button" id="startExam">Start practice</button><button class="btn" type="button" id="resetExamStats">Reset my stats</button></div>
+  <div id="examWorkspace" class="exam-workspace" hidden>
+    <div class="exam-session-bar"><span id="examSessionLabel">Practice session</span><strong id="examClock" aria-live="polite">Untimed</strong><span id="examProgressText">Question 1</span></div>
+    <div class="exam-progress-track"><span id="examProgressBar"></span></div>
+    <div id="examQuestionArea" class="exam-question-area"></div>
+    <div class="exam-actions"><button class="btn" type="button" id="examMarkReview">Mark for review</button><button class="btn" type="button" id="examNext" disabled>Next question →</button><button class="btn" type="button" id="examFinish">Finish exam</button></div>
+    <div id="examFeedback" class="exam-feedback" aria-live="polite"></div>
+  </div>
+  <p class="tool-status">Study note: questions are revision practice, not an official university paper. Check answers against your prescribed material.</p>
+</section>
 <section class="quiz" id="quiz"><h2 style="margin-bottom:16px">Boarding quiz</h2><div class="q" id="qbox"></div></section>
 </main>
 <footer><div class="air"></div>Built from Dowling, Festing &amp; Engle, International Human Resource Management (7th ed.) · IMBA 9th Semester</footer>
@@ -1763,7 +1818,109 @@ header.top .nav-subbuttons{white-space:normal}
 })();
 </script>
 
-</body>
+<script id="exam-centre-controller">
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var bank=[
+{u:1,q:'Which combination best represents Morgan’s three dimensions of IHRM?',o:['HR activities, countries involved, and employee categories','Recruitment, training, and payroll only','Headquarters, sales, and production only','Culture, tax, and unions only'],a:0,e:'Morgan’s framework considers HR activities, the countries involved, and the categories of employees (such as PCNs, HCNs, and TCNs).'},
+{u:1,q:'What distinguishes international HRM from domestic HRM most directly?',o:['It has no recruitment function','It manages people across national contexts and added complexity','It applies one identical policy in every country','It deals only with expatriates'],a:1,e:'IHRM has cross-border complexity, including multiple countries, cultures, institutions, and employee groups.'},
+{u:1,q:'In the PCN–HCN–TCN framework, a host-country national is:',o:['A citizen of the headquarters country','A citizen of the country where the foreign operation is located','A citizen of a third country','Any employee transferred abroad'],a:1,e:'HCN means host-country national: a national of the country in which the foreign subsidiary operates.'},
+{u:1,q:'Which is a common additional challenge in international assignments?',o:['Elimination of all legal differences','Cross-cultural adjustment and family adaptation','No need for performance management','Guaranteed tax neutrality without policy'],a:1,e:'Cross-cultural adjustment and family adaptation are common challenges in international assignments.'},
+{u:1,q:'The term “expatriate” commonly refers in IHRM to an employee who:',o:['Works only in their home country','Is assigned to work in another country','Is always hired locally','Works exclusively in payroll'],a:1,e:'In the usual IHRM context, an expatriate is assigned to work outside their home country.'},
+{u:1,q:'An emic perspective focuses on:',o:['Culture-specific meanings and categories','Universal categories only','Financial accounting only','The legal status of a subsidiary'],a:0,e:'Emic analysis seeks to understand a culture using its own context-specific meanings; etic analysis compares using broader categories.'},
+{u:1,q:'Which statement best describes an MNE?',o:['A company operating only within one city','An enterprise with operations in more than one country','A government department','A firm that employs only expatriates'],a:1,e:'A multinational enterprise operates or controls business activities across national borders.'},
+{u:1,q:'Why can a domestic HR practice fail when transferred abroad?',o:['HR practices are never transferable','Local institutions, culture, law, and workforce expectations may differ','All host countries prohibit HR policies','International firms do not need HR'],a:1,e:'Transferability depends on the host-country context, including culture, labour institutions, law, and employee expectations.'},
+{u:2,q:'Which staffing orientation typically places parent-country nationals in key headquarters-controlled subsidiary roles?',o:['Polycentric','Ethnocentric','Geocentric','Regiocentric'],a:1,e:'Ethnocentric staffing gives priority to parent-country nationals for key positions in foreign subsidiaries.'},
+{u:2,q:'A polycentric staffing approach generally prioritises:',o:['Host-country nationals to manage local subsidiaries','Only parent-country nationals everywhere','The best candidate regardless of nationality in every role','A single regional nationality for all positions'],a:0,e:'Polycentric staffing commonly relies on host-country nationals to manage subsidiaries, reflecting local knowledge and context.'},
+{u:2,q:'A geocentric approach aims to:',o:['Choose staff based only on headquarters nationality','Select the best people for roles regardless of nationality','Hire only host-country citizens','Avoid international transfers'],a:1,e:'Geocentric staffing seeks the best-qualified people internationally, rather than privileging a particular nationality.'},
+{u:2,q:'The broader EPRG framework includes which four orientations?',o:['Ethnocentric, polycentric, regiocentric, geocentric','Economic, political, regional, global','Expatriate, parent, regional, general','Ethical, personal, regulatory, geographic'],a:0,e:'EPRG stands for ethnocentric, polycentric, regiocentric, and geocentric orientations.'},
+{u:2,q:'Which is a sensible factor when selecting an expatriate?',o:['Technical competence alone always guarantees success','Cross-cultural suitability and family considerations, alongside role competence','Nationality alone','Ignoring the assignment location'],a:1,e:'Selection should consider job competence and cross-cultural suitability, and may need to account for family, language, and assignment context.'},
+{u:2,q:'What is one major purpose of expatriate performance management?',o:['To remove all performance feedback','To align goals, feedback, and evaluation with the international assignment context','To use only headquarters metrics regardless of context','To replace all training'],a:1,e:'Performance management should align goals and evaluation with the assignment while considering both organizational and local context.'},
+{u:2,q:'Which is a common reason an international assignment may fail?',o:['Unrealistic expectations and adjustment difficulties','Clear goals and adequate support','Good role preparation','Appropriate family support'],a:0,e:'Adjustment problems, unrealistic expectations, inadequate preparation, and family difficulties can contribute to assignment failure.'},
+{u:2,q:'A TCN in a subsidiary located in Country B is an employee who is a national of:',o:['Country B only','The parent country only','Neither the host country nor the parent country','Every country in the region'],a:2,e:'A third-country national is neither a national of the host country nor of the parent/home country in the assignment framework.'},
+{u:3,q:'The balance-sheet approach to expatriate compensation aims primarily to:',o:['Keep the expatriate broadly whole relative to the home-country standard of living','Pay every employee the same local wage','Remove all allowances','Set pay solely from host-country minimum wage'],a:0,e:'The balance-sheet approach seeks to preserve the expatriate’s home-country purchasing position, often adjusting for costs and assignment-related items.'},
+{u:3,q:'The going-rate approach commonly bases expatriate salary on:',o:['The host-country salary structure or comparable local market rates','The employee’s childhood income','Only the headquarters CEO’s pay','A universal global rate unrelated to location'],a:0,e:'The going-rate approach uses host-country or local-market salary benchmarks for comparable work.'},
+{u:3,q:'Tax equalisation is designed to:',o:['Guarantee that all countries have the same tax law','Keep an expatriate’s tax burden broadly comparable to the home-country position under company policy','Eliminate every tax payment','Pay all taxes personally without company involvement'],a:1,e:'Tax equalisation generally aims to prevent an assignment from creating an undue tax advantage or disadvantage compared with the home-country tax position.'},
+{u:3,q:'Which item may be part of an international assignment compensation package?',o:['Assignment or housing allowance','A guarantee of permanent promotion','A guarantee of citizenship','A waiver of all employment law'],a:0,e:'Packages may include base salary plus assignment-related elements such as housing, cost-of-living, relocation, or hardship allowances, depending on policy.'},
+{u:3,q:'Why do international compensation policies vary by assignment?',o:['All countries have identical costs','Tax, cost of living, labour markets, assignment purpose, and company policy can differ','Employees never relocate','Compensation is unrelated to strategy'],a:1,e:'The package depends on the assignment, local conditions, tax treatment, and the organization’s compensation approach.'},
+{u:3,q:'Which statement best distinguishes home-based and host-based pay approaches?',o:['Home-based pay anchors to home-country structures; host-based pay uses host-country structures','Both always pay the exact same amount','Home-based pay excludes salary','Host-based pay is only for short domestic trips'],a:0,e:'Home-based approaches refer to home-country pay structures; host-based approaches anchor pay to the host-country context.'},
+{u:3,q:'What is a common objective of relocation support?',o:['Make the assignment transition more manageable','Replace the need for role clarity','Ensure the employee never returns home','Remove local legal obligations'],a:0,e:'Relocation support can help with practical transition costs and reduce friction during an international move.'},
+{u:3,q:'Which factor should be checked before comparing net expatriate compensation across countries?',o:['Tax treatment and purchasing power','Only the currency symbol','The colour of the payslip','The employee’s job title alone'],a:0,e:'Tax treatment, exchange rates, living costs, benefits, and purchasing power affect the real value of compensation.'},
+{u:4,q:'What is a multinational enterprise “investment strike” concern in labour relations?',o:['Workers vote on a strike ballot','The company reduces or withholds investment, potentially weakening a facility or workforce','A union invests pension funds','A government increases training'],a:1,e:'In this context, investment withdrawal or underinvestment can be used as leverage and may threaten jobs or facility viability.'},
+{u:4,q:'Why can trade unions find it difficult to coordinate internationally?',o:['Labour law and union structures differ across countries','All unions share identical bargaining rights','MNEs operate in only one country','Workers have no common interests'],a:0,e:'Different legal systems, bargaining structures, priorities, and resources complicate cross-border union coordination.'},
+{u:4,q:'The ILO is primarily associated with:',o:['International labour standards and decent work','Setting every company’s global salary','Running multinational corporations','Approving all international mergers'],a:0,e:'The International Labour Organization develops international labour standards and promotes decent work and social dialogue.'},
+{u:4,q:'What does “social dumping” commonly refer to in international business debates?',o:['Moving products to a landfill','Competition by lowering labour costs or standards, potentially undercutting worker protections','Paying every worker above the market','A system of expatriate tax equalisation'],a:1,e:'The term is used in debates about competition based on lower labour costs or weaker social and labour protections.'},
+{u:4,q:'Why does host-country employment law matter to an MNE?',o:['It applies only to headquarters staff','It can shape employment contracts, collective relations, working time, and employee protections','It can always be ignored by foreign-owned firms','It replaces every company policy automatically in every country'],a:1,e:'MNEs must assess applicable local employment rules and how they interact with corporate policies and any other relevant obligations.'},
+{u:4,q:'Offshoring generally means:',o:['Moving or sourcing activities to another country','Promoting a local employee','A method of tax equalisation','A type of expatriate selection interview'],a:0,e:'Offshoring is the relocation or sourcing of business activities in another country; it differs from outsourcing, which concerns who performs the activity.'},
+{u:4,q:'What is the main purpose of collective bargaining?',o:['Negotiation between employers and worker representatives over employment terms','Selecting expatriates for overseas posts','Calculating exchange rates','Issuing passports'],a:0,e:'Collective bargaining is negotiation between employers and worker representatives, often unions, over employment terms and conditions.'},
+{u:4,q:'Which is a sound approach when applying global HR policies across countries?',o:['Assume one policy automatically fits all legal systems','Balance global consistency with local law and context','Ignore local worker representation','Remove all local management input'],a:1,e:'International HR policy commonly requires balancing global objectives with local legal, institutional, and cultural conditions.'}
+];
+var workspace=$('examWorkspace'),questionArea=$('examQuestionArea'),feedback=$('examFeedback'),clock=$('examClock'),progress=$('examProgressBar'),progressText=$('examProgressText'),sessionLabel=$('examSessionLabel'),next=$('examNext'),finish=$('examFinish'),mark=$('examMarkReview');
+var session=null,timer=null;
+function readStats(){try{var x=JSON.parse(localStorage.getItem('air-exam-stats')||'{}');return x&&typeof x==='object'?x:{}}catch(e){return {attempts:0,correct:0,best:0}}}
+function writeStats(x){try{localStorage.setItem('air-exam-stats',JSON.stringify(x))}catch(e){}}
+function updateStats(){var st=readStats();$('examAttemptCount').textContent=st.attempts||0;$('examAccuracy').textContent=st.attempts?Math.round((st.correct||0)/st.attempts*100)+'%':'—';$('examBest').textContent?$('examBest').textContent=(Number(st.best)>0?Math.round(st.best*100)+'%':'—'):null}
+function shuffled(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),tmp=a[i];a[i]=a[j];a[j]=tmp}return a}
+function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+function fmt(sec){return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+function renderQuestion(){
+ if(!session)return;
+ var item=session.items[session.pos],selected=session.answers[session.pos],isAnswered=selected!==undefined;
+ sessionLabel.textContent=session.mode==='mock'?'Timed mock exam':'Unit-wise practice';
+ progressText.textContent='Question '+(session.pos+1)+' of '+session.items.length+(session.review[session.pos]?' · Marked for review':'');
+ progress.style.width=((session.pos+1)/session.items.length*100)+'%';
+ questionArea.innerHTML='';
+ var meta=document.createElement('div');meta.className='exam-question-meta';meta.textContent='Unit '+item.u+' · '+(['','IHRM foundations','Staffing & performance','International compensation','Unions, law & trends'][item.u]);questionArea.appendChild(meta);
+ var h=document.createElement('h3');h.textContent=(session.pos+1)+'. '+item.q;questionArea.appendChild(h);
+ item.o.forEach(function(option,i){var b=document.createElement('button');b.type='button';b.className='exam-option';b.innerHTML='<span class="exam-option-key">'+String.fromCharCode(65+i)+'.</span><span></span>';b.lastChild.textContent=option;b.disabled=isAnswered;
+ if(isAnswered&&i===item.a)b.classList.add('correct');
+ if(isAnswered&&i===selected&&selected!==item.a)b.classList.add('incorrect');
+ b.addEventListener('click',function(){if(session.answers[session.pos]!==undefined)return;session.answers[session.pos]=i;var st=readStats();st.attempts=(st.attempts||0)+1;if(i===item.a)st.correct=(st.correct||0)+1;writeStats(st);updateStats();if(session.mode==='practice'){feedback.innerHTML='<div class="feedback-box '+(i===item.a?'correct-feedback':'incorrect-feedback')+'"><strong>'+(i===item.a?'Correct ✓':'Not quite — review the explanation')+'</strong><p>'+item.e+'</p></div>'}else{feedback.textContent='Answer recorded. Explanations appear when you finish the mock exam.'}renderQuestion()});
+ questionArea.appendChild(b)});
+ next.disabled=!isAnswered;
+ next.textContent=session.pos===session.items.length-1?'View results →':'Next question →';
+ mark.textContent=session.review[session.pos]?'Unmark review':'Mark for review';
+ if(!isAnswered)feedback.textContent=session.mode==='mock'?'Choose one answer. Your score and explanations appear at the end.':'Choose the best answer to see feedback and an explanation.';
+}
+function finishSession(expired){
+ if(!session)return;stopTimer();
+ var correct=0,answered=0;
+ session.items.forEach(function(item,i){if(session.answers[i]!==undefined){answered++;if(session.answers[i]===item.a)correct++}});
+ var score=Math.round(correct/session.items.length*100),st=readStats();
+ if(session.mode==='mock'){st.best=Math.max(Number(st.best)||0,score);writeStats(st);updateStats()}
+ sessionLabel.textContent=session.mode==='mock'?'Mock exam results':'Practice results';
+ progressText.textContent=expired?'Time expired':'Completed';
+ clock.textContent=expired?'00:00':(session.mode==='mock'?'Finished':'Untimed');
+ progress.style.width='100%';questionArea.innerHTML='';
+ var h=document.createElement('h3');h.textContent='Results: '+correct+' / '+session.items.length+' ('+score+'%)';questionArea.appendChild(h);
+ var p=document.createElement('p');p.textContent=answered+' answered · '+(session.items.length-answered)+' unanswered · '+session.items.filter(function(_,i){return session.review[i]}).length+' marked for review.';questionArea.appendChild(p);
+ var tip=document.createElement('p');tip.textContent=score>=80?'Strong result. Revisit any marked or missed questions.':score>=60?'Good progress. Review the explanations for every missed question.':'Use the explanations below, then retry a shorter unit practice session.';questionArea.appendChild(tip);
+ var review=document.createElement('div');
+ session.items.forEach(function(item,i){var picked=session.answers[i],ok=picked===item.a,wrap=document.createElement('article');wrap.className='exam-review-item';var title=document.createElement('h4');title.textContent=(i+1)+'. '+item.q;wrap.appendChild(title);var pill=document.createElement('span');pill.className='exam-review-pill';pill.textContent=picked===undefined?'Unanswered':ok?'Correct':'Review';wrap.appendChild(pill);var chosen=document.createElement('p');chosen.textContent='Your answer: '+(picked===undefined?'No answer':String.fromCharCode(65+picked)+'. '+item.o[picked]);wrap.appendChild(chosen);var right=document.createElement('p');right.textContent='Correct answer: '+String.fromCharCode(65+item.a)+'. '+item.o[item.a];wrap.appendChild(right);var exp=document.createElement('p');exp.textContent='Explanation: '+item.e;wrap.appendChild(exp);review.appendChild(wrap)});
+ feedback.innerHTML='';feedback.appendChild(review);
+ next.disabled=true;mark.disabled=true;finish.textContent='Close results';finish.onclick=function(){workspace.hidden=true;session=null;finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false};
+}
+function finishCurrent(){finishSession(false)}
+function start(){
+ stopTimer();var unit=$('examUnit').value,mode=$('examMode').value;
+ var eligible=bank.filter(function(q){return unit==='all'||String(q.u)===unit});
+ if(!eligible.length){return}
+ var length=mode==='mock'?Number($('examLength').value):eligible.length;
+ var chosen=shuffled(eligible).slice(0,Math.min(length,eligible.length));
+ session={mode:mode,items:chosen,pos:0,answers:{},review:{}};
+ workspace.hidden=false;feedback.innerHTML='';finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false;
+ if(mode==='mock'){session.seconds=Number($('examLength').value)*60;clock.textContent=fmt(session.seconds);timer=setInterval(function(){if(!session)return;session.seconds--;clock.textContent=fmt(Math.max(0,session.seconds));if(session.seconds<=0)finishSession(true)},1000)}else{clock.textContent='Untimed'}
+ renderQuestion();workspace.scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('startExam').addEventListener('click',start);
+next.addEventListener('click',function(){if(!session||session.answers[session.pos]===undefined)return;if(session.pos===session.items.length-1){finishSession(false);return}session.pos++;feedback.innerHTML='';renderQuestion()});
+mark.addEventListener('click',function(){if(!session)return;session.review[session.pos]=!session.review[session.pos];renderQuestion()});
+finish.addEventListener('click',finishCurrent);
+$('resetExamStats').addEventListener('click',function(){if(!window.confirm('Reset your saved exam statistics on this device?'))return;writeStats({attempts:0,correct:0,best:0});updateStats()});
+updateStats();
+})();
+</script></body>
 </html>
 
 <style id="wide-reading-notes-layout">
