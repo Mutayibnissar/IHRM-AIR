@@ -291,12 +291,13 @@ section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
     <textarea id="agentTask" placeholder="Example: Explain ethnocentric vs polycentric staffing and give me 5 exam questions."></textarea>
     <div class="agent-actions">
       <button class="btn run" id="runAgent" type="button">Run selected agent</button>
-      <button class="btn" id="runAgentTeam" type="button">Run team workflow</button>
+      <button class="btn run" id="runLiveAI" type="button">Ask Live AI</button>
+      <button class="btn" id="runAgentTeam" type="button">Run local team workflow</button>
       <button class="btn" id="clearAgentOutput" type="button">Clear output</button>
     </div>
   </div>
   <div class="agent-output" id="agentOutput" aria-live="polite" role="status"><h3>Ready for take-off</h3><p>Select a specialist and enter a study task. The team workflow runs the navigator, explainer and exam setter in sequence.</p></div>
-  <p class="agent-status">Mode: browser-based specialist agents · No API key needed · No external AI model is called from this public static site.</p>
+  <p class="agent-status">Two modes: local notes-based helpers work offline; Live AI uses a secure server-side tutor. Your notes and prompt are sent to the AI service only when you choose Ask Live AI.</p>
 </section>
 
 <section class="dest" id="u1" style="--c:var(--sun)"><div class="side"><span class="tagline">Destination 1</span><h2>Unit I: Landing in IHRM</h2>
@@ -733,6 +734,37 @@ results.textContent='Search the full notes, all four units, flashcards and revis
   d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
   d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
   d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var nav=roster.navigator.run(q);var explain=roster.explainer.run(q);var exam=roster.exam.run(q);out.innerHTML='<h3>🤝 Coordinated agent workflow</h3><p><span class="agent-chip">1 · Navigator</span><span class="agent-chip">2 · Explainer</span><span class="agent-chip">3 · Exam Setter</span></p><details open><summary>Step 1 — Find relevant notes</summary>'+nav.body+'</details><details open><summary>Step 2 — Build understanding</summary>'+explain.body+'</details><details open><summary>Step 3 — Test retrieval</summary>'+exam.body+'</details><p class="agent-status">Workflow complete. Each specialist used the local IHRM study material; no external AI service was called.</p>';out.scrollIntoView({behavior:'smooth',block:'nearest'})});
+  d.getElementById('runLiveAI').addEventListener('click',async function(){
+    var q=task.value.trim();
+    if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
+    var roleMap={coach:'study-coach',explainer:'concept-explainer',exam:'exam-setter',flashcards:'flashcard-maker',planner:'revision-planner',navigator:'notes-navigator'};
+    var active=d.querySelector('.agent-card[aria-pressed="true"]');
+    var role=selected==='team'?'coordinated-workflow':(roleMap[selected]||'study-coach');
+    var terms=q.toLowerCase().split(/[^a-z0-9]+/).filter(function(t){return t.length>2});
+    var blocks=Array.from(d.querySelectorAll('details.tag, details.full-notes'));
+    var scored=blocks.map(function(el){var text=(el.innerText||'').replace(/\\s+/g,' ').trim();var low=text.toLowerCase();return {text:text,score:terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0)}}).filter(function(x){return x.score>0});
+    scored.sort(function(a,b){return b.score-a.score});
+    var context=scored.slice(0,12).map(function(x){return x.text}).join('\\n\\n').slice(0,11500);
+    var button=this;button.disabled=true;button.textContent='Thinking…';
+    out.innerHTML='<h3>✈ Live AI tutor is working</h3><p>Sending your request and relevant course notes securely to the study backend…</p>';
+    try{
+      var response=await fetch('https://ihrm-air-ai-study-backend.floot.app/_api/study-assistant',{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=UTF-8'},
+        body:JSON.stringify({role:role,prompt:q,courseContext:context,answerStyle:'exam-ready',questionCount:8})
+      });
+      var data=await response.json();
+      if(!response.ok)throw new Error(data&&data.error?data.error:'The AI request failed.');
+      out.innerHTML='';
+      var heading=d.createElement('h3');heading.textContent='✦ Live AI · '+(active?active.innerText.replace(/\\s+/g,' ').trim():'Study Coach');out.appendChild(heading);
+      var answer=d.createElement('div');answer.style.whiteSpace='pre-wrap';answer.style.lineHeight='1.7';answer.style.overflowWrap='anywhere';answer.textContent=data.answer||'No answer returned.';out.appendChild(answer);
+      var meta=d.createElement('p');meta.className='agent-status';meta.textContent='Model: '+(data.model||'AI tutor')+' · Check important facts against your prescribed course material.';out.appendChild(meta);
+      out.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }catch(err){
+      out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Live AI is not ready';out.appendChild(heading);
+      var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach the AI service.')+' You can still use the local notes-based agents while the backend/API connection is completed.';out.appendChild(message);
+    }finally{button.disabled=false;button.textContent='Ask Live AI'}
+  });
   d.getElementById('clearAgentOutput').addEventListener('click',function(){out.innerHTML='<h3>Ready for take-off</h3><p>Output cleared. Choose a specialist and enter a new task.</p>'});
 })();
 </script>
