@@ -237,3 +237,77 @@ p,li,.muted,.subtitle,.description{color:var(--air-muted)}
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
 }
+
+
+/* IHRM Air — purposeful arrows, flow cues and geometric UI accents */
+:root{
+ --air-arrow-bg:color-mix(in srgb,var(--air-blue) 10%,var(--air-surface));
+ --air-arrow-border:color-mix(in srgb,var(--air-blue) 30%,var(--air-line));
+}
+body{
+ background-image:
+   radial-gradient(circle at 7% 12%,color-mix(in srgb,var(--air-blue) 7%,transparent) 0 3px,transparent 4px),
+   radial-gradient(circle at 93% 28%,color-mix(in srgb,var(--air-green) 7%,transparent) 0 4px,transparent 5px);
+ background-attachment:fixed;
+}
+:where(.card,.unit-card,.tool-card,.feature-card,.destination-card,.panel,.question-card,.stat-card,.study-card){
+ position:relative;
+}
+:where(.card,.unit-card,.tool-card,.feature-card,.destination-card,.panel,.study-card)::before{
+ content:"";
+ position:absolute;
+ top:0;right:0;
+ width:32px;height:32px;
+ border-top:3px solid color-mix(in srgb,var(--air-blue) 35%,transparent);
+ border-right:3px solid color-mix(in srgb,var(--air-blue) 35%,transparent);
+ border-top-right-radius:inherit;
+ pointer-events:none;
+ opacity:.7;
+}
+:where(.primary,.btn-primary,.secondary-cta,.destination-card a,.feature-card a){
+ position:relative;
+}
+:where(.primary,.btn-primary,.secondary-cta)::after{
+ content:" ↗";
+ display:inline-block;
+ margin-left:.25em;
+ font-weight:900;
+ transition:transform .2s ease;
+}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ :where(.primary,.btn-primary,.secondary-cta):hover::after{transform:translate(3px,-2px)}
+}
+:where(a[href$=".html"]:not(.logo):not(.site-page-nav a):not(.topnav a):not(.site-back-button)){
+ text-decoration-thickness:1.5px;
+ text-underline-offset:3px;
+}
+:where(.site-page-nav a,.topnav a){
+ display:inline-flex;align-items:center;gap:7px;
+}
+:where(.site-page-nav a,.topnav a)[aria-current="page"]::before{content:"●";font-size:.55em;line-height:1}
+:where(.site-back-button)::before{content:"←";font-size:1.1em}
+:where(.site-nav-toggle[aria-expanded="true"])::after{content:"⌃";margin-left:4px}
+:where(.site-nav-toggle[aria-expanded="false"])::after{content:"⌄";margin-left:4px}
+:where(h2)::after{
+ content:"";
+ display:block;
+ width:54px;height:4px;margin-top:9px;
+ border-radius:9px;
+ background:linear-gradient(90deg,var(--air-blue) 0 65%,var(--air-yellow) 65% 100%);
+ opacity:.8;
+}
+:where(.hero h2)::after{display:none}
+.flow-arrow{
+ display:inline-grid;place-items:center;
+ width:34px;height:34px;border-radius:50%;
+ color:var(--air-blue);background:var(--air-arrow-bg);
+ border:1px solid var(--air-arrow-border);font-weight:900;
+}
+@media(max-width:760px){
+ :where(.site-page-nav a,.topnav a){justify-content:flex-start}
+ :where(.primary,.btn-primary,.secondary-cta){min-height:44px}
+ :where(.card,.unit-card,.tool-card,.feature-card,.destination-card,.panel,.study-card)::before{width:24px;height:24px}
+}
+@media(prefers-reduced-motion:reduce){
+ :where(.primary,.btn-primary,.secondary-cta)::after{transition:none}
+}
