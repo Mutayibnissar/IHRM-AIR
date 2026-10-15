@@ -831,7 +831,8 @@ results.textContent='Search the full notes, all four units, flashcards and revis
     var response=await fetch(API_BASE_URL+'/api/agent',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token,'apikey':window.airSupabaseAnonKey}:{'Content-Type':'application/json','apikey':window.airSupabaseAnonKey||''}})(),\n      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
+      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token,'apikey':window.airSupabaseAnonKey}:{'Content-Type':'application/json','apikey':window.airSupabaseAnonKey||''}})(),
+      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
     });
     var data;
     try{data=await response.json()}catch(_){throw new Error('The AI backend returned an invalid response. Check that the Worker is deployed correctly.')}
