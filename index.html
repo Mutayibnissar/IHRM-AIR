@@ -1885,7 +1885,7 @@ function renderQuestion(){
  else if(session.mode==='practice'){var chosen=session.answers[session.pos],correct=chosen===item.a;feedback.innerHTML='<div class="feedback-box '+(correct?'correct-feedback':'incorrect-feedback')+'"><strong>'+(correct?'Correct ✓':'Not quite — review the explanation')+'</strong><p></p></div>';feedback.querySelector('p').textContent=item.e}
 }
 function finishSession(expired){
- if(!session)return;stopTimer();
+ if(!session||session.finished)return;session.finished=true;stopTimer();
  var correct=0,answered=0;
  session.items.forEach(function(item,i){if(session.answers[i]!==undefined){answered++;if(session.answers[i]===item.a)correct++}});
  var score=Math.round(correct/session.items.length*100),st=readStats();
