@@ -41,10 +41,10 @@
   var attempts=Number(s.attempts)||0,correct=Number(s.correct)||0,best=Number(s.best)||0;
   get('homeAttempts').textContent=attempts;
   get('homeAccuracy').textContent=attempts?Math.round(correct/attempts*100)+'%':'—';
-  get('homeBest').textContent=best>0?Math.round(best*100)+'%':'—';
+  get('homeBest').textContent=best>0?Math.round(best)+'%':'—';
   get('homeProgressMessage').textContent=attempts?'You have answered '+attempts+' question'+(attempts===1?'':'s')+'. Keep practising and revisit explanations for missed answers.':'Your progress will appear here after your first practice question.';
  }catch(e){}
  var toggle=document.querySelector('.site-nav-toggle'),nav=document.getElementById('sitePageNav'),bar=toggle&&toggle.parentElement;
  if(toggle&&nav){var page=location.pathname.split('/').pop()||'index.html';nav.querySelectorAll('a[data-page]').forEach(function(a){if(a.dataset.page===page)a.setAttribute('aria-current','page')});toggle.addEventListener('click',function(){var open=bar.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',String(open));toggle.querySelector('span').textContent=open?'Close menu':'Menu'});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&bar.classList.contains('nav-open')){bar.classList.remove('nav-open');toggle.setAttribute('aria-expanded','false');toggle.querySelector('span').textContent='Menu';toggle.focus()}})}
 })();
-</script><footer class="site-footer">IHRM Air · IMBA International Human Resource Management · Study support, not an official university examination paper.</footer></body></html>
+</script></body></html>
