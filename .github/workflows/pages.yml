@@ -24,6 +24,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate multi-page study hub
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          required = {
+              "index.html": ["units.html", "practice.html", "tools.html"],
+              "units.html": ["id=\"u1\"", "id=\"u2\"", "id=\"u3\"", "id=\"u4\""],
+              "practice.html": ["id=\"exam-centre\"", "id=\"quiz\"", "id=\"integrated-cards\""],
+              "tools.html": ["id=\"study-tools\"", "id=\"focus-timer\"", "id=\"study-notes\""],
+          }
+          for filename, markers in required.items():
+              path = Path(filename)
+              if not path.is_file() or path.stat().st_size == 0:
+                  raise SystemExit(f"Missing or empty page: {filename}")
+              source = path.read_text(encoding="utf-8")
+              for marker in markers:
+                  if marker not in source:
+                      raise SystemExit(f"{filename} is missing required marker: {marker}")
+          print("All IHRM Air pages and required sections are present.")
+          PY
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
