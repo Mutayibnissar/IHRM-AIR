@@ -1882,6 +1882,7 @@ function renderQuestion(){
  next.textContent=session.pos===session.items.length-1?'View results →':'Next question →';
  mark.textContent=session.review[session.pos]?'Unmark review':'Mark for review';
  if(!isAnswered)feedback.textContent=session.mode==='mock'?'Choose one answer. Your score and explanations appear at the end.':'Choose the best answer to see feedback and an explanation.';
+ else if(session.mode==='practice'){var chosen=session.answers[session.pos],correct=chosen===item.a;feedback.innerHTML='<div class="feedback-box '+(correct?'correct-feedback':'incorrect-feedback')+'"><strong>'+(correct?'Correct ✓':'Not quite — review the explanation')+'</strong><p></p></div>';feedback.querySelector('p').textContent=item.e}
 }
 function finishSession(expired){
  if(!session)return;stopTimer();
@@ -1910,7 +1911,7 @@ function start(){
  var chosen=shuffled(eligible).slice(0,Math.min(length,eligible.length));
  session={mode:mode,items:chosen,pos:0,answers:{},review:{}};
  workspace.hidden=false;feedback.innerHTML='';finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false;
- if(mode==='mock'){session.seconds=Number($('examLength').value)*60;clock.textContent=fmt(session.seconds);timer=setInterval(function(){if(!session)return;session.seconds--;clock.textContent=fmt(Math.max(0,session.seconds));if(session.seconds<=0)finishSession(true)},1000)}else{clock.textContent='Untimed'}
+ if(mode==='mock'){session.seconds=chosen.length*60;clock.textContent=fmt(session.seconds);timer=setInterval(function(){if(!session)return;session.seconds--;clock.textContent=fmt(Math.max(0,session.seconds));if(session.seconds<=0)finishSession(true)},1000)}else{clock.textContent='Untimed'}
  renderQuestion();workspace.scrollIntoView({behavior:'smooth',block:'start'});
 }
 $('startExam').addEventListener('click',start);
