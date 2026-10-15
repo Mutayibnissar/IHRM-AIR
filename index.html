@@ -1557,3 +1557,27 @@ header.top .nav-subbuttons{white-space:normal}
 
 </body>
 </html>
+
+<style id="wide-reading-notes-layout">
+/* Make opened notes use the screen width instead of becoming a narrow, tall column. */
+.full-unit-notes{padding:0!important;width:100%!important;max-width:100%!important}
+.full-unit-notes[open]{width:100%!important;max-width:100%!important}
+.full-unit-notes>summary{width:100%;box-sizing:border-box}
+.embedded-notes{width:100%!important;max-width:100%!important;box-sizing:border-box;padding:clamp(14px,2.5vw,30px)!important}
+@media(min-width:900px){
+  .embedded-notes{column-count:2;column-gap:clamp(28px,3vw,46px);column-fill:balance}
+  .embedded-notes h3,.embedded-notes h4,.embedded-notes figure,.embedded-notes table,
+  .embedded-notes .box,.embedded-notes .tip,.embedded-notes .note,.embedded-notes .pol{
+    break-inside:avoid;page-break-inside:avoid
+  }
+  .embedded-notes h3,.embedded-notes figure,.embedded-notes table{column-span:all}
+  .embedded-notes p,.embedded-notes ul,.embedded-notes ol{break-inside:avoid}
+}
+@media(max-width:899px){
+  .embedded-notes{column-count:1;column-gap:0;padding:14px!important}
+}
+@media(max-width:600px){
+  .full-unit-notes{margin-left:0!important;margin-right:0!important}
+  .embedded-notes{padding:12px!important;font-size:15px;line-height:1.65}
+}
+</style>
