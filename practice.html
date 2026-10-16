@@ -2030,6 +2030,13 @@ function finishSession(expired){
  var correct=0,answered=0;
  session.items.forEach(function(item,i){if(session.answers[i]!==undefined){answered++;if(session.answers[i]===item.a)correct++}});
  var score=Math.round(correct/session.items.length*100),st=readStats();
+ try{
+   var history=JSON.parse(localStorage.getItem('air-exam-history')||'[]');
+   if(!Array.isArray(history))history=[];
+   history.unshift({date:new Date().toLocaleDateString(),timestamp:new Date().toISOString(),mode:session.mode,score:score,correct:correct,total:session.items.length,answered:answered,unit:$('examUnit').value});
+   localStorage.setItem('air-exam-history',JSON.stringify(history.slice(0,20)));
+ }catch(e){}
+
  if(session.mode==='mock'){st.best=Math.max(Number(st.best)||0,score);writeStats(st);updateStats()}
  sessionLabel.textContent=session.mode==='mock'?'Mock exam results':'Practice results';
  progressText.textContent=expired?'Time expired':'Completed';
