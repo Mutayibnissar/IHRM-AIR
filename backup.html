@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>IHRM Air — Progress Backup</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&amp;family=DM+Sans:wght@400;500;700&amp;family=Patrick+Hand&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#e6f1ff;--card:#fff;--ink:#14213d;--mute:#4b5d7e;--red:#e5484d;--blue:#2f6fd0;--sun:#ffc83d;--mint:#1fa77f;--sky1:#9fd0ff;--sky2:#e9f5ff;--frame:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1322;--card:#15213a;--ink:#eef3ff;--mute:#a8b8d8;--red:#ff6b70;--blue:#6fa3ff;--mint:#4fd6ad;--sky1:#27406e;--sky2:#14223f;--frame:#2a3c60}}
+:root[data-theme="dark"]{--bg:#0b1322;--card:#15213a;--ink:#eef3ff;--mute:#a8b8d8;--red:#ff6b70;--blue:#6fa3ff;--mint:#4fd6ad;--sky1:#27406e;--sky2:#14223f;--frame:#2a3c60}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 'DM Sans',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.1;margin:0}
+a{color:inherit}
+.air{background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#fff 14px 28px,var(--blue) 28px 42px,#fff 42px 56px)}
+header.top{position:sticky;top:0;z-index:30;background:var(--card);padding:calc(8px + env(safe-area-inset-top,0px)) 16px 0;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.bar{display:flex;align-items:center;gap:12px;max-width:1040px;margin:0 auto;padding-bottom:8px}
+.logo{font-family:'Fredoka';font-size:24px;font-weight:600;text-decoration:none}
+.logo b{color:var(--red)}
+.links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.links a,.btn{font:600 15px 'DM Sans';text-decoration:none;border:2px solid var(--ink);border-radius:99px;padding:3px 12px;background:none;color:var(--ink);cursor:pointer}
+.links a:hover,.btn:hover{background:var(--sun);color:#14213d}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.track{position:relative;height:26px;max-width:1040px;margin:0 auto}
+.track::before{content:"";position:absolute;left:0;right:0;top:12px;border-top:3px dashed var(--mute);opacity:.5}
+.track .fill{position:absolute;left:0;top:11px;height:5px;width:0;background:var(--red);border-radius:5px}
+.track .p{position:absolute;top:0;left:0;width:38px;height:26px;color:var(--ink);transform:translateX(-50%)}
+.air.strip{height:8px;margin:0 -16px}
+.hero{position:relative;overflow:hidden;padding:48px 16px 64px;background:linear-gradient(var(--sky1),var(--sky2))}
+.cloud{position:absolute;width:150px;height:46px;border-radius:99px;background:#fff;opacity:.85;filter:blur(1px);animation:drift 40s linear infinite}
+.cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud::before{width:62px;height:62px;left:24px;top:-30px}.cloud::after{width:48px;height:48px;left:72px;top:-20px}
+.c1{top:30px;left:-160px}.c2{top:150px;left:-160px;animation-duration:58s;animation-delay:-20s;transform:scale(.7)}.c3{top:260px;left:-160px;animation-duration:70s;animation-delay:-45s;transform:scale(1.1)}
+@keyframes drift{to{translate:calc(100vw + 340px) 0}}
+.fly{position:absolute;top:70px;left:-120px;width:110px;color:#fff;filter:drop-shadow(0 6px 4px rgba(0,0,0,.2));animation:fly 14s ease-in-out infinite}
+@keyframes fly{0%{translate:0 20px;rotate:-5deg}50%{translate:calc(50vw + 60px) -14px;rotate:2deg}100%{translate:calc(100vw + 160px) 20px;rotate:-5deg}}
+.pass{position:relative;max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr;background:var(--card);border-radius:20px;box-shadow:0 14px 30px rgba(10,30,70,.3);overflow:hidden}
+@media(min-width:760px){.pass{grid-template-columns:1fr 230px}.stub{border-left:3px dashed var(--mute)}}
+.pass .air{height:12px;grid-column:1/-1}
+.main{padding:26px 26px 30px}
+.main h1{font-size:clamp(36px,7vw,62px);margin:10px 0 12px}
+.main h1 em{font-style:normal;color:var(--red)}
+.route{display:flex;align-items:center;gap:10px;font:600 15px 'DM Sans';color:var(--mute)}
+.route svg{width:36px}
+.stub{padding:22px;background:var(--bg);display:grid;gap:6px;align-content:center;font-size:14px;color:var(--mute)}
+.stub b{display:block;font:600 24px 'Fredoka';color:var(--ink)}
+.go{display:inline-block;margin-top:14px;background:var(--red);color:#fff;font:600 18px 'Fredoka';padding:10px 24px;border-radius:99px;text-decoration:none;box-shadow:0 5px 0 #a12a2e;transition:transform .1s}
+.go:active{transform:translateY(4px);box-shadow:0 1px 0 #a12a2e}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stats span{background:var(--bg);border-radius:12px;padding:4px 12px;font-weight:700;font-size:14px}
+main{max-width:1040px;margin:0 auto;padding:0 16px}
+.dest{display:grid;gap:22px;padding:56px 0 8px;grid-template-columns:1fr}
+@media(min-width:820px){.dest{grid-template-columns:260px 1fr;gap:36px}.dest .side{position:sticky;top:110px;align-self:start}}
+.tagline{display:inline-block;background:var(--c);color:#14213d;font:700 14px 'DM Sans';padding:2px 12px;border-radius:99px}
+.dest h2{font-size:clamp(28px,5vw,40px);margin:10px 0 14px}
+.win{width:170px;height:226px;margin:0 0 16px;border-radius:50%/42%;border:9px solid var(--frame);outline:3px solid var(--mute);background:linear-gradient(var(--sky1),var(--sky2));overflow:hidden;box-shadow:inset 0 6px 16px rgba(0,0,0,.25)}
+.win svg{width:100%;height:100%;display:block;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.stampbtn{display:inline-flex;align-items:center;gap:8px;font:600 16px 'Fredoka';background:var(--card);color:var(--ink);border:3px solid var(--c);border-radius:14px;padding:6px 14px;cursor:pointer}
+.stampbtn[aria-pressed="true"]{background:var(--c);color:#14213d}
+.tags{display:grid;gap:12px;align-content:start}
+details.tag{position:relative;background:var(--card);border-radius:16px;padding:0 18px 0 46px;box-shadow:0 3px 0 rgba(0,0,0,.14);border-left:8px solid var(--c);transition:box-shadow .2s}
+details.tag::before{content:"";position:absolute;left:16px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 3px rgba(0,0,0,.3)}
+details.tag[open]{box-shadow:0 8px 20px rgba(0,0,0,.18)}
+summary{list-style:none;cursor:pointer;font:600 19px 'Fredoka';padding:14px 0}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;font-size:26px;line-height:1;color:var(--c);transition:rotate .25s}
+details[open] summary::after{rotate:45deg}
+.tag div{padding:0 0 16px;color:var(--ink)}
+.tag ul{margin:6px 0 0;padding-left:20px}
+.tag li{margin:3px 0}
+.hint{background:var(--sun);color:#14213d;border-radius:12px;padding:8px 14px;font-weight:700;font-size:15px;margin-top:8px;display:block}
+.pp{margin:72px 0 0;background:var(--card);border-radius:22px;padding:28px 22px;box-shadow:0 8px 24px rgba(0,0,0,.15);border:4px solid var(--blue)}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-top:18px}
+.slot{aspect-ratio:1;border:3px dashed var(--mute);border-radius:16px;display:grid;place-items:center;font:600 14px 'Fredoka';color:var(--mute);text-align:center;padding:6px}
+.slot svg{width:90%;display:none}
+.slot.on{border-style:solid;border-color:transparent}.slot.on span{display:none}.slot.on svg{display:block;animation:pop .6s cubic-bezier(.2,1.8,.4,1)}
+@keyframes pop{from{scale:2.4;rotate:-40deg;opacity:0}to{scale:1;rotate:-8deg;opacity:1}}
+.quiz{margin:56px 0 72px}
+.q{background:var(--card);border-radius:18px;padding:20px;box-shadow:0 4px 0 rgba(0,0,0,.14)}
+.q h3{font-size:22px;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;font:500 17px 'DM Sans';background:var(--bg);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:10px 14px;margin:8px 0;cursor:pointer}
+.opt:hover{border-color:var(--blue)}
+.opt.ok{background:var(--mint);color:#06281f;animation:pop2 .4s}.opt.no{background:var(--red);color:#fff;animation:shake .35s}
+@keyframes pop2{50%{transform:scale(1.04)}}@keyframes shake{25%{translate:-6px 0}75%{translate:6px 0}}
+.score{font:600 22px 'Fredoka';margin-top:12px}
+footer{text-align:center;padding:0 16px 40px;color:var(--mute);font-size:14px}
+footer .air{height:10px;margin:0 -16px 24px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* IHRM Air UI/UX system refresh */
+:root[data-theme="dark"]{--bg:#0b1322;--card:#15213a;--ink:#eef3ff;--mute:#a8b8d8;--red:#ff6b70;--blue:#6fa3ff;--mint:#4fd6ad;--sky:#14223f;--sky1:#27406e;--sky2:#14223f;--frame:#2a3c60}
+:root{color-scheme:light dark;--ui-radius:18px;--ui-shadow:0 8px 24px rgba(20,33,61,.08);--ui-border:color-mix(in srgb,var(--ink) 16%,transparent);--ui-surface:var(--card);--ui-focus:#ffb800}
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+html{scroll-padding-top:100px}
+body{min-height:100vh;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+::selection{background:var(--sun);color:#14213d}
+a,button,input,select,textarea,summary{touch-action:manipulation}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--ui-focus)!important;outline-offset:3px!important}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+img,svg,video,canvas{max-width:100%;height:auto}
+main,.main,.content,.page-intro-inner,.hero-inner{min-width:0}
+main{width:100%}
+p,li{overflow-wrap:anywhere}
+table{max-width:100%}
+.site-nav-wrap{position:sticky;top:0;z-index:100;backdrop-filter:saturate(140%) blur(14px);box-shadow:0 5px 22px rgba(20,33,61,.08)}
+.site-page-nav{align-items:center}
+.site-page-nav a,[data-page]{transition:background .18s ease,transform .18s ease,box-shadow .18s ease}
+.site-page-nav a[aria-current="page"]{background:var(--sun)!important;color:#14213d!important;box-shadow:0 2px 0 rgba(20,33,61,.15)}
+.site-page-nav a:hover{transform:translateY(-1px)}
+.site-theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border:1.5px solid var(--ui-border);border-radius:999px;background:var(--ui-surface);color:var(--ink);font-weight:800;white-space:nowrap}
+.site-nav-toggle{min-height:40px}
+.site-page-nav .site-theme-toggle{margin-left:4px}
+main section,.page-intro,.hero{scroll-margin-top:100px}
+.card,.unit-card,.tool-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.study-card{border-radius:var(--ui-radius)}
+button,.btn,.primary,.page-home-cta{transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}
+button:hover,.btn:hover,.primary:hover,.page-home-cta:hover{filter:brightness(.99)}
+button:active,.btn:active,.primary:active{transform:translateY(1px)}
+input,select,textarea{max-width:100%;border-radius:10px}
+:where(input,select,textarea):not([type=checkbox]):not([type=radio]){min-height:42px}
+:where(textarea){resize:vertical}
+:where(.hero,.page-intro){isolation:isolate}
+.page-intro-inner{max-width:1180px;margin-inline:auto}
+:where(.hero h1,.page-intro h1){text-wrap:balance}
+:where(.hero p,.page-intro p){max-width:72ch}
+:where(.unit-card,.progress-card,.feature-card,.tool-card,.panel,.exam-panel,.quiz-card){min-width:0}
+:where(.unit-card,.progress-card,.feature-card,.tool-card,.panel,.exam-panel,.quiz-card):hover{transition:box-shadow .2s ease,border-color .2s ease}
+#siteReadingProgress{position:fixed;top:0;left:0;z-index:200;width:100%;height:3px;pointer-events:none;background:transparent}
+#siteReadingProgress span{display:block;width:0;height:100%;background:var(--mint);transition:width .08s linear}
+#siteBackTop{position:fixed;right:18px;bottom:18px;z-index:90;display:grid;place-items:center;width:46px;height:46px;border:2px solid var(--ink);border-radius:50%;background:var(--sun);color:#14213d;font-size:1.2rem;font-weight:900;box-shadow:3px 3px 0 var(--ink);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
+#siteBackTop.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.site-status{font-size:.85rem;color:var(--mute)}
+:where(.site-page-nav a,.site-theme-toggle){min-height:40px}
+@media(min-width:900px){main{margin-inline:auto}.page-intro-inner{padding-inline:24px}}
+@media(max-width:760px){
+ .site-nav-wrap{gap:10px}
+ .site-page-nav{gap:8px}
+ .site-page-nav a{min-height:42px;display:inline-flex;align-items:center;justify-content:center}
+ .site-page-nav .site-theme-toggle{margin:0}
+ .hero{padding-top:clamp(38px,8vw,64px);padding-bottom:clamp(38px,8vw,64px)}
+ .page-intro{padding-inline:16px}
+ .site-nav-wrap.nav-open .site-page-nav{padding:10px 0 12px}
+}
+@media(max-width:480px){
+ body{font-size:16px}
+ .logo{font-size:1.35rem}
+ .site-theme-toggle{padding:8px 10px}
+ #siteBackTop{right:12px;bottom:12px;width:42px;height:42px}
+ :where(button,.btn,.primary,.page-home-cta){max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+</style>
+<style>
+:root{
+  --desk:#c9b79c; --paper:#fffef8; --rule:#bcd6ee; --margin:#e58a8a;
+  --ink:#1c3f94; --red:#c4302b; --green:#1e7a45; --note:#fff176; --notetext:#4a3b00;
+  --hl:#fff3a0; --hole:#8d7c64;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --desk:#14161d; --paper:#1f2433; --rule:#303a58; --margin:#8a4a55;
+    --ink:#a9c1ff; --red:#ff8d85; --green:#7fdca0; --note:#5b4f10; --notetext:#fff0a8;
+    --hl:#5a5316; --hole:#0c0d12;
+  }
+}
+:root[data-theme="dark"]{
+  --desk:#14161d; --paper:#1f2433; --rule:#303a58; --margin:#8a4a55;
+  --ink:#a9c1ff; --red:#ff8d85; --green:#7fdca0; --note:#5b4f10; --notetext:#fff0a8;
+  --hl:#5a5316; --hole:#0c0d12;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--desk);color:var(--ink);font-family:'Kalam','Segoe Print','Bradley Hand',cursive;font-size:19px}
+.sheet{
+  max-width:760px;margin:16px auto;padding:32px 20px 64px 74px;position:relative;
+  background-color:var(--paper);
+  background-image:linear-gradient(90deg,transparent 56px,var(--margin) 56px,var(--margin) 58px,transparent 58px),
+    repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px);
+  background-position:0 0,0 31px;
+  line-height:32px;box-shadow:0 2px 14px rgba(0,0,0,.35);border-radius:4px;
+}
+.sheet::before{content:"";position:absolute;left:12px;top:0;bottom:0;width:20px;
+  background:radial-gradient(circle at 10px 10px,var(--hole) 0 8px,transparent 9px) 0 24px/20px 96px repeat-y}
+h1,h2,h3{font-family:'Caveat','Kalam',cursive;font-weight:700;margin:0;line-height:32px}
+h1{font-size:46px;line-height:64px;color:var(--red);margin-bottom:0}
+h2{font-size:36px;line-height:64px;color:var(--red);margin-top:32px;
+  text-decoration:underline wavy var(--red);text-decoration-thickness:1.5px;text-underline-offset:6px}
+h3{font-size:27px;color:var(--green);margin-top:32px}
+p{margin:0 0 32px}
+ul{margin:0 0 32px;padding-left:26px;list-style:none}
+li{position:relative;margin:0}
+li::before{content:"\270E";position:absolute;left:-24px;color:var(--green);font-size:15px}
+ul ul{margin:0 0 0;padding-left:22px}
+ul ul li::before{content:"-";font-size:19px;left:-16px}
+b,strong{font-weight:700}
+.hl{background:linear-gradient(transparent 22%,var(--hl) 22%,var(--hl) 88%,transparent 88%);padding:0 2px}
+.red{color:var(--red);font-weight:700}
+.sub{font-size:17px;color:var(--green)}
+body nav:not(.links){display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 32px}
+nav a{font-family:'Caveat',cursive;font-size:25px;line-height:32px;color:var(--ink);text-decoration:none;
+  border:2px solid var(--ink);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;padding:0 14px}
+.note{background:var(--note);color:var(--notetext);transform:rotate(-1deg);padding:16px 16px;margin:0 0 32px;
+  box-shadow:2px 3px 6px rgba(0,0,0,.3);line-height:32px}
+.note b{font-family:'Caveat',cursive;font-size:25px}
+.tip{border:2px dashed var(--red);border-radius:10px;padding:14px 14px;margin:0 0 32px;color:var(--red);transform:rotate(.6deg)}
+.eq{font-family:'Caveat',cursive;font-size:25px;color:var(--red);margin:0 0 32px;line-height:32px}
+.row{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:620px){.row{grid-template-columns:1fr 1fr;column-gap:24px}}
+@media(max-width:480px){.sheet{margin:0;border-radius:0;padding:24px 12px 48px 56px;font-size:17px}
+  .sheet{background-image:linear-gradient(90deg,transparent 40px,var(--margin) 40px,var(--margin) 42px,transparent 42px),
+    repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px)}
+  .sheet::before{left:6px;width:16px} h1{font-size:38px}}
+.fig{margin:0 0 32px}.fig svg{display:block;width:100%;height:224px}
+.fig *{stroke-linecap:round;stroke-linejoin:round}
+.fig text{font-family:'Caveat',cursive;fill:var(--ink);font-size:21px;stroke:none}
+.fig .rt{fill:var(--red)}.fig .gt{fill:var(--green)}
+.fig .ln{fill:none;stroke:var(--ink);stroke-width:2.5}
+.fig .rl{fill:none;stroke:var(--red);stroke-width:2.5}
+.fig .gl{fill:none;stroke:var(--green);stroke-width:2.5}
+.fig .fl{fill:var(--hl);stroke:var(--ink);stroke-width:2.5}
+.globe{float:right;width:120px;height:128px;margin:0 0 0 12px}
+.globe *{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.tool{font-family:'Caveat',cursive;font-size:24px;line-height:32px;color:var(--ink);background:none;cursor:pointer;border:2px solid var(--green);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;padding:0 14px}
+.tool:focus-visible,nav a:focus-visible,.card:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.prog{margin:0 0 32px;display:flex;flex-wrap:wrap;gap:0 18px;align-items:center}
+.prog label{cursor:pointer;white-space:nowrap}.prog input{accent-color:var(--green);width:18px;height:18px;vertical-align:-3px}
+.study-tools .bar{height:14px;flex:1 1 100%;border:2px solid var(--ink);border-radius:8px;overflow:hidden;margin:9px 0 9px}
+.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+.cards{display:grid;grid-template-columns:1fr;gap:16px 16px;margin:0 0 32px}
+@media(min-width:620px){.cards{grid-template-columns:1fr 1fr}}
+.card{font:inherit;line-height:32px;text-align:left;color:var(--notetext);background:var(--note);border:0;cursor:pointer;padding:14px 14px;min-height:96px;box-shadow:2px 3px 6px rgba(0,0,0,.3);transform:rotate(-.8deg)}
+.card:nth-child(even){transform:rotate(.8deg)}
+.card .a{display:none;color:var(--red);font-weight:700}
+.card.on .q{display:none}.card.on .a{display:block}
+details{margin:0 0 0}summary{cursor:pointer;color:var(--green);font-weight:700}
+details p{margin:0 0 0;padding-left:18px;color:var(--red)}
+#top{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;font-size:22px;padding:0;background:var(--paper);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+@media print{#top,.tool{display:none}}
+.globe{display:none}
+body{background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(160deg,rgba(255,255,255,.08),rgba(0,0,0,.3))}
+.sheet{box-shadow:0 2px 14px rgba(0,0,0,.4),5px 7px 0 -1px rgba(255,255,255,.45),9px 13px 0 -2px rgba(255,255,255,.25)}
+.sheet::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:4px;opacity:.07;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+#rp{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:4px;width:0;background:var(--red);z-index:20}
+.cover{position:relative;display:flex;align-items:center;gap:16px;height:192px;box-sizing:border-box;padding:16px 20px;margin:0 0 32px;border-radius:10px;color:#f3e6bf;background:linear-gradient(145deg,#1d3a73,#0f1d3d);outline:2px dashed rgba(216,180,90,.75);outline-offset:-10px;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.cover h1{font-size:42px;line-height:40px;margin:0 0 8px;color:#f1d27a}
+.cover p{margin:0;font-size:16px;line-height:26px}
+.cover svg{flex:0 0 104px;width:104px;height:104px}
+.cover svg *{fill:none;stroke:#d8b45a;stroke-width:2.5;stroke-linecap:round}
+.rib{position:absolute;top:-6px;right:22px;width:26px;height:92px;background:var(--red);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
+.note{position:relative}.note::before{content:"";position:absolute;top:-10px;left:50%;width:84px;height:22px;margin-left:-42px;background:rgba(229,138,138,.6);transform:rotate(3deg)}
+.pol{position:relative;float:right;width:176px;height:192px;box-sizing:border-box;margin:0 0 0 18px;padding:10px 10px 0;background:#fff;box-shadow:2px 4px 10px rgba(0,0,0,.4);transform:rotate(2deg)}
+.pol.l{transform:rotate(-2deg)}
+.pol::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:rgba(240,200,90,.7);transform:rotate(-4deg)}
+.pol svg{display:block;width:156px;height:128px;background:#dcecf7}
+.pol figcaption{font-family:'Caveat',cursive;font-size:22px;line-height:32px;color:#2b2b2b;text-align:center}
+@media(max-width:480px){.pol{float:none;margin:0 auto 32px}.cover{padding:12px}.cover h1{font-size:32px;line-height:34px}.cover svg{flex-basis:72px;width:72px;height:72px}}
+</style><style>
+.integration-link{display:inline-flex;align-items:center;justify-content:center;margin:.3rem .35rem .2rem 0;padding:.55rem .85rem;border:1px solid rgba(255,255,255,.24);border-radius:999px;text-decoration:none;font-weight:700;font-size:.9rem;background:rgba(255,255,255,.08);color:inherit;}
+.full-notes{margin:1.1rem 0 0;padding:1rem 1.1rem;border:1px solid var(--line,rgba(120,130,150,.28));border-radius:18px;background:rgba(127,145,165,.07);}
+.full-notes>summary{cursor:pointer;font-weight:800;padding:.4rem .1rem;}
+.full-notes[open]>summary{margin-bottom:1rem;color:var(--accent,#2c8fbd);}
+.notes-hub{margin-top:2rem;}
+.notes-hub h3{margin-top:1.5rem;}
+.notes-hub .cards{display:grid;gap:.7rem;}
+@media(max-width:600px){.integration-link{font-size:.82rem;padding:.5rem .65rem}.full-notes{padding:.75rem}}
+
+/* Study controls, accessibility and responsive fixes */
+.study-tools{position:relative;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:1040px;margin:18px auto;padding:12px;background:var(--card);border:1px solid var(--frame);border-radius:16px;box-shadow:0 4px 14px rgba(10,30,70,.08)}
+.study-tools input{flex:1 1 220px;min-width:0;padding:10px 12px;border:2px solid var(--mute);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.study-tools .btn{padding:7px 11px;min-height:40px;white-space:nowrap}
+#searchResults{flex-basis:100%;font-size:.92rem;color:var(--mute)}
+.search-hit{outline:3px solid var(--sun)!important;outline-offset:3px;border-radius:5px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.result-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.result-item{border:1px solid var(--mute);border-radius:9px;padding:6px 9px;background:var(--bg);color:var(--ink);font:inherit;text-align:left;cursor:pointer;max-width:100%}.result-item:hover{background:var(--sun);color:#14213d}
+/* Gentle handwritten accent, deliberately upright and readable */
+.hint,.note,.stampbtn,.slot>span{font-family:'Patrick Hand','DM Sans',sans-serif;font-style:normal}
+button{touch-action:manipulation}
+button:disabled{cursor:not-allowed;opacity:.7}
+@media(max-width:600px){.study-tools{margin:12px 10px;padding:10px}.study-tools .btn{flex:1 1 auto;font-size:13px}.bar{align-items:flex-start;flex-wrap:wrap}.links{margin-left:0;width:100%;justify-content:flex-start}.links a,.links .btn{padding:5px 10px}.main{padding:20px 17px}.hero{padding:30px 12px 42px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{header.top,.hero,.study-tools,.stampbtn,.quiz,.pp,footer{display:none!important}body{background:#fff!important;color:#111!important;font-size:11pt}.dest,.notes-hub{break-inside:avoid;border:0!important;box-shadow:none!important;background:#fff!important;color:#111!important}.dest details{display:block}.dest details>div{display:block!important}a{color:#111!important;text-decoration:none}}
+
+/* Top navigation/action rail: responsive, readable, and above all study content */
+.top-actions{max-width:1040px;margin:10px auto 0;padding:0 16px 10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.top-actions a,.top-actions button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:7px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--bg);color:var(--ink);font:700 14px 'DM Sans',sans-serif;text-decoration:none;cursor:pointer;white-space:nowrap}
+.top-actions a.primary{background:var(--red);border-color:var(--red);color:#fff}
+.top-actions a:hover,.top-actions button:hover{background:var(--sun);color:#14213d}
+.study-tools{scroll-margin-top:120px}
+section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:120px}
+@media(max-width:600px){.top-actions{padding:0 10px 10px;gap:6px}.top-actions a{font-size:12px;min-height:38px;padding:6px 9px}}
+
+</style><style>
+/* Agentic Study Crew — adapted specialist-role architecture from agency-agents */
+.agent-lab{margin:34px 0 18px;padding:24px;background:var(--card);border:3px solid var(--mint);border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.13)}
+.agent-lab h2{font-family:'Fredoka',sans-serif;color:var(--ink);text-decoration:none;font-size:clamp(28px,5vw,38px);line-height:1.15;margin:0 0 8px}
+.agent-intro{color:var(--mute);margin:0 0 18px}
+.agent-roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:14px 0 18px}
+.agent-card{background:var(--bg);border:2px solid transparent;border-radius:14px;padding:12px;text-align:left;color:var(--ink);cursor:pointer;font:inherit;line-height:1.35}
+.agent-card strong{display:block;font-family:'Fredoka',sans-serif;font-size:17px;margin-bottom:4px}
+.agent-card small{color:var(--mute);font-size:13px}
+.agent-card[aria-pressed="true"]{border-color:var(--mint);box-shadow:inset 0 0 0 1px var(--mint)}
+.agent-controls{display:grid;gap:10px}
+.agent-controls label{font-weight:700}
+.agent-controls textarea{width:100%;min-height:94px;resize:vertical;border:2px solid var(--mute);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);font:inherit}
+.agent-actions{display:flex;flex-wrap:wrap;gap:8px}
+.agent-actions .btn{padding:8px 14px}
+.agent-actions .run{background:var(--mint);border-color:var(--mint);color:#06281f}
+.agent-output{margin-top:18px;padding:16px;border-radius:14px;background:var(--bg);min-height:90px;overflow-wrap:anywhere}
+.agent-output h3{font-family:'Fredoka',sans-serif;color:var(--ink);font-size:22px;margin:0 0 10px}
+.agent-output p{margin:8px 0}
+.agent-output ul,.agent-output ol{margin:8px 0;padding-left:24px}
+.agent-output li{margin:5px 0}
+.agent-output li::before{content:none}
+.agent-status{font-size:13px;color:var(--mute);margin-top:10px}
+.agent-output .agent-chip{display:inline-block;border-radius:99px;background:var(--mint);color:#06281f;font-size:12px;font-weight:700;padding:3px 9px;margin:0 4px 6px 0}
+@media(max-width:520px){.agent-lab{padding:16px}.agent-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-actions .btn{flex:1 1 auto}}
+@media print{.agent-lab{break-inside:avoid}.agent-controls,.agent-roster{display:none}}
+</style>
+
+<style>
+/* AetherMesh local-model console */
+.local-model-panel{margin:14px 0;padding:16px;border:2px solid var(--blue);border-radius:16px;background:linear-gradient(135deg,var(--card),var(--bg));box-shadow:0 5px 18px rgba(20,40,80,.09)}
+.local-model-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.local-model-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--ink);color:var(--card);font-size:22px}
+.local-model-panel h3{margin:0;font:700 22px 'Fredoka',sans-serif;color:var(--ink)}
+.local-model-panel p{margin:7px 0;color:var(--mute);font-size:14px;line-height:1.5}
+.local-model-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media(min-width:620px){.local-model-grid{grid-template-columns:1fr 1fr}}
+.local-model-panel label{display:block;font-weight:700;font-size:13px;margin-bottom:4px}
+.local-model-panel input{width:100%;min-width:0;padding:10px 11px;border:2px solid var(--mute);border-radius:10px;background:var(--card);color:var(--ink);font:500 15px 'DM Sans',sans-serif}
+.local-model-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.local-model-actions .btn{min-height:40px}
+.local-model-status{padding:9px 11px;border-radius:10px;background:var(--card);border:1px solid var(--frame);font-size:13px!important;overflow-wrap:anywhere}
+.local-model-status[data-state="ok"]{border-color:var(--mint);color:var(--mint)}.local-model-status[data-state="error"]{border-color:var(--red);color:var(--red)}
+.local-model-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.07em;font-weight:800;padding:4px 8px;border-radius:99px;background:var(--mint);color:#06281f}
+.local-model-foot{font-size:12px!important}
+</style>
+
+
+<style id="compact-study-crew-overrides">
+/* Keep the floating study helper small, fixed and out of the way. */
+.agent-widget-launcher{
+  right:12px!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  min-height:44px!important;padding:7px 11px!important;gap:7px!important;
+  border-radius:13px!important;box-shadow:0 4px 16px rgba(0,0,0,.2)!important
+}
+.agent-widget-launcher strong{font-size:13px!important}
+.agent-widget-launcher small,.agent-widget-pulse{display:none!important}
+.agent-widget-icon{width:28px!important;height:28px!important;flex-basis:28px!important;border-radius:9px!important;font-size:18px!important}
+.agent-lab#agentic-study-crew{
+  right:12px!important;bottom:calc(64px + env(safe-area-inset-bottom,0px))!important;
+  width:min(340px,calc(100vw - 24px))!important;
+  max-height:min(58vh,440px)!important;overflow-y:auto!important;
+  padding:12px!important;border-radius:15px!important;border-width:1px!important
+}
+.agent-widget-heading{margin-bottom:8px!important;gap:8px!important}
+.agent-widget-heading h2{font-size:21px!important}
+.agent-widget-subtitle{font-size:12px!important}
+.agent-widget-close{width:30px!important;height:30px!important;flex-basis:30px!important;font-size:21px!important}
+.agent-lab#agentic-study-crew>.tagline,
+.agent-lab#agentic-study-crew .agent-intro,
+.agent-lab#agentic-study-crew .local-model-panel,
+.agent-lab#agentic-study-crew .gemini-connect,
+.agent-lab#agentic-study-crew #runLiveAI,
+.agent-lab#agentic-study-crew #runGeminiTeam,
+.agent-lab#agentic-study-crew #runLocalAI,
+.agent-lab#agentic-study-crew #runLocalAITeam,
+.agent-lab#agentic-study-crew #localModelTest,
+.agent-lab#agentic-study-crew #airCloudSignIn,
+.agent-lab#agentic-study-crew #airCloudSave,
+.agent-lab#agentic-study-crew #airCloudLoad,
+.agent-lab#agentic-study-crew #airCloudSignOut,
+.agent-lab#agentic-study-crew .agent-controls>.agent-status,
+.agent-lab#agentic-study-crew .agent-status{display:none!important}
+.agent-lab#agentic-study-crew .agent-roster{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin:8px 0!important}
+.agent-lab#agentic-study-crew .agent-card{padding:8px!important;border-radius:10px!important;font-size:12px!important}
+.agent-lab#agentic-study-crew .agent-card strong{font-size:12px!important;line-height:1.2!important}
+.agent-lab#agentic-study-crew .agent-card small{display:none!important}
+.agent-lab#agentic-study-crew .agent-card:nth-child(n+4){display:none!important}
+.agent-lab#agentic-study-crew .agent-controls{margin-top:8px!important}
+.agent-lab#agentic-study-crew .agent-controls>label{font-size:12px!important}
+.agent-lab#agentic-study-crew #agentTask{min-height:62px!important;max-height:88px!important;font-size:13px!important;padding:8px!important}
+.agent-lab#agentic-study-crew .agent-actions{gap:6px!important;margin-top:7px!important}
+.agent-lab#agentic-study-crew .agent-actions .btn{font-size:11px!important;padding:6px 8px!important}
+.agent-lab#agentic-study-crew .agent-output{max-height:18vh!important;overflow:auto!important;font-size:12px!important;padding:8px!important;margin-top:8px!important}
+.agent-lab#agentic-study-crew .agent-output h3{font-size:15px!important;margin:2px 0!important}
+.agent-lab#agentic-study-crew .agent-output p{font-size:12px!important;line-height:1.35!important}
+.agent-lab#agentic-study-crew .agent-controls .agent-actions #clearAgentOutput{display:none!important}
+@media(max-width:520px){
+ .agent-lab#agentic-study-crew{right:8px!important;bottom:calc(58px + env(safe-area-inset-bottom,0px))!important;width:calc(100vw - 16px)!important;max-height:55vh!important;padding:10px!important}
+}
+</style>
+
+
+<style id="unit-notes-and-compact-widget-fix">
+/* Full source notes are embedded under their matching unit, in sequence. */
+.full-unit-notes{margin:18px 0 4px;border:2px solid var(--blue);border-radius:14px;background:var(--card);color:var(--ink);overflow:hidden}
+.full-unit-notes>summary{cursor:pointer;padding:12px 14px;font-weight:700;background:var(--sky2);color:var(--ink);font-size:15px;list-style:none}
+.full-unit-notes>summary::-webkit-details-marker{display:none}
+.full-unit-notes>summary:after{content:"＋";float:right;font-weight:700}
+.full-unit-notes[open]>summary:after{content:"−"}
+.embedded-notes{padding:14px;max-height:none;overflow-wrap:anywhere;font-size:15px;line-height:1.65}
+.embedded-notes h3{font-size:1.25em;margin:1.1em 0 .55em;color:var(--ink)}
+.embedded-notes h4{font-size:1.08em;margin:1em 0 .4em}
+.embedded-notes p{margin:.6em 0}
+.embedded-notes ul,.embedded-notes ol{padding-left:1.4em}
+.embedded-notes li{margin:.35em 0}
+.embedded-notes table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;font-size:.92em}
+.embedded-notes th,.embedded-notes td{padding:7px;border:1px solid var(--frame);vertical-align:top}
+.embedded-notes figure{max-width:100%;margin:12px auto;text-align:center}
+.embedded-notes svg{max-width:100%;height:auto}
+.embedded-notes .tip,.embedded-notes .note,.embedded-notes .pol,.embedded-notes .box{max-width:100%;overflow-wrap:anywhere}
+#agent-launcher,#practice-launcher{position:fixed!important;right:12px!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;left:auto!important;width:auto!important;max-width:calc(100vw - 24px)!important;min-height:42px!important;height:auto!important;padding:8px 12px!important;font-size:13px!important;z-index:999!important}
+#agent-panel,#practice-panel{position:fixed!important;right:12px!important;left:auto!important;bottom:62px!important;top:auto!important;width:min(320px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;max-height:min(55vh,390px)!important;overflow:auto!important;z-index:998!important}
+#agent-panel:not(.open),#practice-panel:not(.open){display:none!important}
+@media(max-width:600px){.full-unit-notes{margin-top:14px}.embedded-notes{padding:10px;font-size:14px}#agent-panel,#practice-panel{bottom:60px!important;max-height:52vh!important}}
+</style>
+
+<style id="grouped-header-subbutton-navigation">
+.grouped-actions{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;padding-top:4px;padding-bottom:12px}
+.nav-group{position:relative;min-width:112px;border:2px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);overflow:visible}
+.nav-group>summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 13px;font-weight:700;font-size:14px;min-height:42px;white-space:nowrap}
+.nav-group>summary::-webkit-details-marker{display:none}
+.nav-group>summary:after{content:"▾";font-size:11px}
+.nav-group[open]>summary{border-bottom:1px solid var(--frame);background:var(--sky2);border-radius:11px 11px 0 0}
+.nav-subbuttons{display:flex;flex-direction:column;gap:6px;padding:8px;min-width:130px}
+.nav-subbuttons a{display:flex;align-items:center;justify-content:flex-start;min-height:36px;padding:7px 10px;border:1px solid var(--frame);border-radius:9px;background:var(--bg);color:var(--ink);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap}
+.nav-subbuttons a:hover{background:var(--sun);color:#14213d}
+.full-unit-notes>summary{font-size:15px}
+@media(min-width:601px){.nav-group[open] .nav-subbuttons{position:relative}}
+@media(max-width:600px){.grouped-actions{gap:7px;padding-left:10px;padding-right:10px}.nav-group{min-width:0;flex:1 1 28%}.nav-group>summary{padding:8px 6px;font-size:12px;min-height:40px}.nav-subbuttons{padding:6px;min-width:0}.nav-subbuttons a{font-size:12px;white-space:normal;padding:7px 8px;min-height:34px}}
+</style>
+
+<style id="navigation-blue-button-overlap-fix">
+/* Clicked navigation opens a blue overlay menu that scrolls independently. */
+header.top{isolation:isolate;z-index:100}
+.top-actions.grouped-actions{position:relative;z-index:101;overflow:visible}
+.nav-group{position:relative;z-index:102;background:#10131b;border:2px solid #10131b;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.nav-group>summary{position:relative;z-index:2;background:#10131b;color:#fff;border-radius:11px;cursor:pointer}
+.nav-group[open]{z-index:500}
+.nav-group[open]>summary{background:#2f6fd0;color:#fff;border-color:#2f6fd0;border-radius:11px 11px 0 0}
+.nav-subbuttons{position:absolute;top:calc(100% - 1px);left:-2px;right:-2px;z-index:501;display:flex;flex-direction:column;gap:7px;min-width:160px;max-height:min(52vh,340px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:10px;background:#2f6fd0;border:2px solid #2f6fd0;border-radius:0 0 13px 13px;box-shadow:0 12px 26px rgba(0,0,0,.35);animation:navBlueRise .16s ease-out}
+.nav-subbuttons a{position:relative;z-index:502;display:flex;align-items:center;min-height:38px;padding:8px 11px;background:#fff;border:1px solid rgba(255,255,255,.7);border-radius:9px;color:#14213d;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-subbuttons a:hover,.nav-subbuttons a:focus-visible{background:#ffc83d;border-color:#ffc83d;color:#14213d}
+@keyframes navBlueRise{from{opacity:.5;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+ .grouped-actions{position:relative;z-index:101}
+ .nav-group{min-width:0;flex:1 1 28%}
+ .nav-group>summary{padding:8px 6px;font-size:12px;min-height:40px}
+ .nav-subbuttons{min-width:0;width:max-content;max-width:min(190px,calc(100vw - 28px));max-height:45vh;padding:8px}
+ .nav-subbuttons a{white-space:normal;min-height:36px;padding:7px 9px}
+}
+@media(prefers-reduced-motion:reduce){.nav-subbuttons{animation:none}}
+</style>
+<style id="compact-floating-search-widget">
+.search-widget-launcher{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:1100;display:flex;align-items:center;gap:7px;min-height:42px;padding:8px 13px;border:1px solid var(--blue);border-radius:999px;background:var(--card);color:var(--ink);box-shadow:0 5px 18px rgba(0,0,0,.18);font:600 13px 'DM Sans',sans-serif;cursor:pointer}
+.search-widget-launcher:hover{background:var(--sun);color:#14213d}
+.search-widget-panel{position:fixed;left:14px;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:1101;width:min(370px,calc(100vw - 28px));max-height:min(65vh,520px);overflow:auto;padding:13px;border:1px solid var(--blue);border-radius:16px;background:var(--card);color:var(--ink);box-shadow:0 12px 38px rgba(0,0,0,.25)}
+.search-widget-panel[hidden]{display:none!important}
+.search-widget-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.search-widget-head strong{font:600 17px 'Fredoka',sans-serif}
+.search-widget-close{width:32px;height:32px;border:1px solid var(--mute);border-radius:50%;background:var(--bg);color:var(--ink);font-size:22px;cursor:pointer}
+.search-widget-panel input{box-sizing:border-box;width:100%;min-height:40px;padding:9px 11px;border:1px solid var(--mute);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.search-widget-actions{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}
+.search-widget-actions .btn{min-height:32px;padding:5px 8px;font-size:12px}
+.search-widget-panel #searchResults{font-size:12px;line-height:1.4;color:var(--mute);max-height:180px;overflow:auto}
+.search-widget-panel .result-list{display:grid;gap:5px;margin-top:8px}
+.search-widget-panel .result-item{padding:7px 8px;text-align:left;border:1px solid var(--mute);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+@media(max-width:520px){.search-widget-launcher{left:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));min-height:40px;padding:7px 11px}.search-widget-panel{left:8px;bottom:calc(58px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:62vh}}
+</style>
+<script>
+(function(){
+ var panel=document.getElementById('searchWidgetPanel'),launcher=document.getElementById('searchWidgetLauncher'),close=document.getElementById('closeSearchWidget'),input=document.getElementById('noteSearch');
+ if(!panel||!launcher||!close)return;
+ function setOpen(open){panel.hidden=!open;launcher.setAttribute('aria-expanded',String(open));if(open&&input)input.focus({preventScroll:true});}
+ launcher.addEventListener('click',function(){setOpen(panel.hidden);});
+ close.addEventListener('click',function(){setOpen(false);launcher.focus({preventScroll:true});});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden){setOpen(false);launcher.focus({preventScroll:true});}});
+})();
+</script>
+
+
+<style id="data-visual-motion-enhancement">
+/* Gentle motion for illustrations, progress graphics, study cards and quiz content */
+:root{--air-motion-duration:560ms}
+@media(prefers-reduced-motion:no-preference){
+  .pol svg,.cover svg,.hero-graphic,.illustration{transform-origin:50% 50%;animation:airGraphicFloat 5.5s ease-in-out infinite}
+  .pol:nth-of-type(even) svg{animation-delay:-2.4s}
+  .card,.agent-card,.slot,.q,.quiz,.dest,.pp{transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+  .card:hover,.agent-card:hover,.slot:hover,.q:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(25,55,95,.13)}
+  .agent-card[aria-pressed="true"]{box-shadow:0 0 0 2px var(--blue, #2f6fd0),0 8px 22px rgba(47,111,208,.14)}
+  .track .fill{transition:width .7s cubic-bezier(.2,.8,.2,1)}
+  .nav-group[open] .nav-subbuttons{animation:airDropdownEnter .2s ease-out both}
+  .search-widget-panel,.agent-lab{transition:opacity .2s ease,transform .2s ease}
+  .motion-reveal{opacity:0;transform:translateY(16px) scale(.99);transition:opacity var(--air-motion-duration) ease,transform var(--air-motion-duration) cubic-bezier(.2,.75,.25,1)}
+  .motion-reveal.motion-visible{opacity:1;transform:translateY(0) scale(1)}
+  .motion-reveal[data-motion-order="1"]{transition-delay:55ms}
+  .motion-reveal[data-motion-order="2"]{transition-delay:100ms}
+  .motion-reveal[data-motion-order="3"]{transition-delay:145ms}
+  .motion-reveal[data-motion-order="4"]{transition-delay:190ms}
+  @keyframes airGraphicFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+  @keyframes airDropdownEnter{from{opacity:0;translate:0 -5px}to{opacity:1;translate:0 0}}
+}
+@media(prefers-reduced-motion:reduce){
+  .pol svg,.cover svg,.hero-graphic,.illustration,.motion-reveal{animation:none!important;transition:none!important;transform:none!important;opacity:1!important}
+}
+
+/* Responsive study-tools dashboard */
+.study-tools-hub{scroll-margin-top:150px}
+.study-tool-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.study-tool-card{min-width:0;padding:20px;border:1px solid var(--frame);border-radius:18px;background:var(--card);box-shadow:0 5px 18px rgba(20,33,61,.07)}
+.study-tool-card h3{font-size:22px;margin:7px 0 8px}
+.study-tool-kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.tool-muted{font-size:14px;color:var(--mute);margin:0 0 14px}
+.focus-clock{font:600 clamp(42px,6vw,58px)/1.15 'Arial',sans-serif;letter-spacing:.04em;text-align:center;padding:16px 6px;color:var(--blue);font-variant-numeric:tabular-nums}
+.tool-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.tool-actions .btn{min-height:40px}
+.timer-presets .btn{font-size:12px;padding:7px 10px}
+.tool-status{font-size:12px;color:var(--mute);margin:10px 0 0}
+.study-checklist{display:grid;gap:11px;margin:16px 0}
+.study-checklist label{display:flex;align-items:flex-start;gap:10px;line-height:1.4}
+.study-checklist input{width:18px;height:18px;flex:0 0 18px;margin-top:2px;accent-color:var(--mint)}
+.study-progress-track{height:9px;border-radius:99px;overflow:hidden;background:var(--bg);border:1px solid var(--frame)}
+.study-progress-track span{display:block;height:100%;width:0;background:var(--mint);transition:width .2s ease}
+.study-notes-card textarea{display:block;width:100%;min-height:150px;resize:vertical;padding:12px;border:1px solid var(--frame);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:15px;line-height:1.55}
+.recall-question{padding:18px;border-radius:14px;background:var(--bg);font-size:18px;font-weight:700;min-height:90px;display:flex;align-items:center}
+.recall-answer{padding:12px;border-left:4px solid var(--mint);background:var(--bg);border-radius:0 10px 10px 0}
+@media(max-width:760px){.study-tool-grid{grid-template-columns:minmax(0,1fr);gap:12px}.study-tool-card{padding:16px}.focus-clock{font-size:48px}}
+
+
+/* Enhanced tool controls */
+.custom-timer,.custom-task{align-items:center}
+.custom-timer label{font-size:12px;color:var(--mute);font-weight:700}
+.custom-timer input,.custom-task input{min-width:0;width:105px;max-width:100%;padding:9px 10px;border:1px solid var(--frame);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.custom-task input{flex:1 1 150px;width:auto}
+.study-checklist label.custom-added-task{align-items:flex-start}
+.study-checklist label.custom-added-task span{flex:1;overflow-wrap:anywhere}
+.study-checklist .remove-study-task{border:0;background:transparent;color:var(--red);font-weight:800;cursor:pointer;padding:0 5px}
+.notes-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px}
+.notes-meta .tool-status{margin:0}
+.recall-confidence{border-top:1px solid var(--frame);margin-top:14px;padding-top:10px}
+.recall-confidence .tool-actions{margin-top:6px}
+#recallAgain{border-color:var(--red)}#recallGotIt{border-color:var(--mint)}
+@media(max-width:600px){.custom-timer input{flex:1 1 65px}.notes-meta{display:block}.custom-task input{flex-basis:100%}}
+
+</style>
+
+<style id="study-progress-upgrade">
+.daily-goal-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:12px 0 8px}
+.daily-goal-heading strong{font-size:14px}
+.daily-goal-heading label{font-size:13px;color:var(--mute)}
+.daily-goal-heading select{max-width:125px;border:1px solid var(--frame);border-radius:9px;background:var(--card);color:var(--ink);padding:7px}
+#study-progress .tool-actions input[type=file]{max-width:100%}
+#study-progress .tool-actions .btn{flex:1 1 145px}
+@media(max-width:600px){#study-progress .tool-actions .btn{flex:1 1 100%}}
+</style>
+<style id="exam-centre-styles">
+.exam-centre{scroll-margin-top:130px}
+.exam-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.exam-controls label{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700}
+.exam-controls select{min-width:0;width:100%;padding:11px;border:1px solid var(--frame);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.exam-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.exam-stats>div{display:flex;flex-direction:column;gap:4px;padding:13px;border:1px solid var(--frame);border-radius:12px;background:var(--card)}
+.exam-stats strong{font-size:23px}.exam-stats span{font-size:12px;color:var(--mute)}
+.exam-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.exam-actions .btn{flex:0 1 auto}
+.exam-workspace{margin-top:20px;padding:clamp(12px,2.5vw,24px);border:1px solid var(--frame);border-radius:18px;background:var(--card);color:var(--ink)}
+.exam-session-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;margin-bottom:10px}
+.exam-session-bar strong{font-size:18px;font-variant-numeric:tabular-nums}
+.exam-progress-track{height:8px;overflow:hidden;background:var(--frame);border-radius:99px;margin:10px 0 20px}
+.exam-progress-track span{display:block;height:100%;width:0;background:var(--blue);transition:width .2s}
+.exam-question-area h3{font-size:clamp(18px,2.5vw,24px);line-height:1.4;margin:8px 0 16px}
+.exam-question-meta{font-size:12px;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+.exam-option{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;padding:12px 14px;margin:9px 0;border:1px solid var(--frame);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer}
+.exam-option:hover:not(:disabled){border-color:var(--blue)}
+.exam-option:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.exam-option.correct{border-color:#18865a;background:#d8f5e8;color:#123d2d}
+.exam-option.incorrect{border-color:#c83939;background:#ffe0e0;color:#6e1717}
+.exam-option:disabled{cursor:default;opacity:1}
+.exam-option-key{font-weight:800;min-width:1.2em}
+.exam-feedback{line-height:1.65;margin-top:12px}
+.exam-feedback .feedback-box{padding:12px;border-radius:12px;background:var(--bg);border-left:4px solid var(--blue)}
+.exam-feedback .feedback-box.correct-feedback{border-left-color:#18865a}
+.exam-feedback .feedback-box.incorrect-feedback{border-left-color:#c83939}
+.exam-review-item{border-top:1px solid var(--frame);padding:12px 0}
+.exam-review-item h4{margin:4px 0 8px}
+.exam-review-item p{margin:5px 0}
+.exam-review-pill{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:3px 8px;background:var(--bg);margin-right:6px}
+.exam-empty{padding:16px;border-radius:12px;background:var(--bg)}
+@media(max-width:720px){.exam-controls{grid-template-columns:1fr}.exam-stats strong{font-size:20px}.exam-stats span{font-size:11px}.exam-actions .btn{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){.exam-progress-track span{transition:none}}
+</style>
+<style id="multi-page-layout">
+.page-nav-link{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink);font-weight:800;text-decoration:none;box-shadow:3px 3px 0 var(--ink);margin:4px}
+.page-nav-link:hover,.page-nav-link:focus-visible{transform:translateY(-1px);background:var(--sun);color:#14213d}
+.page-intro{padding:clamp(22px,5vw,54px) 16px 18px;background:linear-gradient(135deg,var(--sky2),var(--bg));border-bottom:2px solid var(--ink)}
+.page-intro-inner{max-width:1180px;margin:auto}.page-eyebrow{font-size:.78rem;letter-spacing:.13em;font-weight:900;color:var(--blue)}
+.page-intro h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;margin:.2em 0;color:var(--ink)}
+.page-intro p:not(.page-eyebrow){max-width:760px;font-size:1.08rem;color:var(--mute)}
+.page-home-cta{display:inline-block;margin-top:8px;padding:10px 15px;background:var(--sun);color:#14213d;border:2px solid var(--ink);border-radius:12px;font-weight:900;text-decoration:none;box-shadow:3px 3px 0 var(--ink)}
+#top{display:none!important}#u1,#u2,#u3,#u4,#full-notes,#exam-centre,#quiz{display:none!important}
+@media(max-width:700px){.top-actions.grouped-actions{display:flex;flex-wrap:wrap;gap:4px}.page-nav-link{padding:8px 10px;font-size:.9rem}.page-intro{padding-top:25px}}
+</style><style id="unified-site-navigation">
+.site-nav-wrap{display:flex!important;align-items:center;gap:10px;flex-wrap:wrap}
+.site-nav-toggle{display:none;align-items:center;gap:8px;padding:9px 13px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink);font:800 15px Arial,sans-serif;box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+.site-page-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.site-page-nav a{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink);font-weight:800;text-decoration:none;box-shadow:3px 3px 0 var(--ink);transition:transform .15s ease,background .15s ease}
+.site-page-nav a:hover,.site-page-nav a:focus-visible{background:var(--sun);color:#14213d;transform:translateY(-1px)}
+.site-page-nav a[aria-current="page"]{background:var(--sun);color:#14213d;box-shadow:inset 0 0 0 2px var(--ink),3px 3px 0 var(--ink)}
+.site-footer{padding:20px 16px;text-align:center;color:var(--mute);border-top:2px solid var(--ink);background:var(--card);font-size:14px}
+@media(max-width:700px){
+.site-nav-wrap{width:100%;display:block!important}
+.site-nav-toggle{display:inline-flex}
+.site-page-nav{display:none;width:100%;padding:12px 2px 4px;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.site-nav-wrap.nav-open .site-page-nav{display:grid}
+.site-page-nav a{padding:10px 8px;font-size:.9rem;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){.site-page-nav a{transition:none}}
+</style><style id="ihrm-air-shared-visual-refresh">
+/* IHRM Air 2026 visual refresh — shared design system */
+:root{--ui-radius:20px;--ui-line:color-mix(in srgb,var(--ink) 14%,transparent);--ui-elev:0 12px 32px rgba(20,33,61,.09);--ui-elev-hover:0 18px 42px rgba(20,33,61,.14)}
+body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--blue) 9%,transparent),transparent 34%),var(--bg);letter-spacing:-.012em}
+h1,h2,h3{letter-spacing:-.035em}
+:where(.top,.topbar,.site-nav-wrap){backdrop-filter:blur(16px) saturate(145%);border-bottom:1px solid var(--ui-line)}
+:where(.top,.topbar){box-shadow:0 6px 28px rgba(20,33,61,.07)}
+:where(.logo){letter-spacing:-.045em}
+:where(.site-page-nav a,.topnav a){border-radius:999px;box-shadow:none;border:1px solid var(--ui-line);padding:10px 15px}
+:where(.site-page-nav a[aria-current="page"]){box-shadow:0 4px 12px rgba(255,200,61,.24)!important}
+:where(.site-nav-toggle,.search-widget-launcher){border-radius:999px;box-shadow:none;transition:transform .18s ease,background .18s ease}
+:where(.page-intro,.hero){position:relative;isolation:isolate;overflow:hidden}
+:where(.page-intro){padding:clamp(46px,7vw,86px) clamp(18px,5vw,64px);background:linear-gradient(125deg,color-mix(in srgb,var(--blue) 15%,var(--bg)),var(--card) 62%,color-mix(in srgb,var(--mint) 12%,var(--bg)));border-bottom:1px solid var(--ui-line)}
+:where(.page-intro)::after{content:"✈";position:absolute;right:clamp(18px,8vw,120px);top:10%;font-size:clamp(5rem,13vw,11rem);line-height:1;opacity:.055;transform:rotate(-12deg);pointer-events:none;z-index:-1}
+:where(.page-intro-inner){max-width:1180px;margin-inline:auto}
+:where(.page-eyebrow,.eyebrow){font-size:.76rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+:where(.page-intro h1){font-size:clamp(2.5rem,6vw,4.8rem);max-width:900px;margin:10px 0 16px;line-height:1.02}
+:where(.page-intro p:not(.page-eyebrow)){max-width:70ch;color:var(--mute);font-size:clamp(1rem,1.6vw,1.18rem)}
+:where(.page-home-cta,.primary,.btn){min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:10px 16px;font-weight:800;text-decoration:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+:where(.page-home-cta){margin-top:10px;background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.primary){background:var(--sun);color:#14213d;border:1.5px solid #14213d;box-shadow:3px 3px 0 #14213d}
+:where(.btn){background:var(--card);color:var(--ink);border:1px solid var(--ui-line);box-shadow:0 2px 5px rgba(20,33,61,.04)}
+:where(.page-home-cta,.primary,.btn):hover{transform:translateY(-2px);filter:brightness(1.015)}
+:where(.page-home-cta,.primary):active{transform:translate(1px,1px);box-shadow:1px 1px 0 #14213d}
+:where(.section,.content-section,.main-section){scroll-margin-top:100px}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card){border-radius:var(--ui-radius);box-shadow:var(--ui-elev);border-color:var(--ui-line);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.flashcard,.question-card):hover{box-shadow:var(--ui-elev-hover);border-color:color-mix(in srgb,var(--blue) 34%,var(--ui-line))}
+:where(.unit-card,.tool-card,.study-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){min-width:0}
+:where(.top-actions,.grouped-actions){gap:10px}
+:where(.search-widget-launcher){min-height:42px;padding:9px 15px;background:var(--card);border:1px solid var(--ui-line);font-weight:800}
+:where(input,select,textarea){border:1px solid var(--ui-line);background:var(--card);color:var(--ink);padding:10px 12px}
+:where(input,select,textarea):focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+:where(details){border-radius:14px}
+:where(summary){cursor:pointer}
+:where(footer,.site-footer){border-top:1px solid var(--ui-line);background:var(--card)}
+#siteBackTop{box-shadow:0 8px 24px rgba(20,33,61,.2);border-radius:16px}
+@media(max-width:700px){
+ :where(.top,.topbar){gap:10px}
+ :where(.page-intro){padding:42px 18px}
+ :where(.page-intro)::after{right:8px;top:8%;opacity:.04}
+ :where(.page-intro h1){font-size:clamp(2.35rem,11vw,3.6rem)}
+ :where(.site-page-nav a){min-height:44px}
+ :where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card){border-radius:16px}
+}
+@media(prefers-reduced-motion:reduce){:where(.unit-card,.tool-card,.study-card,.progress-card,.feature-card,.exam-panel,.quiz-card,.panel,.tile,.card,.btn,.primary,.page-home-cta){transition:none}}
+</style>
+<link rel="stylesheet" href="assets/ihrm-refresh.css?v=6">
+</head>
+<body>
+<svg aria-hidden="true" height="0" style="position:absolute" width="0"><symbol id="pl" viewbox="0 0 64 24"><path d="M2 12l18-3 14-8h6l-6 9 14-1 8-5h4l-4 7 4 7h-4l-8-5-14-1 6 9h-6l-14-8-18-3z" fill="currentColor"></path></symbol></svg>
+<header class="top"><div class="bar"><a class="logo" href="index.html">IHRM<b>Air</b></a></div>
+<button class="search-widget-launcher" id="searchWidgetLauncher" type="button" aria-controls="searchWidgetPanel" aria-expanded="false" aria-label="Open note search">⌕ <span>Search notes</span></button>
+<div class="search-widget-panel" id="searchWidgetPanel" aria-label="Search and study tools" hidden>
+  <div class="search-widget-head"><strong>Search your notes</strong><button class="search-widget-close" id="closeSearchWidget" type="button" aria-label="Close search">×</button></div>
+  <label class="sr-only" for="noteSearch">Search all notes</label><input id="noteSearch" type="search" placeholder="Search units, topics or terms…" autocomplete="off">
+  <div class="search-widget-actions"><button class="btn" id="searchClear" type="button">Clear</button><button class="btn" id="expandAll" type="button">Expand all</button><button class="btn" id="collapseAll" type="button">Collapse all</button><button class="btn" id="printPage" type="button">Print / Save PDF</button><button class="btn" id="toTop" type="button">↑ Top</button></div>
+  <div id="searchResults" role="status" aria-live="polite">Search the full notes, all four units, flashcards and revision tools.</div>
+</div>
+<div class="top-actions grouped-actions site-nav-wrap" aria-label="Main study navigation">
+<button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="sitePageNav">☰ <span>Menu</span></button>
+<nav class="site-page-nav" id="sitePageNav" aria-label="Main pages">
+<a href="index.html" data-page="index.html">⌂ Home</a>
+<a href="units.html" data-page="units.html">📚 Units</a>
+<a href="practice.html" data-page="practice.html">📝 Practice</a>
+<a href="tools.html" data-page="tools.html">✦ Tools Hub</a>
+<a href="planner.html" data-page="planner.html">🗓 Planner</a>
+<a href="tracker.html" data-page="tracker.html">⏱ Tracker</a>
+<a href="backup.html" data-page="backup.html">💾 Backup</a>
+</nav></div><div aria-hidden="true" class="track"><i class="fill" id="fill"></i><svg class="p" id="pn"><use href="#pl"></use></svg></div><div class="air strip"></div></header>
+<section class="page-intro" aria-label="Study Tools Dashboard"><div class="page-intro-inner"><p class="page-eyebrow">IHRM AIR · IMBA 9TH SEMESTER</p><h1>Study Tools Dashboard</h1><p>Organise revision, run focus sessions, track your daily goal, save notes, and review concepts at your own pace.</p><a class="page-home-cta" href="index.html">← Back to flight deck</a></div></section><section class="hero" id="top"><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><svg aria-hidden="true" class="fly" viewbox="0 0 64 24"><use href="#pl"></use></svg>
+<div class="pass"><div class="air"></div><div class="main"><div class="route"><span>Domestic HRM</span><svg viewbox="0 0 64 24"><use href="#pl"></use></svg><span>Global HRM</span></div>
+<h1>Manage people <em>across borders</em></h1><p>Your complete IMBA International HRM flight deck: fly through the four destinations, open detailed semester notes, revise with flashcards, test yourself and stamp your passport as you progress.</p>
+<a class="go" href="units.html">Start boarding</a>
+<div class="stats"><span>4 units</span><span>22 topic tags</span><span>5-question quiz</span></div></div>
+<div class="stub"><div>PASSENGER<b>IMBA 9th Sem</b></div><div>COURSE<b>IMBA18914DCE</b></div><div>BOOK<b>Dowling, Festing &amp; Engle</b></div></div></div></section>
+<main>
+<section class="air-tool-page-intro"><span class="air-intel-kicker">YOUR LEARNING DATA</span><h1>Backup & Restore</h1><p>Export a portable copy of your IHRM Air progress or restore a backup. Always restore a trusted file from your own backup.</p><a class="air-back-hub" href="tools.html">← Back to Tools Hub</a></section>
+</main>
+
+<footer><div class="air"></div>Built from Dowling, Festing &amp; Engle, International Human Resource Management (7th ed.) · IMBA 9th Semester</footer>
+<script>
+(function(){
+var d=document,r=d.documentElement;
+function S(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var t=S('air-theme');if(t)r.setAttribute('data-theme',t);
+var themeButton=d.getElementById('th');if(themeButton){themeButton.onclick=function(){var dk=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);var n=dk?'light':'dark';r.setAttribute('data-theme',n);S('air-theme',n)}};
+var f=d.getElementById('fill'),pn=d.getElementById('pn'),tr=d.querySelector('.track');
+function sc(){var m=r.scrollHeight-r.clientHeight,p=m>0?r.scrollTop/m:0,w=tr.clientWidth;f.style.width=(p*100)+'%';pn.style.left=Math.max(19,Math.min(w-19,p*w))+'px'}
+addEventListener('scroll',sc,{passive:true});addEventListener('resize',sc);sc();
+var cols=['#ffc83d','#1fa77f','#e5484d','#2f6fd0'],names=['I','II','III','IV'],st={};
+var sl=d.getElementById('slots');
+names.forEach(function(n,i){var s=d.createElement('div');s.className='slot';s.dataset.k=i+1;
+s.innerHTML='<span>Unit '+n+'</span><svg viewBox="0 0 120 120"><g fill="none" stroke="'+cols[i]+'" stroke-width="5"><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="44" stroke-width="2"/></g><text x="60" y="52" text-anchor="middle" font-family="Fredoka,sans-serif" font-size="15" fill="'+cols[i]+'">VISITED</text><text x="60" y="84" text-anchor="middle" font-family="Fredoka,sans-serif" font-size="30" fill="'+cols[i]+'">'+n+'</text></svg>';sl.appendChild(s)});
+function pt(){var c=0;for(var k in st)if(st[k])c++;d.getElementById('ptxt').textContent=c===4?'Fully stamped. Ready for take-off!':c+' of 4 stamps collected'}
+d.querySelectorAll('.stampbtn').forEach(function(b){var k=b.dataset.k;st[k]=S('air-s'+k)==='1';
+function ap(){b.setAttribute('aria-pressed',st[k]);b.textContent=st[k]?'Stamped':'Stamp this unit';d.querySelector('.slot[data-k="'+k+'"]').classList.toggle('on',st[k]);pt()}
+ap();b.onclick=function(){st[k]=!st[k];S('air-s'+k,st[k]?'1':'0');ap()}});
+var Q=[['Which staffing approach keeps PCNs in key posts and decisions at HQ?',['Ethnocentric','Polycentric','Geocentric'],0],
+['A TCN is a citizen of...',['The HQ country','The host country','Neither HQ nor host country'],2],
+['The balance sheet approach aims to...',['Match local pay','Keep the expatriate whole','Cut all allowances'],1],
+['The most common international tax policy is...',['Tax equalisation','Laissez-faire','Ad hoc'],0],
+['An investment strike is one of Kennedy\'s worries. It means...',['Workers stop work','The MNE stops investing so a plant becomes obsolete','Unions buy shares'],1]];
+var qi=0,sc2=0,box=d.getElementById('qbox');
+function show(){if(qi>=Q.length){box.innerHTML='<h3>Landed!</h3><p class="score">You scored '+sc2+' / '+Q.length+'</p><button class="btn" id="rs" type="button">Fly again</button>';d.getElementById('rs').onclick=function(){qi=0;sc2=0;show()};return}
+var q=Q[qi];box.innerHTML='<h3>Q'+(qi+1)+'. '+q[0]+'</h3>';
+q[1].forEach(function(o,i){var b=d.createElement('button');b.className='opt';b.type='button';b.textContent=o;b.onclick=function(){
+box.querySelectorAll('.opt').forEach(function(x){x.disabled=true});
+if(i===q[2]){b.classList.add('ok');sc2++}else{b.classList.add('no');box.querySelectorAll('.opt')[q[2]].classList.add('ok')}
+setTimeout(function(){qi++;show()},1100)};box.appendChild(b)})}
+show();
+// Search headings and note blocks without hiding course content.
+var search=d.getElementById('noteSearch'),results=d.getElementById('searchResults'),lastHit=null;
+function clearHits(){d.querySelectorAll('.search-hit').forEach(function(x){x.classList.remove('search-hit')});lastHit=null}
+function runSearch(){clearHits();var term=(search.value||'').trim().toLowerCase();if(!term){results.textContent='Search the full notes, all four units, flashcards and revision tools.';return}
+var nodes=Array.from(d.querySelectorAll('main h2,main h3,main h4,main summary,main li,main .note,main .hint,main .card'));
+var hits=nodes.filter(function(el){return el.textContent.toLowerCase().includes(term)}).slice(0,30);
+results.textContent=hits.length?hits.length+' matching result(s) shown (maximum 30). Select a result to jump to it.':'No matches found. Try a shorter keyword.';
+if(hits.length){var list=d.createElement('div');list.className='result-list';hits.forEach(function(el,i){var a=d.createElement('button');a.type='button';a.className='result-item';a.textContent=(i+1)+'. '+el.textContent.trim().replace(/\s+/g,' ').slice(0,110);a.addEventListener('click',function(){clearHits();el.classList.add('search-hit');lastHit=el;el.scrollIntoView({behavior:'smooth',block:'center'});if(el.tagName==='SUMMARY'&&el.parentElement.tagName==='DETAILS')el.parentElement.open=true;});list.appendChild(a)});results.appendChild(list)} }
+search.addEventListener('input',function(){runSearch()});
+d.getElementById('searchClear').onclick=function(){search.value='';clearHits();results.textContent='Search cleared. All notes remain visible.';search.focus()};
+d.getElementById('expandAll').onclick=function(){d.querySelectorAll('main details').forEach(function(x){x.open=true})};
+d.getElementById('collapseAll').onclick=function(){d.querySelectorAll('main details').forEach(function(x){x.open=false})};
+d.getElementById('printPage').onclick=function(){window.print()};
+d.getElementById('toTop').onclick=function(){d.getElementById('top').scrollIntoView({behavior:'smooth'})};
+results.textContent='Search the full notes, all four units, flashcards and revision tools.';
+})();
+</script>
+<script>(function(){document.querySelectorAll('.card').forEach(function(c){c.setAttribute('aria-pressed','false');c.addEventListener('click',function(){var on=c.classList.toggle('on');c.setAttribute('aria-pressed',String(on));});});})();</script><!-- IHRM-AIR deploy refresh: 2026-10-15T14:50Z -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  // Replace these two public browser configuration values after creating your Supabase project.
+  var SUPABASE_URL='https://YOUR-PROJECT-REF.supabase.co';
+  var SUPABASE_ANON_KEY='YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY';
+  var configured=SUPABASE_URL.indexOf('YOUR-PROJECT-REF')===-1 && SUPABASE_ANON_KEY.indexOf('YOUR_SUPABASE_')===-1;
+  window.airSupabaseAnonKey=SUPABASE_ANON_KEY;
+  window.airSupabaseClient=configured&&window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+  window.airGetAccessToken=async function(){
+    if(!window.airSupabaseClient)return null;
+    var result=await window.airSupabaseClient.auth.getSession();
+    return result.data&&result.data.session?result.data.session.access_token:null;
+  };
+  var status=document.getElementById('airCloudStatus');
+  function msg(s){if(status)status.textContent=s}
+  if(!window.airSupabaseClient){msg('Not configured yet: add your Supabase URL and publishable/anon key in index.html.');return}
+  var client=window.airSupabaseClient;
+  client.auth.onAuthStateChange(function(event,session){
+    msg(session?'Signed in as '+session.user.email+'. Your snapshot is private to this account.':(event==='SIGNED_OUT'?'Signed out.':'Use email magic-link sign-in to enable cloud sync.'));
+  });
+  document.getElementById('airCloudSignIn').onclick=async function(){
+    var email=document.getElementById('airCloudEmail').value.trim();
+    if(!email){msg('Enter your email first.');return}
+    var r=await client.auth.signInWithOtp({email:email,options:{emailRedirectTo:location.origin+location.pathname}});
+    msg(r.error?'Sign-in email failed: '+r.error.message:'Magic link sent. Check your inbox, then return to this page.');
+  };
+  function snapshot(){
+    var data={schema:1,savedAt:new Date().toISOString(),study:{}};
+    try{Object.keys(localStorage).filter(function(k){return k.indexOf('air-')===0}).forEach(function(k){data.study[k]=localStorage.getItem(k)})}catch(e){}
+    var output=document.getElementById('agentOutput');
+    if(output)data.study['air-last-agent-output']=output.innerText;
+    return data;
+  }
+  document.getElementById('airCloudSave').onclick=async function(){
+    var token=await window.airGetAccessToken();if(!token){msg('Please sign in with the email link first.');return}
+    var userResult=await client.auth.getUser();var user=userResult.data.user;
+    if(!user){msg('Session unavailable. Sign in again.');return}
+    var result=await client.from('study_snapshots').upsert({user_id:user.id,snapshot:snapshot(),updated_at:new Date().toISOString()},{onConflict:'user_id'});
+    msg(result.error?'Save failed: '+result.error.message:'Study snapshot saved securely to your Supabase account.');
+  };
+  document.getElementById('airCloudLoad').onclick=async function(){
+    var token=await window.airGetAccessToken();if(!token){msg('Please sign in with the email link first.');return}
+    var result=await client.from('study_snapshots').select('snapshot').maybeSingle();
+    if(result.error){msg('Restore failed: '+result.error.message);return}
+    if(!result.data||!result.data.snapshot){msg('No cloud snapshot found for this account yet.');return}
+    var study=result.data.snapshot.study||{};
+    try{Object.keys(study).filter(function(k){return k.indexOf('air-')===0&&k!=='air-last-agent-output'}).forEach(function(k){localStorage.setItem(k,study[k])})}catch(e){}
+    msg('Snapshot restored. Reload the page to refresh unit stamps/theme. Saved output: '+(study['air-last-agent-output']?'available in cloud snapshot':'none'));
+  };
+  document.getElementById('airCloudSignOut').onclick=async function(){var r=await client.auth.signOut();msg(r.error?'Sign-out failed: '+r.error.message:'Signed out.')};
+})();
+</script>
+<script>
+(function(){
+  'use strict';
+  var d=document, selected='trainingDesigner';
+  var task=d.getElementById('agentTask'), out=d.getElementById('agentOutput');
+  if(!task||!out)return;
+  var sourceAgents={
+    trainingDesigner:{name:'Corporate Training Designer',badge:'📚',source:'agent-library/specialized/corporate-training-designer.md',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('IHRM staffing expatriate compensation performance');return {title:'Learning design blueprint',body:'<p><b>Learning outcome:</b> By the end of this study block, explain and apply the selected IHRM concept using the course notes.</p><ol><li><b>Analyse:</b> identify key terms and likely knowledge gaps.</li><li><b>Design:</b> read matched notes and write 3 learning objectives.</li><li><b>Practice:</b> answer one definition, one application and one comparison question.</li><li><b>Evaluate:</b> check each answer against source notes and retry weak areas.</li></ol>'+noteList(hits,5,'Course evidence')+'<p class="agent-status">Source profile: Corporate Training Designer · measurable learning outcomes and evaluation.</p>'}}},
+    academicPsychologist:{name:'Academic Psychologist',badge:'🧠',source:'agent-library/academic/academic-psychologist.md',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('motivation learning culture leadership');return {title:'Learning and recall protocol',body:'<ol><li><b>Chunk:</b> divide the topic into 3–5 meaningful ideas.</li><li><b>Retrieve:</b> hide the notes and explain each idea from memory.</li><li><b>Elaborate:</b> connect the idea to an IHRM example.</li><li><b>Diagnose:</b> label each point secure, uncertain or missing.</li><li><b>Space:</b> retry uncertain points later rather than rereading everything.</li></ol>'+noteList(hits,6,'Relevant study material')+'<p class="agent-status">Source profile: Academic Psychologist · learning strategy adapted to supplied notes.</p>'}}},
+    statistician:{name:'Academic Statistician',badge:'📊',source:'agent-library/academic/academic-statistician.md',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('compensation performance appraisal workforce');var prompts=hits.slice(0,5).map(function(h,i){return '<li><b>'+(['Recall check','Compare variables','Apply to a case','Interpret the relationship','Evaluate the claim'][i%5])+'</b> — '+esc(h.text.slice(0,180))+'<br><span class="agent-status">Answer from notes; do not invent numerical data.</span></li>'}).join('');return {title:'Structured practice set',body:'<p>Practice questions generated from retrieved course material. If the notes provide no figures or formula, state that rather than guessing.</p><ol>'+prompts+'</ol><p><b>Marking rule:</b> correct term, supported explanation and relevant application.</p>'}}},
+    orgPsychologist:{name:'Organizational Psychologist',badge:'👥',source:'agent-library/specialized/organizational-psychologist.md',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('culture motivation leadership staffing expatriate');return {title:'Workplace behaviour lens',body:'<p>Analyse the topic at three levels:</p><ol><li><b>Individual:</b> motivation, adjustment, perception or learning.</li><li><b>Team:</b> communication, trust, collaboration or conflict.</li><li><b>Organization:</b> culture, staffing policy, leadership and systems.</li></ol>'+noteList(hits,7,'IHRM evidence')+'<p><b>Application prompt:</b> What could an international manager do, and what limitation or cultural difference should they consider?</p>'}}},
+    synthesist:{name:'Research Synthesist',badge:'🔬',source:'agent-library/research/research-synthesist.md',run:function(q){var hits=findNotes(q);if(!hits.length)hits=findNotes('international human resource management staffing compensation unions');return {title:'Evidence synthesis',body:'<p><b>Main theme:</b> '+esc(q||'IHRM concepts in the supplied notes')+'</p>'+noteList(hits,10,'Retrieved evidence')+'<p><b>Cross-note synthesis:</b> group evidence into definitions, mechanisms, applications and limitations. Where no note supports a claim, mark it as a gap rather than adding outside information.</p>'}}},
+    realityChecker:{name:'Reality Checker',badge:'🧪',source:'agent-library/testing/testing-reality-checker.md',run:function(q){var hits=findNotes(q);return {title:'Evidence and gap audit',body:'<p><b>Audit target:</b> '+esc(q||'The selected IHRM topic')+'</p><ul><li><b>Supported:</b> points directly visible in retrieved course notes.</li><li><b>Needs checking:</b> claims that go beyond those notes.</li><li><b>Missing evidence:</b> details not found in course material.</li><li><b>Safe answer rule:</b> do not present unsupported claims as course facts.</li></ul>'+noteList(hits,8,'Available evidence')+'<p class="agent-status">This offline checker audits against visible page notes; it does not independently verify external facts.</p>'}}},
+    orchestrator:{name:'Agents Orchestrator',badge:'🤝',source:'agent-library/specialized/agents-orchestrator.md',run:function(q){var order=['synthesist','trainingDesigner','academicPsychologist','statistician','realityChecker'];return {title:'Coordinated source-agent workflow',body:order.map(function(id,i){var a=sourceAgents[id],r=a.run(q);return '<details '+(i===0?'open':'')+'><summary>Stage '+(i+1)+' · '+esc(a.name)+'</summary>'+r.body+'</details>'}).join('')+'<p class="agent-status">The browser runs these repository-mapped stages in sequence; this is not an autonomous background service.</p>'}}}
+  };
+  var roster=sourceAgents;
+  function esc(v){return String(v||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function findNotes(q){var terms=String(q||'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>2});var nodes=Array.from(d.querySelectorAll('main h2,main h3,main h4,main summary,main li,main .note,main .hint,main button.card'));var scored=nodes.map(function(el){var text=(el.innerText||el.textContent||'').replace(/\s+/g,' ').trim();var low=text.toLowerCase();var score=terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0);return {el:el,text:text,score:score}}).filter(function(x){return x.score>0&&x.text.length>8});scored.sort(function(a,b){return b.score-a.score});var seen={};return scored.filter(function(x){var k=x.text.slice(0,100);if(seen[k])return false;seen[k]=true;return true}).slice(0,15)}
+  function noteList(hits,n,label){if(!hits.length)return '<p>No relevant course notes found.</p>';return '<p><span class="agent-chip">'+esc(label)+'</span></p><ul>'+hits.slice(0,n).map(function(h){var id=h.el.id;var parent=h.el.closest('section[id]');var target=id?'#'+id:(parent?'#'+parent.id:'');return '<li>'+(target?'<a href="'+esc(target)+'">':'')+esc(h.text.slice(0,260))+(target?'</a>':'')+'</li>'}).join('')+'</ul>'}
+  function render(agent,result){out.innerHTML='<h3>'+agent.badge+' '+esc(agent.name)+' · '+esc(result.title)+'</h3>'+result.body;if(agent.source){var source=document.createElement('p');source.className='agent-status';var link=document.createElement('a');link.href=agent.source;link.target='_blank';link.rel='noopener';link.textContent='Open original agent definition from this repository';source.appendChild(link);out.appendChild(source)}out.scrollIntoView({behavior:'smooth',block:'nearest'})}
+  d.querySelectorAll('.agent-card').forEach(function(b){b.addEventListener('click',function(){selected=b.dataset.agent;d.querySelectorAll('.agent-card').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});})});
+  d.getElementById('runAgent').addEventListener('click',function(){var a=roster[selected];render(a,a.run(task.value.trim()))});
+  d.getElementById('runAgentTeam').addEventListener('click',function(){var q=task.value.trim();var result=roster.orchestrator.run(q);render(roster.orchestrator,result);});
+  var geminiKeyStatus=d.getElementById('geminiKeyStatus');
+  var API_BASE_URL='https://YOUR-PROJECT-REF.supabase.co/functions/v1/agent';
+  var agentInstructions={
+     trainingDesigner:'Use the Corporate Training Designer profile in agent-library/specialized/corporate-training-designer.md. Design measurable learning outcomes, a clear learning sequence, practice, and evaluation using only supplied IHRM notes.',
+     academicPsychologist:'Use the Academic Psychologist profile in agent-library/academic/academic-psychologist.md. Apply learning and recall methods to supplied notes without adding unsupported course facts.',
+     statistician:'Use the Academic Statistician profile in agent-library/academic/academic-statistician.md. Produce structured practice and never invent data, calculations or formulas absent from notes.',
+     orgPsychologist:'Use the Organizational Psychologist profile in agent-library/specialized/organizational-psychologist.md. Analyse IHRM at individual, team and organizational levels grounded in supplied notes.',
+     synthesist:'Use the Research Synthesist profile in agent-library/research/research-synthesist.md. Synthesize relevant supplied notes, surface themes and gaps, and do not silently add outside facts.',
+     realityChecker:'Use the Reality Checker profile in agent-library/testing/testing-reality-checker.md. Audit claims against supplied notes and label unsupported claims or missing evidence.',
+     orchestrator:'Use the Agents Orchestrator profile in agent-library/specialized/agents-orchestrator.md. Coordinate Research Synthesist, Corporate Training Designer, Academic Psychologist, Academic Statistician and Reality Checker in sequence.'
+   };
+  function getCourseContext(q){
+    var terms=q.toLowerCase().split(/[^a-z0-9]+/).filter(function(t){return t.length>2});
+    var blocks=Array.from(d.querySelectorAll('details.tag, details.full-notes'));
+    var scored=blocks.map(function(el){var text=(el.innerText||'').replace(/\s+/g,' ').trim();var low=text.toLowerCase();return {text:text,score:terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0)}}).filter(function(x){return x.score>0});
+    scored.sort(function(a,b){return b.score-a.score});
+    return scored.slice(0,12).map(function(x){return x.text}).join('\n\n').slice(0,12000);
+  }
+  async function callGemini(agentId,q,context){
+    if(!API_BASE_URL||API_BASE_URL.includes('YOUR-PROJECT-REF')){
+      throw new Error('The secure AI backend has not been connected yet. Deploy the Supabase Edge Function and set API_BASE_URL in index.html to its URL.');
+    }
+    var response=await fetch(API_BASE_URL+'/api/agent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      headers:await (async function(){var token=window.airGetAccessToken?await window.airGetAccessToken():null;return token?{'Content-Type':'application/json','Authorization':'Bearer '+token,'apikey':window.airSupabaseAnonKey}:{'Content-Type':'application/json','apikey':window.airSupabaseAnonKey||''}})(),
+      body:JSON.stringify({agentId:agentId,q:q,context:context||''})
+    });
+    var data;
+    try{data=await response.json()}catch(_){throw new Error('The AI backend returned an invalid response. Check that the Worker is deployed correctly.')}
+    if(!response.ok)throw new Error(data&&data.error?data.error:'AI backend request failed ('+response.status+').');
+    if(!data||typeof data.answer!=='string'||!data.answer.trim())throw new Error('The AI backend returned no answer.');
+    return data.answer.trim();
+  }
+  function showGeminiAnswer(title,answer,modelLabel){
+    out.innerHTML='';var heading=d.createElement('h3');heading.textContent='✦ '+title;out.appendChild(heading);
+    var body=d.createElement('div');body.style.whiteSpace='pre-wrap';body.style.lineHeight='1.7';body.style.overflowWrap='anywhere';body.textContent=answer;out.appendChild(body);
+    var meta=d.createElement('p');meta.className='agent-status';meta.textContent=modelLabel+' · Verify important points against your prescribed course material.';out.appendChild(meta);
+    out.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  async function runGeminiWorkflow(teamMode,button){
+    var q=task.value.trim();
+    if(!q){out.innerHTML='<h3>🛫 Your task is missing</h3><p>Enter a topic or question first.</p>';task.focus();return}
+    if(!API_BASE_URL||API_BASE_URL.includes('YOUR-PROJECT-REF')){out.innerHTML='<h3>Secure AI backend setup required</h3><p>Configure Supabase URL and anon key, sign in, deploy the Supabase Edge Function, add GEMINI_API_KEY as a Supabase function secret, then set the function URL in index.html.</p>';return}
+    var oldText=button.textContent;button.disabled=true;button.textContent=teamMode?'Agents working…':'Thinking…';
+    out.innerHTML='<h3>✈ Gemini agents are working</h3><p>Reading relevant course notes and generating an exam-focused response…</p>';
+    try{
+      var context=getCourseContext(q);
+      if(!teamMode){
+        var active=d.querySelector('.agent-card[aria-pressed="true"]');
+        var name=active?active.querySelector('strong').innerText:'Study Coach';
+        var answer=await callGemini(selected,q,context);
+        showGeminiAnswer(name+' · Gemini',answer,'Model: Gemini 2.5 Flash via Supabase Edge Function');
+      }else{
+        var stages=[
+          {id:'synthesist',name:'Research Synthesist'},
+          {id:'trainingDesigner',name:'Corporate Training Designer'},
+          {id:'academicPsychologist',name:'Academic Psychologist'},
+          {id:'statistician',name:'Academic Statistician'},
+          {id:'realityChecker',name:'Reality Checker'}
+        ];
+        var results=[];
+        for(var i=0;i<stages.length;i++){
+          out.innerHTML='<h3>🤝 AI Agent Team · Step '+(i+1)+' of '+stages.length+'</h3><p><b>'+stages[i].name+'</b> is working on your task…</p>';
+          var stagePrompt=q+'\n\nThis is stage '+(i+1)+' of a coordinated team. '+(i===0?'Synthesize relevant supplied notes and identify evidence gaps.':i===1?'Turn the synthesis into measurable learning outcomes and a practice sequence.':i===2?'Apply learning and retrieval strategies to supplied concepts.':i===3?'Create structured practice questions based only on supplied evidence.':'Audit previous stages for unsupported claims and missing evidence.')+'\n\nPREVIOUS TEAM OUTPUTS:\n'+results.map(function(r){return r.name+':\n'+r.answer}).join('\n\n').slice(0,9000);
+          var stageAnswer=await callGemini(stages[i].id,stagePrompt,context);
+          results.push({name:stages[i].name,answer:stageAnswer});
+        }
+        showGeminiAnswer('Coordinated Gemini Agent Team',results.map(function(r,i){return 'STEP '+(i+1)+' · '+r.name+'\n'+r.answer}).join('\n\n'+'─'.repeat(36)+'\n\n'),'5 repository-based specialist stages · backend connection required');
+      }
+    }catch(err){
+      out.innerHTML='';var heading=d.createElement('h3');heading.textContent='Gemini connection needs attention';out.appendChild(heading);
+      var message=d.createElement('p');message.textContent=(err&&err.message?err.message:'Could not reach Gemini. Check your internet connection, key, API enablement, and quota.');out.appendChild(message);
+      var hint=d.createElement('p');hint.className='agent-status';hint.textContent='The Gemini key must be stored as a Supabase Edge Function secret. Check Supabase config, sign-in session, function deployment, GEMINI_API_KEY, allowed site origin, and Gemini API quota.';out.appendChild(hint);
+    }finally{button.disabled=false;button.textContent=oldText}
+  }
+  d.getElementById('runLiveAI').addEventListener('click',function(){runGeminiWorkflow(false,this)});
+  d.getElementById('runGeminiTeam').addEventListener('click',function(){runGeminiWorkflow(true,this)});
+  d.getElementById('clearAgentOutput').addEventListener('click',function(){out.innerHTML='<h3>Ready for take-off</h3><p>Output cleared. Choose a repository-backed specialist and enter a new task.</p>'});
+})();
+</script>
+
+
+<style>
+/* Compact floating agent widget: keeps the main study design uncluttered */
+.agent-widget-launcher{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:1000;display:flex;align-items:center;gap:10px;min-height:62px;padding:10px 16px 10px 11px;border:2px solid var(--mint);border-radius:18px;background:var(--card);color:var(--ink);box-shadow:0 8px 28px rgba(0,0,0,.24);cursor:pointer;text-align:left;font:inherit;line-height:1.2}
+.agent-widget-launcher strong,.agent-widget-launcher small{display:block}.agent-widget-launcher strong{font:600 16px 'Fredoka',sans-serif}.agent-widget-launcher small{font-size:12px;color:var(--mute);margin-top:3px}
+.agent-widget-icon{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:13px;background:var(--mint);color:#06281f;font-size:23px}
+.agent-widget-pulse{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 4px color-mix(in srgb,var(--mint) 20%,transparent)}
+.agent-lab#agentic-study-crew{display:none;position:fixed;right:16px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:999;width:min(680px,calc(100vw - 24px));max-height:min(78vh,760px);overflow:auto;margin:0;padding:18px;background:var(--card);border:2px solid var(--mint);border-radius:20px;box-shadow:0 18px 55px rgba(0,0,0,.32);overscroll-behavior:contain}
+.agent-lab#agentic-study-crew.widget-open{display:block}
+.agent-widget-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px}
+.agent-widget-heading h2{margin:5px 0 0!important;font-size:clamp(25px,4vw,32px)!important}
+.agent-widget-subtitle{margin:6px 0 0;color:var(--mute);font-size:14px;line-height:1.4}
+.agent-widget-close{flex:0 0 38px;width:38px;height:38px;border:1px solid var(--mute);border-radius:50%;background:var(--bg);color:var(--ink);font-size:26px;line-height:1;cursor:pointer}
+.agent-lab#agentic-study-crew .agent-intro{font-size:13px;line-height:1.45;margin:0 0 12px}
+.agent-lab#agentic-study-crew .agent-roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0 14px}
+.agent-lab#agentic-study-crew .agent-card{padding:9px;font-size:13px}
+.agent-lab#agentic-study-crew .agent-card strong{font-size:14px}
+.agent-lab#agentic-study-crew .agent-card small{font-size:11px}
+.agent-lab#agentic-study-crew .agent-output{max-height:35vh;overflow:auto}
+.agent-lab#agentic-study-crew .gemini-connect{padding:10px!important}
+.agent-lab#agentic-study-crew .gemini-connect p{font-size:12px;line-height:1.4}
+.agent-lab#agentic-study-crew .agent-actions .btn{font-size:12px;padding:7px 9px}
+@media(max-width:520px){.agent-widget-launcher{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:56px;padding:8px 12px 8px 9px}.agent-widget-icon{width:34px;height:34px;flex-basis:34px}.agent-lab#agentic-study-crew{right:8px;bottom:calc(78px + env(safe-area-inset-bottom,0px));width:calc(100vw - 16px);max-height:78vh;padding:13px;border-radius:16px}.agent-lab#agentic-study-crew .agent-roster{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-lab#agentic-study-crew .agent-controls textarea{min-height:76px}}
+@media(prefers-reduced-motion:no-preference){.agent-widget-launcher{animation:agentWidgetIn .35s ease-out}@keyframes agentWidgetIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}}
+</style>
+<script>
+(function(){
+ var panel=document.getElementById('agentic-study-crew');
+ var launcher=document.getElementById('agentWidgetLauncher');
+ var close=document.getElementById('closeAgentWidget');
+ if(!panel||!launcher||!close)return;
+ function setOpen(open){panel.classList.toggle('widget-open',open);panel.setAttribute('aria-hidden',String(!open));launcher.setAttribute('aria-expanded',String(open));if(open){var task=document.getElementById('agentTask');if(task)task.focus({preventScroll:true});}else launcher.focus({preventScroll:true});}
+ launcher.addEventListener('click',function(){setOpen(!panel.classList.contains('widget-open'));});
+ close.addEventListener('click',function(){setOpen(false);});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('widget-open'))setOpen(false);});
+})();
+</script>
+
+
+<style>
+/* Keep search at the top with the sticky navigation */
+header.top .study-tools{margin:7px auto 9px;padding:7px 9px;gap:6px;border-radius:12px;box-shadow:none;max-width:1040px}
+header.top .study-tools input{flex:1 1 190px;padding:7px 10px;font-size:14px;min-height:38px}
+header.top .study-tools .btn{min-height:34px;padding:4px 8px;font-size:12px}
+header.top .study-tools #searchResults{font-size:12px;max-height:90px;overflow:auto}
+@media(max-width:600px){header.top .study-tools{margin:6px 0 8px;padding:6px;gap:5px}header.top .study-tools input{flex-basis:100%;width:100%}header.top .study-tools .btn{flex:1 1 auto}header.top .top-actions{max-height:70px;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}}
+</style>
+
+<script>
+(function(){
+  'use strict';
+  var endpoint=document.getElementById('localModelEndpoint');
+  var model=document.getElementById('localModelName');
+  var status=document.getElementById('localModelStatus');
+  var test=document.getElementById('localModelTest');
+  var run=document.getElementById('runLocalAI');
+  var team=document.getElementById('runLocalAITeam');
+  var task=document.getElementById('agentTask');
+  var output=document.getElementById('agentOutput');
+  if(!endpoint||!model||!status||!task||!output)return;
+  function readSaved(key,fallback){try{return localStorage.getItem(key)||fallback}catch(e){return fallback}}
+  function save(key,value){try{localStorage.setItem(key,value)}catch(e){}}
+  endpoint.value=readSaved('air-local-model-endpoint','http://localhost:11434');
+  model.value=readSaved('air-local-model-name','qwen2.5:3b');
+  function base(){return endpoint.value.trim().replace(/\/+$/,'')}
+  function say(message,state){status.textContent=message;status.dataset.state=state||'idle'}
+  function selectedAgent(){var b=document.querySelector('.agent-card[aria-pressed="true"]');return b?b.dataset.agent:'trainingDesigner'}
+  var roleNames={
+    trainingDesigner:'Corporate Training Designer',academicPsychologist:'Academic Psychologist',statistician:'Academic Statistician',
+    orgPsychologist:'Organizational Psychologist',synthesist:'Research Synthesist',realityChecker:'Reality Checker',orchestrator:'Agents Orchestrator'
+  };
+  var rolePrompts={
+    trainingDesigner:'Act as the Corporate Training Designer from the AetherMesh agent roster. Create measurable learning outcomes, an ordered lesson, active practice, and a short evaluation.',
+    academicPsychologist:'Act as the Academic Psychologist from the AetherMesh agent roster. Teach with retrieval practice, spaced review, clear explanations, and memory cues.',
+    statistician:'Act as the Academic Statistician from the AetherMesh agent roster. Produce structured questions and calculations only when the provided course context supports them. Never invent data.',
+    orgPsychologist:'Act as the Organizational Psychologist from the AetherMesh agent roster. Explain IHRM concepts at individual, team, and organization levels, grounded in the supplied notes.',
+    synthesist:'Act as the Research Synthesist from the AetherMesh agent roster. Synthesize the relevant notes, show themes and evidence gaps, and distinguish supplied content from inference.',
+    realityChecker:'Act as the Reality Checker from the AetherMesh agent roster. Audit each key claim against supplied course context; label missing or unsupported information instead of guessing.',
+    orchestrator:'Act as the AetherMesh Agents Orchestrator. Coordinate a research synthesist, explainer, exam-question designer, and reality checker in that order. Present the final integrated answer and flag gaps.'
+  };
+  function courseContext(query){
+    var blocks=Array.from(document.querySelectorAll('details.tag'));
+    var terms=query.toLowerCase().split(/[^a-z0-9]+/).filter(function(t){return t.length>2});
+    var scored=blocks.map(function(el){var txt=(el.innerText||'').replace(/\s+/g,' ').trim();var low=txt.toLowerCase();return{text:txt,score:terms.reduce(function(n,t){return n+(low.includes(t)?1:0)},0)}}).filter(function(x){return x.score>0});
+    scored.sort(function(a,b){return b.score-a.score});
+    var chosen=(scored.length?scored:blocks.map(function(el){return{text:(el.innerText||'').replace(/\s+/g,' ').trim(),score:0}})).slice(0,12);
+    return chosen.map(function(x){return x.text}).filter(Boolean).join('\n\n').slice(0,10000);
+  }
+  async function call(path,body){
+    var res=await fetch(base()+path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:undefined,body:body?JSON.stringify(body):undefined});
+    var data;try{data=await res.json()}catch(e){throw new Error('Ollama returned a response that was not JSON.')}
+    if(!res.ok)throw new Error(data.error||('Local model request failed ('+res.status+').'));
+    return data;
+  }
+  function activeModel(){return model.value.trim()}
+  function validate(){
+    if(!/^https?:\/\//i.test(base()))throw new Error('Enter a valid local endpoint, for example http://localhost:11434.');
+    if(!activeModel())throw new Error('Enter an installed Ollama model name, such as qwen2.5:3b.');
+  }
+  async function checkModels(){
+    validate();save('air-local-model-endpoint',base());save('air-local-model-name',activeModel());
+    say('Connecting to Ollama and checking installed models…','idle');
+    var data=await call('/api/tags');
+    var names=(data.models||[]).map(function(m){return m.name}).filter(Boolean);
+    if(names.length&&!names.includes(activeModel()))say('Connected. Installed models: '+names.join(', ')+'. Your selected model "'+activeModel()+'" was not in the list; enter one of the installed names.','ok');
+    else if(names.length)say('Connected to Ollama. '+names.length+' model(s) found: '+names.join(', '),'ok');
+    else say('Ollama answered, but no models are installed. Run: ollama pull qwen2.5:3b','error');
+    return names;
+  }
+  async function runModel(isTeam){
+    var q=task.value.trim();
+    if(!q){say('Enter a study task in the main task box first.','error');task.focus();return}
+    try{
+      validate();save('air-local-model-endpoint',base());save('air-local-model-name',activeModel());
+      run.disabled=true;team.disabled=true;test.disabled=true;
+      say('Running '+(isTeam?'AetherMesh local team':'selected local agent')+' on '+activeModel()+'…','idle');
+      var id=selectedAgent(),role=roleNames[id]||'AetherMesh Study Agent';
+      var system=isTeam
+        ?'You are the AetherMesh multi-agent study team for the IHRM Air platform. Simulate a transparent sequence: (1) Research Synthesist extracts relevant evidence from supplied notes; (2) Corporate Training Designer explains it in a structured way; (3) Academic Psychologist creates active-recall practice; (4) Academic Statistician adds MCQs or short-answer checks; (5) Reality Checker flags claims not supported by the notes. Clearly label each stage. Do not claim that separate models or agents actually ran; this is one local model following a multi-role workflow. Use only supplied context for course facts and state when context is insufficient.'
+        :rolePrompts[id]||rolePrompts.trainingDesigner;
+      var context=courseContext(q);
+      var prompt='USER TASK:\n'+q+'\n\nRELEVANT IHRM COURSE NOTES (treat these as source material; do not invent missing course facts):\n'+(context||'No matching course-note block was found. Ask for the relevant unit or clearly state the evidence gap.');
+      var data=await call('/api/chat',{model:activeModel(),stream:false,messages:[{role:'system',content:system+'\n\nYou are working inside IHRM Air. Be exam-useful, structured, concise, and honest about uncertainty.'},{role:'user',content:prompt}],options:{temperature:0.25}});
+      var answer=data&&data.message&&data.message.content?data.message.content.trim():'';
+      if(!answer)throw new Error('The local model returned an empty answer.');
+      output.innerHTML='';
+      var h=document.createElement('h3');h.textContent='✦ '+(isTeam?'AetherMesh Local Team':role)+' · '+activeModel();output.appendChild(h);
+      var body=document.createElement('div');body.style.whiteSpace='pre-wrap';body.style.lineHeight='1.7';body.style.overflowWrap='anywhere';body.textContent=answer;output.appendChild(body);
+      var meta=document.createElement('p');meta.className='agent-status';meta.textContent='Generated locally via Ollama · '+(isTeam?'one model following a multi-role workflow':'AetherMesh role prompt')+' · Check exam answers against your prescribed text.';output.appendChild(meta);
+      say('Done. Response generated by '+activeModel()+' on your local Ollama service.','ok');
+    }catch(e){
+      var msg=e&&e.message?e.message:String(e);
+      if(/Failed to fetch|NetworkError|Load failed/i.test(msg))msg='Could not reach Ollama. Ensure it is running at '+base()+' and allows this website origin. See local-ai/README.md for the OLLAMA_ORIGINS setup.';
+      say(msg,'error');
+    }finally{run.disabled=false;team.disabled=false;test.disabled=false}
+  }
+  test.addEventListener('click',async function(){try{await checkModels()}catch(e){var msg=e&&e.message?e.message:String(e);if(/Failed to fetch|NetworkError|Load failed/i.test(msg))msg='Could not reach Ollama or the browser blocked CORS. Start Ollama and configure OLLAMA_ORIGINS for https://mutayibnissar.github.io; instructions are in local-ai/README.md.';say(msg,'error')}});
+  run.addEventListener('click',function(){runModel(false)});
+  team.addEventListener('click',function(){runModel(true)});
+  endpoint.addEventListener('change',function(){save('air-local-model-endpoint',base())});
+  model.addEventListener('change',function(){save('air-local-model-name',activeModel())});
+  say('Ready to connect. Local model calls are disabled until Ollama is running on your computer.','idle');
+})();
+</script>
+
+
+<script id="air-visual-motion-controller">
+(function(){
+  'use strict';
+  var root=document.documentElement;
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  root.classList.add('air-motion-enabled');
+  var selectors='.pol, .card, .agent-card, .slot, .q, .dest, .pp, .full-unit-notes';
+  var items=Array.from(document.querySelectorAll(selectors));
+  items.forEach(function(el,i){
+    if(el.closest('.agent-lab')||el.classList.contains('motion-reveal'))return;
+    el.classList.add('motion-reveal');
+    el.setAttribute('data-motion-order',String(i%5));
+  });
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('motion-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+  items.forEach(function(el){if(el.classList.contains('motion-reveal'))observer.observe(el)});
+})();
+</script>
+
+
+<style id="simple-readable-fonts">
+/* Use a clean, familiar system font throughout the study hub */
+html, body, body *,
+button, input, select, textarea {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6,
+.logo, .go, .stampbtn, summary, .slot, .score,
+nav a, .note b, .eq, .tool, .pol figcaption,
+.fig text {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+body { font-size: 16px; line-height: 1.55; }
+h1, h2, h3 { line-height: 1.25; }
+</style>
+
+
+<style id="navigation-foreground-layer-fix">
+/* Keep navigation menus in the foreground, floating above the animated aircraft scene */
+header.top{position:sticky!important;top:0!important;z-index:9000!important;isolation:isolate!important;overflow:visible!important}
+header.top .top-actions,
+header.top .grouped-actions{position:relative!important;z-index:9001!important;overflow:visible!important}
+header.top .nav-group{position:relative!important;z-index:9002!important;overflow:visible!important}
+header.top .nav-group[open]{z-index:9999!important}
+header.top .nav-group[open]>summary{position:relative!important;z-index:10001!important;background:#2f6fd0!important;color:#fff!important}
+header.top .nav-subbuttons{
+  position:absolute!important;top:calc(100% + 7px)!important;left:0!important;right:auto!important;
+  z-index:10000!important;min-width:170px!important;width:max-content!important;
+  max-width:min(260px,calc(100vw - 24px))!important;max-height:min(60vh,420px)!important;
+  overflow-y:auto!important;overscroll-behavior:contain!important;
+  padding:9px!important;gap:6px!important;
+  background:var(--card)!important;color:var(--ink)!important;
+  border:1px solid var(--frame)!important;border-radius:14px!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.30)!important;
+}
+header.top .nav-subbuttons a{
+  background:var(--bg)!important;color:var(--ink)!important;
+  border:1px solid var(--frame)!important;border-radius:9px!important;
+  min-height:40px!important;padding:9px 12px!important;white-space:normal!important;
+}
+header.top .nav-subbuttons a:hover,
+header.top .nav-subbuttons a:focus-visible{background:#ffc83d!important;color:#14213d!important;border-color:#ffc83d!important}
+@media(max-width:600px){
+  header.top .nav-subbuttons{left:0!important;min-width:0!important;width:min(220px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;max-height:55vh!important}
+}
+@media(prefers-reduced-motion:reduce){header.top .nav-group[open] .nav-subbuttons{animation:none!important}}
+</style>
+
+
+<style id="responsive-mobile-desktop-layout">
+/* Responsive layout pass: phones, tablets, laptops and wide screens */
+html{width:100%;max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:clip}
+img,svg,video,canvas,iframe{max-width:100%}
+input,select,textarea,button{max-width:100%;font:inherit}
+button,a,summary{touch-action:manipulation}
+main{width:min(100% - 32px,1180px);margin-inline:auto}
+.dest{min-width:0;width:100%;padding-top:clamp(28px,5vw,56px)}
+.dest>*{min-width:0}
+.tags,details.tag,.tag div,.full-unit-notes,.card,.pp,.quiz,.tool,.panel{min-width:0;max-width:100%}
+p,li,td,th,summary,a{overflow-wrap:anywhere}
+table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse}
+pre,code{max-width:100%;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+main>section,main>.dest{margin-inline:auto}
+.top-actions{width:min(100%,1080px)}
+header.top .bar{width:min(100%,1080px)}
+.search-widget-panel,.search-widget-launcher{max-width:calc(100vw - 24px)}
+/* Keep all nav controls tappable without clipping their dropdowns */
+header.top .top-actions{max-height:none;overflow:visible;min-width:0}
+header.top .nav-group{flex:0 0 auto;min-width:0}
+header.top .nav-group>summary{min-height:44px}
+header.top .nav-subbuttons{white-space:normal}
+@media(min-width:1100px){
+  main{width:min(100% - 56px,1180px)}
+  .hero{padding:58px 28px 72px}
+  .main{padding:34px 36px 38px}
+  .dest{gap:40px}
+  .tags{gap:14px}
+  .top-actions{padding-inline:0}
+}
+@media(max-width:819px){
+  main{width:calc(100% - 28px)}
+  .dest{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:34px}
+  .dest .side{position:relative;top:auto;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:14px;align-items:center}
+  .dest .side h2,.dest .side .tagline{grid-column:1/-1}
+  .dest .side .win{width:94px;height:112px;margin:6px 0 8px;border-width:6px}
+  .dest .side .win svg{width:100%;height:100%}
+  .dest .side .stampbtn{justify-self:start;align-self:center}
+  .tags{gap:10px}
+  .tag div{overflow-wrap:anywhere}
+}
+@media(max-width:600px){
+  html{scroll-padding-top:150px}
+  section[id],.dest[id],.pp[id],.quiz[id]{scroll-margin-top:150px}
+  header.top{padding-left:12px;padding-right:12px}
+  header.top .bar{padding-bottom:5px}
+  .logo{font-size:23px}
+  header.top .top-actions{display:flex;flex-wrap:wrap;gap:6px;padding:0 0 9px;margin-top:7px;justify-content:flex-start}
+  header.top .nav-group{flex:0 0 auto;max-width:100%}
+  header.top .nav-group>summary{font-size:12px;padding:8px 9px;min-height:42px;gap:5px}
+  header.top .nav-subbuttons{top:calc(100% + 5px)!important;left:0!important;width:min(220px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;padding:8px!important}
+  header.top .nav-group:nth-last-child(1) .nav-subbuttons{left:auto!important;right:0!important}
+  .track{height:22px}
+  .track::before{top:10px}
+  .hero{padding:28px 12px 38px}
+  .pass{border-radius:15px}
+  .main{padding:20px 17px 23px}
+  .main h1{font-size:clamp(32px,9vw,46px);line-height:1.12}
+  .main p{font-size:15px;line-height:1.6}
+  .route{font-size:12px;gap:6px;flex-wrap:wrap}
+  .route svg{width:26px}
+  .stub{padding:14px 17px;grid-template-columns:1fr 1fr;gap:10px;font-size:12px}
+  .stub>div:last-child{grid-column:1/-1}
+  .stub b{font-size:18px;overflow-wrap:anywhere}
+  .stats{gap:7px}
+  .stats span{font-size:12px;padding:4px 8px}
+  main{width:calc(100% - 24px)}
+  .dest{padding-top:28px;gap:14px}
+  .dest h2{font-size:clamp(25px,7vw,34px)}
+  .dest .side .win{width:78px;height:94px}
+  details.tag{padding-left:34px;padding-right:12px;border-left-width:5px;border-radius:12px}
+  details.tag::before{left:10px;top:20px;width:11px;height:11px}
+  details.tag summary{font-size:16px;line-height:1.4;padding:13px 0}
+  .tag div{font-size:15px;line-height:1.6}
+  .tag ul{padding-left:18px}
+  .study-tools{margin:12px 0;padding:10px;gap:7px}
+  .study-tools input{flex-basis:100%;width:100%;font-size:16px}
+  .study-tools .btn{flex:1 1 auto;min-height:42px;font-size:12px;padding:7px 8px;white-space:normal}
+  .search-widget-panel{left:12px;bottom:calc(68px + env(safe-area-inset-bottom,0px));width:calc(100vw - 24px);max-height:65dvh}
+  .search-widget-launcher{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:44px}
+  .pol{float:none;margin:8px auto 28px;max-width:100%}
+  .cover{max-width:100%;overflow:hidden}
+  .full-unit-notes{padding:0 12px}
+  .full-unit-notes summary{font-size:15px}
+  .agent-lab input,.agent-lab textarea,.agent-lab select{width:100%;min-width:0}
+  .agent-lab .agent-grid,.agent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){
+  main{width:calc(100% - 18px)}
+  .hero{padding-inline:9px}
+  header.top .nav-group>summary{font-size:11px;padding-inline:7px}
+  .dest .side{grid-template-columns:minmax(0,1fr) auto}
+  .dest .side .win{width:64px;height:78px}
+  .dest .side .stampbtn{font-size:13px;padding:6px 8px}
+  .stub{grid-template-columns:minmax(0,1fr)}
+  .stub>div:last-child{grid-column:auto}
+  .main{padding:17px 13px 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+
+
+<style id="responsive-expanded-notes-fix">
+/* Expanded full notes must fit their parent and reflow with the device */
+.full-unit-notes{width:100%;max-width:100%;min-width:0;box-sizing:border-box;scroll-margin-top:150px}
+.full-unit-notes[open]{display:block;width:100%;max-width:100%;min-width:0}
+.full-unit-notes>summary{display:block;width:100%;box-sizing:border-box;line-height:1.45;overflow-wrap:anywhere}
+.embedded-notes{display:flow-root;width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow:visible;padding:clamp(12px,2.2vw,24px);font-size:clamp(14px,1.15vw,16px);line-height:1.7;overflow-wrap:anywhere}
+.embedded-notes>*{max-width:100%;min-width:0}
+.embedded-notes h3,.embedded-notes h4{max-width:100%;overflow-wrap:anywhere}
+.embedded-notes img,.embedded-notes svg,.embedded-notes video{max-width:100%;height:auto}
+.embedded-notes figure{float:none;clear:both;display:block;width:fit-content;max-width:100%;margin:16px auto 24px}
+.embedded-notes figure.pol{float:right;width:min(176px,35%);margin:4px 0 16px 18px}
+.embedded-notes table{display:block;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.embedded-notes pre,.embedded-notes code{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+.embedded-notes .pol,.embedded-notes .box,.embedded-notes .tip,.embedded-notes .note{box-sizing:border-box}
+@media(min-width:900px){
+  .full-unit-notes{margin-top:22px}
+  .embedded-notes{padding:24px clamp(22px,3vw,38px);font-size:16px;line-height:1.75}
+  .embedded-notes h3{margin-top:1.35em}
+}
+@media(max-width:700px){
+  .full-unit-notes{margin-top:14px;border-radius:12px}
+  .full-unit-notes>summary{padding:12px;font-size:14px}
+  .embedded-notes{padding:13px;font-size:15px;line-height:1.65}
+  .embedded-notes figure.pol{float:none;width:min(176px,100%);margin:12px auto 22px}
+  .embedded-notes ul,.embedded-notes ol{padding-left:1.25em}
+  .embedded-notes table{font-size:13px}
+  .embedded-notes th,.embedded-notes td{padding:6px}
+}
+@media(max-width:380px){
+  .embedded-notes{padding:10px;font-size:14px}
+  .full-unit-notes>summary{padding:10px;font-size:13px}
+}
+</style>
+
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  function save(key,value){try{localStorage.setItem(key,value);return true}catch(e){return false}}
+  function read(key){try{return localStorage.getItem(key)}catch(e){return null}}
+  // Focus timer with custom duration and session counter
+  var clock=$('focusClock'),status=$('timerStatus'),remaining=1500,interval=null,completedSessions=0;
+  function paintClock(){if(clock)clock.textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0')}
+  function stopTimer(){if(interval){clearInterval(interval);interval=null}}
+  function setPreset(minutes){stopTimer();remaining=minutes*60;paintClock();if(status)status.textContent=minutes===5?'Break selected. Take a breather.':minutes===15?'15-minute review selected.':minutes===25?'25-minute focus selected.':minutes+'-minute custom session selected.'}
+  function timerFinished(){completedSessions++;var counter=$('timerSessions');if(counter)counter.textContent='Completed sessions this visit: '+completedSessions;status.textContent='Session complete. Stretch, then choose a break or start again.';try{if('Notification'in window&&Notification.permission==='granted')new Notification('IHRM Air',{body:'Your study timer is complete.'})}catch(e){}}
+  if(clock){
+    paintClock();
+    $('timerStart').addEventListener('click',function(){if(interval)return;if(remaining<=0)remaining=1500;status.textContent='Session in progress — stay with one task.';interval=setInterval(function(){remaining--;paintClock();if(remaining<=0){stopTimer();remaining=0;paintClock();timerFinished()}},1000)});
+    $('timerPause').addEventListener('click',function(){stopTimer();status.textContent='Paused. Resume whenever you are ready.'});
+    $('timerReset').addEventListener('click',function(){setPreset(25);status.textContent='Timer reset to 25 minutes.'});
+    document.querySelectorAll('[data-minutes]').forEach(function(b){b.addEventListener('click',function(){setPreset(Number(b.dataset.minutes))})});
+    var setCustom=$('setCustomTimer');if(setCustom)setCustom.addEventListener('click',function(){var input=$('customMinutes'),minutes=Number(input.value);if(!Number.isFinite(minutes)||minutes<1||minutes>180){status.textContent='Choose a duration from 1 to 180 minutes.';return}setPreset(Math.round(minutes))});
+  }
+  // Checklist supports saved default tasks plus user-created tasks.
+  var checklist=$('studyChecklist');
+  var defaultChecks=Array.from(document.querySelectorAll('#studyChecklist [data-task]'));
+  function addTaskRow(task,done,custom){
+    var label=document.createElement('label');if(custom)label.className='custom-added-task';
+    var input=document.createElement('input');input.type='checkbox';input.checked=!!done;input.dataset.task=task.key;
+    var span=document.createElement('span');span.textContent=task.text;
+    label.appendChild(input);label.appendChild(span);
+    if(custom){var remove=document.createElement('button');remove.type='button';remove.className='remove-study-task';remove.textContent='×';remove.setAttribute('aria-label','Remove task '+task.text);remove.addEventListener('click',function(){var tasks=customTasks().filter(function(t){return t.key!==task.key});save('air-study-custom-tasks',JSON.stringify(tasks));save('air-study-task-'+task.key,'');label.remove();updateChecklist()});label.appendChild(remove)}
+    if(checklist)checklist.appendChild(label);
+    input.addEventListener('change',updateChecklist);return input;
+  }
+  function customTasks(){try{return JSON.parse(read('air-study-custom-tasks')||'[]')}catch(e){return []}}
+  defaultChecks.forEach(function(c){c.checked=read('air-study-task-'+c.dataset.task)==='1'});
+  customTasks().forEach(function(t){addTaskRow(t,read('air-study-task-'+t.key)==='1',true)});
+  function allChecks(){return checklist?Array.from(checklist.querySelectorAll('input[type=checkbox][data-task]')):[]}
+  function updateChecklist(){var all=allChecks(),done=all.filter(function(c){return c.checked}).length;var bar=$('studyChecklistBar');if(bar)bar.style.width=(all.length?done/all.length*100:0)+'%';var msg=$('studyChecklistStatus');if(msg)msg.textContent=done+' of '+all.length+' tasks complete'+(all.length&&done===all.length?' — excellent work!':'');all.forEach(function(c){save('air-study-task-'+c.dataset.task,c.checked?'1':'0')})}
+  var addTask=$('addStudyTask');if(addTask)addTask.addEventListener('click',function(){var field=$('newStudyTask'),text=(field.value||'').trim();if(!text)return;var tasks=customTasks();var task={key:'custom-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6),text:text};tasks.push(task);save('air-study-custom-tasks',JSON.stringify(tasks));addTaskRow(task,false,true);field.value='';updateChecklist();field.focus()});
+  var taskField=$('newStudyTask');if(taskField)taskField.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addTask.click()}});
+  var reset=$('resetStudyChecklist');if(reset)reset.addEventListener('click',function(){allChecks().forEach(function(c){c.checked=false});updateChecklist()});updateChecklist();
+  // Personal notes: autosave, word count, copy and plain-text export.
+  var notes=$('personalStudyNotes'),notesStatus=$('personalNotesStatus'),saveDelay;
+  function updateNotesCount(){var text=notes?notes.value:'';var words=text.trim()?text.trim().split(/\\s+/).length:0;var count=$('personalNotesCount');if(count)count.textContent=words+' words · '+text.length+' characters'}
+  if(notes){notes.value=read('air-personal-study-notes')||'';updateNotesCount();notes.addEventListener('input',function(){updateNotesCount();if(notesStatus)notesStatus.textContent='Saving…';clearTimeout(saveDelay);saveDelay=setTimeout(function(){var ok=save('air-personal-study-notes',notes.value);if(notesStatus)notesStatus.textContent=ok?'Saved locally on this device.':'Browser storage is unavailable; copy or download your notes before leaving.'},180)})}
+  var clearNotes=$('clearPersonalNotes');if(clearNotes)clearNotes.addEventListener('click',function(){if(notes)notes.value='';save('air-personal-study-notes','');updateNotesCount();if(notesStatus)notesStatus.textContent='Notes cleared.'});
+  var downloadNotes=$('downloadPersonalNotes');if(downloadNotes)downloadNotes.addEventListener('click',function(){var blob=new Blob([notes?notes.value:''],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='IHRM-Air-personal-study-notes.txt';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);if(notesStatus)notesStatus.textContent='Notes downloaded as a text file.'});
+  var copyNotes=$('copyPersonalNotes');if(copyNotes)copyNotes.addEventListener('click',async function(){try{await navigator.clipboard.writeText(notes?notes.value:'');if(notesStatus)notesStatus.textContent='Notes copied to clipboard.'}catch(e){if(notes){notes.focus();notes.select();var ok=false;try{ok=document.execCommand('copy')}catch(err){}if(notesStatus)notesStatus.textContent=ok?'Notes copied to clipboard.':'Copy is blocked by this browser; use Download .txt.'}}});
+  // Quick recall prompts are based on the course's existing revision content.
+  var prompts=[
+    ['What are Morgan’s three dimensions of IHRM?','HR activities × countries (host, parent, other) × employee types (HCN, PCN, TCN).'],
+    ['What is the main aim of the balance-sheet approach?','Keep the expatriate whole: preserve the home-country living standard and add an inducement.'],
+    ['What are the three dimensions of expatriate adjustment?','Work adjustment, interaction adjustment, and general adjustment.'],
+    ['Going rate versus balance sheet: what is the key difference?','Going rate focuses on host-country pay; balance sheet uses home-country pay to maintain the expatriate’s standard of living.'],
+    ['Name four ways unions may constrain multinational enterprises.','Wages, employment levels, global integration, and campaigns.'],
+    ['What do emic and etic mean?','Emic is culture-specific; etic is culture-common or universal.'],
+    ['What is tax equalisation intended to do?','Keep expatriate tax burdens comparable to the home-country position during an international assignment.'],
+    ['Name six expatriate selection factors from the revision notes.','Technical ability, cross-cultural suitability, family, country rules, MNE needs, and language.'],
+    ['What are the three EPRG orientations?','Ethnocentric, polycentric, and geocentric (the broader framework also includes regiocentric).'],
+    ['What is social dumping?','A “race to the bottom” in labour costs or standards as firms or work move to lower-cost locations.'],
+    ['What is the difference between HCN, PCN, and TCN?','HCN: host-country national; PCN: parent-country national; TCN: a national of neither the host nor parent country.'],
+    ['What are the three broad ethical positions in the revision notes?','Ethical relativism, ethical absolutism, and ethical universalism.']
+  ];
+  var promptOrder=prompts.map(function(_,i){return i}),promptPosition=0,question=$('recallQuestion'),answer=$('recallAnswer'),reveal=$('revealRecall'),mastered={},reviewAgain={};
+  try{mastered=JSON.parse(read('air-recall-mastered')||'{}');reviewAgain=JSON.parse(read('air-recall-review')||'{}')}catch(e){}
+  function currentPrompt(){return prompts[promptOrder[promptPosition]]}
+  function updateRecallStats(){var m=Object.keys(mastered).filter(function(k){return mastered[k]}).length,r=Object.keys(reviewAgain).filter(function(k){return reviewAgain[k]}).length;var el=$('recallStats');if(el)el.textContent=m+' mastered · '+r+' to review'}
+  function showPrompt(){if(!question||!answer)return;var p=currentPrompt();question.textContent=p[0];answer.textContent=p[1];answer.hidden=true;if(reveal)reveal.textContent='Reveal answer';updateRecallStats()}
+  function nextPrompt(){promptPosition=(promptPosition+1)%promptOrder.length;showPrompt()}
+  if(reveal)reveal.addEventListener('click',function(){answer.hidden=!answer.hidden;reveal.textContent=answer.hidden?'Reveal answer':'Hide answer'});
+  var next=$('nextRecall');if(next)next.addEventListener('click',nextPrompt);
+  var shuffle=$('shuffleRecall');if(shuffle)shuffle.addEventListener('click',function(){for(var i=promptOrder.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),tmp=promptOrder[i];promptOrder[i]=promptOrder[j];promptOrder[j]=tmp}promptPosition=0;showPrompt()});
+  var again=$('recallAgain');if(again)again.addEventListener('click',function(){var key=String(promptOrder[promptPosition]);reviewAgain[key]=true;delete mastered[key];save('air-recall-review',JSON.stringify(reviewAgain));save('air-recall-mastered',JSON.stringify(mastered));nextPrompt()});
+  var gotIt=$('recallGotIt');if(gotIt)gotIt.addEventListener('click',function(){var key=String(promptOrder[promptPosition]);mastered[key]=true;delete reviewAgain[key];save('air-recall-review',JSON.stringify(reviewAgain));save('air-recall-mastered',JSON.stringify(mastered));nextPrompt()});
+  // Daily goal and streak: only completed focus timers count as sessions.
+  var dailyGoalTarget=$('dailyGoalTarget');
+  function localDateKey(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0')}
+  function readDailyLog(){try{var data=JSON.parse(read('air-study-daily-log')||'{}');return data&&typeof data==='object'&&!Array.isArray(data)?data:{}}catch(e){return {}}}
+  function updateDailyGoal(){
+    var log=readDailyLog(),today=localDateKey(new Date()),goal=Math.max(1,Math.min(12,Number(read('air-study-daily-goal'))||2)),count=Math.max(0,Number(log[today])||0);
+    if(dailyGoalTarget)dailyGoalTarget.value=String(goal);
+    var countEl=$('dailyGoalCount'),bar=$('dailyGoalBar'),streakEl=$('studyStreakStatus');
+    if(countEl)countEl.textContent=count+' / '+goal+' focus session'+(goal===1?'':'s')+' today';
+    if(bar)bar.style.width=Math.min(100,count/goal*100)+'%';
+    var cursor=new Date(),streak=0;
+    if(!(Number(log[localDateKey(cursor)])>0))cursor.setDate(cursor.getDate()-1);
+    while(Number(log[localDateKey(cursor)])>0&&streak<366){streak++;cursor.setDate(cursor.getDate()-1)}
+    if(streakEl)streakEl.textContent=(count>=goal?'Daily goal reached — excellent consistency. ':count>0?'Good start. One session at a time. ':'Complete a focus session to build today’s progress. ')+'Current streak: '+streak+' day'+(streak===1?'':'s')+'.';
+  }
+  function recordFocusSession(){var log=readDailyLog(),today=localDateKey(new Date());log[today]=(Number(log[today])||0)+1;save('air-study-daily-log',JSON.stringify(log));updateDailyGoal()}
+  if(dailyGoalTarget){dailyGoalTarget.value=String(Math.max(1,Math.min(12,Number(read('air-study-daily-goal'))||2)));dailyGoalTarget.addEventListener('change',function(){save('air-study-daily-goal',String(Math.max(1,Math.min(12,Number(dailyGoalTarget.value)||2))));updateDailyGoal()})}
+  updateDailyGoal();
+  // Count completed timer sessions toward the daily goal.
+  var originalTimerFinished=timerFinished;
+  timerFinished=function(){originalTimerFinished();recordFocusSession()};
+  // Portable, allowlisted backup: never export credentials or arbitrary browser storage.
+  function isStudyBackupKey(key){return key==='air-theme'||key==='air-personal-study-notes'||key==='air-study-custom-tasks'||key==='air-recall-mastered'||key==='air-recall-review'||key==='air-study-daily-log'||key==='air-study-daily-goal'||/^air-s[1-4]$/.test(key)||/^air-study-task-[a-zA-Z0-9_-]+$/.test(key)}
+  function makeStudyBackup(){var data={};try{for(var i=0;i<localStorage.length;i++){var key=localStorage.key(i);if(key&&isStudyBackupKey(key))data[key]=localStorage.getItem(key)}}catch(e){}return {app:'IHRM Air Study Backup',version:1,exportedAt:new Date().toISOString(),data:data}}
+  var exportBackup=$('exportStudyBackup'),importBackup=$('importStudyBackup'),backupFile=$('studyBackupFile'),backupStatus=$('studyBackupStatus');
+  if(exportBackup)exportBackup.addEventListener('click',function(){var blob=new Blob([JSON.stringify(makeStudyBackup(),null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='IHRM-Air-study-backup-'+localDateKey(new Date())+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000);if(backupStatus)backupStatus.textContent='Backup exported. Keep the JSON file somewhere safe.'});
+  if(importBackup&&backupFile)importBackup.addEventListener('click',function(){backupFile.click()});
+  if(backupFile)backupFile.addEventListener('change',function(){var file=backupFile.files&&backupFile.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(){try{var backup=JSON.parse(String(reader.result||''));if(!backup||backup.app!=='IHRM Air Study Backup'||backup.version!==1||!backup.data||typeof backup.data!=='object'||Array.isArray(backup.data))throw new Error('This is not a supported IHRM Air backup.');var count=0;Object.keys(backup.data).forEach(function(key){if(isStudyBackupKey(key)&&typeof backup.data[key]==='string'){save(key,backup.data[key]);count++}});if(backupStatus)backupStatus.textContent='Imported '+count+' saved items. Reloading the page will apply all restored progress.';if(window.confirm('Study backup imported. Reload now to apply the restored progress?'))location.reload()}catch(e){if(backupStatus)backupStatus.textContent=e.message||'Could not read this backup file.'}finally{backupFile.value=''}};reader.onerror=function(){if(backupStatus)backupStatus.textContent='Could not read the selected file.'};reader.readAsText(file)});
+  showPrompt();
+})();
+</script>
+
+<script id="exam-centre-controller">
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)};
+var bank=[
+{u:1,q:'Which combination best represents Morgan’s three dimensions of IHRM?',o:['HR activities, countries involved, and employee categories','Recruitment, training, and payroll only','Headquarters, sales, and production only','Culture, tax, and unions only'],a:0,e:'Morgan’s framework considers HR activities, the countries involved, and the categories of employees (such as PCNs, HCNs, and TCNs).'},
+{u:1,q:'What distinguishes international HRM from domestic HRM most directly?',o:['It has no recruitment function','It manages people across national contexts and added complexity','It applies one identical policy in every country','It deals only with expatriates'],a:1,e:'IHRM has cross-border complexity, including multiple countries, cultures, institutions, and employee groups.'},
+{u:1,q:'In the PCN–HCN–TCN framework, a host-country national is:',o:['A citizen of the headquarters country','A citizen of the country where the foreign operation is located','A citizen of a third country','Any employee transferred abroad'],a:1,e:'HCN means host-country national: a national of the country in which the foreign subsidiary operates.'},
+{u:1,q:'Which is a common additional challenge in international assignments?',o:['Elimination of all legal differences','Cross-cultural adjustment and family adaptation','No need for performance management','Guaranteed tax neutrality without policy'],a:1,e:'Cross-cultural adjustment and family adaptation are common challenges in international assignments.'},
+{u:1,q:'The term “expatriate” commonly refers in IHRM to an employee who:',o:['Works only in their home country','Is assigned to work in another country','Is always hired locally','Works exclusively in payroll'],a:1,e:'In the usual IHRM context, an expatriate is assigned to work outside their home country.'},
+{u:1,q:'An emic perspective focuses on:',o:['Culture-specific meanings and categories','Universal categories only','Financial accounting only','The legal status of a subsidiary'],a:0,e:'Emic analysis seeks to understand a culture using its own context-specific meanings; etic analysis compares using broader categories.'},
+{u:1,q:'Which statement best describes an MNE?',o:['A company operating only within one city','An enterprise with operations in more than one country','A government department','A firm that employs only expatriates'],a:1,e:'A multinational enterprise operates or controls business activities across national borders.'},
+{u:1,q:'Why can a domestic HR practice fail when transferred abroad?',o:['HR practices are never transferable','Local institutions, culture, law, and workforce expectations may differ','All host countries prohibit HR policies','International firms do not need HR'],a:1,e:'Transferability depends on the host-country context, including culture, labour institutions, law, and employee expectations.'},
+{u:2,q:'Which staffing orientation typically places parent-country nationals in key headquarters-controlled subsidiary roles?',o:['Polycentric','Ethnocentric','Geocentric','Regiocentric'],a:1,e:'Ethnocentric staffing gives priority to parent-country nationals for key positions in foreign subsidiaries.'},
+{u:2,q:'A polycentric staffing approach generally prioritises:',o:['Host-country nationals to manage local subsidiaries','Only parent-country nationals everywhere','The best candidate regardless of nationality in every role','A single regional nationality for all positions'],a:0,e:'Polycentric staffing commonly relies on host-country nationals to manage subsidiaries, reflecting local knowledge and context.'},
+{u:2,q:'A geocentric approach aims to:',o:['Choose staff based only on headquarters nationality','Select the best people for roles regardless of nationality','Hire only host-country citizens','Avoid international transfers'],a:1,e:'Geocentric staffing seeks the best-qualified people internationally, rather than privileging a particular nationality.'},
+{u:2,q:'The broader EPRG framework includes which four orientations?',o:['Ethnocentric, polycentric, regiocentric, geocentric','Economic, political, regional, global','Expatriate, parent, regional, general','Ethical, personal, regulatory, geographic'],a:0,e:'EPRG stands for ethnocentric, polycentric, regiocentric, and geocentric orientations.'},
+{u:2,q:'Which is a sensible factor when selecting an expatriate?',o:['Technical competence alone always guarantees success','Cross-cultural suitability and family considerations, alongside role competence','Nationality alone','Ignoring the assignment location'],a:1,e:'Selection should consider job competence and cross-cultural suitability, and may need to account for family, language, and assignment context.'},
+{u:2,q:'What is one major purpose of expatriate performance management?',o:['To remove all performance feedback','To align goals, feedback, and evaluation with the international assignment context','To use only headquarters metrics regardless of context','To replace all training'],a:1,e:'Performance management should align goals and evaluation with the assignment while considering both organizational and local context.'},
+{u:2,q:'Which is a common reason an international assignment may fail?',o:['Unrealistic expectations and adjustment difficulties','Clear goals and adequate support','Good role preparation','Appropriate family support'],a:0,e:'Adjustment problems, unrealistic expectations, inadequate preparation, and family difficulties can contribute to assignment failure.'},
+{u:2,q:'A TCN in a subsidiary located in Country B is an employee who is a national of:',o:['Country B only','The parent country only','Neither the host country nor the parent country','Every country in the region'],a:2,e:'A third-country national is neither a national of the host country nor of the parent/home country in the assignment framework.'},
+{u:3,q:'The balance-sheet approach to expatriate compensation aims primarily to:',o:['Keep the expatriate broadly whole relative to the home-country standard of living','Pay every employee the same local wage','Remove all allowances','Set pay solely from host-country minimum wage'],a:0,e:'The balance-sheet approach seeks to preserve the expatriate’s home-country purchasing position, often adjusting for costs and assignment-related items.'},
+{u:3,q:'The going-rate approach commonly bases expatriate salary on:',o:['The host-country salary structure or comparable local market rates','The employee’s childhood income','Only the headquarters CEO’s pay','A universal global rate unrelated to location'],a:0,e:'The going-rate approach uses host-country or local-market salary benchmarks for comparable work.'},
+{u:3,q:'Tax equalisation is designed to:',o:['Guarantee that all countries have the same tax law','Keep an expatriate’s tax burden broadly comparable to the home-country position under company policy','Eliminate every tax payment','Pay all taxes personally without company involvement'],a:1,e:'Tax equalisation generally aims to prevent an assignment from creating an undue tax advantage or disadvantage compared with the home-country tax position.'},
+{u:3,q:'Which item may be part of an international assignment compensation package?',o:['Assignment or housing allowance','A guarantee of permanent promotion','A guarantee of citizenship','A waiver of all employment law'],a:0,e:'Packages may include base salary plus assignment-related elements such as housing, cost-of-living, relocation, or hardship allowances, depending on policy.'},
+{u:3,q:'Why do international compensation policies vary by assignment?',o:['All countries have identical costs','Tax, cost of living, labour markets, assignment purpose, and company policy can differ','Employees never relocate','Compensation is unrelated to strategy'],a:1,e:'The package depends on the assignment, local conditions, tax treatment, and the organization’s compensation approach.'},
+{u:3,q:'Which statement best distinguishes home-based and host-based pay approaches?',o:['Home-based pay anchors to home-country structures; host-based pay uses host-country structures','Both always pay the exact same amount','Home-based pay excludes salary','Host-based pay is only for short domestic trips'],a:0,e:'Home-based approaches refer to home-country pay structures; host-based approaches anchor pay to the host-country context.'},
+{u:3,q:'What is a common objective of relocation support?',o:['Make the assignment transition more manageable','Replace the need for role clarity','Ensure the employee never returns home','Remove local legal obligations'],a:0,e:'Relocation support can help with practical transition costs and reduce friction during an international move.'},
+{u:3,q:'Which factor should be checked before comparing net expatriate compensation across countries?',o:['Tax treatment and purchasing power','Only the currency symbol','The colour of the payslip','The employee’s job title alone'],a:0,e:'Tax treatment, exchange rates, living costs, benefits, and purchasing power affect the real value of compensation.'},
+{u:4,q:'What is a multinational enterprise “investment strike” concern in labour relations?',o:['Workers vote on a strike ballot','The company reduces or withholds investment, potentially weakening a facility or workforce','A union invests pension funds','A government increases training'],a:1,e:'In this context, investment withdrawal or underinvestment can be used as leverage and may threaten jobs or facility viability.'},
+{u:4,q:'Why can trade unions find it difficult to coordinate internationally?',o:['Labour law and union structures differ across countries','All unions share identical bargaining rights','MNEs operate in only one country','Workers have no common interests'],a:0,e:'Different legal systems, bargaining structures, priorities, and resources complicate cross-border union coordination.'},
+{u:4,q:'The ILO is primarily associated with:',o:['International labour standards and decent work','Setting every company’s global salary','Running multinational corporations','Approving all international mergers'],a:0,e:'The International Labour Organization develops international labour standards and promotes decent work and social dialogue.'},
+{u:4,q:'What does “social dumping” commonly refer to in international business debates?',o:['Moving products to a landfill','Competition by lowering labour costs or standards, potentially undercutting worker protections','Paying every worker above the market','A system of expatriate tax equalisation'],a:1,e:'The term is used in debates about competition based on lower labour costs or weaker social and labour protections.'},
+{u:4,q:'Why does host-country employment law matter to an MNE?',o:['It applies only to headquarters staff','It can shape employment contracts, collective relations, working time, and employee protections','It can always be ignored by foreign-owned firms','It replaces every company policy automatically in every country'],a:1,e:'MNEs must assess applicable local employment rules and how they interact with corporate policies and any other relevant obligations.'},
+{u:4,q:'Offshoring generally means:',o:['Moving or sourcing activities to another country','Promoting a local employee','A method of tax equalisation','A type of expatriate selection interview'],a:0,e:'Offshoring is the relocation or sourcing of business activities in another country; it differs from outsourcing, which concerns who performs the activity.'},
+{u:4,q:'What is the main purpose of collective bargaining?',o:['Negotiation between employers and worker representatives over employment terms','Selecting expatriates for overseas posts','Calculating exchange rates','Issuing passports'],a:0,e:'Collective bargaining is negotiation between employers and worker representatives, often unions, over employment terms and conditions.'},
+{u:4,q:'Which is a sound approach when applying global HR policies across countries?',o:['Assume one policy automatically fits all legal systems','Balance global consistency with local law and context','Ignore local worker representation','Remove all local management input'],a:1,e:'International HR policy commonly requires balancing global objectives with local legal, institutional, and cultural conditions.'}
+];
+var workspace=$('examWorkspace'),questionArea=$('examQuestionArea'),feedback=$('examFeedback'),clock=$('examClock'),progress=$('examProgressBar'),progressText=$('examProgressText'),sessionLabel=$('examSessionLabel'),next=$('examNext'),finish=$('examFinish'),mark=$('examMarkReview');
+var session=null,timer=null;
+function readStats(){try{var x=JSON.parse(localStorage.getItem('air-exam-stats')||'{}');return x&&typeof x==='object'?x:{}}catch(e){return {attempts:0,correct:0,best:0}}}
+function writeStats(x){try{localStorage.setItem('air-exam-stats',JSON.stringify(x))}catch(e){}}
+function updateStats(){var st=readStats();$('examAttemptCount').textContent=st.attempts||0;$('examAccuracy').textContent=st.attempts?Math.round((st.correct||0)/st.attempts*100)+'%':'—';$('examBest').textContent?$('examBest').textContent=(Number(st.best)>0?Math.round(Number(st.best))+'%':'—'):null}
+function shuffled(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),tmp=a[i];a[i]=a[j];a[j]=tmp}return a}
+function stopTimer(){if(timer){clearInterval(timer);timer=null}}
+function fmt(sec){return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+function renderQuestion(){
+ if(!session)return;
+ var item=session.items[session.pos],selected=session.answers[session.pos],isAnswered=selected!==undefined;
+ sessionLabel.textContent=session.mode==='mock'?'Timed mock exam':'Unit-wise practice';
+ progressText.textContent='Question '+(session.pos+1)+' of '+session.items.length+(session.review[session.pos]?' · Marked for review':'');
+ progress.style.width=((session.pos+1)/session.items.length*100)+'%';
+ questionArea.innerHTML='';
+ var meta=document.createElement('div');meta.className='exam-question-meta';meta.textContent='Unit '+item.u+' · '+(['','IHRM foundations','Staffing & performance','International compensation','Unions, law & trends'][item.u]);questionArea.appendChild(meta);
+ var h=document.createElement('h3');h.textContent=(session.pos+1)+'. '+item.q;questionArea.appendChild(h);
+ item.o.forEach(function(option,i){var b=document.createElement('button');b.type='button';b.className='exam-option';b.innerHTML='<span class="exam-option-key">'+String.fromCharCode(65+i)+'.</span><span></span>';b.lastChild.textContent=option;b.disabled=isAnswered;
+ if(isAnswered&&i===item.a)b.classList.add('correct');
+ if(isAnswered&&i===selected&&selected!==item.a)b.classList.add('incorrect');
+ b.addEventListener('click',function(){if(session.answers[session.pos]!==undefined)return;session.answers[session.pos]=i;var st=readStats();st.attempts=(st.attempts||0)+1;if(i===item.a)st.correct=(st.correct||0)+1;writeStats(st);updateStats();if(session.mode==='practice'){feedback.innerHTML='<div class="feedback-box '+(i===item.a?'correct-feedback':'incorrect-feedback')+'"><strong>'+(i===item.a?'Correct ✓':'Not quite — review the explanation')+'</strong><p>'+item.e+'</p></div>'}else{feedback.textContent='Answer recorded. Explanations appear when you finish the mock exam.'}renderQuestion()});
+ questionArea.appendChild(b)});
+ next.disabled=!isAnswered;
+ next.textContent=session.pos===session.items.length-1?'View results →':'Next question →';
+ mark.textContent=session.review[session.pos]?'Unmark review':'Mark for review';
+ if(!isAnswered)feedback.textContent=session.mode==='mock'?'Choose one answer. Your score and explanations appear at the end.':'Choose the best answer to see feedback and an explanation.';
+ else if(session.mode==='practice'){var chosen=session.answers[session.pos],correct=chosen===item.a;feedback.innerHTML='<div class="feedback-box '+(correct?'correct-feedback':'incorrect-feedback')+'"><strong>'+(correct?'Correct ✓':'Not quite — review the explanation')+'</strong><p></p></div>';feedback.querySelector('p').textContent=item.e}
+}
+function finishSession(expired){
+ if(!session||session.finished)return;session.finished=true;stopTimer();
+ var correct=0,answered=0;
+ session.items.forEach(function(item,i){if(session.answers[i]!==undefined){answered++;if(session.answers[i]===item.a)correct++}});
+ var score=Math.round(correct/session.items.length*100),st=readStats();
+ if(session.mode==='mock'){st.best=Math.max(Number(st.best)||0,score);writeStats(st);updateStats()}
+ sessionLabel.textContent=session.mode==='mock'?'Mock exam results':'Practice results';
+ progressText.textContent=expired?'Time expired':'Completed';
+ clock.textContent=expired?'00:00':(session.mode==='mock'?'Finished':'Untimed');
+ progress.style.width='100%';questionArea.innerHTML='';
+ var h=document.createElement('h3');h.textContent='Results: '+correct+' / '+session.items.length+' ('+score+'%)';questionArea.appendChild(h);
+ var p=document.createElement('p');p.textContent=answered+' answered · '+(session.items.length-answered)+' unanswered · '+session.items.filter(function(_,i){return session.review[i]}).length+' marked for review.';questionArea.appendChild(p);
+ var tip=document.createElement('p');tip.textContent=score>=80?'Strong result. Revisit any marked or missed questions.':score>=60?'Good progress. Review the explanations for every missed question.':'Use the explanations below, then retry a shorter unit practice session.';questionArea.appendChild(tip);
+ var review=document.createElement('div');
+ session.items.forEach(function(item,i){var picked=session.answers[i],ok=picked===item.a,wrap=document.createElement('article');wrap.className='exam-review-item';var title=document.createElement('h4');title.textContent=(i+1)+'. '+item.q;wrap.appendChild(title);var pill=document.createElement('span');pill.className='exam-review-pill';pill.textContent=picked===undefined?'Unanswered':ok?'Correct':'Review';wrap.appendChild(pill);var chosen=document.createElement('p');chosen.textContent='Your answer: '+(picked===undefined?'No answer':String.fromCharCode(65+picked)+'. '+item.o[picked]);wrap.appendChild(chosen);var right=document.createElement('p');right.textContent='Correct answer: '+String.fromCharCode(65+item.a)+'. '+item.o[item.a];wrap.appendChild(right);var exp=document.createElement('p');exp.textContent='Explanation: '+item.e;wrap.appendChild(exp);review.appendChild(wrap)});
+ feedback.innerHTML='';feedback.appendChild(review);
+ next.disabled=true;mark.disabled=true;finish.textContent='Close results';finish.onclick=function(){workspace.hidden=true;session=null;finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false};
+}
+function finishCurrent(){finishSession(false)}
+function start(){
+ stopTimer();var unit=$('examUnit').value,mode=$('examMode').value;
+ var eligible=bank.filter(function(q){return unit==='all'||String(q.u)===unit});
+ if(!eligible.length){return}
+ var length=mode==='mock'?Number($('examLength').value):eligible.length;
+ var chosen=shuffled(eligible).slice(0,Math.min(length,eligible.length));
+ session={mode:mode,items:chosen,pos:0,answers:{},review:{}};
+ workspace.hidden=false;feedback.innerHTML='';finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false;
+ if(mode==='mock'){session.seconds=chosen.length*60;clock.textContent=fmt(session.seconds);timer=setInterval(function(){if(!session)return;session.seconds--;clock.textContent=fmt(Math.max(0,session.seconds));if(session.seconds<=0)finishSession(true)},1000)}else{clock.textContent='Untimed'}
+ renderQuestion();workspace.scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('startExam').addEventListener('click',start);
+next.addEventListener('click',function(){if(!session||session.answers[session.pos]===undefined)return;if(session.pos===session.items.length-1){finishSession(false);return}session.pos++;feedback.innerHTML='';renderQuestion()});
+mark.addEventListener('click',function(){if(!session)return;session.review[session.pos]=!session.review[session.pos];renderQuestion()});
+finish.addEventListener('click',finishCurrent);
+$('resetExamStats').addEventListener('click',function(){if(!window.confirm('Reset your saved exam statistics on this device?'))return;writeStats({attempts:0,correct:0,best:0});updateStats()});
+updateStats();
+})();
+</script><style id="wide-reading-notes-layout">
+/* Make opened notes use the screen width instead of becoming a narrow, tall column. */
+.full-unit-notes{padding:0!important;width:100%!important;max-width:100%!important}
+.full-unit-notes[open]{width:100%!important;max-width:100%!important}
+.full-unit-notes>summary{width:100%;box-sizing:border-box}
+.embedded-notes{width:100%!important;max-width:100%!important;box-sizing:border-box;padding:clamp(14px,2.5vw,30px)!important}
+@media(min-width:900px){
+  .embedded-notes{column-count:2;column-gap:clamp(28px,3vw,46px);column-fill:balance}
+  .embedded-notes h3,.embedded-notes h4,.embedded-notes figure,.embedded-notes table,
+  .embedded-notes .box,.embedded-notes .tip,.embedded-notes .note,.embedded-notes .pol{
+    break-inside:avoid;page-break-inside:avoid
+  }
+  .embedded-notes h3,.embedded-notes figure,.embedded-notes table{column-span:all}
+  .embedded-notes p,.embedded-notes ul,.embedded-notes ol{break-inside:avoid}
+}
+@media(max-width:899px){
+  .embedded-notes{column-count:1;column-gap:0;padding:14px!important}
+}
+@media(max-width:600px){
+  .full-unit-notes{margin-left:0!important;margin-right:0!important}
+  .embedded-notes{padding:12px!important;font-size:15px;line-height:1.65}
+}
+</style>
+
+
+<style id="desktop-notes-two-column-correction">
+/* Correct desktop reading flow: let text and lists continue into the second column.
+   Only diagrams/tables span the full width; headings must not force each section into one long column. */
+@media(min-width:900px){
+  .embedded-notes{
+    column-count:2!important;
+    column-width:auto!important;
+    column-gap:38px!important;
+    column-fill:balance!important;
+  }
+  .embedded-notes h3,.embedded-notes h4{
+    column-span:none!important;
+    break-after:avoid-column;
+    page-break-after:avoid;
+  }
+  .embedded-notes p,.embedded-notes ul,.embedded-notes ol,.embedded-notes li{
+    break-inside:auto!important;
+    page-break-inside:auto!important;
+  }
+  .embedded-notes figure,.embedded-notes .fig,.embedded-notes table{
+    column-span:all!important;
+    break-inside:avoid!important;
+  }
+  .embedded-notes .pol{float:none!important;width:min(176px,100%);margin:12px auto 20px!important}
+}
+@media(max-width:899px){
+  .embedded-notes{column-count:1!important}
+}
+</style>
+
+
+<style id="notes-match-main-website-layout">
+/* Keep expanded notes aligned with the normal unit content: one full-width,
+   left-aligned reading surface, not newspaper columns or floating side layouts. */
+.full-unit-notes,
+.full-unit-notes[open]{
+  display:block;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:18px 0 4px!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+.full-unit-notes>summary{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+}
+.embedded-notes{
+  display:flow-root!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  columns:auto!important;
+  column-count:1!important;
+  column-width:auto!important;
+  column-span:none!important;
+  padding:clamp(16px,2.2vw,28px)!important;
+  box-sizing:border-box!important;
+  text-align:left;
+}
+.embedded-notes h3,
+.embedded-notes h4,
+.embedded-notes p,
+.embedded-notes ul,
+.embedded-notes ol{
+  column-span:none!important;
+  max-width:100%;
+}
+.embedded-notes figure,
+.embedded-notes .fig,
+.embedded-notes table{
+  column-span:none!important;
+  max-width:100%;
+}
+.embedded-notes figure.pol{
+  float:right!important;
+  width:min(176px,28%)!important;
+  margin:4px 0 16px 20px!important;
+}
+@media(max-width:899px){
+  .embedded-notes{padding:14px!important}
+}
+@media(max-width:600px){
+  .embedded-notes{padding:12px!important;font-size:15px;line-height:1.65}
+  .embedded-notes figure.pol{float:none!important;width:min(176px,100%)!important;margin:12px auto 22px!important}
+}
+</style>
+
+
+<script id="ihrm-air-ui-upgrade">
+(function(){
+ 'use strict';
+ var root=document.documentElement, key='ihrm-air-theme';
+ try{
+   var saved=localStorage.getItem(key);
+   if(saved==='light'||saved==='dark') root.setAttribute('data-theme',saved);
+ }catch(e){}
+ var nav=document.getElementById('sitePageNav');
+ if(nav&&!nav.querySelector('.site-theme-toggle')){
+   var theme=document.createElement('button');
+   theme.type='button';theme.className='site-theme-toggle';theme.id='siteThemeToggle';
+   theme.setAttribute('aria-label','Switch colour theme');
+   nav.appendChild(theme);
+   function paintTheme(){
+     var dark=root.getAttribute('data-theme')==='dark';
+     theme.innerHTML=dark?'☀️ <span>Light</span>':'🌙 <span>Dark</span>';
+     theme.setAttribute('aria-pressed',String(dark));
+     theme.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');
+   }
+   paintTheme();
+   theme.addEventListener('click',function(){
+     var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+     root.setAttribute('data-theme',next);
+     try{localStorage.setItem(key,next)}catch(e){}
+     paintTheme();
+   });
+ }
+ if(!document.getElementById('siteReadingProgress')){
+   var progress=document.createElement('div');progress.id='siteReadingProgress';progress.setAttribute('aria-hidden','true');
+   progress.innerHTML='<span></span>';document.body.appendChild(progress);
+ }
+ if(!document.getElementById('siteBackTop')){
+   var top=document.createElement('button');top.id='siteBackTop';top.type='button';top.innerHTML='↑';top.setAttribute('aria-label','Back to top');top.title='Back to top';document.body.appendChild(top);
+   top.addEventListener('click',function(){window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+ }
+ var bar=document.getElementById('siteReadingProgress'),fill=bar&&bar.firstElementChild,topBtn=document.getElementById('siteBackTop'),busy=false;
+ function update(){
+   var doc=document.documentElement, max=doc.scrollHeight-window.innerHeight, y=window.scrollY||doc.scrollTop;
+   if(fill)fill.style.width=(max>0?Math.min(100,Math.max(0,y/max*100)):0)+'%';
+   if(topBtn)topBtn.classList.toggle('is-visible',y>420);
+   busy=false;
+ }
+ window.addEventListener('scroll',function(){if(!busy){busy=true;requestAnimationFrame(update)}},{passive:true});
+ window.addEventListener('resize',update,{passive:true});update();
+ document.querySelectorAll('a[href^="#"]').forEach(function(a){
+   a.addEventListener('click',function(){
+     var id=a.getAttribute('href');if(id&&id.length>1){var target=document.querySelector(id);if(target){target.setAttribute('tabindex','-1');setTimeout(function(){target.focus({preventScroll:true})},350)}}
+   });
+ });
+})();
+</script>
+<script src="assets/ihrm-refresh.js?v=6" defer></script>
+</body></html>
