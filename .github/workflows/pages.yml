@@ -31,6 +31,7 @@ jobs:
         run: |
           node --check assets/ihrm-refresh.js
           node --check service-worker.js
+          python scripts/check_inline_scripts.py
 
       - name: Validate multi-page study hub
         run: |
