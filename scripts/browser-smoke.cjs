@@ -45,6 +45,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.equal(await page.locator('#timerDisplay').innerText(), '15:00', 'timer preset should update');
     await page.locator('#finishTimer').click();
     assert.match(await page.locator('#sessionCount').innerText(), /0 sessions/, 'unstarted timer should not create a session');
+    await page.locator('#startTimer').click();
+    await page.waitForTimeout(1200);
+    await page.locator('#pauseTimer').click();
+    await page.locator('#finishTimer').click();
+    assert.match(await page.locator('#sessionCount').innerText(), /1 sessions/, 'paused focus session should save elapsed time');
 
     await page.goto('http://127.0.0.1:8765/backup.html', { waitUntil: 'networkidle' });
     await page.locator('#exportBackup').waitFor({ state: 'visible', timeout: 10000 });
