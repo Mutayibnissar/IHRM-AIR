@@ -7,7 +7,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     const pageErrors = [];
-    page.on('pageerror', error => pageErrors.push(error.message));
+    page.on('pageerror', error => pageErrors.push({ url: page.url(), message: error.message, stack: error.stack }));
 
     await page.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'networkidle' });
     assert.match(await page.title(), /IHRM Air/i);
