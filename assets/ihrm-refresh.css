@@ -353,3 +353,44 @@ body{
 .air-import-button input{display:none}
 .air-data-message{flex-basis:100%;font-weight:700}
 @media(max-width:520px){.air-data-panel{align-items:stretch}.air-data-actions{display:grid;grid-template-columns:1fr 1fr}.air-data-button{padding:10px 8px;font-size:.9rem}}
+
+
+/* Study Intelligence dashboard, progress tracking and weekly planner */
+.air-intelligence-panel{max-width:1180px;margin:36px auto;padding:clamp(16px,3vw,28px);border:1px solid var(--air-line);border-radius:24px;background:var(--air-surface);color:var(--air-text);box-shadow:var(--air-shadow)}
+.air-intel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.air-intel-kicker{font-size:.72rem;font-weight:900;letter-spacing:.14em;color:var(--air-blue)}
+.air-intel-head h2{margin:6px 0;font-size:clamp(1.4rem,3.4vw,2rem)}
+.air-intel-head h2::after,.air-intel-subpanel h3::after{display:none}
+.air-intel-head p,.air-intel-help,.air-intel-note{color:var(--air-muted);margin:5px 0}
+.air-intel-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border-radius:13px;background:var(--air-yellow);color:#10213d!important;font-weight:900;text-decoration:none;white-space:nowrap}
+.air-intel-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.air-intel-metric{padding:16px;border:1px solid var(--air-line);border-radius:17px;background:var(--air-bg);min-width:0}
+.air-intel-metric span,.air-intel-metric small{display:block;color:var(--air-muted)}
+.air-intel-metric strong{display:block;margin:7px 0;font-size:clamp(1.5rem,3vw,2rem);line-height:1.1;color:var(--air-text)}
+.air-intel-metric small{font-size:.78rem;line-height:1.4}
+.air-intel-columns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.air-intel-subpanel{min-width:0;padding:17px;border:1px solid var(--air-line);border-radius:18px;background:var(--air-bg)}
+.air-intel-subpanel h3{margin:0 0 12px;color:var(--air-text)}
+.air-unit-progress-row{margin:14px 0}
+.air-unit-progress-label{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:7px}
+.air-unit-progress-label a{font-weight:800;color:var(--air-text);text-decoration:none}
+.air-unit-status{font-size:.76rem;color:var(--air-muted);white-space:nowrap}
+.air-unit-track{height:8px;overflow:hidden;border-radius:99px;background:var(--air-line)}
+.air-unit-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--air-blue),var(--air-yellow));transition:width .3s ease}
+.air-plan-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--air-line)}
+.air-plan-row>input[type=checkbox]{width:19px;height:19px;flex:0 0 auto;accent-color:var(--air-blue)}
+.air-plan-copy{display:grid;gap:5px;min-width:0;flex:1}
+.air-plan-copy strong{font-size:.82rem}
+.air-plan-copy input{width:100%;min-width:0;padding:8px 10px;border:1px solid var(--air-line);border-radius:9px;background:var(--air-surface);color:var(--air-text);font:inherit;font-size:.88rem}
+.air-plan-row.is-done .air-plan-copy strong{text-decoration:line-through;color:var(--air-muted)}
+.air-intel-reset{margin-top:12px;padding:9px 12px;border:1px solid var(--air-line);border-radius:10px;background:var(--air-surface);color:var(--air-text);font:inherit;font-weight:800;cursor:pointer}
+.air-intel-reset:hover{background:var(--air-yellow);color:#10213d}
+.air-history{margin-top:14px}
+.air-history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.air-history-head h3{margin:0}
+.air-history-head a{font-weight:800;color:var(--air-blue)}
+.air-history-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--air-line)}
+.air-history-row span{font-size:.86rem;color:var(--air-muted);text-align:right}
+.air-intel-note{font-size:.78rem;margin-top:16px}
+@media(max-width:760px){.air-intel-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.air-intel-columns{grid-template-columns:1fr}.air-history-row{align-items:flex-start;flex-direction:column}.air-history-row span{text-align:left}}
+@media(max-width:380px){.air-intel-metrics{grid-template-columns:1fr}.air-unit-progress-label{flex-direction:column}}
