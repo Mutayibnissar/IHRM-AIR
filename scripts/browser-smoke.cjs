@@ -121,7 +121,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     }
     await page.locator('#examFinish').click();
     await page.waitForFunction(() => (document.querySelector('#examQuestionArea h3')?.innerText || '').includes('Results:'), null, { timeout: 5000 });
-    assert.match(await page.locator('#examQuestionArea h3').innerText(), /Results:\\s*8\\s*\\/\\s*8\\s*\\(100%\\)/, 'eight correct answers should produce a 100% score');
+    assert.equal((await page.locator('#examQuestionArea h3').innerText()).replace(/\\s+/g, ' ').includes('Results: 8 / 8 (100%)'), true, 'eight correct answers should produce a 100% score');
     const practiceHistory = await page.evaluate(() => JSON.parse(localStorage.getItem('air-exam-history') || '[]'));
     assert.equal(practiceHistory[0]?.correct, 8, 'practice history should record eight correct answers');
     assert.equal(practiceHistory[0]?.total, 8, 'practice history should record eight questions');
