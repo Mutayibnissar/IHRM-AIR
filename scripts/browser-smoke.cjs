@@ -13,6 +13,20 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.match(await page.title(), /IHRM Air/i);
     assert.equal(await page.locator('a[href="units.html"]').count() > 0, true, 'home should link to course units');
 
+    // Premium global navigation regression: command palette and scroll affordances.
+    await page.locator('#airOpenCommand').waitFor({ state: 'visible', timeout: 5000 });
+    await page.keyboard.press('Control+k');
+    await page.locator('#airCommandOverlay').waitFor({ state: 'visible', timeout: 3000 });
+    await page.locator('#airCommandInput').fill('planner');
+    assert.equal(await page.locator('#airCommandResults a[href="planner.html"]').count(), 1, 'command palette should filter to the planner page');
+    await page.keyboard.press('Escape');
+    await page.locator('#airCommandOverlay').waitFor({ state: 'hidden', timeout: 3000 });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible'), null, { timeout: 3000 });
+    assert.equal(await page.locator('#siteReadingProgress span').evaluate(el => parseFloat(el.style.width) >= 90), true, 'reading progress should reflect page scroll');
+    await page.locator('#siteBackTop').click();
+    await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 3000 });
+
     await page.goto('http://127.0.0.1:8765/units.html', { waitUntil: 'networkidle' });
     for (const unit of ['#u1', '#u2', '#u3', '#u4']) {
       assert.equal(await page.locator(unit).count() > 0, true, 'course notes should include ' + unit);
@@ -175,7 +189,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await menu.getAttribute('aria-expanded'), 'true', 'mobile menu should expose its expanded state');
     }
     assert.deepEqual(pageErrors, [], 'pages should not raise uncaught JavaScript errors');
-    console.log('PASS: browser smoke tests verified navigation, dedicated tools, question loading, answer/next flow, timed mock history, backup export/restore, mistake retry, planner/tracker actions, PWA offline navigation, mobile menu, and no uncaught page errors.');
+    console.log('PASS: browser smoke tests verified navigation, dedicated tools, question loading, answer/next flow, timed mock history, backup export/restore, mistake retry, planner/tracker actions, PWA offline navigation, command palette, reading progress, back-to-top, mobile menu, and no uncaught page errors.');
   } finally {
     await browser.close();
   }
