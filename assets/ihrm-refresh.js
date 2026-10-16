@@ -248,10 +248,15 @@
     if(!planner||typeof planner!=='object')planner={};
     var total=stamps.filter(Boolean).length,accuracy=Number(stats.attempts)>0?Math.round(Number(stats.correct||0)/Number(stats.attempts)*100):null;
     var panel=document.createElement('section');panel.id='air-study-intelligence';panel.className='air-intelligence-panel';
-    panel.innerHTML='<div class="air-intel-head"><div><span class="air-intel-kicker">YOUR STUDY FLIGHT DECK</span><h2>Study progress & planner</h2><p>Track unit completion, review practice results, and plan your next study sessions. Your data stays in this browser.</p></div><a class="air-intel-link" href="practice.html">Practise now ↗</a></div><div class="air-intel-metrics"><article class="air-intel-metric"><span>Units stamped</span><strong id="airMetricUnits">'+total+'/4</strong><small>Use the unit stamps to mark progress</small></article><article class="air-intel-metric"><span>Questions answered</span><strong id="airMetricAttempts">'+(Number(stats.attempts)||0)+'</strong><small>Across saved practice sessions</small></article><article class="air-intel-metric"><span>Practice accuracy</span><strong id="airMetricAccuracy">'+(accuracy===null?'—':accuracy+'%')+'</strong><small>Based on saved question stats</small></article><article class="air-intel-metric"><span>Best mock score</span><strong id="airMetricBest">'+(Number(stats.best)>0?Math.round(Number(stats.best))+'%':'—')+'</strong><small>Your highest saved result</small></article></div><div class="air-intel-columns"><section class="air-intel-subpanel"><h3>Unit-by-unit progress</h3><div id="airUnitProgress"></div></section><section class="air-intel-subpanel"><h3>Weekly study planner</h3><p class="air-intel-help">Choose a focus and mark sessions done. Changes save automatically.</p><div id="airPlanner"></div><button type="button" class="air-intel-reset" id="airResetPlanner">Reset weekly plan</button></section></div><section class="air-intel-subpanel air-history"><div class="air-history-head"><h3>Mock-exam history</h3><a href="practice.html">Open exam centre →</a></div><div id="airExamHistory"></div></section><p class="air-intel-note" role="status" id="airIntelStatus">Progress is stored locally on this device and browser.</p>';
+    panel.innerHTML='<div class="air-intel-head"><div><span class="air-intel-kicker">YOUR STUDY FLIGHT DECK</span><h2>Study progress & planner</h2><p>Track unit completion, review practice results, and plan your next study sessions. Your data stays in this browser.</p></div><a class="air-intel-link" href="practice.html">Practise now ↗</a></div><div class="air-intel-metrics"><article class="air-intel-metric"><span>Units stamped</span><strong id="airMetricUnits">'+total+'/4</strong><small>Use the unit stamps to mark progress</small></article><article class="air-intel-metric"><span>Questions answered</span><strong id="airMetricAttempts">'+(Number(stats.attempts)||0)+'</strong><small>Across saved practice sessions</small></article><article class="air-intel-metric"><span>Practice accuracy</span><strong id="airMetricAccuracy">'+(accuracy===null?'—':accuracy+'%')+'</strong><small>Based on saved question stats</small></article><article class="air-intel-metric"><span>Best mock score</span><strong id="airMetricBest">'+(Number(stats.best)>0?Math.round(Number(stats.best))+'%':'—')+'</strong><small>Your highest saved result</small></article></div><div class="air-intel-daily"><article class="air-intel-subpanel"><h3>Today's study goal</h3><p class="air-intel-help">Answer questions to reach your daily target.</p><div class="air-daily-controls"><label for="airDailyGoal">Daily target</label><input id="airDailyGoal" type="number" min="1" max="200" step="1"><span>questions</span></div><div class="air-daily-track"><span id="airDailyFill"></span></div><p class="air-intel-help" id="airDailySummary" role="status"></p></article><article class="air-intel-subpanel"><h3>Consistency & readiness</h3><div class="air-readiness-metrics"><div><span>Study streak</span><strong id="airStudyStreak">0 days</strong></div><div><span>Readiness estimate</span><strong id="airReadiness">Getting started</strong></div></div><p class="air-intel-help" id="airReadinessNote">Complete units and practise questions to build your estimate.</p></article></div><div class="air-intel-columns"><section class="air-intel-subpanel"><h3>Unit-by-unit progress</h3><div id="airUnitProgress"></div></section><section class="air-intel-subpanel"><h3>Weekly study planner</h3><p class="air-intel-help">Choose a focus and mark sessions done. Changes save automatically.</p><div id="airPlanner"></div><button type="button" class="air-intel-reset" id="airResetPlanner">Reset weekly plan</button></section></div><section class="air-intel-subpanel air-history"><div class="air-history-head"><h3>Mock-exam history</h3><a href="practice.html">Open exam centre →</a></div><div id="airExamHistory"></div></section><p class="air-intel-note" role="status" id="airIntelStatus">Progress is stored locally on this device and browser.</p>';
     var main=document.querySelector('main');main.appendChild(panel);
     var progressRoot=panel.querySelector('#airUnitProgress');
     var historyRoot=panel.querySelector('#airExamHistory');
+    function localDay(date){var d=date||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+    function readDaily(){var d=store.get('air-daily-study-v1',{});if(!d||typeof d!=='object')d={};if(d.date!==localDay()){d={date:localDay(),count:0,goal:Number(d.goal)||10};store.set('air-daily-study-v1',d)}d.goal=Math.max(1,Math.min(200,Number(d.goal)||10));d.count=Math.max(0,Number(d.count)||0);return d}
+    function readActivity(){var a=store.get('air-study-activity-v1',[]);return Array.isArray(a)?a:[]}
+    function streakDays(){var a=readActivity(),set={};a.forEach(function(d){set[d]=true});var cursor=new Date();if(!set[localDay(cursor)])cursor.setDate(cursor.getDate()-1);var n=0;for(var i=0;i<366;i++){if(!set[localDay(cursor)])break;n++;cursor.setDate(cursor.getDate()-1)}return n}
+    var daily=readDaily(),lastAttempts=Number(stats.attempts)||0;
     function refreshDashboard(){
       stamps=units.map(function(u){return localStorage.getItem('air-s'+u.id)==='1'});
       stats=store.get('air-exam-stats',{attempts:0,correct:0,best:0})||{};
@@ -262,6 +267,15 @@
       panel.querySelector('#airMetricAttempts').textContent=attempts;
       panel.querySelector('#airMetricAccuracy').textContent=attempts?Math.round(correct/attempts*100)+'%':'—';
       panel.querySelector('#airMetricBest').textContent=Number(stats.best)>0?Math.round(Number(stats.best))+'%':'—';
+      daily=readDaily();
+      var goalInput=panel.querySelector('#airDailyGoal');if(document.activeElement!==goalInput)goalInput.value=daily.goal;
+      panel.querySelector('#airDailyFill').style.width=Math.min(100,Math.round(daily.count/daily.goal*100))+'%';
+      panel.querySelector('#airDailySummary').textContent=daily.count+' of '+daily.goal+' questions answered today'+(daily.count>=daily.goal?' — daily goal reached!':' · '+(daily.goal-daily.count)+' to go');
+      var streak=streakDays();panel.querySelector('#airStudyStreak').textContent=streak+' '+(streak===1?'day':'days');
+      var readiness=Math.round((done/4*40)+(Math.min(100,Number(stats.attempts)||0)/100*20)+(Math.min(100,Number(stats.correct||0)/Math.max(1,Number(stats.attempts)||1)*100)*0.2)+(Math.max(0,Number(stats.best)||0)*0.2));
+      panel.querySelector('#airReadiness').textContent=(Number(stats.attempts)||0)===0&&done===0?'Getting started':readiness>=80?'Strong':readiness>=55?'Building':'In progress';
+      panel.querySelector('#airReadinessNote').textContent='Study indicator: '+Math.min(100,readiness)+'% · Based on unit stamps, practice volume, accuracy and best mock score. This is a study guide, not a prediction of exam results.';
+
       progressRoot.textContent='';
       units.forEach(function(u){
         var row=document.createElement('div');row.className='air-unit-progress-row';
@@ -287,6 +301,14 @@
     refreshDashboard();
     window.addEventListener('air-study-data-updated',refreshDashboard);
     window.addEventListener('storage',function(e){if(!e.key||/^air-(s[1-4]|exam-stats|exam-history)$/.test(e.key))refreshDashboard()});
+    panel.querySelector('#airDailyGoal').addEventListener('change',function(){daily=readDaily();daily.goal=Math.max(1,Math.min(200,Math.round(Number(this.value)||10)));store.set('air-daily-study-v1',daily);refreshDashboard();panel.querySelector('#airIntelStatus').textContent='Daily target saved on this device.'});
+    window.addEventListener('air-study-data-updated',function(e){
+      if(e.detail&&e.detail.type==='question'){
+        daily=readDaily();daily.count+=1;store.set('air-daily-study-v1',daily);
+        var activity=readActivity(),today=localDay();if(activity.indexOf(today)<0)activity.push(today);store.set('air-study-activity-v1',activity.slice(-366));
+      }
+      refreshDashboard();
+    });
     var plannerRoot=panel.querySelector('#airPlanner');
     var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
     var defaults=['Unit I · Foundations','Unit II · Staffing','Unit III · Compensation','Unit IV · Law & trends','Practice questions','Timed mock exam','Review weak topics'];
