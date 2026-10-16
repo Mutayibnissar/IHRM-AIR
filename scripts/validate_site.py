@@ -12,14 +12,14 @@ REQUIRED = {
     "units.html": ['id="u1"', 'id="u2"', 'id="u3"', 'id="u4"'],
     "practice.html": ['id="exam-centre"', 'id="quiz"', 'id="integrated-cards"', "data/question-bank.json", "correctOptionId"],
     "tools.html": ["Study Tools Hub", 'href="planner.html"', 'href="tracker.html"', 'href="backup.html"'],
-    "planner.html": ["Study Planner", "planner"],
-    "tracker.html": ["Session Tracker", "tracker"],
-    "backup.html": ["Backup", "backup"],
+    "planner.html": ["Study Planner", "planForm", "Generate revision plan", "study-tools.js"],
+    "tracker.html": ["Session Tracker", "timerDisplay", "startTimer", "sessionLogs", "study-tools.js"],
+    "backup.html": ["Backup", "exportBackup", "importBackup", "clearLocalData", "study-tools.js"],
     "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
     "agents.html": ["Agent Crew", "Study Coach", "Concept Explainer", "Revision Planner", "agent-workspace.js", "browser-local"],
 }
 CORE_FILES = [
-    "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "assets/agent-workspace.js", "service-worker.js",
+    "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "assets/agent-workspace.js", "assets/study-tools.js", "service-worker.js",
     "manifest.webmanifest", "offline.html", "assets/icon.svg", "data/question.schema.json", "data/question-bank.json", "data/README.md",
 ]
 
