@@ -1264,6 +1264,18 @@ h1,h2,h3{letter-spacing:-.035em}
 
 <section class="pp" id="pp"><h2>Your passport</h2><p>Stamp each unit as you finish revising it.</p>
 <div class="slots" id="slots"></div><p class="score" id="ptxt"></p></section>
+<style id="air-incorrect-notebook-styles">
+.air-mistake-notebook{margin:22px 0;padding:clamp(16px,2.5vw,26px);border:1px solid var(--line,#d5e2f4);border-radius:20px;background:var(--surface,#fff);color:var(--ink,#17233f)}
+.air-mistake-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.air-mistake-head h3{margin:0}.air-mistake-count{display:inline-flex;padding:5px 10px;border-radius:999px;background:var(--sun,#ffc83d);color:#17233f;font-weight:800}
+.air-mistake-tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.air-mistake-tools button,.air-mistake-row button{padding:8px 12px;border:1px solid var(--line,#d5e2f4);border-radius:10px;background:var(--surface,#fff);color:inherit;font:inherit;font-weight:750;cursor:pointer}
+.air-mistake-row{padding:14px 0;border-top:1px solid var(--line,#d5e2f4)}
+.air-mistake-row h4{margin:0 0 8px}.air-mistake-row p{margin:6px 0;line-height:1.55}
+.air-mistake-row .air-mistake-answer{font-weight:750}
+.air-mistake-empty{padding:12px;border-radius:12px;background:var(--soft,#f3f6fb)}
+@media(max-width:600px){.air-mistake-tools{display:grid;grid-template-columns:1fr}.air-mistake-tools button{width:100%}}
+</style>
 <section class="dest exam-centre" id="exam-centre">
   <h2>🎓 Exam Centre</h2>
   <p>Practise unit-wise, learn from every mistake, or sit a timed mock exam. Your results are saved on this device.</p>
@@ -1965,10 +1977,27 @@ header.top .nav-subbuttons{white-space:normal}
 .exam-review-item{scroll-margin-top:100px}
 @media(max-width:600px){.exam-result-actions{display:grid;grid-template-columns:1fr}.exam-retry-button{width:100%}}
 </style>
+<section id="airMistakeNotebook" class="air-mistake-notebook" aria-labelledby="airMistakeTitle">
+ <div class="air-mistake-head"><div><h3 id="airMistakeTitle">Incorrect Answers Notebook</h3><p>Questions you miss are saved on this device for later revision.</p></div><span class="air-mistake-count" id="airMistakeCount">0 saved</span></div>
+ <div class="air-mistake-tools"><button type="button" id="airMistakeRetry">Retry saved mistakes</button><button type="button" id="airMistakeExport">Export notebook</button><button type="button" id="airMistakeClear">Clear notebook</button></div>
+ <div id="airMistakeList" aria-live="polite"></div>
+</section>
 <script id="exam-centre-controller">
 (function(){
 'use strict';
 var $=function(id){return document.getElementById(id)};
+var mistakeKey='air-mistake-notebook-v1';
+function readMistakes(){try{var v=JSON.parse(localStorage.getItem(mistakeKey)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}}
+function saveMistakes(list){try{localStorage.setItem(mistakeKey,JSON.stringify(list.slice(0,300)));return true}catch(e){return false}}
+function mistakeId(item){return String(item.u)+'|'+item.q}
+function rememberMistake(item,picked){var list=readMistakes(),id=mistakeId(item),old=list.find(function(v){return v.id===id});if(old){old.picked=picked;old.lastMissed=new Date().toISOString();old.misses=(Number(old.misses)||1)+1}else{list.unshift({id:id,u:item.u,q:item.q,o:item.o,a:item.a,e:item.e,picked:picked,firstMissed:new Date().toISOString(),lastMissed:new Date().toISOString(),misses:1})}saveMistakes(list)}
+function renderMistakeNotebook(){
+ var list=readMistakes(),root=$('airMistakeList'),count=$('airMistakeCount');if(!root||!count)return;
+ count.textContent=list.length+' saved';root.textContent='';
+ if(!list.length){var empty=document.createElement('p');empty.className='air-mistake-empty';empty.textContent='No saved mistakes yet. Answer a practice or mock question incorrectly and it will appear here.';root.appendChild(empty);$('airMistakeRetry').disabled=true;$('airMistakeExport').disabled=true;return}
+ $('airMistakeRetry').disabled=false;$('airMistakeExport').disabled=false;
+ list.forEach(function(item,index){var row=document.createElement('article');row.className='air-mistake-row';var h=document.createElement('h4');h.textContent='Unit '+item.u+' · '+item.q;row.appendChild(h);var picked=document.createElement('p');picked.textContent='Your last answer: '+(item.picked===undefined?'Not recorded':String.fromCharCode(65+item.picked)+'. '+(item.o[item.picked]||''));row.appendChild(picked);var answer=document.createElement('p');answer.className='air-mistake-answer';answer.textContent='Correct answer: '+String.fromCharCode(65+item.a)+'. '+item.o[item.a];row.appendChild(answer);var exp=document.createElement('p');exp.textContent='Explanation: '+item.e;row.appendChild(exp);var actions=document.createElement('div');actions.className='air-mistake-tools';var retry=document.createElement('button');retry.type='button';retry.textContent='Retry this question';retry.addEventListener('click',function(){startRetry([{u:item.u,q:item.q,o:item.o,a:item.a,e:item.e}],'notebook')});var remove=document.createElement('button');remove.type='button';remove.textContent='Remove';remove.addEventListener('click',function(){var latest=readMistakes();latest.splice(index,1);saveMistakes(latest);renderMistakeNotebook()});actions.appendChild(retry);actions.appendChild(remove);row.appendChild(actions);root.appendChild(row)})
+}
 var bank=[
 {u:1,q:'Which combination best represents Morgan’s three dimensions of IHRM?',o:['HR activities, countries involved, and employee categories','Recruitment, training, and payroll only','Headquarters, sales, and production only','Culture, tax, and unions only'],a:0,e:'Morgan’s framework considers HR activities, the countries involved, and the categories of employees (such as PCNs, HCNs, and TCNs).'},
 {u:1,q:'What distinguishes international HRM from domestic HRM most directly?',o:['It has no recruitment function','It manages people across national contexts and added complexity','It applies one identical policy in every country','It deals only with expatriates'],a:1,e:'IHRM has cross-border complexity, including multiple countries, cultures, institutions, and employee groups.'},
@@ -2023,7 +2052,7 @@ function renderQuestion(){
  item.o.forEach(function(option,i){var b=document.createElement('button');b.type='button';b.className='exam-option';b.innerHTML='<span class="exam-option-key">'+String.fromCharCode(65+i)+'.</span><span></span>';b.lastChild.textContent=option;b.disabled=isAnswered;
  if(isAnswered&&i===item.a)b.classList.add('correct');
  if(isAnswered&&i===selected&&selected!==item.a)b.classList.add('incorrect');
- b.addEventListener('click',function(){if(session.answers[session.pos]!==undefined)return;session.answers[session.pos]=i;var st=readStats();st.attempts=(st.attempts||0)+1;if(i===item.a)st.correct=(st.correct||0)+1;writeStats(st);updateStats();try{var unitStats=JSON.parse(localStorage.getItem('air-unit-practice-v1')||'{}');if(!unitStats||typeof unitStats!=='object')unitStats={};var us=unitStats[item.u]||{attempts:0,correct:0};us.attempts=(Number(us.attempts)||0)+1;if(i===item.a)us.correct=(Number(us.correct)||0)+1;unitStats[item.u]=us;localStorage.setItem('air-unit-practice-v1',JSON.stringify(unitStats))}catch(e){}window.dispatchEvent(new CustomEvent('air-study-data-updated',{detail:{type:'question'}}));if(session.mode==='practice'){feedback.innerHTML='<div class="feedback-box '+(i===item.a?'correct-feedback':'incorrect-feedback')+'"><strong>'+(i===item.a?'Correct ✓':'Not quite — review the explanation')+'</strong><p>'+item.e+'</p></div>'}else{feedback.textContent='Answer recorded. Explanations appear when you finish the mock exam.'}renderQuestion()});
+ b.addEventListener('click',function(){if(session.answers[session.pos]!==undefined)return;session.answers[session.pos]=i;if(i!==item.a)rememberMistake(item,i);var st=readStats();st.attempts=(st.attempts||0)+1;if(i===item.a)st.correct=(st.correct||0)+1;writeStats(st);updateStats();try{var unitStats=JSON.parse(localStorage.getItem('air-unit-practice-v1')||'{}');if(!unitStats||typeof unitStats!=='object')unitStats={};var us=unitStats[item.u]||{attempts:0,correct:0};us.attempts=(Number(us.attempts)||0)+1;if(i===item.a)us.correct=(Number(us.correct)||0)+1;unitStats[item.u]=us;localStorage.setItem('air-unit-practice-v1',JSON.stringify(unitStats))}catch(e){}window.dispatchEvent(new CustomEvent('air-study-data-updated',{detail:{type:'question'}}));if(session.mode==='practice'){feedback.innerHTML='<div class="feedback-box '+(i===item.a?'correct-feedback':'incorrect-feedback')+'"><strong>'+(i===item.a?'Correct ✓':'Not quite — review the explanation')+'</strong><p>'+item.e+'</p></div>'}else{feedback.textContent='Answer recorded. Explanations appear when you finish the mock exam.'}renderQuestion()});
  questionArea.appendChild(b)});
  next.disabled=!isAnswered;
  next.textContent=session.pos===session.items.length-1?'View results →':'Next question →';
@@ -2108,6 +2137,11 @@ try{
    }
  }
 }catch(e){}
+$('airMistakeRetry').addEventListener('click',function(){var list=readMistakes();if(!list.length)return;startRetry(list.map(function(v){return {u:v.u,q:v.q,o:v.o,a:v.a,e:v.e}}),'notebook')});
+$('airMistakeExport').addEventListener('click',function(){var blob=new Blob([JSON.stringify({app:'IHRM Air Incorrect Answers Notebook',version:1,exportedAt:new Date().toISOString(),items:readMistakes()},null,2)],{type:'application/json'});var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ihrm-air-incorrect-answers.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
+$('airMistakeClear').addEventListener('click',function(){if(!readMistakes().length)return;if(!window.confirm('Clear all saved incorrect answers on this device? This cannot be undone.'))return;saveMistakes([]);renderMistakeNotebook()});
+renderMistakeNotebook();
+window.addEventListener('storage',function(e){if(e.key===mistakeKey)renderMistakeNotebook()});
 updateStats();
 })();
 </script><style id="wide-reading-notes-layout">
