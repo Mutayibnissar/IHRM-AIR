@@ -337,3 +337,19 @@ body{
 .air-back-to-top{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:1000;display:flex;align-items:center;gap:6px;padding:11px 15px;border:1px solid var(--air-line);border-radius:999px;background:var(--air-surface);color:var(--air-text);font:inherit;font-weight:900;box-shadow:var(--air-shadow)}
 .air-back-to-top:hover{background:var(--air-yellow);color:#10213d;transform:translateY(-2px)}
 @media(max-width:480px){.air-command-overlay{padding-top:12px}.air-command-box{border-radius:18px}.air-command-result{padding:10px}.air-back-to-top{right:12px;bottom:14px}}
+
+
+/* Personal progress and backup/restore panel */
+.air-data-panel{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin:32px auto;padding:clamp(18px,4vw,28px);max-width:1100px;border:1px solid var(--air-line);border-radius:22px;background:linear-gradient(135deg,var(--air-surface),var(--air-arrow-bg));color:var(--air-text);box-shadow:var(--air-shadow)}
+.air-data-panel-copy{flex:1 1 300px;min-width:0}
+.air-data-kicker{font-size:.72rem;font-weight:900;letter-spacing:.14em;color:var(--air-blue)}
+.air-data-panel h2{margin:5px 0 8px;font-size:clamp(1.25rem,3vw,1.7rem)}
+.air-data-panel h2::after{display:none}
+.air-data-panel p{margin:5px 0;color:var(--air-muted)}
+.air-data-status{font-weight:800}
+.air-data-actions{display:flex;gap:10px;flex-wrap:wrap}
+.air-data-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 14px;border:1px solid var(--air-line);border-radius:13px;background:var(--air-surface);color:var(--air-text);font:inherit;font-weight:800;cursor:pointer;text-decoration:none}
+.air-data-button:hover{background:var(--air-yellow);color:#10213d;border-color:#10213d}
+.air-import-button input{display:none}
+.air-data-message{flex-basis:100%;font-weight:700}
+@media(max-width:520px){.air-data-panel{align-items:stretch}.air-data-actions{display:grid;grid-template-columns:1fr 1fr}.air-data-button{padding:10px 8px;font-size:.9rem}}
