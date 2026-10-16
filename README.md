@@ -32,6 +32,6 @@ Personal study data is stored in the browser on the device being used. It is not
 ## Development status and next steps
 The live exam controller now reads data/question-bank.json and converts records into the existing practice/mock-exam format. This avoids maintaining two independent copies of question content. Browser-local study data remains local to each device; there is no account sync or server-side data store.
 
-Remaining quality work: add dedicated regression coverage for retry/mistake recovery and backup restore, verify academic question content against authoritative sources before changing draft review status, and perform real-device accessibility and offline smoke tests.
+The automated browser suite now also verifies mistake capture/retry, backup export/restore, timed mock history, PWA offline navigation, and the main study workspaces. Remaining quality work: verify academic question content against authoritative sources before changing draft review status, and perform real-device accessibility and offline smoke tests.
 
 No AI features are included in this build.
