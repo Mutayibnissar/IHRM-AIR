@@ -24,6 +24,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Run reusable site integrity checks
+        run: python scripts/validate_site.py
+
       - name: Validate multi-page study hub
         run: |
           python - <<'PY'
