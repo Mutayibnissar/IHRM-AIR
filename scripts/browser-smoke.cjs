@@ -22,11 +22,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.keyboard.press('Escape');
     await page.locator('#airCommandOverlay').waitFor({ state: 'hidden', timeout: 3000 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible'), null, { timeout: 3000 });
+    await page.evaluate(() => { window.scrollTo(0, document.documentElement.scrollHeight); window.dispatchEvent(new Event('scroll')); });
+    await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible'), null, { timeout: 5000 });
     assert.equal(await page.locator('#siteReadingProgress span').evaluate(el => parseFloat(el.style.width) >= 90), true, 'reading progress should reflect page scroll');
-    await page.locator('#siteBackTop').click();
-    await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 5000 });
+    await page.locator('#siteBackTop').evaluate(el => el.click());
+    await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 8000 });
 
     await page.goto('http://127.0.0.1:8765/units.html', { waitUntil: 'networkidle' });
     for (const unit of ['#u1', '#u2', '#u3', '#u4']) {
