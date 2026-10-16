@@ -1655,6 +1655,18 @@ function finishSession(expired){
  var correct=0,answered=0;
  session.items.forEach(function(item,i){if(session.answers[i]!==undefined){answered++;if(session.answers[i]===item.a)correct++}});
  var score=Math.round(correct/session.items.length*100),st=readStats();
+ var unitCompletion=null;
+ if(session.mode==='practice'&&$('examUnit').value!=='all'&&answered===session.items.length){
+   try{
+     var completionKey='air-unit-practice-completion-v1';
+     var completions=JSON.parse(localStorage.getItem(completionKey)||'{}');
+     if(!completions||typeof completions!=='object'||Array.isArray(completions))completions={};
+     var unitId=String($('examUnit').value),previous=completions[unitId];
+     unitCompletion={unit:unitId,score:score,passed:score>=80,total:session.items.length,correct:correct};
+     completions[unitId]={bestScore:Math.max(Number(previous&&previous.bestScore)||0,score),latestScore:score,attempts:(Number(previous&&previous.attempts)||0)+1,passed:score>=80||(previous&&previous.passed===true),completedAt:new Date().toISOString(),questions:session.items.length};
+     localStorage.setItem(completionKey,JSON.stringify(completions));
+   }catch(e){unitCompletion={unit:String($('examUnit').value),score:score,passed:score>=80,saveFailed:true}}
+ }
  try{
    var history=JSON.parse(localStorage.getItem('air-exam-history')||'[]');
    if(!Array.isArray(history))history=[];
@@ -1671,6 +1683,12 @@ function finishSession(expired){
  var h=document.createElement('h3');h.textContent='Results: '+correct+' / '+session.items.length+' ('+score+'%)';questionArea.appendChild(h);
  var p=document.createElement('p');p.textContent=answered+' answered · '+(session.items.length-answered)+' unanswered · '+session.items.filter(function(_,i){return session.review[i]}).length+' marked for review.';questionArea.appendChild(p);
  var tip=document.createElement('p');tip.textContent=score>=80?'Strong result. Revisit any marked or missed questions.':score>=60?'Good progress. Review the explanations for every missed question.':'Use the explanations below, then retry a shorter unit practice session.';questionArea.appendChild(tip);
+ if(unitCompletion){
+   var completionNote=document.createElement('p');
+   completionNote.className='feedback-box '+(unitCompletion.passed?'correct-feedback':'incorrect-feedback');
+   completionNote.textContent=unitCompletion.saveFailed?'Unit result calculated, but browser storage was unavailable.':(unitCompletion.passed?'Unit '+unitCompletion.unit+' practice passed: ':'Unit '+unitCompletion.unit+' practice not yet passed: ')+score+'%. '+(unitCompletion.passed?'Your completion is saved on this device.':'Aim for at least 80%, review missed answers, and retry this unit.');
+   questionArea.appendChild(completionNote);
+ }
  var missedItems=session.items.filter(function(item,i){return session.answers[i]===undefined||session.answers[i]!==item.a});
  var wrongItems=session.items.filter(function(item,i){return session.answers[i]!==undefined&&session.answers[i]!==item.a});
  var markedItems=session.items.filter(function(item,i){return !!session.review[i]});
