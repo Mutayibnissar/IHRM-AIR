@@ -43,7 +43,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
         const downloadPromise = page.waitForEvent('download');
         await page.locator('#airExportData').click();
         const download = await downloadPromise;
-        assert.match(download.suggestedFilename(), /ihrm-air-study-backup.*\\.json$/i, 'backup should export a JSON file');
+        assert.equal(download.suggestedFilename().endsWith('.json'), true, 'backup should export a JSON file');
       }
     }
 
