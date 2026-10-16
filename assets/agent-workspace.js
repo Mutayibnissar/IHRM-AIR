@@ -9,10 +9,15 @@ function clean(s){return String(s||'').replace(/\s+/g,' ').trim()}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function norm(s){return clean(s).toLowerCase().replace(/[^a-z0-9\s-]/g,' ')}
 async function load(){
- const [b,...n]=await Promise.all([fetch('data/question-bank.json').then(r=>{if(!r.ok)throw Error('Question bank unavailable');return r.json()}),...pages.map(p=>fetch(p.url).then(r=>r.ok?r.text():'').catch(()=>''))]);
+ const response=await fetch('data/question-bank.json');
+ if(!response.ok)throw Error('Question bank unavailable');
+ const b=await response.json();
  bank=Array.isArray(b.questions)?b.questions:[];
- notes=n.map((html,i)=>{const doc=new DOMParser().parseFromString(html,'text/html');return {name:pages[i].name,url:pages[i].url,text:clean(doc.body.textContent),html}}).filter(x=>x.text);
- status.textContent='Ready · '+bank.length+' structured practice questions · '+notes.length+' study sources loaded.';
+ status.textContent='Ready · '+bank.length+' structured practice questions · loading study sources…';
+ Promise.all(pages.map(p=>fetch(p.url).then(r=>r.ok?r.text():'').catch(()=>''))).then(n=>{
+  notes=n.map((html,i)=>{const doc=new DOMParser().parseFromString(html,'text/html');return {name:pages[i].name,url:pages[i].url,text:clean(doc.body.textContent),html}}).filter(x=>x.text);
+  status.textContent='Ready · '+bank.length+' structured practice questions · '+notes.length+' study sources loaded.';
+ }).catch(()=>{status.textContent='Ready · '+bank.length+' structured practice questions · some study sources could not be loaded.'});
 }
 function relevantNotes(query){
  const terms=norm(query).split(/\s+/).filter(x=>x.length>2);
