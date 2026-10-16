@@ -101,4 +101,62 @@
     }
     paintTheme();
   }
+
+  // Site-wide quick navigator: searchable destinations and headings (Ctrl/Cmd + K).
+  if(!document.getElementById('airCommandPalette')){
+    var palette=document.createElement('div');
+    palette.id='airCommandPalette';palette.className='air-command-overlay';palette.hidden=true;
+    palette.innerHTML='<section class="air-command-box" role="dialog" aria-modal="true" aria-labelledby="airCommandTitle"><div class="air-command-head"><div><p class="air-command-kicker">IHRM AIR · QUICK NAVIGATION</p><h2 id="airCommandTitle">Where would you like to go?</h2></div><button type="button" id="airCommandClose" class="air-command-close" aria-label="Close search">×</button></div><label class="air-command-input-wrap"><span aria-hidden="true">⌕</span><input id="airCommandInput" type="search" placeholder="Search pages and topics…" autocomplete="off"></label><p class="air-command-hint">Tip: press Ctrl/⌘ + K to open · Esc to close</p><div id="airCommandResults" class="air-command-results" role="listbox" aria-label="Navigation results"></div></section>';
+    document.body.appendChild(palette);
+    var input=palette.querySelector('#airCommandInput'),results=palette.querySelector('#airCommandResults'),close=palette.querySelector('#airCommandClose');
+    var destinations=[
+      {label:'Home / Flight deck',detail:'Overview and study progress',href:'index.html',terms:'home dashboard progress'},
+      {label:'Course Units',detail:'Four units and full study notes',href:'units.html',terms:'units notes learning course'},
+      {label:'Practice & Exam Centre',detail:'MCQs, mocks and answer review',href:'practice.html',terms:'practice mcq quiz mock exam test'},
+      {label:'Study Tools',detail:'Focus timer, notes, checklist and recall',href:'tools.html',terms:'tools timer notes checklist recall'}
+    ];
+    var items=destinations.slice();
+    document.querySelectorAll('main h1,main h2,main h3,section h1,section h2,section h3').forEach(function(h){
+      var label=(h.innerText||h.textContent||'').replace(/\s+/g,' ').trim();
+      if(label.length>2&&h.id&&!items.some(function(it){return it.href==='#'+h.id;})){
+        items.push({label:label,detail:'Topic on this page',href:'#'+h.id,terms:label.toLowerCase()});
+      }
+    });
+    function render(q){
+      results.textContent='';
+      var query=(q||'').trim().toLowerCase();
+      var matches=items.filter(function(it){return !query||(it.label+' '+it.detail+' '+(it.terms||'')).toLowerCase().includes(query)}).slice(0,12);
+      if(!matches.length){var empty=document.createElement('p');empty.className='air-command-empty';empty.textContent='No matches. Try “unit”, “MCQ”, “timer” or “notes”.';results.appendChild(empty);return}
+      matches.forEach(function(it,index){
+        var a=document.createElement('a');a.className='air-command-result';a.href=it.href;
+        a.setAttribute('role','option');a.innerHTML='<span class="air-command-result-icon">'+(it.href==='index.html'?'⌂':it.href==='units.html'?'▤':it.href==='practice.html'?'✓':it.href==='tools.html'?'✦':'↳')+'</span><span class="air-command-result-copy"><strong></strong><small></small></span><span class="air-command-result-arrow">↗</span>';
+        a.querySelector('strong').textContent=it.label;a.querySelector('small').textContent=it.detail;
+        a.addEventListener('click',function(e){
+          if(it.href.charAt(0)==='#'){e.preventDefault();var target=document.getElementById(it.href.slice(1));if(target){target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});history.replaceState(null,'',it.href)}}
+          palette.hidden=true;
+        });
+        results.appendChild(a);
+      });
+    }
+    function openPalette(){palette.hidden=false;render(input.value);setTimeout(function(){input.focus()},30)}
+    function closePalette(){palette.hidden=true}
+    input.addEventListener('input',function(){render(input.value)});
+    close.addEventListener('click',closePalette);
+    palette.addEventListener('click',function(e){if(e.target===palette)closePalette()});
+    document.addEventListener('keydown',function(e){
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palette.hidden?openPalette():closePalette()}
+      if(e.key==='Escape'&&!palette.hidden){closePalette()}
+    });
+    render('');
+  }
+
+  // Add a compact floating top button on long pages when one is not already present.
+  if(!document.getElementById('airBackToTop')){
+    var topButton=document.createElement('button');topButton.id='airBackToTop';topButton.type='button';topButton.className='air-back-to-top';topButton.innerHTML='↑ <span>Top</span>';topButton.setAttribute('aria-label','Back to top');topButton.hidden=true;
+    document.body.appendChild(topButton);
+    topButton.addEventListener('click',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+    var tick=false;
+    window.addEventListener('scroll',function(){if(!tick){window.requestAnimationFrame(function(){topButton.hidden=window.scrollY<480;tick=false}) ;tick=true}},{passive:true});
+  }
+
 })();
