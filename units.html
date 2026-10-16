@@ -1302,7 +1302,7 @@ s.innerHTML='<span>Unit '+n+'</span><svg viewBox="0 0 120 120"><g fill="none" st
 function pt(){var c=0;for(var k in st)if(st[k])c++;d.getElementById('ptxt').textContent=c===4?'Fully stamped. Ready for take-off!':c+' of 4 stamps collected'}
 d.querySelectorAll('.stampbtn').forEach(function(b){var k=b.dataset.k;st[k]=S('air-s'+k)==='1';
 function ap(){b.setAttribute('aria-pressed',st[k]);b.textContent=st[k]?'Stamped':'Stamp this unit';d.querySelector('.slot[data-k="'+k+'"]').classList.toggle('on',st[k]);pt()}
-ap();b.onclick=function(){st[k]=!st[k];S('air-s'+k,st[k]?'1':'0');ap()}});
+ap();b.onclick=function(){st[k]=!st[k];S('air-s'+k,st[k]?'1':'0');ap();window.dispatchEvent(new CustomEvent('air-study-data-updated'))}});
 var Q=[['Which staffing approach keeps PCNs in key posts and decisions at HQ?',['Ethnocentric','Polycentric','Geocentric'],0],
 ['A TCN is a citizen of...',['The HQ country','The host country','Neither HQ nor host country'],2],
 ['The balance sheet approach aims to...',['Match local pay','Keep the expatriate whole','Cut all allowances'],1],
