@@ -2,35 +2,14 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
-
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'practice.html'), 'utf8');
-const marker = 'var bank=[';
-const markerIndex = html.indexOf(marker);
-if (markerIndex < 0) throw new Error('Could not locate the existing embedded question bank.');
-const start = html.indexOf('[', markerIndex);
-let depth = 0, quote = '', escaped = false, end = -1;
-for (let i = start; i < html.length; i++) {
-  const ch = html[i];
-  if (quote) {
-    if (escaped) escaped = false;
-    else if (ch === '\\') escaped = true;
-    else if (ch === quote) quote = '';
-    continue;
-  }
-  if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
-  if (ch === '[') depth++;
-  else if (ch === ']' && --depth === 0) { end = i + 1; break; }
-}
-if (end < 0) throw new Error('Could not find the end of the existing question bank.');
-const embedded = vm.runInNewContext('(' + html.slice(start, end) + ')');
-const structured = JSON.parse(fs.readFileSync(path.join(root, 'data/question-bank.json'), 'utf8')).questions;
-const compact = q => JSON.stringify({u:q.u ?? q.unitId, q:q.q ?? q.prompt, o:q.o ?? q.options.map(x=>x.text), a:q.a ?? q.options.findIndex(x=>x.id===q.correctOptionId), e:q.e ?? q.explanation});
-if (embedded.length !== structured.length) throw new Error(`Question count mismatch: embedded=${embedded.length}, structured=${structured.length}`);
-for (let i = 0; i < embedded.length; i++) {
-  if (compact(embedded[i]) !== compact(structured[i])) {
-    throw new Error(`Question parity mismatch at item ${i + 1} (embedded ID ${embedded[i].u}-${i + 1}, structured ID ${structured[i].id}).`);
-  }
-}
-console.log(`PASS: all ${embedded.length} structured questions exactly match the live practice bank (prompt, options, answer, explanation, unit, and order).`);
+const bank = JSON.parse(fs.readFileSync(path.join(root, 'data/question-bank.json'), 'utf8'));
+if (html.includes('var bank=[')) throw new Error('The legacy embedded question bank must not be restored.');
+if (!html.includes("fetch(new URL('data/question-bank.json', document.baseURI)")) throw new Error('Practice page must load the structured question bank.');
+for (const token of ['item.unitId','item.prompt','item.options.map','item.correctOptionId','item.explanation']) if (!html.includes(token)) throw new Error('Live question adapter is missing mapping: ' + token);
+if (!Array.isArray(bank.questions) || bank.questions.length !== 32) throw new Error('Expected 32 structured questions.');
+const ids = new Set(); const counts = [0,0,0,0,0];
+for (const [index,q] of bank.questions.entries()) { if (!q.id || ids.has(q.id)) throw new Error('Missing or duplicate question ID at item ' + (index+1)); ids.add(q.id); if (!Number.isInteger(q.unitId)||q.unitId<1||q.unitId>4) throw new Error('Invalid unit at item '+(index+1)); counts[q.unitId]++; if (!Array.isArray(q.options)||q.options.length<2||!q.options.some(o=>o.id===q.correctOptionId)) throw new Error('Invalid options or answer at item '+(index+1)); if(!q.prompt||!q.explanation) throw new Error('Missing prompt or explanation at item '+(index+1)); }
+if (counts.slice(1).some(n=>n!==8)) throw new Error('Expected 8 questions per unit, found '+counts.slice(1).join(', '));
+console.log('PASS: live practice loads the structured bank; 32 questions, stable IDs, valid answer mapping, and 8 questions per unit.');
