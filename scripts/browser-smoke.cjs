@@ -139,6 +139,15 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     const history = await page.evaluate(() => JSON.parse(localStorage.getItem('air-exam-history') || '[]'));
     assert.equal(history.some(item => item.mode === 'mock'), true, 'timed mock should be recorded in exam history');
 
+    await page.goto('http://127.0.0.1:8765/agents.html', { waitUntil: 'networkidle' });
+    await page.locator('#agentStatus').waitFor({ state: 'visible', timeout: 10000 });
+    await page.waitForFunction(() => /structured practice questions/i.test(document.getElementById('agentStatus')?.textContent || ''), null, { timeout: 10000 });
+    await page.locator('#mission').fill('prepare for my exam');
+    await page.locator('#minutes').selectOption('25');
+    await page.locator('#runMission').click();
+    await page.waitForFunction(() => (document.getElementById('agentOutput')?.innerText || '').includes('study mission'), null, { timeout: 5000 });
+    assert.equal(await page.locator('a[href="practice.html"]').count() > 0, true, 'Agent Crew should link back to practice');
+ 
     const swReady = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
       const registration = await Promise.race([navigator.serviceWorker.ready, new Promise(resolve => setTimeout(() => resolve(null), 8000))]);
