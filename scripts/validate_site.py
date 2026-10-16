@@ -15,6 +15,7 @@ REQUIRED = {
     "planner.html": ["Study Planner", "planner"],
     "tracker.html": ["Session Tracker", "tracker"],
     "backup.html": ["Backup", "backup"],
+    "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
 }
 CORE_FILES = [
     "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "service-worker.js",
@@ -90,7 +91,7 @@ for filename in REQUIRED:
             fail(f"{filename} has a broken local href: {href}")
 
 # This build is intentionally non-AI and has no cloud-auth scaffolding.
-for filename in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html"):
+for filename in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "references.html"):
     source = (ROOT / filename).read_text(encoding="utf-8").lower()
     for forbidden in ("supabase-js", "supabase_url", "localmodelendpoint", "agentic-study-crew", "agentwidgetlauncher", "aircloudsignin"):
         if forbidden in source:
@@ -170,7 +171,7 @@ if len(questions) != 32 or any(count != 8 for count in unit_counts.values()):
 if any(question.get("review", {}).get("status") != "draft" for question in questions):
     fail("migrated questions must remain draft until subject-matter review")
 worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
-for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "offline.html", "data/question-bank.json"):
+for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "references.html", "offline.html", "data/question-bank.json"):
     if page not in worker:
         fail(f"service-worker.js app shell does not mention {page}")
 
