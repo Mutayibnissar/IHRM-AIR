@@ -1689,7 +1689,7 @@ function finishSession(expired){
  next.disabled=true;mark.disabled=true;finish.textContent='Close results';finish.onclick=function(){workspace.hidden=true;session=null;finish.textContent='Finish exam';finish.onclick=finishCurrent;mark.disabled=false};
 }
 function startRetry(items,kind){
- if(!session||!items||!items.length)return;
+ if(!items||!items.length)return;
  stopTimer();
  var retryItems=items.slice();
  session={mode:'practice',items:retryItems,pos:0,answers:{},review:{}};
