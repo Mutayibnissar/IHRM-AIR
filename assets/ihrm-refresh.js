@@ -113,7 +113,8 @@
       {label:'Home / Flight deck',detail:'Overview and study progress',href:'index.html',terms:'home dashboard progress'},
       {label:'Course Units',detail:'Four units and full study notes',href:'units.html',terms:'units notes learning course'},
       {label:'Practice & Exam Centre',detail:'MCQs, mocks and answer review',href:'practice.html',terms:'practice mcq quiz mock exam test'},
-      {label:'Study Tools',detail:'Focus timer, notes, checklist and recall',href:'tools.html',terms:'tools timer notes checklist recall'}
+      {label:'Study Tools',detail:'Focus timer, notes, checklist and recall',href:'tools.html',terms:'tools timer notes checklist recall'},
+      {label:'Evidence & Sources',detail:'Core IHRM text and official labour guidance',href:'references.html',terms:'sources references bibliography academic research ILO OECD scholar'}
     ];
     var items=destinations.slice();
     document.querySelectorAll('main h1,main h2,main h3,section h1,section h2,section h3').forEach(function(h){
