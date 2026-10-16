@@ -141,7 +141,9 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
     await page.goto('http://127.0.0.1:8765/agents.html', { waitUntil: 'networkidle' });
     await page.locator('#agentStatus').waitFor({ state: 'visible', timeout: 10000 });
-    await page.waitForFunction(() => /structured practice questions/i.test(document.getElementById('agentStatus')?.textContent || ''), null, { timeout: 10000 });
+    await page.waitForFunction(() => { const s = document.getElementById('agentStatus')?.textContent || ''; return /\bready\b/i.test(s) || /could not be loaded|unavailable/i.test(s); }, null, { timeout: 15000 });
+    const agentStatusText = await page.locator('#agentStatus').innerText();
+    assert.match(agentStatusText, /structured practice questions/i, 'Agent Crew should load its structured question bank');
     await page.locator('#mission').fill('prepare for my exam');
     await page.locator('#minutes').selectOption('25');
     await page.locator('#runMission').click();
