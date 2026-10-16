@@ -30,6 +30,21 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     ]) {
       await page.goto('http://127.0.0.1:8765/' + workspace.path, { waitUntil: 'networkidle' });
       await page.locator(workspace.selector).waitFor({ state: 'visible', timeout: 10000 });
+      if (workspace.path === 'planner.html') {
+        await page.locator('#airBuildRevision').click();
+        await page.waitForFunction(() => (document.getElementById('airRevisionSchedule')?.innerText || '').trim().length > 0, null, { timeout: 5000 });
+      }
+      if (workspace.path === 'tracker.html') {
+        page.once('dialog', dialog => dialog.accept('5'));
+        await page.locator('#airSessionLog').click();
+        await page.waitForFunction(() => document.getElementById('airSessionCount')?.innerText === '1', null, { timeout: 5000 });
+      }
+      if (workspace.path === 'backup.html') {
+        const downloadPromise = page.waitForEvent('download');
+        await page.locator('#airExportData').click();
+        const download = await downloadPromise;
+        assert.match(download.suggestedFilename(), /ihrm-air-study-backup.*\\.json$/i, 'backup should export a JSON file');
+      }
     }
 
     await page.goto('http://127.0.0.1:8765/practice.html', { waitUntil: 'networkidle' });
@@ -52,6 +67,29 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       return heading && heading.innerText !== previous;
     }, firstQuestion, { timeout: 5000 });
 
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.selectOption('#examMode', 'mock');
+    await page.selectOption('#examLength', '10');
+    await page.locator('#startExam').click();
+    await page.locator('#examQuestionArea .exam-option').first().waitFor({ state: 'visible', timeout: 10000 });
+    await page.locator('#examQuestionArea .exam-option').first().click();
+    await page.locator('#examFinish').click();
+    await page.waitForFunction(() => (document.querySelector('#examQuestionArea h3')?.innerText || '').includes('Results:'), null, { timeout: 5000 });
+    const history = await page.evaluate(() => JSON.parse(localStorage.getItem('air-exam-history') || '[]'));
+    assert.equal(history.some(item => item.mode === 'mock'), true, 'timed mock should be recorded in exam history');
+
+    const swReady = await page.evaluate(async () => {
+      if (!('serviceWorker' in navigator)) return false;
+      const registration = await navigator.serviceWorker.ready;
+      return Boolean(registration.active);
+    });
+    assert.equal(swReady, true, 'PWA service worker should activate on the local test origin');
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.context().setOffline(true);
+    await page.goto('http://127.0.0.1:8765/practice.html', { waitUntil: 'domcontentloaded' });
+    await page.locator('#exam-centre').waitFor({ state: 'visible', timeout: 10000 });
+    await page.context().setOffline(false);
+
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'networkidle' });
     const menu = page.locator('.site-nav-toggle').first();
@@ -60,7 +98,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await menu.getAttribute('aria-expanded'), 'true', 'mobile menu should expose its expanded state');
     }
     assert.deepEqual(pageErrors, [], 'pages should not raise uncaught JavaScript errors');
-    console.log('PASS: browser smoke tests verified home/tools navigation, structured question loading, answer/next flow, mobile menu, and no uncaught page errors.');
+    console.log('PASS: browser smoke tests verified navigation, dedicated tools, question loading, answer/next flow, timed mock history, backup export, planner/tracker actions, PWA offline navigation, mobile menu, and no uncaught page errors.');
   } finally {
     await browser.close();
   }
