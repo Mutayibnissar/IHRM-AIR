@@ -18,6 +18,15 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await page.locator('a[href="' + target + '"]').count() > 0, true, 'tools hub should link to ' + target);
     }
 
+    for (const workspace of [
+      { path: 'planner.html', selector: '#air-study-intelligence' },
+      { path: 'tracker.html', selector: '#air-study-session-tracker' },
+      { path: 'backup.html', selector: '#airDataBackupPanel' }
+    ]) {
+      await page.goto('http://127.0.0.1:8765/' + workspace.path, { waitUntil: 'networkidle' });
+      await page.locator(workspace.selector).waitFor({ state: 'visible', timeout: 10000 });
+    }
+
     await page.goto('http://127.0.0.1:8765/practice.html', { waitUntil: 'networkidle' });
     const status = page.locator('#questionBankStatus');
     await status.waitFor({ state: 'visible', timeout: 10000 });
