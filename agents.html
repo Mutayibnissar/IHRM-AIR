@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3f7ff"><meta name="description" content="A source-grounded, browser-local study workspace for International Human Resource Management.">
+<title>Agent Crew — IHRM Air</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/ihrm-refresh.css">
+<style>
+:root{--bg:#f3f7ff;--card:#fff;--ink:#152541;--mute:#60708b;--blue:#2463eb;--yellow:#ffd447;--line:#dce5f2}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.6}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px clamp(16px,4vw,44px);background:var(--card);border-bottom:1px solid var(--line)}
+.logo{font-family:Fredoka,sans-serif;font-size:1.7rem;font-weight:600;text-decoration:none}.logo b{color:var(--blue)}
+nav{display:flex;gap:8px;flex-wrap:wrap}nav a,.button{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:800;color:var(--ink);background:var(--card);cursor:pointer}
+nav a[aria-current=page],.button.primary{background:var(--yellow);color:#17233c;border-color:transparent}
+main{max-width:1180px;margin:auto;padding:clamp(20px,5vw,56px) 18px}
+.eyebrow{font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:900}
+h1,h2,h3{line-height:1.12;letter-spacing:-.04em}h1{font-size:clamp(2.4rem,6vw,4.5rem);margin:.25em 0}h2{font-size:clamp(1.45rem,3vw,2rem)}p{max-width:75ch}.muted{color:var(--mute)}
+.notice{padding:14px 16px;border:1px solid #d9e4f5;border-radius:16px;background:#edf4ff;margin:22px 0}.notice strong{display:block}
+.layout{display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr);gap:22px;margin-top:24px}
+.panel,.agent-card,.result{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 12px 30px rgba(26,55,104,.06);min-width:0}
+label{display:block;font-weight:800;margin:14px 0 6px}input,select,textarea{width:100%;border:1px solid #cbd7e8;background:var(--card);color:var(--ink);padding:11px 12px;border-radius:12px;font:inherit}textarea{min-height:110px;resize:vertical}
+.button{border-radius:12px;margin-top:12px}.button.primary{background:var(--yellow);box-shadow:0 3px 0 #d8a91e}.button:disabled{opacity:.5;cursor:not-allowed}
+.agent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.agent-card{padding:16px;box-shadow:none}.agent-card h3{margin:5px 0;font-size:1.05rem}.agent-card p{margin:0;color:var(--mute);font-size:.92rem}.agent-card .tag{font-size:.72rem;font-weight:900;color:var(--blue);letter-spacing:.08em;text-transform:uppercase}
+.result{margin-top:16px;min-height:230px}.result h3{margin-top:0}.result-content{white-space:normal;overflow-wrap:anywhere}.result-content li{margin:.5em 0}.source-chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:4px 4px 0 0;font-size:.8rem}
+.empty{color:var(--mute)}.status{font-size:.9rem;color:var(--mute);margin-top:10px}.question{padding:14px;border:1px solid var(--line);border-radius:14px;margin:10px 0}.question label{font-weight:500;display:flex;gap:8px;align-items:flex-start}.question input{width:auto;margin-top:6px}
+footer{text-align:center;padding:25px 16px;color:var(--mute);border-top:1px solid var(--line)}
+:root[data-theme=dark] body{background:var(--air-bg);color:var(--air-text)}:root[data-theme=dark] .notice{background:#152744;border-color:#2a3b56}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.agent-grid{grid-template-columns:1fr}header{align-items:flex-start}nav{width:100%}nav a{flex:1}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<a class="logo" href="index.html">IHRM <b>Air</b></a>
+<nav aria-label="Main navigation">
+<a href="index.html">Home</a><a href="units.html">Course units</a><a href="practice.html">Practice</a><a href="tools.html">Study tools</a><a href="references.html">Sources</a><a href="agents.html" aria-current="page">Agent Crew</a>
+</nav>
+</header>
+<main>
+<p class="eyebrow">Your browser-local study crew</p>
+<h1>Study smarter.<br><span style="color:var(--blue)">One mission at a time.</span></h1>
+<p class="muted">Choose a specialist, describe what you need, and get a practical next step grounded in the study material available in this repository.</p>
+<div class="notice"><strong>Privacy & accuracy</strong>This workspace runs locally in your browser and uses the published course pages and structured question bank. It does not send your prompt to an AI provider, and it does not claim to generate expert-verified answers. Verify academic claims against the cited course sources.</div>
+<div class="agent-grid" aria-label="Available study specialists">
+<article class="agent-card"><span class="tag">01 · Plan</span><h3>Study Coach</h3><p>Turn your time and exam goal into a realistic next action.</p></article>
+<article class="agent-card"><span class="tag">02 · Understand</span><h3>Concept Explainer</h3><p>Find matching course passages and build a simple explanation scaffold.</p></article>
+<article class="agent-card"><span class="tag">03 · Practise</span><h3>Exam Setter</h3><p>Retrieve relevant question-bank questions and test your understanding.</p></article>
+<article class="agent-card"><span class="tag">04 · Recall</span><h3>Flashcard Maker</h3><p>Create a quick recall deck from the existing question bank.</p></article>
+<article class="agent-card"><span class="tag">05 · Schedule</span><h3>Revision Planner</h3><p>Split a revision goal into time-boxed, achievable study blocks.</p></article>
+<article class="agent-card"><span class="tag">06 · Find</span><h3>Notes Navigator</h3><p>Search course notes and jump to the most relevant study page.</p></article>
+</div>
+<div class="layout">
+<section class="panel" aria-labelledby="mission-heading">
+<h2 id="mission-heading">Set your study mission</h2>
+<label for="agentRole">Choose a specialist</label>
+<select id="agentRole">
+<option value="coach">Study Coach</option><option value="explainer">Concept Explainer</option><option value="exam">Exam Setter</option><option value="flashcards">Flashcard Maker</option><option value="planner">Revision Planner</option><option value="navigator">Notes Navigator</option>
+</select>
+<label for="mission">Topic or goal</label>
+<textarea id="mission" placeholder="Example: explain international staffing or revise Unit 2 before Friday"></textarea>
+<label for="minutes">Time available (minutes)</label>
+<select id="minutes"><option>10</option><option selected>25</option><option>40</option><option>60</option><option>90</option></select>
+<button class="button primary" id="runMission" type="button">Run study mission →</button>
+<p class="status" id="agentStatus" role="status" aria-live="polite">Loading course material…</p>
+</section>
+<section aria-labelledby="output-heading">
+<div class="result" aria-live="polite"><h2 id="output-heading">Mission output</h2><div id="agentOutput" class="result-content"><p class="empty">Your plan, notes, or practice questions will appear here.</p></div></div>
+<div class="result"><h3>Suggested next stops</h3><p><a href="units.html">Read the course units</a> · <a href="practice.html">Open practice and mock exams</a> · <a href="references.html">Check evidence and sources</a></p></div>
+</section>
+</div>
+</main>
+<footer>IHRM Air · Browser-local study workspace · Your progress stays on this device.</footer>
+<script src="assets/agent-workspace.js" defer></script><script src="assets/ihrm-refresh.js" defer></script>
+</body></html>
