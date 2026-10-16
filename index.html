@@ -275,4 +275,43 @@ h1,h2,h3{letter-spacing:-.035em}
 </script>
 
 <script src="assets/ihrm-refresh.js?v=6" defer></script>
+
+<script id="home-menu-workflow-connection">
+(function(){
+  'use strict';
+  var bar=document.querySelector('.site-nav-wrap');
+  var toggle=bar&&bar.querySelector('.site-nav-toggle');
+  var nav=bar&&bar.querySelector('#sitePageNav');
+  if(!bar||!toggle||!nav)return;
+  function setOpen(open){
+    bar.classList.toggle('nav-open',open);
+    toggle.setAttribute('aria-expanded',String(open));
+    var label=toggle.querySelector('span');
+    if(label)label.textContent=open?'Close menu':'Menu';
+    toggle.setAttribute('aria-label',open?'Close page navigation':'Open page navigation');
+    nav.setAttribute('aria-hidden',String(!open&&window.matchMedia('(max-width: 700px)').matches));
+  }
+  toggle.addEventListener('click',function(event){
+    event.preventDefault();
+    setOpen(toggle.getAttribute('aria-expanded')!=='true');
+  });
+  nav.querySelectorAll('a[data-page]').forEach(function(link){
+    link.addEventListener('click',function(){setOpen(false);});
+  });
+  document.addEventListener('click',function(event){
+    if(!bar.contains(event.target)&&toggle.getAttribute('aria-expanded')==='true')setOpen(false);
+  });
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){
+      setOpen(false);toggle.focus();
+    }
+  });
+  window.addEventListener('resize',function(){
+    if(!window.matchMedia('(max-width: 700px)').matches)setOpen(false);
+    else nav.setAttribute('aria-hidden',String(toggle.getAttribute('aria-expanded')!=='true'));
+  });
+  setOpen(false);
+})();
+</script>
+
 </body></html>
