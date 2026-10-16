@@ -394,3 +394,19 @@ body{
 .air-intel-note{font-size:.78rem;margin-top:16px}
 @media(max-width:760px){.air-intel-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.air-intel-columns{grid-template-columns:1fr}.air-history-row{align-items:flex-start;flex-direction:column}.air-history-row span{text-align:left}}
 @media(max-width:380px){.air-intel-metrics{grid-template-columns:1fr}.air-unit-progress-label{flex-direction:column}}
+
+
+/* Daily goal and readiness dashboard */
+.air-intel-daily{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}
+.air-daily-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.air-daily-controls label{font-weight:700}
+.air-daily-controls input{width:86px;min-height:40px;padding:8px 10px;border:1px solid var(--line,#b7c9e4);border-radius:10px;background:var(--card,#fff);color:var(--ink,#14213d);font:inherit}
+.air-daily-track{height:10px;overflow:hidden;border-radius:999px;background:var(--sky2,#e9f5ff);margin:12px 0}
+.air-daily-track span{display:block;height:100%;width:0;border-radius:inherit;background:var(--mint,#1fa77f);transition:width .25s ease}
+.air-readiness-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.air-readiness-metrics>div{padding:12px;border-radius:12px;background:var(--sky2,#e9f5ff)}
+.air-readiness-metrics span,.air-readiness-metrics strong{display:block}
+.air-readiness-metrics span{font-size:.86rem;color:var(--mute,#4b5d7e)}
+.air-readiness-metrics strong{font-size:1.25rem;margin-top:4px}
+@media(max-width:680px){.air-intel-daily{grid-template-columns:1fr}.air-readiness-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.air-daily-track span{transition:none}}
