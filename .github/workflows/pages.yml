@@ -27,6 +27,11 @@ jobs:
       - name: Run reusable site integrity checks
         run: python scripts/validate_site.py
 
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/ihrm-refresh.js
+          node --check service-worker.js
+
       - name: Validate multi-page study hub
         run: |
           python - <<'PY'
