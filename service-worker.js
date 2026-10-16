@@ -17,7 +17,9 @@ const APP_SHELL = [
   BASE_PATH + 'assets/study-tools.js',
   BASE_PATH + 'offline.html',
   BASE_PATH + 'assets/ihrm-refresh.js',
+  BASE_PATH + 'assets/ihrm-refresh.js?v=7',
   BASE_PATH + 'assets/ihrm-refresh.css',
+  BASE_PATH + 'assets/ihrm-refresh.css?v=12',
   BASE_PATH + 'assets/icon.svg',
   BASE_PATH + 'manifest.webmanifest',
   BASE_PATH + 'data/question-bank.json'
