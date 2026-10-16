@@ -558,3 +558,8 @@ body{letter-spacing:-.008em}
   :where(.card,.tile,.unit-card,.tool-card,.feature-card,.air-tool-card){transition:none}
   #siteBackTop{transition:none}
 }
+
+.air-install-app{border-color:var(--air-premium-line);background:var(--air-premium-gold);color:#152541;font-weight:850;white-space:nowrap}
+.air-install-app[hidden]{display:none}
+.air-install-app:disabled{opacity:.65;cursor:wait}
+@media(max-width:700px){.air-install-app{min-height:40px}}
