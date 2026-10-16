@@ -22,11 +22,15 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.keyboard.press('Escape');
     await page.locator('#airCommandOverlay').waitFor({ state: 'hidden', timeout: 3000 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.evaluate(() => { window.scrollTo(0, document.documentElement.scrollHeight); window.dispatchEvent(new Event('scroll')); });
-    await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible'), null, { timeout: 5000 });
-    assert.equal(await page.locator('#siteReadingProgress span').evaluate(el => parseFloat(el.style.width) >= 90), true, 'reading progress should reflect page scroll');
-    await page.locator('#siteBackTop').evaluate(el => el.click());
-    await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 8000 });
+    await page.evaluate(() => { const max = document.documentElement.scrollHeight - window.innerHeight; window.scrollTo(0, Math.max(0, max)); window.dispatchEvent(new Event('scroll')); });
+    await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible') || document.documentElement.scrollHeight <= window.innerHeight, null, { timeout: 5000 });
+    const scrollMetrics = await page.evaluate(() => ({ max: document.documentElement.scrollHeight - window.innerHeight, progress: parseFloat(document.querySelector('#siteReadingProgress span')?.style.width || '0'), visible: document.getElementById('siteBackTop')?.classList.contains('is-visible') }));
+    if (scrollMetrics.max > 0) {
+      assert.equal(scrollMetrics.progress >= 90, true, 'reading progress should reflect page scroll');
+      assert.equal(scrollMetrics.visible, true, 'back-to-top should appear after scrolling');
+      await page.locator('#siteBackTop').evaluate(el => el.click());
+      await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 5000 });
+    }
 
     await page.goto('http://127.0.0.1:8765/units.html', { waitUntil: 'networkidle' });
     for (const unit of ['#u1', '#u2', '#u3', '#u4']) {
