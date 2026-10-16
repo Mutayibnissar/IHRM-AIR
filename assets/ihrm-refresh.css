@@ -460,3 +460,101 @@ body{
 [data-theme="dark"] .air-connection-status.is-offline{color:#fed7aa;background:#431407;border-color:#9a3412}
 @media(max-width:700px){.air-connection-status{font-size:.68rem;margin:.25rem 0;order:5}.site-nav-wrap{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.air-connection-status{transition:none}}
+
+
+/* =========================================================
+   IHRM AIR — Premium Flight-deck design system (v12)
+   Intent: calm editorial hierarchy, polished surfaces, accessible
+   interaction states, and responsive controls without removing
+   the original aviation identity or page-specific layouts.
+   ========================================================= */
+:root{
+  --air-premium-accent:#245fe8;
+  --air-premium-gold:#ffd447;
+  --air-premium-line:color-mix(in srgb,var(--ink,#152541) 12%,transparent);
+  --air-premium-glass:color-mix(in srgb,var(--card,#fff) 88%,transparent);
+  --air-premium-shadow:0 18px 50px rgba(21,37,65,.075);
+  --air-premium-shadow-hover:0 24px 60px rgba(21,37,65,.13);
+}
+:root[data-theme="dark"]{
+  --air-premium-line:rgba(190,210,245,.16);
+  --air-premium-shadow:0 18px 48px rgba(0,0,0,.20);
+  --air-premium-shadow-hover:0 24px 60px rgba(0,0,0,.32);
+}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{letter-spacing:-.008em}
+::selection{background:var(--air-premium-gold);color:#152541}
+:where(header.top,.topbar,.top,.site-nav-wrap){backdrop-filter:saturate(155%) blur(18px)}
+:where(.topbar,.top,header.top){box-shadow:0 6px 26px rgba(20,33,61,.045)}
+:where(.site-page-nav a,.topnav a,.links a,nav a){transition:background .18s ease,color .18s ease,transform .18s ease,border-color .18s ease}
+:where(.site-page-nav a:hover,.topnav a:hover,.links a:hover,nav a:hover){transform:translateY(-1px)}
+:where(.hero,.page-intro,.intro,.refs-hero,.air-tools-hero){isolation:isolate}
+:where(.hero,.page-intro,.intro,.refs-hero){box-shadow:var(--air-premium-shadow)}
+:where(.card,.tile,.unit-card,.tool-card,.feature-card,.exam-panel,.quiz-card,.panel,.study-card,.agent-card,.result,.ref-card,.air-tool-card,.progress-card){
+  box-shadow:var(--air-premium-shadow);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+:where(.card,.tile,.unit-card,.tool-card,.feature-card,.air-tool-card):hover{
+  transform:translateY(-3px);
+  box-shadow:var(--air-premium-shadow-hover);
+}
+:where(.card,.tile,.unit-card,.tool-card,.feature-card,.exam-panel,.quiz-card,.panel,.study-card,.agent-card,.result,.ref-card,.air-tool-card){
+  border-color:var(--air-premium-line);
+}
+:where(button,.button,.btn,.primary,.go,.page-home-cta,.site-back-button){
+  -webkit-tap-highlight-color:transparent;
+}
+:where(button,.button,.btn,.primary,.go,.page-home-cta):focus-visible{
+  outline:3px solid var(--air-premium-gold)!important;outline-offset:3px!important;
+}
+:where(input,select,textarea){
+  transition:border-color .16s ease,box-shadow .16s ease,background .16s ease;
+}
+:where(input,select,textarea):focus{
+  border-color:var(--air-premium-accent)!important;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--air-premium-accent) 15%,transparent);
+}
+:where(.site-theme-toggle,.site-nav-toggle,.site-back-button){
+  border:1px solid var(--air-premium-line);
+  border-radius:999px;
+  box-shadow:0 2px 8px rgba(20,33,61,.04);
+}
+.site-back-button{min-height:40px;padding:8px 13px;background:var(--ui-surface,var(--card,#fff));color:var(--ink,#152541);font:inherit;font-weight:800;cursor:pointer}
+#siteReadingProgress{position:fixed;inset:0 0 auto;z-index:1000;height:3px;background:transparent;pointer-events:none}
+#siteReadingProgress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--air-premium-accent),var(--air-premium-gold));box-shadow:0 0 12px rgba(36,95,232,.24)}
+#siteBackTop{
+  position:fixed;right:clamp(14px,3vw,28px);bottom:clamp(14px,3vw,28px);z-index:90;
+  display:grid;place-items:center;width:46px;height:46px;border:1px solid var(--air-premium-line);
+  border-radius:16px;background:var(--ui-surface,var(--card,#fff));color:var(--ink,#152541);
+  box-shadow:0 10px 28px rgba(20,33,61,.15);font-size:1.35rem;font-weight:900;
+  opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .18s ease,transform .18s ease;
+}
+#siteBackTop.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.air-command-overlay{position:fixed;inset:0;z-index:1200;display:grid;place-items:start center;padding:12vh 16px 24px;background:rgba(7,16,34,.58);backdrop-filter:blur(8px)}
+.air-command-overlay[hidden]{display:none}
+.air-command-box{width:min(680px,100%);max-height:76vh;overflow:auto;padding:clamp(18px,4vw,28px);border:1px solid var(--air-premium-line);border-radius:24px;background:var(--ui-surface,var(--card,#fff));color:var(--ink,#152541);box-shadow:0 30px 100px rgba(0,0,0,.3)}
+.air-command-box h2{font-size:clamp(1.35rem,3vw,2rem);margin:.3rem 0 .9rem}
+.air-command-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.air-command-kicker{margin:0;font-size:.72rem;letter-spacing:.14em;font-weight:900;color:var(--blue,#2463eb)}
+.air-command-close{width:38px;height:38px;border:1px solid var(--air-premium-line);border-radius:12px;background:transparent;color:inherit;font-size:1.4rem}
+.air-command-input-wrap{display:flex;align-items:center;gap:10px;padding:0 14px;border:1px solid var(--air-premium-line);border-radius:15px;background:color-mix(in srgb,var(--card,#fff) 90%,var(--blue,#2463eb) 10%)}
+.air-command-input-wrap input{width:100%;min-height:52px;border:0!important;outline:0!important;box-shadow:none!important;background:transparent;color:inherit;font:inherit}
+.air-command-hint{font-size:.8rem;opacity:.72}
+#airCommandResults{display:grid;gap:6px;margin-top:12px}
+#airCommandResults a,#airCommandResults button{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid transparent;border-radius:12px;background:transparent;color:inherit;text-decoration:none;text-align:left;font:inherit;font-weight:750}
+#airCommandResults a:hover,#airCommandResults button:hover,#airCommandResults [aria-selected=true]{background:color-mix(in srgb,var(--blue,#2463eb) 10%,var(--card,#fff));border-color:var(--air-premium-line)}
+.air-reveal{opacity:1}
+.air-motion-ready .air-reveal{animation:airPremiumRise .45s both}
+@keyframes airPremiumRise{from{opacity:.72;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+:root[data-theme="dark"] :where(.card,.tile,.unit-card,.tool-card,.feature-card,.exam-panel,.quiz-card,.panel,.study-card,.agent-card,.result,.ref-card,.air-tool-card){background-color:var(--card,#15213a)}
+:root[data-theme="dark"] #siteBackTop{background:var(--card,#15213a);color:var(--ink,#eef3ff)}
+@media(max-width:700px){
+  #siteBackTop{width:42px;height:42px;border-radius:14px}
+  .air-command-overlay{padding-top:7vh}
+  .air-command-box{max-height:84vh;border-radius:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .air-motion-ready .air-reveal{animation:none}
+  :where(.card,.tile,.unit-card,.tool-card,.feature-card,.air-tool-card){transition:none}
+  #siteBackTop{transition:none}
+}
