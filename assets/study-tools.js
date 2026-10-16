@@ -21,7 +21,7 @@ list.innerHTML=tasks.length?tasks.map(t=>'<li class="task-row"><label><input typ
 }
 form.addEventListener('submit',e=>{e.preventDefault();const units=[...document.querySelectorAll('[name="unit"]:checked')].map(x=>x.value);if(!units.length){notice('planStatus','Choose at least one unit.');return}
 const p={examDate:$('examDate').value,minutes:Math.max(15,Number($('dailyMinutes').value)||60),units,tasks:read(keys.plan,{tasks:[]}).tasks||[]};if(!write(keys.plan,p)){notice('planStatus','Could not save. Check browser storage space.');return}
-const start=new Date(today()+'T12:00:00'),end=p.examDate?new Date(p.examDate+'T12:00:00'):new Date(start.getTime()+13*86400000),days=Math.max(1,Math.min(120,Math.ceil((end-start)/86400000)+1)),count=Math.min(80,days*units.length),tasks=[];
+const start=new Date(today()+'T12:00:00'),end=p.examDate?new Date(p.examDate+'T12:00:00'):new Date(start.getTime()+13*86400000);if(p.examDate&&end<start){notice('planStatus','Exam date is in the past. Choose today or a future date.');return}const days=Math.max(1,Math.min(120,Math.ceil((end-start)/86400000)+1)),count=Math.min(80,days*units.length),tasks=[];
 for(let i=0;i<count;i++){const date=new Date(start.getTime()+Math.floor(i/units.length)*86400000).toISOString().slice(0,10),unit=units[i%units.length];tasks.push({id:'t'+Date.now().toString(36)+i,title:['Review core concepts','Write a short answer','Practise recall questions','Review mistakes'][i%4],unit,date,minutes:Math.max(15,Math.round(p.minutes/Math.min(units.length,3)/5)*5),done:false})}
 p.tasks=tasks;if(!write(keys.plan,p)){notice('planStatus','Plan could not be saved.');return}notice('planStatus','Created '+tasks.length+' tasks across '+days+' day(s). Edit by completing or deleting tasks.');render();
 });
