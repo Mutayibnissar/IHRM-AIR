@@ -393,4 +393,18 @@
     panel.querySelector('.air-intel-head .air-intel-link').addEventListener('click',function(){});
   })();
 
+
+  // Progressive Web App foundation: install metadata and offline app shell.
+  (function(){
+    var manifestLink=document.querySelector('link[rel="manifest"]');
+    if(!manifestLink){manifestLink=document.createElement('link');manifestLink.rel='manifest';manifestLink.href='manifest.webmanifest';document.head.appendChild(manifestLink);}
+    var themeMeta=document.querySelector('meta[name="theme-color"]');
+    if(!themeMeta){themeMeta=document.createElement('meta');themeMeta.name='theme-color';themeMeta.content='#2f6fd0';document.head.appendChild(themeMeta);}
+    if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
+      window.addEventListener('load',function(){
+        navigator.serviceWorker.register(new URL('service-worker.js',document.baseURI),{scope:new URL('./',document.baseURI).pathname})
+          .catch(function(error){console.warn('IHRM Air offline support could not be registered.',error);});
+      },{once:true});
+    }
+  })();
 })();
