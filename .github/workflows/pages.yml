@@ -30,6 +30,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check assets/ihrm-refresh.js
+          node --check assets/agent-workspace.js
+          node --check assets/study-tools.js
           node --check service-worker.js
           python scripts/check_inline_scripts.py
           node scripts/check_question_bank_parity.js
@@ -56,9 +58,9 @@ jobs:
               "units.html": ["id=\"u1\"", "id=\"u2\"", "id=\"u3\"", "id=\"u4\""],
               "practice.html": ["id=\"exam-centre\"", "id=\"quiz\"", "id=\"integrated-cards\""],
               "tools.html": ["Study Tools Hub", "href=\"planner.html\"", "href=\"tracker.html\"", "href=\"backup.html\""],
-              "planner.html": ["Study Planner", "planner"],
-              "tracker.html": ["Session Tracker", "tracker"],
-              "backup.html": ["Backup", "backup"],
+              "planner.html": ["Study Planner", "planForm", "Generate revision plan", "study-tools.js"],
+              "tracker.html": ["Session Tracker", "timerDisplay", "startTimer", "sessionLogs", "study-tools.js"],
+              "backup.html": ["Backup", "exportBackup", "importBackup", "clearLocalData", "study-tools.js"],
               "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
               "agents.html": ["Agent Crew", "Study Coach", "Concept Explainer", "Revision Planner", "agent-workspace.js", "browser-local"],
           }
