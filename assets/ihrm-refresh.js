@@ -394,6 +394,26 @@
   })();
 
 
+  // Keep learners informed when connectivity changes; study progress remains device-local.
+  (function(){
+    if(!wrap || document.getElementById('airConnectionStatus')) return;
+    var status=document.createElement('span');
+    status.id='airConnectionStatus';
+    status.className='air-connection-status';
+    status.setAttribute('role','status');
+    status.setAttribute('aria-live','polite');
+    function paint(){
+      var online=navigator.onLine!==false;
+      status.textContent=online?'● Online · saved on this device':'○ Offline · cached pages may be available';
+      status.classList.toggle('is-offline',!online);
+      status.setAttribute('aria-label',online?'Online. Your study data is saved on this device.':'Offline. Cached pages may be available; study data remains on this device.');
+    }
+    wrap.appendChild(status);
+    paint();
+    window.addEventListener('online',paint);
+    window.addEventListener('offline',paint);
+  })();
+
   // Progressive Web App foundation: install metadata and offline app shell.
   (function(){
     var manifestLink=document.querySelector('link[rel="manifest"]');
