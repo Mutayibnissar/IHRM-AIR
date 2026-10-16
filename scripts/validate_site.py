@@ -84,7 +84,7 @@ for filename in REQUIRED:
             continue
         target = (ROOT / filename).parent / local_path if not local_path.startswith("/") else ROOT / local_path.lstrip("/")
         target = target.resolve()
-        if ROOT.resolve() not in (target.parents + (target,)):
+        if target != ROOT.resolve() and ROOT.resolve() not in target.parents:
             fail(f"{filename} has a local href escaping the repository: {href}")
         if not target.is_file():
             fail(f"{filename} has a broken local href: {href}")
