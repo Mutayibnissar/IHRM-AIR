@@ -89,6 +89,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#examQuestionArea .exam-option').nth(wrongIndex).click();
     await page.waitForFunction(() => document.getElementById('airMistakeCount')?.textContent.includes('1 saved'), null, { timeout: 5000 });
     await page.locator('#airMistakeList button').filter({ hasText: 'Retry this question' }).first().click();
+    await page.waitForFunction(() => (document.getElementById('examSessionLabel')?.textContent || '').includes('Missed-question retry'), null, { timeout: 5000 });
     await page.waitForFunction(() => { const option = document.querySelector('#examQuestionArea .exam-option'); return option && !option.disabled; }, null, { timeout: 5000 });
     await page.locator('#examQuestionArea .exam-option').nth(correctIndex).click();
     await page.waitForFunction(() => Boolean(document.querySelector('#examQuestionArea .exam-option.correct')), null, { timeout: 5000 });
