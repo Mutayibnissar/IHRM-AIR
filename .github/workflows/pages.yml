@@ -32,6 +32,7 @@ jobs:
           node --check assets/ihrm-refresh.js
           node --check service-worker.js
           python scripts/check_inline_scripts.py
+          node scripts/check_question_bank_parity.js
 
       - name: Validate multi-page study hub
         run: |
