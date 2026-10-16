@@ -23,7 +23,7 @@ async function load(){
  }).catch(()=>{status.textContent='Ready · '+bank.length+' structured practice questions · some study sources could not be loaded.'});
 }
 function relevantNotes(query){
- const terms=norm(query).split(/\\s+/).filter(x=>x.length>2);
+ const terms=norm(query).split(/\s+/).filter(x=>x.length>2);
  return notes.map(note=>{
   const text=note.text.toLowerCase();
   const score=terms.reduce((sum,term)=>sum+(text.split(term).length-1),0);
