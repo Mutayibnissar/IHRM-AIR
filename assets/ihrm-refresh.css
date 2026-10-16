@@ -432,3 +432,9 @@ body{
 .air-revision-day span{overflow-wrap:anywhere}
 .air-revision-day small{color:var(--mute,#4b5d7e);white-space:nowrap}
 @media(max-width:600px){.air-revision-day{grid-template-columns:1fr;gap:4px}.air-revision-day small{white-space:normal}.air-revision-controls>*{width:100%}}
+
+/* Action links in the weak-topic dashboard */
+.air-weak-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.air-weak-actions a{display:inline-flex;align-items:center;justify-content:center;padding:8px 11px;border:1px solid var(--line,#d5e2f4);border-radius:999px;text-decoration:none;font-weight:800;font-size:.88rem}
+.air-weak-actions .air-weak-practice{background:var(--sun,#ffc83d);color:#14213d;border-color:#14213d}
+@media(max-width:600px){.air-weak-actions{width:100%}.air-weak-actions a{flex:1}}
