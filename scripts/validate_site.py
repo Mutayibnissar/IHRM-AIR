@@ -140,7 +140,7 @@ if len(questions) != 32 or any(count != 8 for count in unit_counts.values()):
 if any(question.get("review", {}).get("status") != "draft" for question in questions):
     fail("migrated questions must remain draft until subject-matter review")
 worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
-for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "offline.html"):
+for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "offline.html", "data/question-bank.json"):
     if page not in worker:
         fail(f"service-worker.js app shell does not mention {page}")
 
