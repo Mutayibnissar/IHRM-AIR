@@ -159,4 +159,71 @@
     window.addEventListener('scroll',function(){if(!tick){window.requestAnimationFrame(function(){topButton.hidden=window.scrollY<480;tick=false}) ;tick=true}},{passive:true});
   }
 
+
+  // Personal study data: persist checklist state and offer a portable backup/restore.
+  try{
+    var storagePrefix='air-';
+    var checklistKey='air-study-checklist-v1';
+    var checklistState={};
+    try{checklistState=JSON.parse(localStorage.getItem(checklistKey)||'{}')||{}}catch(e){checklistState={}}
+    document.querySelectorAll('.study-checklist input[type="checkbox"]').forEach(function(box,index){
+      var key=box.id||box.name||('task-'+index);
+      if(Object.prototype.hasOwnProperty.call(checklistState,key))box.checked=!!checklistState[key];
+      box.addEventListener('change',function(){
+        checklistState[key]=box.checked;
+        try{localStorage.setItem(checklistKey,JSON.stringify(checklistState))}catch(e){}
+        updateChecklistProgress();
+      });
+    });
+    function updateChecklistProgress(){
+      var boxes=Array.from(document.querySelectorAll('.study-checklist input[type="checkbox"]'));
+      var done=boxes.filter(function(b){return b.checked}).length;
+      var node=document.getElementById('airChecklistProgress');
+      if(node)node.textContent=boxes.length?done+' of '+boxes.length+' tasks complete':'Your checklist is ready';
+    }
+    updateChecklistProgress();
+
+    function collectAirData(){
+      var data={format:'IHRM-AIR-backup',version:1,exportedAt:new Date().toISOString(),items:{}};
+      for(var i=0;i<localStorage.length;i++){
+        var key=localStorage.key(i);
+        if(key&&key.indexOf(storagePrefix)===0){
+          try{data.items[key]=JSON.parse(localStorage.getItem(key))}catch(e){data.items[key]=localStorage.getItem(key)}
+        }
+      }
+      return data;
+    }
+    function downloadAirBackup(){
+      var blob=new Blob([JSON.stringify(collectAirData(),null,2)],{type:'application/json'});
+      var url=URL.createObjectURL(blob),a=document.createElement('a');
+      a.href=url;a.download='ihrm-air-study-backup-'+new Date().toISOString().slice(0,10)+'.json';
+      document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000);
+    }
+    function injectDataTools(){
+      if(!document.querySelector('main')||document.getElementById('airDataBackupPanel'))return;
+      var panel=document.createElement('section');panel.id='airDataBackupPanel';panel.className='air-data-panel';
+      panel.innerHTML='<div class="air-data-panel-copy"><span class="air-data-kicker">YOUR LEARNING DATA</span><h2>Progress & backup</h2><p>Keep your study checklist and saved IHRM Air progress portable. Export a backup before changing devices.</p><p id="airChecklistProgress" class="air-data-status" aria-live="polite">Your checklist is ready</p></div><div class="air-data-actions"><button type="button" class="air-data-button" id="airExportData">↓ Export backup</button><label class="air-data-button air-import-button" for="airImportFile">↑ Restore backup<input type="file" id="airImportFile" accept="application/json,.json" hidden></label></div><p class="air-data-message" id="airDataMessage" role="status"></p>';
+      var main=document.querySelector('main');main.appendChild(panel);
+      panel.querySelector('#airExportData').addEventListener('click',downloadAirBackup);
+      panel.querySelector('#airImportFile').addEventListener('change',function(e){
+        var file=e.target.files&&e.target.files[0];if(!file)return;
+        var reader=new FileReader();
+        reader.onload=function(){
+          try{
+            var data=JSON.parse(String(reader.result||''));
+            if(!data||data.format!=='IHRM-AIR-backup'||!data.items||typeof data.items!=='object')throw new Error('This file is not a valid IHRM Air backup.');
+            Object.keys(data.items).forEach(function(key){
+              if(key.indexOf(storagePrefix)!==0)return;
+              var value=data.items[key];
+              localStorage.setItem(key,typeof value==='string'?value:JSON.stringify(value));
+            });
+            panel.querySelector('#airDataMessage').textContent='Backup restored. Reload the page to refresh all saved progress.';
+          }catch(err){panel.querySelector('#airDataMessage').textContent=err.message||'Could not restore this backup.'}
+        };
+        reader.readAsText(file);e.target.value='';
+      });
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',injectDataTools);else injectDataTools();
+  }catch(e){/* Storage may be disabled; the rest of the platform remains usable. */}
+
 })();
