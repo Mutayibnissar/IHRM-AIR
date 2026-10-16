@@ -28,36 +28,36 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await page.locator('a[href="' + target + '"]').count() > 0, true, 'tools hub should link to ' + target);
     }
 
-    for (const workspace of [
-      { path: 'planner.html', selector: '#air-study-intelligence' },
-      { path: 'tracker.html', selector: '#air-study-session-tracker' },
-      { path: 'backup.html', selector: '#airDataBackupPanel' }
-    ]) {
-      await page.goto('http://127.0.0.1:8765/' + workspace.path, { waitUntil: 'networkidle' });
-      await page.locator(workspace.selector).waitFor({ state: 'visible', timeout: 10000 });
-      if (workspace.path === 'planner.html') {
-        await page.locator('#airBuildRevision').click();
-        await page.waitForFunction(() => (document.getElementById('airRevisionSchedule')?.innerText || '').trim().length > 0, null, { timeout: 5000 });
-      }
-      if (workspace.path === 'tracker.html') {
-        page.once('dialog', dialog => dialog.accept('5'));
-        await page.locator('#airSessionLog').click();
-        await page.waitForFunction(() => document.getElementById('airSessionCount')?.innerText === '1', null, { timeout: 5000 });
-      }
-      if (workspace.path === 'backup.html') {
-        const downloadPromise = page.waitForEvent('download');
-        await page.locator('#airExportData').click();
-        const download = await downloadPromise;
-        assert.equal(download.suggestedFilename().endsWith('.json'), true, 'backup should export a JSON file');
-        await page.locator('#airImportFile').setInputFiles({
-          name: 'ihrm-air-test-backup.json',
-          mimeType: 'application/json',
-          buffer: Buffer.from(JSON.stringify({ format: 'IHRM-AIR-backup', version: 1, items: { 'air-test-restore': 'restored' } }))
-        });
-        await page.waitForFunction(() => (document.getElementById('airDataMessage')?.textContent || '').includes('Backup restored'), null, { timeout: 5000 });
-        assert.equal(await page.evaluate(() => localStorage.getItem('air-test-restore')), 'restored', 'backup restore should restore browser-local data');
-      }
-    }
+    await page.goto('http://127.0.0.1:8765/planner.html', { waitUntil: 'networkidle' });
+    await page.locator('#planForm').waitFor({ state: 'visible', timeout: 10000 });
+    await page.locator('#examDate').fill(new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10));
+    await page.locator('#dailyMinutes').fill('60');
+    await page.locator('#planForm button[type="submit"]').click();
+    await page.waitForFunction(() => (document.getElementById('planTasks')?.innerText || '').includes('Review core concepts'), null, { timeout: 5000 });
+    assert.ok(await page.locator('#planTasks [data-task]').count() > 0, 'planner should generate tasks');
+    await page.locator('#planTasks input[type="checkbox"]').first().check();
+    assert.match(await page.locator('#planSummary').innerText(), /1 completed/, 'planner should persist task completion');
+
+    await page.goto('http://127.0.0.1:8765/tracker.html', { waitUntil: 'networkidle' });
+    await page.locator('#timerDisplay').waitFor({ state: 'visible', timeout: 10000 });
+    assert.equal(await page.locator('#timerDisplay').innerText(), '25:00', 'focus timer should initialise');
+    await page.locator('#timerPreset').selectOption('15');
+    assert.equal(await page.locator('#timerDisplay').innerText(), '15:00', 'timer preset should update');
+    await page.locator('#finishTimer').click();
+    assert.match(await page.locator('#sessionCount').innerText(), /0 sessions/, 'unstarted timer should not create a session');
+
+    await page.goto('http://127.0.0.1:8765/backup.html', { waitUntil: 'networkidle' });
+    await page.locator('#exportBackup').waitFor({ state: 'visible', timeout: 10000 });
+    const downloadPromise = page.waitForEvent('download');
+    await page.locator('#exportBackup').click();
+    const download = await downloadPromise;
+    assert.equal(download.suggestedFilename().endsWith('.json'), true, 'backup should export JSON');
+    const backup = { app: 'IHRM Air', schemaVersion: 1, exportedAt: new Date().toISOString(), data: { 'air-study-plan-v1': JSON.stringify({tasks:[{id:'restored-task',title:'Restored task',unit:'1',date:'2026-10-16',minutes:25,done:false}]}) } };
+    await page.locator('#backupFile').setInputFiles({ name: 'ihrm-air-test-backup.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(backup)) });
+    page.once('dialog', dialog => dialog.accept());
+    await page.locator('#importBackup').click();
+    await page.waitForFunction(() => (document.getElementById('backupStatus')?.textContent || '').includes('Backup restored'), null, { timeout: 5000 });
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('air-study-plan-v1') || '{}').tasks?.[0]?.id), 'restored-task', 'backup restore should restore local data');
 
     await page.goto('http://127.0.0.1:8765/practice.html', { waitUntil: 'networkidle' });
     const status = page.locator('#questionBankStatus');
