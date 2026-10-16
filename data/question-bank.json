@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": 1,
+  "description": "Migrated structured copy of the existing 32-question IHRM Air practice bank. Review status remains draft until subject-matter verification.",
+  "questions": [
+    {
+      "id": "unit-1-mcq-001",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "Which combination best represents Morgan’s three dimensions of IHRM?",
+      "options": [
+        {
+          "id": "a",
+          "text": "HR activities, countries involved, and employee categories"
+        },
+        {
+          "id": "b",
+          "text": "Recruitment, training, and payroll only"
+        },
+        {
+          "id": "c",
+          "text": "Headquarters, sales, and production only"
+        },
+        {
+          "id": "d",
+          "text": "Culture, tax, and unions only"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Morgan’s framework considers HR activities, the countries involved, and the categories of employees (such as PCNs, HCNs, and TCNs).",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-002",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "What distinguishes international HRM from domestic HRM most directly?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It has no recruitment function"
+        },
+        {
+          "id": "b",
+          "text": "It manages people across national contexts and added complexity"
+        },
+        {
+          "id": "c",
+          "text": "It applies one identical policy in every country"
+        },
+        {
+          "id": "d",
+          "text": "It deals only with expatriates"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "IHRM has cross-border complexity, including multiple countries, cultures, institutions, and employee groups.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-003",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "In the PCN–HCN–TCN framework, a host-country national is:",
+      "options": [
+        {
+          "id": "a",
+          "text": "A citizen of the headquarters country"
+        },
+        {
+          "id": "b",
+          "text": "A citizen of the country where the foreign operation is located"
+        },
+        {
+          "id": "c",
+          "text": "A citizen of a third country"
+        },
+        {
+          "id": "d",
+          "text": "Any employee transferred abroad"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "HCN means host-country national: a national of the country in which the foreign subsidiary operates.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-004",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "Which is a common additional challenge in international assignments?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elimination of all legal differences"
+        },
+        {
+          "id": "b",
+          "text": "Cross-cultural adjustment and family adaptation"
+        },
+        {
+          "id": "c",
+          "text": "No need for performance management"
+        },
+        {
+          "id": "d",
+          "text": "Guaranteed tax neutrality without policy"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Cross-cultural adjustment and family adaptation are common challenges in international assignments.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-005",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "The term “expatriate” commonly refers in IHRM to an employee who:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Works only in their home country"
+        },
+        {
+          "id": "b",
+          "text": "Is assigned to work in another country"
+        },
+        {
+          "id": "c",
+          "text": "Is always hired locally"
+        },
+        {
+          "id": "d",
+          "text": "Works exclusively in payroll"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "In the usual IHRM context, an expatriate is assigned to work outside their home country.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-006",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "An emic perspective focuses on:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Culture-specific meanings and categories"
+        },
+        {
+          "id": "b",
+          "text": "Universal categories only"
+        },
+        {
+          "id": "c",
+          "text": "Financial accounting only"
+        },
+        {
+          "id": "d",
+          "text": "The legal status of a subsidiary"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Emic analysis seeks to understand a culture using its own context-specific meanings; etic analysis compares using broader categories.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-007",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "Which statement best describes an MNE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "A company operating only within one city"
+        },
+        {
+          "id": "b",
+          "text": "An enterprise with operations in more than one country"
+        },
+        {
+          "id": "c",
+          "text": "A government department"
+        },
+        {
+          "id": "d",
+          "text": "A firm that employs only expatriates"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "A multinational enterprise operates or controls business activities across national borders.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-1-mcq-008",
+      "unitId": 1,
+      "type": "single-choice",
+      "prompt": "Why can a domestic HR practice fail when transferred abroad?",
+      "options": [
+        {
+          "id": "a",
+          "text": "HR practices are never transferable"
+        },
+        {
+          "id": "b",
+          "text": "Local institutions, culture, law, and workforce expectations may differ"
+        },
+        {
+          "id": "c",
+          "text": "All host countries prohibit HR policies"
+        },
+        {
+          "id": "d",
+          "text": "International firms do not need HR"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Transferability depends on the host-country context, including culture, labour institutions, law, and employee expectations.",
+      "difficulty": "foundation",
+      "tags": [
+        "IHRM-foundations"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-009",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "Which staffing orientation typically places parent-country nationals in key headquarters-controlled subsidiary roles?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Polycentric"
+        },
+        {
+          "id": "b",
+          "text": "Ethnocentric"
+        },
+        {
+          "id": "c",
+          "text": "Geocentric"
+        },
+        {
+          "id": "d",
+          "text": "Regiocentric"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Ethnocentric staffing gives priority to parent-country nationals for key positions in foreign subsidiaries.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-010",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "A polycentric staffing approach generally prioritises:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Host-country nationals to manage local subsidiaries"
+        },
+        {
+          "id": "b",
+          "text": "Only parent-country nationals everywhere"
+        },
+        {
+          "id": "c",
+          "text": "The best candidate regardless of nationality in every role"
+        },
+        {
+          "id": "d",
+          "text": "A single regional nationality for all positions"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Polycentric staffing commonly relies on host-country nationals to manage subsidiaries, reflecting local knowledge and context.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-011",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "A geocentric approach aims to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Choose staff based only on headquarters nationality"
+        },
+        {
+          "id": "b",
+          "text": "Select the best people for roles regardless of nationality"
+        },
+        {
+          "id": "c",
+          "text": "Hire only host-country citizens"
+        },
+        {
+          "id": "d",
+          "text": "Avoid international transfers"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Geocentric staffing seeks the best-qualified people internationally, rather than privileging a particular nationality.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-012",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "The broader EPRG framework includes which four orientations?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ethnocentric, polycentric, regiocentric, geocentric"
+        },
+        {
+          "id": "b",
+          "text": "Economic, political, regional, global"
+        },
+        {
+          "id": "c",
+          "text": "Expatriate, parent, regional, general"
+        },
+        {
+          "id": "d",
+          "text": "Ethical, personal, regulatory, geographic"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "EPRG stands for ethnocentric, polycentric, regiocentric, and geocentric orientations.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-013",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "Which is a sensible factor when selecting an expatriate?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Technical competence alone always guarantees success"
+        },
+        {
+          "id": "b",
+          "text": "Cross-cultural suitability and family considerations, alongside role competence"
+        },
+        {
+          "id": "c",
+          "text": "Nationality alone"
+        },
+        {
+          "id": "d",
+          "text": "Ignoring the assignment location"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Selection should consider job competence and cross-cultural suitability, and may need to account for family, language, and assignment context.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-014",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "What is one major purpose of expatriate performance management?",
+      "options": [
+        {
+          "id": "a",
+          "text": "To remove all performance feedback"
+        },
+        {
+          "id": "b",
+          "text": "To align goals, feedback, and evaluation with the international assignment context"
+        },
+        {
+          "id": "c",
+          "text": "To use only headquarters metrics regardless of context"
+        },
+        {
+          "id": "d",
+          "text": "To replace all training"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Performance management should align goals and evaluation with the assignment while considering both organizational and local context.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-015",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "Which is a common reason an international assignment may fail?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Unrealistic expectations and adjustment difficulties"
+        },
+        {
+          "id": "b",
+          "text": "Clear goals and adequate support"
+        },
+        {
+          "id": "c",
+          "text": "Good role preparation"
+        },
+        {
+          "id": "d",
+          "text": "Appropriate family support"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Adjustment problems, unrealistic expectations, inadequate preparation, and family difficulties can contribute to assignment failure.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-2-mcq-016",
+      "unitId": 2,
+      "type": "single-choice",
+      "prompt": "A TCN in a subsidiary located in Country B is an employee who is a national of:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Country B only"
+        },
+        {
+          "id": "b",
+          "text": "The parent country only"
+        },
+        {
+          "id": "c",
+          "text": "Neither the host country nor the parent country"
+        },
+        {
+          "id": "d",
+          "text": "Every country in the region"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "A third-country national is neither a national of the host country nor of the parent/home country in the assignment framework.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-staffing",
+        "performance"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-017",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "The balance-sheet approach to expatriate compensation aims primarily to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Keep the expatriate broadly whole relative to the home-country standard of living"
+        },
+        {
+          "id": "b",
+          "text": "Pay every employee the same local wage"
+        },
+        {
+          "id": "c",
+          "text": "Remove all allowances"
+        },
+        {
+          "id": "d",
+          "text": "Set pay solely from host-country minimum wage"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The balance-sheet approach seeks to preserve the expatriate’s home-country purchasing position, often adjusting for costs and assignment-related items.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-018",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "The going-rate approach commonly bases expatriate salary on:",
+      "options": [
+        {
+          "id": "a",
+          "text": "The host-country salary structure or comparable local market rates"
+        },
+        {
+          "id": "b",
+          "text": "The employee’s childhood income"
+        },
+        {
+          "id": "c",
+          "text": "Only the headquarters CEO’s pay"
+        },
+        {
+          "id": "d",
+          "text": "A universal global rate unrelated to location"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The going-rate approach uses host-country or local-market salary benchmarks for comparable work.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-019",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "Tax equalisation is designed to:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Guarantee that all countries have the same tax law"
+        },
+        {
+          "id": "b",
+          "text": "Keep an expatriate’s tax burden broadly comparable to the home-country position under company policy"
+        },
+        {
+          "id": "c",
+          "text": "Eliminate every tax payment"
+        },
+        {
+          "id": "d",
+          "text": "Pay all taxes personally without company involvement"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Tax equalisation generally aims to prevent an assignment from creating an undue tax advantage or disadvantage compared with the home-country tax position.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-020",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "Which item may be part of an international assignment compensation package?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assignment or housing allowance"
+        },
+        {
+          "id": "b",
+          "text": "A guarantee of permanent promotion"
+        },
+        {
+          "id": "c",
+          "text": "A guarantee of citizenship"
+        },
+        {
+          "id": "d",
+          "text": "A waiver of all employment law"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Packages may include base salary plus assignment-related elements such as housing, cost-of-living, relocation, or hardship allowances, depending on policy.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-021",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "Why do international compensation policies vary by assignment?",
+      "options": [
+        {
+          "id": "a",
+          "text": "All countries have identical costs"
+        },
+        {
+          "id": "b",
+          "text": "Tax, cost of living, labour markets, assignment purpose, and company policy can differ"
+        },
+        {
+          "id": "c",
+          "text": "Employees never relocate"
+        },
+        {
+          "id": "d",
+          "text": "Compensation is unrelated to strategy"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The package depends on the assignment, local conditions, tax treatment, and the organization’s compensation approach.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-022",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "Which statement best distinguishes home-based and host-based pay approaches?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Home-based pay anchors to home-country structures; host-based pay uses host-country structures"
+        },
+        {
+          "id": "b",
+          "text": "Both always pay the exact same amount"
+        },
+        {
+          "id": "c",
+          "text": "Home-based pay excludes salary"
+        },
+        {
+          "id": "d",
+          "text": "Host-based pay is only for short domestic trips"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Home-based approaches refer to home-country pay structures; host-based approaches anchor pay to the host-country context.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-023",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "What is a common objective of relocation support?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Make the assignment transition more manageable"
+        },
+        {
+          "id": "b",
+          "text": "Replace the need for role clarity"
+        },
+        {
+          "id": "c",
+          "text": "Ensure the employee never returns home"
+        },
+        {
+          "id": "d",
+          "text": "Remove local legal obligations"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Relocation support can help with practical transition costs and reduce friction during an international move.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-3-mcq-024",
+      "unitId": 3,
+      "type": "single-choice",
+      "prompt": "Which factor should be checked before comparing net expatriate compensation across countries?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tax treatment and purchasing power"
+        },
+        {
+          "id": "b",
+          "text": "Only the currency symbol"
+        },
+        {
+          "id": "c",
+          "text": "The colour of the payslip"
+        },
+        {
+          "id": "d",
+          "text": "The employee’s job title alone"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Tax treatment, exchange rates, living costs, benefits, and purchasing power affect the real value of compensation.",
+      "difficulty": "foundation",
+      "tags": [
+        "international-compensation"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-025",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "What is a multinational enterprise “investment strike” concern in labour relations?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Workers vote on a strike ballot"
+        },
+        {
+          "id": "b",
+          "text": "The company reduces or withholds investment, potentially weakening a facility or workforce"
+        },
+        {
+          "id": "c",
+          "text": "A union invests pension funds"
+        },
+        {
+          "id": "d",
+          "text": "A government increases training"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "In this context, investment withdrawal or underinvestment can be used as leverage and may threaten jobs or facility viability.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-026",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "Why can trade unions find it difficult to coordinate internationally?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Labour law and union structures differ across countries"
+        },
+        {
+          "id": "b",
+          "text": "All unions share identical bargaining rights"
+        },
+        {
+          "id": "c",
+          "text": "MNEs operate in only one country"
+        },
+        {
+          "id": "d",
+          "text": "Workers have no common interests"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Different legal systems, bargaining structures, priorities, and resources complicate cross-border union coordination.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-027",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "The ILO is primarily associated with:",
+      "options": [
+        {
+          "id": "a",
+          "text": "International labour standards and decent work"
+        },
+        {
+          "id": "b",
+          "text": "Setting every company’s global salary"
+        },
+        {
+          "id": "c",
+          "text": "Running multinational corporations"
+        },
+        {
+          "id": "d",
+          "text": "Approving all international mergers"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "The International Labour Organization develops international labour standards and promotes decent work and social dialogue.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-028",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "What does “social dumping” commonly refer to in international business debates?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Moving products to a landfill"
+        },
+        {
+          "id": "b",
+          "text": "Competition by lowering labour costs or standards, potentially undercutting worker protections"
+        },
+        {
+          "id": "c",
+          "text": "Paying every worker above the market"
+        },
+        {
+          "id": "d",
+          "text": "A system of expatriate tax equalisation"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "The term is used in debates about competition based on lower labour costs or weaker social and labour protections.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-029",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "Why does host-country employment law matter to an MNE?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It applies only to headquarters staff"
+        },
+        {
+          "id": "b",
+          "text": "It can shape employment contracts, collective relations, working time, and employee protections"
+        },
+        {
+          "id": "c",
+          "text": "It can always be ignored by foreign-owned firms"
+        },
+        {
+          "id": "d",
+          "text": "It replaces every company policy automatically in every country"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "MNEs must assess applicable local employment rules and how they interact with corporate policies and any other relevant obligations.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-030",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "Offshoring generally means:",
+      "options": [
+        {
+          "id": "a",
+          "text": "Moving or sourcing activities to another country"
+        },
+        {
+          "id": "b",
+          "text": "Promoting a local employee"
+        },
+        {
+          "id": "c",
+          "text": "A method of tax equalisation"
+        },
+        {
+          "id": "d",
+          "text": "A type of expatriate selection interview"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Offshoring is the relocation or sourcing of business activities in another country; it differs from outsourcing, which concerns who performs the activity.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-031",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "What is the main purpose of collective bargaining?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Negotiation between employers and worker representatives over employment terms"
+        },
+        {
+          "id": "b",
+          "text": "Selecting expatriates for overseas posts"
+        },
+        {
+          "id": "c",
+          "text": "Calculating exchange rates"
+        },
+        {
+          "id": "d",
+          "text": "Issuing passports"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Collective bargaining is negotiation between employers and worker representatives, often unions, over employment terms and conditions.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    },
+    {
+      "id": "unit-4-mcq-032",
+      "unitId": 4,
+      "type": "single-choice",
+      "prompt": "Which is a sound approach when applying global HR policies across countries?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Assume one policy automatically fits all legal systems"
+        },
+        {
+          "id": "b",
+          "text": "Balance global consistency with local law and context"
+        },
+        {
+          "id": "c",
+          "text": "Ignore local worker representation"
+        },
+        {
+          "id": "d",
+          "text": "Remove all local management input"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "International HR policy commonly requires balancing global objectives with local legal, institutional, and cultural conditions.",
+      "difficulty": "foundation",
+      "tags": [
+        "labour-relations",
+        "global-HR"
+      ],
+      "source": {
+        "kind": "course-material",
+        "title": "IHRM Air embedded practice bank (migrated; source review pending)",
+        "author": null,
+        "year": null,
+        "url": null,
+        "page": null
+      },
+      "review": {
+        "status": "draft",
+        "reviewedAt": null,
+        "reviewerNote": "Migrated from the existing practice page. Verify answer and explanation against course material before marking approved."
+      }
+    }
+  ]
+}
