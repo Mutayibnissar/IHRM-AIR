@@ -9,10 +9,13 @@ function clean(s){return String(s||'').replace(/\s+/g,' ').trim()}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function norm(s){return clean(s).toLowerCase().replace(/[^a-z0-9\s-]/g,' ')}
 async function load(){
- const response=await fetch('data/question-bank.json');
- if(!response.ok)throw Error('Question bank unavailable');
+ if(!status||!output)throw Error('Agent Crew page controls are missing');
+ const bankUrl=new URL('data/question-bank.json',document.baseURI).toString();
+ const response=await Promise.race([fetch(bankUrl,{cache:'no-store'}),new Promise((_,reject)=>setTimeout(()=>reject(Error('Question bank request timed out')),10000))]);
+ if(!response.ok)throw Error('Question bank unavailable (HTTP '+response.status+')');
  const b=await response.json();
  bank=Array.isArray(b.questions)?b.questions:[];
+ if(!bank.length)throw Error('Question bank contains no usable questions');
  status.textContent='Ready · '+bank.length+' structured practice questions · loading study sources…';
  Promise.all(pages.map(p=>fetch(p.url).then(r=>r.ok?r.text():'').catch(()=>''))).then(n=>{
   notes=n.map((html,i)=>{const doc=new DOMParser().parseFromString(html,'text/html');return {name:pages[i].name,url:pages[i].url,text:clean(doc.body.textContent),html}}).filter(x=>x.text);
@@ -54,5 +57,5 @@ function run(){
 }
 $('runMission').addEventListener('click',run);
 $('mission').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')run()});
-load().catch(e=>{status.textContent='Study sources could not be loaded. Open this site through GitHub Pages or a local HTTP server, then reload.';console.error(e)});
+load().catch(e=>{if(status)status.textContent='Agent Crew unavailable: '+(e&&e.message?e.message:'unknown loading error');console.error('IHRM Air Agent Crew load failed',e)});
 })();
