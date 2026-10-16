@@ -14,13 +14,12 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.equal(await page.locator('a[href="units.html"]').count() > 0, true, 'home should link to course units');
 
     // Premium global navigation regression: command palette and scroll affordances.
-    await page.locator('#airOpenCommand').waitFor({ state: 'visible', timeout: 5000 });
     await page.keyboard.press('Control+k');
-    await page.locator('#airCommandOverlay').waitFor({ state: 'visible', timeout: 3000 });
+    await page.locator('#airCommandPalette').waitFor({ state: 'visible', timeout: 3000 });
     await page.locator('#airCommandInput').fill('planner');
     assert.equal(await page.locator('#airCommandResults a[href="planner.html"]').count(), 1, 'command palette should filter to the planner page');
     await page.keyboard.press('Escape');
-    await page.locator('#airCommandOverlay').waitFor({ state: 'hidden', timeout: 3000 });
+    await page.locator('#airCommandPalette').waitFor({ state: 'hidden', timeout: 3000 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.evaluate(() => { const max = document.documentElement.scrollHeight - window.innerHeight; window.scrollTo(0, Math.max(0, max)); window.dispatchEvent(new Event('scroll')); });
     await page.waitForFunction(() => document.getElementById('siteBackTop')?.classList.contains('is-visible') || document.documentElement.scrollHeight <= window.innerHeight, null, { timeout: 5000 });
