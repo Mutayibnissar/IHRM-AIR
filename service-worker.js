@@ -1,6 +1,6 @@
 /* IHRM Air offline app shell — versioned cache, GitHub Pages safe. */
 'use strict';
-const CACHE_NAME = 'ihrm-air-shell-v1';
+const CACHE_NAME = 'ihrm-air-shell-v2';
 const BASE_PATH = new URL('./', self.registration.scope).pathname;
 const APP_SHELL = [
   BASE_PATH,
@@ -15,7 +15,8 @@ const APP_SHELL = [
   BASE_PATH + 'assets/ihrm-refresh.js',
   BASE_PATH + 'assets/ihrm-refresh.css',
   BASE_PATH + 'assets/icon.svg',
-  BASE_PATH + 'manifest.webmanifest'
+  BASE_PATH + 'manifest.webmanifest',
+  BASE_PATH + 'data/question-bank.json'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
