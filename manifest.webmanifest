@@ -1,0 +1,19 @@
+{
+  "name": "IHRM Air — Integrated Study Hub",
+  "short_name": "IHRM Air",
+  "description": "An installable study workspace for International Human Resource Management.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#e6f1ff",
+  "theme_color": "#2f6fd0",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
