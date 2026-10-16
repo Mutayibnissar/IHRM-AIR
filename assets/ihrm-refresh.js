@@ -469,4 +469,78 @@
     window.addEventListener('appinstalled',function(){button.hidden=true;installPrompt=null;});
   })();
 
+
+  // Premium navigation layer: command palette, reading progress, and back-to-top.
+  (function(){
+    if(!document.body || document.getElementById('airCommandOverlay')) return;
+    var pages=[
+      ['Home','index.html','Dashboard and study overview'],
+      ['Course units','units.html','Browse the four IHRM units'],
+      ['Practice & mock exams','practice.html','Questions, practice and timed exams'],
+      ['Study tools','tools.html','Flashcards and learning tools'],
+      ['Study planner','planner.html','Build a revision plan'],
+      ['Study tracker','tracker.html','Focus timer and session history'],
+      ['Backup & restore','backup.html','Export or restore device data'],
+      ['Evidence & references','references.html','Sources and further reading'],
+      ['Agent Crew','agents.html','Run a guided study mission']
+    ];
+    var progress=document.createElement('div');
+    progress.id='siteReadingProgress';progress.setAttribute('aria-hidden','true');
+    var progressFill=document.createElement('span');progress.appendChild(progressFill);document.body.appendChild(progress);
+    var top=document.createElement('button');
+    top.id='siteBackTop';top.type='button';top.textContent='↑';top.setAttribute('aria-label','Back to top');
+    top.addEventListener('click',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+    document.body.appendChild(top);
+    function updateScroll(){
+      var max=document.documentElement.scrollHeight-window.innerHeight;
+      progressFill.style.width=(max>0?Math.max(0,Math.min(100,window.scrollY/max*100)):0)+'%';
+      top.classList.toggle('is-visible',window.scrollY>420);
+    }
+    window.addEventListener('scroll',updateScroll,{passive:true});window.addEventListener('resize',updateScroll);updateScroll();
+
+    var overlay=document.createElement('div');
+    overlay.id='airCommandOverlay';overlay.className='air-command-overlay';overlay.hidden=true;
+    overlay.innerHTML='<section class="air-command-box" role="dialog" aria-modal="true" aria-labelledby="airCommandTitle"><div class="air-command-head"><div><p class="air-command-kicker">IHRM AIR · QUICK NAVIGATION</p><h2 id="airCommandTitle">Where would you like to go?</h2></div><button type="button" class="air-command-close" aria-label="Close command palette">×</button></div><label class="air-command-input-wrap"><span aria-hidden="true">⌕</span><input id="airCommandInput" type="search" autocomplete="off" placeholder="Search pages and study tools…"></label><p class="air-command-hint">Press Ctrl/⌘ + K to open · Esc to close · ↑ ↓ to navigate</p><div id="airCommandResults" role="listbox" aria-label="Navigation results"></div></section>';
+    document.body.appendChild(overlay);
+    var box=overlay.querySelector('.air-command-box'),input=overlay.querySelector('#airCommandInput'),results=overlay.querySelector('#airCommandResults');
+    var opener=document.createElement('button');
+    opener.type='button';opener.id='airOpenCommand';opener.className='site-theme-toggle';opener.textContent='⌕ Search';opener.setAttribute('aria-haspopup','dialog');opener.setAttribute('aria-controls',overlay.id);
+    var nav=document.querySelector('.site-nav-wrap');
+    if(nav) nav.appendChild(opener); else {opener.style.position='fixed';opener.style.right='14px';opener.style.top='14px';opener.style.zIndex='100';document.body.appendChild(opener);}
+    var activeIndex=0,previousFocus=null;
+    function render(){
+      var q=input.value.trim().toLowerCase();
+      var matches=pages.filter(function(p){return (p[0]+' '+p[1]+' '+p[2]).toLowerCase().indexOf(q)>=0;});
+      results.textContent='';activeIndex=0;
+      if(!matches.length){var empty=document.createElement('p');empty.textContent='No matching pages. Try “practice”, “planner” or “references”.';results.appendChild(empty);return;}
+      matches.forEach(function(p,i){
+        var a=document.createElement('a');a.href=p[1];a.setAttribute('role','option');a.setAttribute('aria-selected',i===0?'true':'false');
+        var label=document.createElement('span');label.textContent=p[0];
+        var detail=document.createElement('small');detail.textContent=p[2];
+        a.appendChild(label);a.appendChild(detail);a.addEventListener('mouseenter',function(){activeIndex=i;paintActive();});results.appendChild(a);
+      });
+    }
+    function paintActive(){var items=results.querySelectorAll('a');items.forEach(function(item,i){item.setAttribute('aria-selected',i===activeIndex?'true':'false');});if(items[activeIndex])items[activeIndex].scrollIntoView({block:'nearest'});}
+    function openPalette(){previousFocus=document.activeElement;overlay.hidden=false;input.value='';render();input.focus();}
+    function closePalette(){overlay.hidden=true;if(previousFocus&&typeof previousFocus.focus==='function')previousFocus.focus();}
+    opener.addEventListener('click',openPalette);overlay.querySelector('.air-command-close').addEventListener('click',closePalette);
+    overlay.addEventListener('click',function(e){if(e.target===overlay)closePalette();});
+    input.addEventListener('input',render);
+    input.addEventListener('keydown',function(e){
+      var items=results.querySelectorAll('a');
+      if(e.key==='ArrowDown'&&items.length){e.preventDefault();activeIndex=(activeIndex+1)%items.length;paintActive();}
+      else if(e.key==='ArrowUp'&&items.length){e.preventDefault();activeIndex=(activeIndex-1+items.length)%items.length;paintActive();}
+      else if(e.key==='Enter'&&items.length){e.preventDefault();items[activeIndex].click();}
+    });
+    document.addEventListener('keydown',function(e){
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();if(overlay.hidden)openPalette();else closePalette();}
+      else if(e.key==='Escape'&&!overlay.hidden){e.preventDefault();closePalette();}
+      else if(e.key==='Tab'&&!overlay.hidden){
+        var focusables=box.querySelectorAll('button,input,a[href]');
+        if(e.shiftKey&&document.activeElement===focusables[0]){e.preventDefault();focusables[focusables.length-1].focus();}
+        else if(!e.shiftKey&&document.activeElement===focusables[focusables.length-1]){e.preventDefault();focusables[0].focus();}
+      }
+    });
+  })();
+
 })();
