@@ -251,6 +251,7 @@
     panel.innerHTML='<div class="air-intel-head"><div><span class="air-intel-kicker">YOUR STUDY FLIGHT DECK</span><h2>Study progress & planner</h2><p>Track unit completion, review practice results, and plan your next study sessions. Your data stays in this browser.</p></div><a class="air-intel-link" href="practice.html">Practise now ↗</a></div><div class="air-intel-metrics"><article class="air-intel-metric"><span>Units stamped</span><strong id="airMetricUnits">'+total+'/4</strong><small>Use the unit stamps to mark progress</small></article><article class="air-intel-metric"><span>Questions answered</span><strong id="airMetricAttempts">'+(Number(stats.attempts)||0)+'</strong><small>Across saved practice sessions</small></article><article class="air-intel-metric"><span>Practice accuracy</span><strong id="airMetricAccuracy">'+(accuracy===null?'—':accuracy+'%')+'</strong><small>Based on saved question stats</small></article><article class="air-intel-metric"><span>Best mock score</span><strong id="airMetricBest">'+(Number(stats.best)>0?Math.round(Number(stats.best))+'%':'—')+'</strong><small>Your highest saved result</small></article></div><div class="air-intel-columns"><section class="air-intel-subpanel"><h3>Unit-by-unit progress</h3><div id="airUnitProgress"></div></section><section class="air-intel-subpanel"><h3>Weekly study planner</h3><p class="air-intel-help">Choose a focus and mark sessions done. Changes save automatically.</p><div id="airPlanner"></div><button type="button" class="air-intel-reset" id="airResetPlanner">Reset weekly plan</button></section></div><section class="air-intel-subpanel air-history"><div class="air-history-head"><h3>Mock-exam history</h3><a href="practice.html">Open exam centre →</a></div><div id="airExamHistory"></div></section><p class="air-intel-note" role="status" id="airIntelStatus">Progress is stored locally on this device and browser.</p>';
     var main=document.querySelector('main');main.appendChild(panel);
     var progressRoot=panel.querySelector('#airUnitProgress');
+    var historyRoot=panel.querySelector('#airExamHistory');
     function refreshDashboard(){
       stamps=units.map(function(u){return localStorage.getItem('air-s'+u.id)==='1'});
       stats=store.get('air-exam-stats',{attempts:0,correct:0,best:0})||{};
@@ -303,7 +304,6 @@
       if(!window.confirm('Reset your weekly planner to its suggested study topics?'))return;
       localStorage.removeItem('air-study-plan-v1');location.reload();
     });
-    var historyRoot=panel.querySelector('#airExamHistory');
     panel.querySelector('.air-intel-head .air-intel-link').addEventListener('click',function(){});
   })();
 
