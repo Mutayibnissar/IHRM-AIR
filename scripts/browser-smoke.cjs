@@ -94,6 +94,35 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#examQuestionArea .exam-option').nth(correctIndex).click();
     await page.waitForFunction(() => Boolean(document.querySelector('#examQuestionArea .exam-option.correct')), null, { timeout: 5000 });
 
+    // Deterministic scoring regression: answer every Unit 1 practice question correctly.
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.evaluate(() => localStorage.removeItem('air-exam-history'));
+    await page.selectOption('#examUnit', '1');
+    await page.selectOption('#examMode', 'practice');
+    await page.locator('#startExam').click();
+    const scoringBank = await page.evaluate(() => fetch('data/question-bank.json').then(response => response.json()));
+    const unitQuestions = scoringBank.questions.filter(item => item.unitId === 1);
+    assert.equal(unitQuestions.length, 8, 'Unit 1 should have eight questions');
+    for (let index = 0; index < unitQuestions.length; index++) {
+      const heading = page.locator('#examQuestionArea h3');
+      await heading.waitFor({ state: 'visible', timeout: 10000 });
+      const renderedPrompt = (await heading.innerText()).replace(/^\\d+\\.\\s*/, '');
+      const record = scoringBank.questions.find(item => item.prompt === renderedPrompt);
+      assert.ok(record && record.unitId === 1, 'rendered question should match Unit 1 structured record');
+      const correctIndex = record.options.findIndex(option => option.id === record.correctOptionId);
+      assert.ok(correctIndex >= 0, 'structured record should identify a correct option');
+      await page.locator('#examQuestionArea .exam-option').nth(correctIndex).click();
+      if (index < unitQuestions.length - 1) await page.locator('#examNext').click();
+    }
+    await page.locator('#examFinish').click();
+    await page.waitForFunction(() => (document.querySelector('#examQuestionArea h3')?.innerText || '').includes('Results:'), null, { timeout: 5000 });
+    assert.match(await page.locator('#examQuestionArea h3').innerText(), /Results:\\s*8\\s*\\/\\s*8\\s*\\(100%\\)/, 'eight correct answers should produce a 100% score');
+    const practiceHistory = await page.evaluate(() => JSON.parse(localStorage.getItem('air-exam-history') || '[]'));
+    assert.equal(practiceHistory[0]?.correct, 8, 'practice history should record eight correct answers');
+    assert.equal(practiceHistory[0]?.total, 8, 'practice history should record eight questions');
+    assert.equal(practiceHistory[0]?.score, 100, 'practice history should persist the calculated score');
+
+    // Mock exam completion and history persistence.
     await page.reload({ waitUntil: 'networkidle' });
     await page.selectOption('#examMode', 'mock');
     await page.selectOption('#examLength', '10');
