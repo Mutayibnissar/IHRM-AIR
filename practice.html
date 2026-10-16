@@ -1977,6 +1977,36 @@ header.top .nav-subbuttons{white-space:normal}
 .exam-review-item{scroll-margin-top:100px}
 @media(max-width:600px){.exam-result-actions{display:grid;grid-template-columns:1fr}.exam-retry-button{width:100%}}
 </style>
+<style id="air-readiness-styles">
+.air-readiness{margin:22px 0;padding:clamp(16px,2.5vw,26px);border:1px solid var(--line,#d5e2f4);border-radius:20px;background:var(--surface,#fff);color:var(--ink,#17233f)}
+.air-readiness h3{margin:0 0 8px}.air-readiness p{line-height:1.55}
+.air-ready-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:16px 0}
+.air-ready-stat{padding:14px;border-radius:14px;background:var(--soft,#f3f6fb)}.air-ready-stat strong{display:block;font-size:1.45rem}.air-ready-stat span{font-size:.88rem}
+.air-ready-units{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:14px 0}
+.air-ready-unit{padding:14px;border:1px solid var(--line,#d5e2f4);border-radius:14px}.air-ready-unit h4{margin:0 0 8px}.air-ready-meter{height:8px;overflow:hidden;border-radius:999px;background:var(--line,#d5e2f4);margin:8px 0}.air-ready-meter span{display:block;height:100%;width:0;background:var(--accent,#4778e8);border-radius:999px}
+.air-ready-checks{display:grid;gap:10px;margin:14px 0}.air-ready-check{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;background:var(--soft,#f3f6fb)}.air-ready-check input{margin-top:5px;accent-color:var(--accent,#4778e8)}.air-ready-check span{line-height:1.45}
+.air-ready-actions{display:flex;flex-wrap:wrap;gap:9px}.air-ready-actions a,.air-ready-actions button{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border:1px solid var(--line,#d5e2f4);border-radius:11px;background:var(--surface,#fff);color:inherit;text-decoration:none;font:inherit;font-weight:750;cursor:pointer}
+</style>
+<section id="airExamReadiness" class="air-readiness" aria-labelledby="airReadinessTitle">
+ <h3 id="airReadinessTitle">Exam Readiness Centre</h3>
+ <p>Use your practice history to identify revision priorities, then complete the checklist before exam day. Your checklist is saved on this device.</p>
+ <div class="air-ready-overview" aria-live="polite">
+  <div class="air-ready-stat"><strong id="airReadyScore">0%</strong><span>Readiness indicator</span></div>
+  <div class="air-ready-stat"><strong id="airReadyAccuracy">—</strong><span>Overall practice accuracy</span></div>
+  <div class="air-ready-stat"><strong id="airReadyChecklist">0/6</strong><span>Checklist completed</span></div>
+ </div>
+ <h4>Unit-wise performance</h4><div id="airReadyUnits" class="air-ready-units"></div>
+ <h4>Final revision checklist</h4>
+ <div id="airReadyChecks" class="air-ready-checks">
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="1"><span>Revise the core concepts and definitions in all four units.</span></label>
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="2"><span>Review weak topics and revisit the relevant unit notes.</span></label>
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="3"><span>Review every saved item in the Incorrect Answers Notebook.</span></label>
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="4"><span>Complete at least one full-length timed mock exam.</span></label>
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="5"><span>Recheck important comparisons, frameworks, and examples.</span></label>
+  <label class="air-ready-check"><input type="checkbox" data-ready-check="6"><span>Prepare a short last-day summary and confirm exam logistics.</span></label>
+ </div>
+ <div class="air-ready-actions"><a href="units.html">Open unit notes ↗</a><button type="button" id="airReadyMock">Start timed mock</button><button type="button" id="airReadyReset">Reset checklist</button></div>
+</section>
 <section id="airMistakeNotebook" class="air-mistake-notebook" aria-labelledby="airMistakeTitle">
  <div class="air-mistake-head"><div><h3 id="airMistakeTitle">Incorrect Answers Notebook</h3><p>Questions you miss are saved on this device for later revision.</p></div><span class="air-mistake-count" id="airMistakeCount">0 saved</span></div>
  <div class="air-mistake-tools"><button type="button" id="airMistakeRetry">Retry saved mistakes</button><button type="button" id="airMistakeExport">Export notebook</button><button type="button" id="airMistakeClear">Clear notebook</button></div>
@@ -1986,6 +2016,21 @@ header.top .nav-subbuttons{white-space:normal}
 (function(){
 'use strict';
 var $=function(id){return document.getElementById(id)};
+var readyNames={1:'IHRM foundations',2:'Staffing & performance',3:'International compensation',4:'Unions, law & trends'};
+function renderReadiness(){
+ var stats={};try{stats=JSON.parse(localStorage.getItem('air-unit-practice-v1')||'{}')||{}}catch(e){}
+ var totalAttempts=0,totalCorrect=0,weighted=0,unitCount=0,html='';
+ for(var u=1;u<=4;u++){var us=stats[u]||{attempts:0,correct:0},attempts=Number(us.attempts)||0,correct=Number(us.correct)||0,accuracy=attempts?Math.round(correct/attempts*100):0;totalAttempts+=attempts;totalCorrect+=correct;if(attempts){weighted+=accuracy;unitCount++}
+ var label=attempts?accuracy+'% accuracy':'Not practised';html+='<article class="air-ready-unit"><h4>Unit '+u+' · '+readyNames[u]+'</h4><strong>'+label+'</strong><div class="air-ready-meter"><span style="width:'+accuracy+'%"></span></div><p>'+attempts+' question'+(attempts===1?'':'s')+' attempted</p><div class="air-ready-actions"><a href="units.html#u'+u+'">Revise ↗</a><a href="practice.html?unit='+u+'#exam-centre">Practise ↗</a></div></article>'}
+ var unitRoot=$('airReadyUnits');if(unitRoot)unitRoot.innerHTML=html;
+ var accuracyAll=totalAttempts?Math.round(totalCorrect/totalAttempts*100):0;
+ var checkboxes=document.querySelectorAll('[data-ready-check]'),done=0;checkboxes.forEach(function(box){if(box.checked)done++});
+ var checklist=localStorage.getItem('air-exam-readiness-checklist-v1');if(checklist===null){/* use current initial states */}
+ var coverage=Math.round((unitCount/4)*100),practiceScore=Math.min(100,Math.round(totalAttempts/40*100)),accuracyScore=totalAttempts?accuracyAll:0,checkScore=Math.round(done/6*100);
+ var readiness=Math.round(coverage*.25+practiceScore*.2+accuracyScore*.35+checkScore*.2);
+ if($('airReadyScore'))$('airReadyScore').textContent=readiness+'%';if($('airReadyAccuracy'))$('airReadyAccuracy').textContent=totalAttempts?accuracyAll+'%':'—';if($('airReadyChecklist'))$('airReadyChecklist').textContent=done+'/6';
+}
+function loadReadinessChecklist(){var saved={};try{saved=JSON.parse(localStorage.getItem('air-exam-readiness-checklist-v1')||'{}')||{}}catch(e){}document.querySelectorAll('[data-ready-check]').forEach(function(box){box.checked=!!saved[box.getAttribute('data-ready-check')];box.addEventListener('change',function(){var next={};document.querySelectorAll('[data-ready-check]').forEach(function(b){next[b.getAttribute('data-ready-check')]=b.checked});try{localStorage.setItem('air-exam-readiness-checklist-v1',JSON.stringify(next))}catch(e){}renderReadiness()})});}
 var mistakeKey='air-mistake-notebook-v1';
 function readMistakes(){try{var v=JSON.parse(localStorage.getItem(mistakeKey)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}}
 function saveMistakes(list){try{localStorage.setItem(mistakeKey,JSON.stringify(list.slice(0,300)));return true}catch(e){return false}}
@@ -2141,6 +2186,11 @@ $('airMistakeRetry').addEventListener('click',function(){var list=readMistakes()
 $('airMistakeExport').addEventListener('click',function(){var blob=new Blob([JSON.stringify({app:'IHRM Air Incorrect Answers Notebook',version:1,exportedAt:new Date().toISOString(),items:readMistakes()},null,2)],{type:'application/json'});var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ihrm-air-incorrect-answers.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
 $('airMistakeClear').addEventListener('click',function(){if(!readMistakes().length)return;if(!window.confirm('Clear all saved incorrect answers on this device? This cannot be undone.'))return;saveMistakes([]);renderMistakeNotebook()});
 renderMistakeNotebook();
+loadReadinessChecklist();renderReadiness();
+$('airReadyMock').addEventListener('click',function(){$('examMode').value='mock';$('examLength').value='20';$('startExam').click();$('exam-centre').scrollIntoView({behavior:'smooth',block:'start'})});
+$('airReadyReset').addEventListener('click',function(){if(!window.confirm('Reset all six checklist items?'))return;try{localStorage.removeItem('air-exam-readiness-checklist-v1')}catch(e){}document.querySelectorAll('[data-ready-check]').forEach(function(box){box.checked=false});renderReadiness()});
+window.addEventListener('air-study-data-updated',renderReadiness);
+
 window.addEventListener('storage',function(e){if(e.key===mistakeKey)renderMistakeNotebook()});
 updateStats();
 })();
