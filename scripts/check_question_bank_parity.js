@@ -5,7 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'practice.html'), 'utf8');
 const bank = JSON.parse(fs.readFileSync(path.join(root, 'data/question-bank.json'), 'utf8'));
-if (/var bank=\\[\\s*\\{/.test(html)) throw new Error('The legacy embedded question bank must not be restored.');
+if (html.includes('var bank=[\n{')) throw new Error('The legacy embedded question bank must not be restored.');
 if (!html.includes("fetch(new URL('data/question-bank.json', document.baseURI)")) throw new Error('Practice page must load the structured question bank.');
 for (const token of ['item.unitId','item.prompt','item.options.map','item.correctOptionId','item.explanation']) if (!html.includes(token)) throw new Error('Live question adapter is missing mapping: ' + token);
 if (!Array.isArray(bank.questions) || bank.questions.length !== 32) throw new Error('Expected 32 structured questions.');
