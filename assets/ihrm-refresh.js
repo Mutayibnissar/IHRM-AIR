@@ -200,7 +200,7 @@
       document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000);
     }
     function injectDataTools(){
-      if(!document.querySelector('main')||document.getElementById('airDataBackupPanel'))return;
+      if(path!=='backup.html'||!document.querySelector('main')||document.getElementById('airDataBackupPanel'))return;
       var panel=document.createElement('section');panel.id='airDataBackupPanel';panel.className='air-data-panel';
       panel.innerHTML='<div class="air-data-panel-copy"><span class="air-data-kicker">YOUR LEARNING DATA</span><h2>Progress & backup</h2><p>Keep your study checklist and saved IHRM Air progress portable. Export a backup before changing devices.</p><p id="airChecklistProgress" class="air-data-status" aria-live="polite">Your checklist is ready</p></div><div class="air-data-actions"><button type="button" class="air-data-button" id="airExportData">↓ Export backup</button><label class="air-data-button air-import-button" for="airImportFile">↑ Restore backup<input type="file" id="airImportFile" accept="application/json,.json" hidden></label></div><p class="air-data-message" id="airDataMessage" role="status"></p>';
       var main=document.querySelector('main');main.appendChild(panel);
@@ -230,7 +230,7 @@
 
   // Study Session Tracker (non-AI; local-device storage).
   (function(){
-    if(!document.querySelector('main')||document.getElementById('air-study-session-tracker'))return;
+    if(path!=='tracker.html'||!document.querySelector('main')||document.getElementById('air-study-session-tracker'))return;
     var key='air-study-session-tracker-v1',dailyKey='air-study-session-daily-goal-v1';
     function read(){try{var d=JSON.parse(localStorage.getItem(key)||'{}');return d&&typeof d==='object'?d:{}}catch(e){return {}}}
     function save(d){try{localStorage.setItem(key,JSON.stringify(d));return true}catch(e){return false}}
@@ -260,7 +260,7 @@
 
   // Study Intelligence (non-AI): progress dashboard, mock history, and editable weekly plan.
   (function(){
-    if(!document.querySelector('main')||document.getElementById('air-study-intelligence'))return;
+    if(path!=='planner.html'||!document.querySelector('main')||document.getElementById('air-study-intelligence'))return;
     var store={
       get:function(k,fallback){try{var v=localStorage.getItem(k);return v===null?fallback:JSON.parse(v)}catch(e){return fallback}},
       set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
