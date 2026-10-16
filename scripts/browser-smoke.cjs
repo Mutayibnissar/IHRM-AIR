@@ -111,7 +111,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     for (let index = 0; index < unitQuestions.length; index++) {
       const heading = page.locator('#examQuestionArea h3');
       await heading.waitFor({ state: 'visible', timeout: 10000 });
-      const renderedPrompt = (await heading.innerText()).replace(/^\\d+\\.\\s*/, '');
+      const renderedPrompt = (await heading.innerText()).replace(/^[0-9]+[.] +/, '');
       const record = scoringBank.questions.find(item => item.prompt === renderedPrompt);
       assert.ok(record && record.unitId === 1, 'rendered question should match Unit 1 structured record');
       const correctIndex = record.options.findIndex(option => option.id === record.correctOptionId);
