@@ -80,8 +80,8 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 
     const swReady = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
-      const registration = await navigator.serviceWorker.ready;
-      return Boolean(registration.active);
+      const registration = await Promise.race([navigator.serviceWorker.ready, new Promise(resolve => setTimeout(() => resolve(null), 8000))]);
+      return Boolean(registration && registration.active);
     });
     assert.equal(swReady, true, 'PWA service worker should activate on the local test origin');
     await page.reload({ waitUntil: 'networkidle' });
