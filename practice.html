@@ -1608,7 +1608,7 @@ var mistakeKey='air-mistake-notebook-v1';
 function readMistakes(){try{var v=JSON.parse(localStorage.getItem(mistakeKey)||'[]');return Array.isArray(v)?v:[]}catch(e){return []}}
 function saveMistakes(list){try{localStorage.setItem(mistakeKey,JSON.stringify(list.slice(0,300)));return true}catch(e){return false}}
 function mistakeId(item){return String(item.u)+'|'+item.q}
-function rememberMistake(item,picked){var list=readMistakes(),id=mistakeId(item),old=list.find(function(v){return v.id===id});if(old){old.picked=picked;old.lastMissed=new Date().toISOString();old.misses=(Number(old.misses)||1)+1}else{list.unshift({id:id,u:item.u,q:item.q,o:item.o,a:item.a,e:item.e,picked:picked,firstMissed:new Date().toISOString(),lastMissed:new Date().toISOString(),misses:1})}saveMistakes(list)}
+function rememberMistake(item,picked){var list=readMistakes(),id=mistakeId(item),old=list.find(function(v){return v.id===id});if(old){old.picked=picked;old.lastMissed=new Date().toISOString();old.misses=(Number(old.misses)||1)+1}else{list.unshift({id:id,u:item.u,q:item.q,o:item.o,a:item.a,e:item.e,picked:picked,firstMissed:new Date().toISOString(),lastMissed:new Date().toISOString(),misses:1})}saveMistakes(list);renderMistakeNotebook()}
 function renderMistakeNotebook(){
  var list=readMistakes(),root=$('airMistakeList'),count=$('airMistakeCount');if(!root||!count)return;
  count.textContent=list.length+' saved';root.textContent='';
