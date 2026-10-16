@@ -226,4 +226,69 @@
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',injectDataTools);else injectDataTools();
   }catch(e){/* Storage may be disabled; the rest of the platform remains usable. */}
 
+
+  // Study Intelligence (non-AI): progress dashboard, mock history, and editable weekly plan.
+  (function(){
+    if(!document.querySelector('main')||document.getElementById('air-study-intelligence'))return;
+    var store={
+      get:function(k,fallback){try{var v=localStorage.getItem(k);return v===null?fallback:JSON.parse(v)}catch(e){return fallback}},
+      set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+    };
+    var units=[
+      {id:1,title:'IHRM foundations',href:'units.html#u1',tasks:['Review the unit notes','Write a 5-point summary','Complete unit practice']},
+      {id:2,title:'Staffing & performance',href:'units.html#u2',tasks:['Review staffing approaches','Compare performance systems','Complete unit practice']},
+      {id:3,title:'International compensation',href:'units.html#u3',tasks:['Review compensation concepts','Practise a short answer','Complete unit practice']},
+      {id:4,title:'Unions, law & trends',href:'units.html#u4',tasks:['Review laws and unions','Revise emerging trends','Complete unit practice']}
+    ];
+    var stamps=units.map(function(u){return store.get('air-s'+u.id,null)==='1'||localStorage.getItem('air-s'+u.id)==='1'});
+    var stats=store.get('air-exam-stats',{attempts:0,correct:0,best:0})||{};
+    var history=store.get('air-exam-history',[]);
+    if(!Array.isArray(history))history=[];
+    var planner=store.get('air-study-plan-v1',{});
+    if(!planner||typeof planner!=='object')planner={};
+    var total=stamps.filter(Boolean).length,accuracy=Number(stats.attempts)>0?Math.round(Number(stats.correct||0)/Number(stats.attempts)*100):null;
+    var panel=document.createElement('section');panel.id='air-study-intelligence';panel.className='air-intelligence-panel';
+    panel.innerHTML='<div class="air-intel-head"><div><span class="air-intel-kicker">YOUR STUDY FLIGHT DECK</span><h2>Study progress & planner</h2><p>Track unit completion, review practice results, and plan your next study sessions. Your data stays in this browser.</p></div><a class="air-intel-link" href="practice.html">Practise now ↗</a></div><div class="air-intel-metrics"><article class="air-intel-metric"><span>Units stamped</span><strong id="airMetricUnits">'+total+'/4</strong><small>Use the unit stamps to mark progress</small></article><article class="air-intel-metric"><span>Questions answered</span><strong id="airMetricAttempts">'+(Number(stats.attempts)||0)+'</strong><small>Across saved practice sessions</small></article><article class="air-intel-metric"><span>Practice accuracy</span><strong id="airMetricAccuracy">'+(accuracy===null?'—':accuracy+'%')+'</strong><small>Based on saved question stats</small></article><article class="air-intel-metric"><span>Best mock score</span><strong id="airMetricBest">'+(Number(stats.best)>0?Math.round(Number(stats.best))+'%':'—')+'</strong><small>Your highest saved result</small></article></div><div class="air-intel-columns"><section class="air-intel-subpanel"><h3>Unit-by-unit progress</h3><div id="airUnitProgress"></div></section><section class="air-intel-subpanel"><h3>Weekly study planner</h3><p class="air-intel-help">Choose a focus and mark sessions done. Changes save automatically.</p><div id="airPlanner"></div><button type="button" class="air-intel-reset" id="airResetPlanner">Reset weekly plan</button></section></div><section class="air-intel-subpanel air-history"><div class="air-history-head"><h3>Mock-exam history</h3><a href="practice.html">Open exam centre →</a></div><div id="airExamHistory"></div></section><p class="air-intel-note" role="status" id="airIntelStatus">Progress is stored locally on this device and browser.</p>';
+    var main=document.querySelector('main');main.appendChild(panel);
+    var progressRoot=panel.querySelector('#airUnitProgress');
+    units.forEach(function(u){
+      var row=document.createElement('div');row.className='air-unit-progress-row';
+      var label=document.createElement('div');label.className='air-unit-progress-label';
+      var link=document.createElement('a');link.href=u.href;link.textContent='Unit '+u.id+' · '+u.title;
+      var status=document.createElement('span');status.className='air-unit-status';status.textContent=stamps[u.id-1]?'Complete':'In progress';
+      label.appendChild(link);label.appendChild(status);
+      var track=document.createElement('div');track.className='air-unit-track';var fill=document.createElement('span');fill.style.width=stamps[u.id-1]?'100%':'8%';track.appendChild(fill);
+      row.appendChild(label);row.appendChild(track);progressRoot.appendChild(row);
+    });
+    var plannerRoot=panel.querySelector('#airPlanner');
+    var days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    var defaults=['Unit I · Foundations','Unit II · Staffing','Unit III · Compensation','Unit IV · Law & trends','Practice questions','Timed mock exam','Review weak topics'];
+    days.forEach(function(day,i){
+      var row=document.createElement('label');row.className='air-plan-row';
+      var check=document.createElement('input');check.type='checkbox';check.checked=!!planner[day+'_done'];check.setAttribute('aria-label',day+' session complete');
+      var copy=document.createElement('span');copy.className='air-plan-copy';
+      var dayName=document.createElement('strong');dayName.textContent=day;
+      var input=document.createElement('input');input.type='text';input.maxLength=90;input.value=typeof planner[day+'_focus']==='string'?planner[day+'_focus']:defaults[i];input.setAttribute('aria-label',day+' study focus');
+      copy.appendChild(dayName);copy.appendChild(input);row.appendChild(check);row.appendChild(copy);plannerRoot.appendChild(row);
+      function save(){planner[day+'_done']=check.checked;planner[day+'_focus']=input.value;store.set('air-study-plan-v1',planner);panel.querySelector('#airIntelStatus').textContent='Weekly plan saved on this device.';row.classList.toggle('is-done',check.checked)}
+      check.addEventListener('change',save);input.addEventListener('change',save);row.classList.toggle('is-done',check.checked);
+    });
+    panel.querySelector('#airResetPlanner').addEventListener('click',function(){
+      if(!window.confirm('Reset your weekly planner to its suggested study topics?'))return;
+      localStorage.removeItem('air-study-plan-v1');location.reload();
+    });
+    var historyRoot=panel.querySelector('#airExamHistory');
+    if(history.length){
+      history.slice(0,5).forEach(function(item){
+        var row=document.createElement('div');row.className='air-history-row';
+        var name=document.createElement('strong');name.textContent=item.mode==='mock'?'Timed mock exam':'Unit practice';
+        var detail=document.createElement('span');detail.textContent=(item.date||'Saved session')+' · '+(item.score!=null?item.score+'%':'Score unavailable')+' · '+(item.correct||0)+'/'+(item.total||0)+' correct';
+        row.appendChild(name);row.appendChild(detail);historyRoot.appendChild(row);
+      });
+    }else{
+      var empty=document.createElement('p');empty.className='air-intel-help';empty.textContent='Your completed mock exams will appear here after you finish a session.';historyRoot.appendChild(empty);
+    }
+    panel.querySelector('.air-intel-head .air-intel-link').addEventListener('click',function(){});
+  })();
+
 })();
