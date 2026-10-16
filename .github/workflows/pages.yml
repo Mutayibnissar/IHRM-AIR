@@ -60,6 +60,7 @@ jobs:
               "tracker.html": ["Session Tracker", "tracker"],
               "backup.html": ["Backup", "backup"],
               "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
+              "agents.html": ["Agent Crew", "Study Coach", "Concept Explainer", "Revision Planner", "agent-workspace.js", "browser-local"],
           }
           for filename, markers in required.items():
               path = Path(filename)
