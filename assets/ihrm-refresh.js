@@ -421,10 +421,12 @@
     var themeMeta=document.querySelector('meta[name="theme-color"]');
     if(!themeMeta){themeMeta=document.createElement('meta');themeMeta.name='theme-color';themeMeta.content='#2f6fd0';document.head.appendChild(themeMeta);}
     if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost' || location.hostname==='127.0.0.1')){
-      window.addEventListener('load',function(){
+      function registerOfflineSupport(){
         navigator.serviceWorker.register(new URL('service-worker.js',document.baseURI),{scope:new URL('./',document.baseURI).pathname})
           .catch(function(error){console.warn('IHRM Air offline support could not be registered.',error);});
-      },{once:true});
+      }
+      if(document.readyState==='complete')registerOfflineSupport();
+      else window.addEventListener('load',registerOfflineSupport,{once:true});
     }
   })();
 })();
