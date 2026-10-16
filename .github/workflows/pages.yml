@@ -34,6 +34,19 @@ jobs:
           python scripts/check_inline_scripts.py
           node scripts/check_question_bank_parity.js
 
+      - name: Run browser smoke tests
+        run: |
+          npm install --prefix /tmp/ihrm-air-playwright playwright
+          node /tmp/ihrm-air-playwright/node_modules/playwright/cli.js install --with-deps chromium
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/ihrm-air-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:8765/index.html >/dev/null; then break; fi
+            sleep 1
+          done
+          PLAYWRIGHT_MODULE=/tmp/ihrm-air-playwright/node_modules/playwright node scripts/browser-smoke.cjs
+
       - name: Validate multi-page study hub
         run: |
           python - <<'PY'
