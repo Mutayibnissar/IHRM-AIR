@@ -89,6 +89,13 @@ for filename in REQUIRED:
         if not target.is_file():
             fail(f"{filename} has a broken local href: {href}")
 
+# This build is intentionally non-AI and has no cloud-auth scaffolding.
+for filename in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html"):
+    source = (ROOT / filename).read_text(encoding="utf-8").lower()
+    for forbidden in ("supabase-js", "supabase_url", "localmodelendpoint", "agentic-study-crew", "agentwidgetlauncher", "aircloudsignin"):
+        if forbidden in source:
+            fail(f"{filename} contains removed AI/cloud scaffolding: {forbidden}")
+
 try:
     manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
 except (ValueError, OSError) as exc:
