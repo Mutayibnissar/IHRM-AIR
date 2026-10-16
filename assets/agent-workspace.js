@@ -4,7 +4,7 @@
 const $=id=>document.getElementById(id);
 const status=$('agentStatus'),output=$('agentOutput');
 let bank=[],notes=[];
-const pages=[{name:'Course units',url:'units.html'},{name:'Full notes',url:'full-notes.html'},{name:'Practice',url:'practice.html'},{name:'Evidence & Sources',url:'references.html'}];
+const pages=[{name:'Course units',url:'units.html'},{name:'Full notes',url:'full-notes.html'},{name:'Evidence & Sources',url:'references.html'}];
 function clean(s){return String(s||'').replace(/\s+/g,' ').trim()}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function norm(s){return clean(s).toLowerCase().replace(/[^a-z0-9\s-]/g,' ')}
