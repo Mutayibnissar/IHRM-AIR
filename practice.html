@@ -2165,9 +2165,10 @@ window.addEventListener('air-study-data-updated',renderReadiness);
 
 window.addEventListener('storage',function(e){if(e.key===mistakeKey)renderMistakeNotebook()});
 updateStats();
-})();
+}
 
 }).catch(function(error){var area=document.getElementById('examQuestionArea');if(area){area.innerHTML='';var message=document.createElement('p');message.setAttribute('role','alert');message.textContent='The question bank could not be loaded. Check your connection, then refresh this page.';area.appendChild(message)}var next=document.getElementById('examNext'),finish=document.getElementById('examFinish');if(next)next.disabled=true;if(finish)finish.disabled=true;console.error('IHRM Air question bank:',error)});
+})();
 </script><style id="wide-reading-notes-layout">
 /* Make opened notes use the screen width instead of becoming a narrow, tall column. */
 .full-unit-notes{padding:0!important;width:100%!important;max-width:100%!important}
