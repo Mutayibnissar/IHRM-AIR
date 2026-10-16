@@ -13,6 +13,16 @@
     else{link.removeAttribute('aria-current');}
   });
 
+  // Keep the Agent Crew discoverable from every page that uses the shared navigation.
+  if(nav&&!nav.querySelector('a[href="agents.html"]')){
+    var agentLink=document.createElement('a');
+    agentLink.href='agents.html';
+    agentLink.textContent='🤖 Agent Crew';
+    agentLink.setAttribute('data-page','agents.html');
+    if(path==='agents.html')agentLink.setAttribute('aria-current','page');
+    nav.appendChild(agentLink);
+  }
+
   if(wrap&&toggle&&nav){
     toggle.setAttribute('aria-controls',nav.id||'sitePageNav');
     function closeMenu(restoreFocus){
