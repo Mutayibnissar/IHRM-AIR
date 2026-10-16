@@ -44,6 +44,13 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
         await page.locator('#airExportData').click();
         const download = await downloadPromise;
         assert.equal(download.suggestedFilename().endsWith('.json'), true, 'backup should export a JSON file');
+        await page.locator('#airImportFile').setInputFiles({
+          name: 'ihrm-air-test-backup.json',
+          mimeType: 'application/json',
+          buffer: Buffer.from(JSON.stringify({ format: 'IHRM-AIR-backup', version: 1, items: { 'air-test-restore': 'restored' } }))
+        });
+        await page.waitForFunction(() => (document.getElementById('airDataMessage')?.textContent || '').includes('Backup restored'), null, { timeout: 5000 });
+        assert.equal(await page.evaluate(() => localStorage.getItem('air-test-restore')), 'restored', 'backup restore should restore browser-local data');
       }
     }
 
@@ -66,6 +73,24 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       const heading = document.querySelector('#examQuestionArea h3');
       return heading && heading.innerText !== previous;
     }, firstQuestion, { timeout: 5000 });
+
+    await page.evaluate(() => localStorage.removeItem('air-mistake-notebook-v1'));
+    await page.reload({ waitUntil: 'networkidle' });
+    await page.selectOption('#examUnit', '1');
+    await page.selectOption('#examMode', 'practice');
+    await page.locator('#startExam').click();
+    await page.locator('#examQuestionArea .exam-option').first().waitFor({ state: 'visible', timeout: 10000 });
+    const questionBank = await page.evaluate(() => fetch('data/question-bank.json').then(response => response.json()));
+    const retryPrompt = (await page.locator('#examQuestionArea h3').innerText()).replace(/^\d+\.\s*/, '');
+    const retryQuestion = questionBank.questions.find(item => item.prompt === retryPrompt);
+    assert.ok(retryQuestion, 'rendered practice question should map to the structured bank');
+    const correctIndex = retryQuestion.options.findIndex(option => option.id === retryQuestion.correctOptionId);
+    const wrongIndex = correctIndex === 0 ? 1 : 0;
+    await page.locator('#examQuestionArea .exam-option').nth(wrongIndex).click();
+    await page.waitForFunction(() => document.getElementById('airMistakeCount')?.textContent.includes('1 saved'), null, { timeout: 5000 });
+    await page.locator('#airMistakeList button').filter({ hasText: 'Retry this question' }).first().click();
+    await page.locator('#examQuestionArea .exam-option').nth(correctIndex).click();
+    await page.waitForFunction(() => Boolean(document.querySelector('#examQuestionArea .exam-option.correct')), null, { timeout: 5000 });
 
     await page.reload({ waitUntil: 'networkidle' });
     await page.selectOption('#examMode', 'mock');
@@ -98,7 +123,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await menu.getAttribute('aria-expanded'), 'true', 'mobile menu should expose its expanded state');
     }
     assert.deepEqual(pageErrors, [], 'pages should not raise uncaught JavaScript errors');
-    console.log('PASS: browser smoke tests verified navigation, dedicated tools, question loading, answer/next flow, timed mock history, backup export, planner/tracker actions, PWA offline navigation, mobile menu, and no uncaught page errors.');
+    console.log('PASS: browser smoke tests verified navigation, dedicated tools, question loading, answer/next flow, timed mock history, backup export/restore, mistake retry, planner/tracker actions, PWA offline navigation, mobile menu, and no uncaught page errors.');
   } finally {
     await browser.close();
   }
