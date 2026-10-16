@@ -440,4 +440,33 @@
       else window.addEventListener('load',registerOfflineSupport,{once:true});
     }
   })();
+
+  // Installable app affordance: only show it when the browser confirms installation is available.
+  (function(){
+    var installPrompt=null;
+    var navWrap=document.querySelector('.site-nav-wrap');
+    if(!navWrap||document.getElementById('airInstallApp'))return;
+    var installed=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+    if(installed)return;
+    var button=document.createElement('button');
+    button.id='airInstallApp';button.type='button';button.className='site-theme-toggle air-install-app';
+    button.textContent='＋ Install app';button.hidden=true;
+    button.setAttribute('aria-label','Install IHRM Air as an app');
+    button.addEventListener('click',async function(){
+      if(!installPrompt)return;
+      button.disabled=true;
+      try{
+        installPrompt.prompt();
+        var choice=await installPrompt.userChoice;
+        if(choice&&choice.outcome==='accepted')button.hidden=true;
+      }catch(error){console.warn('IHRM Air install prompt was not completed.',error)}
+      installPrompt=null;button.disabled=false;
+    });
+    navWrap.appendChild(button);
+    window.addEventListener('beforeinstallprompt',function(event){
+      event.preventDefault();installPrompt=event;button.hidden=false;
+    });
+    window.addEventListener('appinstalled',function(){button.hidden=true;installPrompt=null;});
+  })();
+
 })();
