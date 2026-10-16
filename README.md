@@ -7,7 +7,10 @@ IHRM Air is a multi-page study platform for International Human Resource Managem
 - Browser-local progress, mistake notebook, study planner and session tracking.
 - Import/export tools for personal study data.
 - Responsive UI, keyboard accessibility and light/dark themes.
-- Installable Progressive Web App (PWA) shell with offline caching for core pages.\n- Automated deployment checks for required pages, navigation, duplicate IDs, PWA metadata, and JavaScript syntax.\n- Versioned question-record schema and editorial guidance for source tracking and review.\n- A structured 32-question bank (8 per unit) migrated from the live practice bank, with an automated exact-parity check so the copy cannot silently drift. Items remain marked draft pending subject-matter verification.
+- Installable Progressive Web App (PWA) shell with offline caching for core pages and the structured question bank.
+- Automated deployment checks for required pages, navigation, duplicate IDs, PWA metadata, and JavaScript syntax.
+- A versioned question-record schema and editorial guidance for source tracking and review.
+- A single structured 32-question bank (8 per unit) is now the live source for practice and mock exams; the duplicated embedded bank was removed. Automated checks validate question IDs, unit coverage, answer mapping, and the live loader. Questions remain marked draft pending subject-matter verification.
 
 ## Run locally
 This is a static web app. Serve the repository directory with any static HTTP server; opening files directly with `file://` will not enable service-worker features. For example:
@@ -24,10 +27,9 @@ GitHub Actions deploys the static site to GitHub Pages when changes reach `main`
 ## Data and privacy
 Personal study data is stored in the browser on the device being used. It is not synced between devices or accounts. Export a backup before clearing browser storage.
 
-## Development roadmap
-1. Separate course and question content into versioned data files.
-2. Add automated question validation and workflow tests.
-3. Add robust progress and assessment reporting.
-4. Add account-backed sync only after selecting a secure backend and hosting environment.
+## Development status and next steps
+The live exam controller now reads data/question-bank.json and converts records into the existing practice/mock-exam format. This avoids maintaining two independent copies of question content. Browser-local study data remains local to each device; there is no account sync or server-side data store.
+
+Remaining quality work: add browser-level regression coverage for timed mock exams, retry flows, progress persistence, backup/restore and offline install; verify all academic content against authoritative sources before changing draft review status; and perform a real-device accessibility and offline smoke test.
 
 No AI features are included in this build.
