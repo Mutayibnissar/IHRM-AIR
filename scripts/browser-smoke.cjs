@@ -13,6 +13,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.match(await page.title(), /IHRM Air/i);
     assert.equal(await page.locator('a[href="units.html"]').count() > 0, true, 'home should link to course units');
 
+    await page.goto('http://127.0.0.1:8765/units.html', { waitUntil: 'networkidle' });
+    for (const unit of ['#u1', '#u2', '#u3', '#u4']) {
+      assert.equal(await page.locator(unit).count() > 0, true, 'course notes should include ' + unit);
+    }
+
     await page.goto('http://127.0.0.1:8765/tools.html', { waitUntil: 'networkidle' });
     for (const target of ['planner.html', 'tracker.html', 'backup.html']) {
       assert.equal(await page.locator('a[href="' + target + '"]').count() > 0, true, 'tools hub should link to ' + target);
