@@ -18,6 +18,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert.equal(await page.locator(unit).count() > 0, true, 'course notes should include ' + unit);
     }
 
+    await page.goto('http://127.0.0.1:8765/references.html', { waitUntil: 'networkidle' });
+    assert.match(await page.locator('h1').innerText(), /Evidence & Sources/i);
+    assert.equal(await page.locator('a[href^="https://www.ilo.org"]').count() > 0, true, 'source page should link to official ILO guidance');
+    assert.equal((await page.locator('a[href^="https://www.oecd.org"]').count()) + (await page.locator('a[href^="https://doi.org"]').count()) > 0, true, 'source page should link to OECD guidance');
+
     await page.goto('http://127.0.0.1:8765/tools.html', { waitUntil: 'networkidle' });
     for (const target of ['planner.html', 'tracker.html', 'backup.html']) {
       assert.equal(await page.locator('a[href="' + target + '"]').count() > 0, true, 'tools hub should link to ' + target);
