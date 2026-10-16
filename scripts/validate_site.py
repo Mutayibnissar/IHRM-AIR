@@ -8,7 +8,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
-    "index.html": ["units.html", "practice.html", "tools.html", 'id="homeAttempts"', 'id="homeAccuracy"', 'site-nav-toggle'],
+    "index.html": ["units.html", "practice.html", "tools.html", "agents.html", 'id="homeAttempts"', 'id="homeAccuracy"', 'site-nav-toggle'],
     "units.html": ['id="u1"', 'id="u2"', 'id="u3"', 'id="u4"'],
     "practice.html": ['id="exam-centre"', 'id="quiz"', 'id="integrated-cards"', "data/question-bank.json", "correctOptionId"],
     "tools.html": ["Study Tools Hub", 'href="planner.html"', 'href="tracker.html"', 'href="backup.html"'],
@@ -16,9 +16,10 @@ REQUIRED = {
     "tracker.html": ["Session Tracker", "tracker"],
     "backup.html": ["Backup", "backup"],
     "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
+    "agents.html": ["Agent Crew", "Study Coach", "Concept Explainer", "Revision Planner", "agent-workspace.js", "browser-local"],
 }
 CORE_FILES = [
-    "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "service-worker.js",
+    "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "assets/agent-workspace.js", "service-worker.js",
     "manifest.webmanifest", "offline.html", "assets/icon.svg", "data/question.schema.json", "data/question-bank.json", "data/README.md",
 ]
 
