@@ -2097,6 +2097,17 @@ next.addEventListener('click',function(){if(!session||session.answers[session.po
 mark.addEventListener('click',function(){if(!session)return;session.review[session.pos]=!session.review[session.pos];renderQuestion()});
 finish.addEventListener('click',finishCurrent);
 $('resetExamStats').addEventListener('click',function(){if(!window.confirm('Reset your saved exam statistics on this device?'))return;writeStats({attempts:0,correct:0,best:0});updateStats()});
+/* Open the exam centre with the requested unit when arriving from revision priorities. */
+try{
+ var requestedUnit=new URLSearchParams(window.location.search).get('unit');
+ if(['1','2','3','4'].indexOf(requestedUnit)!==-1){
+   $('examUnit').value=requestedUnit;
+   var examCentre=document.getElementById('exam-centre');
+   if(examCentre&&window.location.hash==='#exam-centre'){
+     window.addEventListener('load',function(){setTimeout(function(){examCentre.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});},80)},{once:true});
+   }
+ }
+}catch(e){}
 updateStats();
 })();
 </script><style id="wide-reading-notes-layout">
