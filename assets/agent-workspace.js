@@ -23,8 +23,15 @@ async function load(){
  }).catch(()=>{status.textContent='Ready · '+bank.length+' structured practice questions · some study sources could not be loaded.'});
 }
 function relevantNotes(query){
- const terms=norm(query).split(/\s+/).filter(x=>x.length>2);
- return notes.map(note=>{const text=note.text.toLowerCase();let score=terms.reduce((s,t)=>s+(text.split(t).length-1),0);let idx=-1;for(const t of terms){idx=text.indexOf(t);if(idx>=0)break}return {...note,score,excerpt:idx>=0?note.text.slice(Math.max(0,idx-180),Math.min(note.text.length,idx+420)):'')}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4)
+ const terms=norm(query).split(/\\s+/).filter(x=>x.length>2);
+ return notes.map(note=>{
+  const text=note.text.toLowerCase();
+  const score=terms.reduce((sum,term)=>sum+(text.split(term).length-1),0);
+  let idx=-1;
+  for(const term of terms){idx=text.indexOf(term);if(idx>=0)break}
+  const excerpt=idx>=0?note.text.slice(Math.max(0,idx-180),Math.min(note.text.length,idx+420)):'';
+  return {...note,score,excerpt};
+ }).filter(note=>note.score>0).sort((a,b)=>b.score-a.score).slice(0,4);
 }
 function relevantQuestions(query){
  const terms=norm(query).split(/\s+/).filter(x=>x.length>2);
