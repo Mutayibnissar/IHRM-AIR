@@ -1,6 +1,6 @@
 /* IHRM Air offline app shell — versioned cache, GitHub Pages safe. */
 'use strict';
-const CACHE_NAME = 'ihrm-air-shell-v8';
+const CACHE_NAME = 'ihrm-air-shell-v9';
 const BASE_PATH = new URL('./', self.registration.scope).pathname;
 const APP_SHELL = [
   BASE_PATH,
@@ -14,6 +14,7 @@ const APP_SHELL = [
   BASE_PATH + 'references.html',
   BASE_PATH + 'agents.html',
   BASE_PATH + 'assets/agent-workspace.js',
+  BASE_PATH + 'assets/study-tools.js',
   BASE_PATH + 'offline.html',
   BASE_PATH + 'assets/ihrm-refresh.js',
   BASE_PATH + 'assets/ihrm-refresh.css',
