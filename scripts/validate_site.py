@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     "index.html": ["units.html", "practice.html", "tools.html", 'id="homeAttempts"', 'id="homeAccuracy"', 'site-nav-toggle'],
     "units.html": ['id="u1"', 'id="u2"', 'id="u3"', 'id="u4"'],
-    "practice.html": ['id="exam-centre"', 'id="quiz"', 'id="integrated-cards"'],
+    "practice.html": ['id="exam-centre"', 'id="quiz"', 'id="integrated-cards"', "data/question-bank.json", "correctOptionId"],
     "tools.html": ["Study Tools Hub", 'href="planner.html"', 'href="tracker.html"', 'href="backup.html"'],
     "planner.html": ["Study Planner", "planner"],
     "tracker.html": ["Session Tracker", "tracker"],
