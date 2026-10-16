@@ -2,6 +2,7 @@
 """Fast, dependency-free integrity checks for the IHRM Air static app."""
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit, unquote
 import json
 import sys
 
@@ -27,12 +28,15 @@ class DocumentCheck(HTMLParser):
         self.footer_count = 0
         self.ids = set()
         self.duplicates = set()
+        self.hrefs = []
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if tag == "nav" and attrs.get("id") == "sitePageNav":
             self.nav_count += 1
         if tag == "footer":
             self.footer_count += 1
+        if attrs.get("href"):
+            self.hrefs.append(attrs["href"])
         ident = attrs.get("id")
         if ident:
             if ident in self.ids:
@@ -65,6 +69,25 @@ for filename, markers in REQUIRED.items():
         fail(f"{filename} contains duplicate footer elements")
     if parser.duplicates:
         fail(f"{filename} has duplicate HTML IDs: {', '.join(sorted(parser.duplicates)[:12])}")
+
+# Check local navigation and asset references across every primary page.
+for filename in REQUIRED:
+    source = (ROOT / filename).read_text(encoding="utf-8")
+    parser = DocumentCheck()
+    parser.feed(source)
+    for href in parser.hrefs:
+        parts = urlsplit(href.strip())
+        if not href.strip() or parts.scheme or parts.netloc or href.strip().startswith(("data:", "javascript:")):
+            continue
+        local_path = unquote(parts.path)
+        if not local_path:
+            continue
+        target = (ROOT / filename).parent / local_path if not local_path.startswith("/") else ROOT / local_path.lstrip("/")
+        target = target.resolve()
+        if ROOT.resolve() not in (target.parents + (target,)):
+            fail(f"{filename} has a local href escaping the repository: {href}")
+        if not target.is_file():
+            fail(f"{filename} has a broken local href: {href}")
 
 try:
     manifest = json.loads((ROOT / "manifest.webmanifest").read_text(encoding="utf-8"))
