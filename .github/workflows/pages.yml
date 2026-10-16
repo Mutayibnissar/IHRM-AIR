@@ -59,6 +59,7 @@ jobs:
               "planner.html": ["Study Planner", "planner"],
               "tracker.html": ["Session Tracker", "tracker"],
               "backup.html": ["Backup", "backup"],
+              "references.html": ["Evidence & Sources", "ILO", "OECD", "Google Scholar", "draft"],
           }
           for filename, markers in required.items():
               path = Path(filename)
