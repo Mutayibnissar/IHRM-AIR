@@ -7,7 +7,7 @@ IHRM Air is a multi-page study platform for International Human Resource Managem
 - Browser-local progress, mistake notebook, study planner and session tracking.
 - Import/export tools for personal study data.
 - Responsive UI, keyboard accessibility and light/dark themes.
-- Installable Progressive Web App (PWA) shell with offline caching for core pages.\n- Automated deployment checks for required pages, navigation, duplicate IDs, PWA metadata, and JavaScript syntax.\n- Versioned question-record schema and editorial guidance for source tracking and review.
+- Installable Progressive Web App (PWA) shell with offline caching for core pages.\n- Automated deployment checks for required pages, navigation, duplicate IDs, PWA metadata, and JavaScript syntax.\n- Versioned question-record schema and editorial guidance for source tracking and review.\n- A structured 32-question bank (8 per unit) migrated from the live practice bank, with an automated exact-parity check so the copy cannot silently drift. Items remain marked draft pending subject-matter verification.
 
 ## Run locally
 This is a static web app. Serve the repository directory with any static HTTP server; opening files directly with `file://` will not enable service-worker features. For example:
