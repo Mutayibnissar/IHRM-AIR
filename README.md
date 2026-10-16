@@ -4,6 +4,7 @@ IHRM Air is a multi-page study platform for International Human Resource Managem
 
 ## Current software foundation
 - Course units, practice and timed mock exams.
+- Dedicated Evidence & Sources page with a recognised IHRM textbook, official ILO/OECD references, and Google Scholar topic discovery.
 - Browser-local progress, mistake notebook, study planner and session tracking.
 - Import/export tools for personal study data.
 - Responsive UI, keyboard accessibility and light/dark themes.
