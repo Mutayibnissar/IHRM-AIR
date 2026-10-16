@@ -1632,7 +1632,7 @@ function fmt(sec){return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(s
 function renderQuestion(){
  if(!session)return;
  var item=session.items[session.pos],selected=session.answers[session.pos],isAnswered=selected!==undefined;
- sessionLabel.textContent=session.mode==='mock'?'Timed mock exam':'Unit-wise practice';
+ sessionLabel.textContent=session.kind==='marked'?'Marked-question review':session.kind==='incorrect'?'Incorrect-answer retry':session.kind==='notebook'?'Missed-question retry':session.mode==='mock'?'Timed mock exam':'Unit-wise practice';
  progressText.textContent='Question '+(session.pos+1)+' of '+session.items.length+(session.review[session.pos]?' · Marked for review':'');
  progress.style.width=((session.pos+1)/session.items.length*100)+'%';
  questionArea.innerHTML='';
@@ -1692,7 +1692,7 @@ function startRetry(items,kind){
  if(!items||!items.length)return;
  stopTimer();
  var retryItems=items.slice();
- session={mode:'practice',items:retryItems,pos:0,answers:{},review:{}};
+ session={mode:'practice',kind:kind,items:retryItems,pos:0,answers:{},review:{}};
  workspace.hidden=false;feedback.innerHTML='';
  sessionLabel.textContent=kind==='marked'?'Marked-question review':kind==='incorrect'?'Incorrect-answer retry':'Missed-question retry';
  clock.textContent='Untimed';progressText.textContent='Retry session';finish.textContent='Finish review';finish.onclick=finishCurrent;mark.disabled=false;
