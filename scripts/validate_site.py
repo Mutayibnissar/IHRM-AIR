@@ -17,7 +17,7 @@ REQUIRED = {
 }
 CORE_FILES = [
     "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "service-worker.js",
-    "manifest.webmanifest", "offline.html", "assets/icon.svg",
+    "manifest.webmanifest", "offline.html", "assets/icon.svg", "data/question.schema.json", "data/README.md",
 ]
 
 class DocumentCheck(HTMLParser):
@@ -80,9 +80,20 @@ for icon in manifest["icons"]:
     if ROOT.resolve() not in icon_path.parents or not icon_path.is_file():
         fail(f"manifest icon is missing or escapes repository: {icon.get('src')}")
 
+try:
+    schema = json.loads((ROOT / "data/question.schema.json").read_text(encoding="utf-8"))
+except (ValueError, OSError) as exc:
+    fail(f"question schema is not valid JSON: {exc}")
+if schema.get("$schema") != "https://json-schema.org/draft/2020-12/schema":
+    fail("question schema must declare JSON Schema 2020-12")
+question_fields = schema.get("properties", {})
+for field in ("id", "unitId", "type", "prompt", "options", "correctOptionId", "explanation", "difficulty", "tags", "source"):
+    if field not in question_fields:
+        fail(f"question schema missing field: {field}")
+
 worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
 for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "offline.html"):
     if page not in worker:
         fail(f"service-worker.js app shell does not mention {page}")
 
-print(f"PASS: {len(REQUIRED)} pages, {len(CORE_FILES)} core assets, navigation/ID integrity, PWA manifest and offline shell.")
+print(f"PASS: {len(REQUIRED)} pages, {len(CORE_FILES)} core assets, navigation/ID integrity, PWA manifest, question schema and offline shell.")
