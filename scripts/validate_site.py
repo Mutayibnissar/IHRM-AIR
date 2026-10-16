@@ -17,7 +17,7 @@ REQUIRED = {
 }
 CORE_FILES = [
     "assets/ihrm-refresh.js", "assets/ihrm-refresh.css", "service-worker.js",
-    "manifest.webmanifest", "offline.html", "assets/icon.svg", "data/question.schema.json", "data/README.md",
+    "manifest.webmanifest", "offline.html", "assets/icon.svg", "data/question.schema.json", "data/question-bank.json", "data/README.md",
 ]
 
 class DocumentCheck(HTMLParser):
@@ -91,9 +91,57 @@ for field in ("id", "unitId", "type", "prompt", "options", "correctOptionId", "e
     if field not in question_fields:
         fail(f"question schema missing field: {field}")
 
+try:
+    bank = json.loads((ROOT / "data/question-bank.json").read_text(encoding="utf-8"))
+except (ValueError, OSError) as exc:
+    fail(f"question bank is not valid JSON: {exc}")
+questions = bank.get("questions")
+if bank.get("schemaVersion") != 1 or not isinstance(questions, list) or not questions:
+    fail("question bank must have schemaVersion 1 and a non-empty questions array")
+question_ids = set()
+unit_counts = {unit: 0 for unit in range(1, 5)}
+for index, question in enumerate(questions, 1):
+    label = f"question #{index}"
+    required = ("id", "unitId", "type", "prompt", "options", "correctOptionId", "explanation", "difficulty", "tags", "source")
+    missing = [field for field in required if field not in question]
+    if missing:
+        fail(f"{label} missing fields: {', '.join(missing)}")
+    if not isinstance(question["id"], str) or question["id"] in question_ids:
+        fail(f"{label} has a missing or duplicate stable ID")
+    question_ids.add(question["id"])
+    unit = question["unitId"]
+    if unit not in unit_counts:
+        fail(f"{label} has invalid unitId: {unit}")
+    unit_counts[unit] += 1
+    if question["type"] != "single-choice" or question["difficulty"] not in ("foundation", "intermediate", "advanced"):
+        fail(f"{label} has unsupported type or difficulty")
+    if not isinstance(question["prompt"], str) or len(question["prompt"].strip()) < 12:
+        fail(f"{label} has an empty or too-short prompt")
+    options = question["options"]
+    if not isinstance(options, list) or not 2 <= len(options) <= 6:
+        fail(f"{label} must have between 2 and 6 options")
+    option_ids = [option.get("id") for option in options if isinstance(option, dict)]
+    if len(option_ids) != len(options) or len(set(option_ids)) != len(option_ids):
+        fail(f"{label} has malformed or duplicate option IDs")
+    if question["correctOptionId"] not in option_ids:
+        fail(f"{label} correctOptionId does not match any option")
+    if not isinstance(question["explanation"], str) or len(question["explanation"].strip()) < 12:
+        fail(f"{label} needs a meaningful explanation")
+    if not isinstance(question["tags"], list) or not question["tags"]:
+        fail(f"{label} needs at least one topic tag")
+    source = question["source"]
+    if not isinstance(source, dict) or source.get("kind") not in ("textbook", "academic-paper", "official-guidance", "course-material", "original") or not source.get("title"):
+        fail(f"{label} has incomplete source metadata")
+    review = question.get("review", {})
+    if review and review.get("status") not in ("draft", "reviewed", "approved"):
+        fail(f"{label} has an invalid review status")
+if len(questions) != 32 or any(count != 8 for count in unit_counts.values()):
+    fail(f"unexpected migrated bank distribution: {len(questions)} total, per unit {unit_counts}")
+if any(question.get("review", {}).get("status") != "draft" for question in questions):
+    fail("migrated questions must remain draft until subject-matter review")
 worker = (ROOT / "service-worker.js").read_text(encoding="utf-8")
 for page in ("index.html", "units.html", "practice.html", "tools.html", "planner.html", "tracker.html", "backup.html", "offline.html"):
     if page not in worker:
         fail(f"service-worker.js app shell does not mention {page}")
 
-print(f"PASS: {len(REQUIRED)} pages, {len(CORE_FILES)} core assets, navigation/ID integrity, PWA manifest, question schema and offline shell.")
+print(f"PASS: {len(REQUIRED)} pages, {len(CORE_FILES)} core assets, navigation/ID integrity, PWA manifest, question schema and {len(questions)} question records across four units.")
