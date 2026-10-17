@@ -28,7 +28,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     if (scrollMetrics.max > 0) {
       assert.equal(scrollMetrics.progress >= 90, true, 'reading progress should reflect page scroll');
       assert.equal(scrollMetrics.visible, true, 'back-to-top should appear after scrolling');
-      await page.locator('#siteBackTop').evaluate(el => el.click());
+      await page.locator('#siteBackTop').first().evaluate(el => el.click());
       await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 5000 });
     }
 
