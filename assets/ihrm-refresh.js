@@ -487,19 +487,7 @@
       ['Evidence & references','references.html','Sources and further reading'],
       ['Agent Crew','agents.html','Run a guided study mission']
     ];
-    var progress=document.createElement('div');
-    progress.id='siteReadingProgress';progress.setAttribute('aria-hidden','true');
-    var progressFill=document.createElement('span');progress.appendChild(progressFill);document.body.appendChild(progress);
-    var top=document.createElement('button');
-    top.id='siteBackTop';top.type='button';top.textContent='↑';top.setAttribute('aria-label','Back to top');
-    top.addEventListener('click',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
-    document.body.appendChild(top);
-    function updateScroll(){
-      var max=document.documentElement.scrollHeight-window.innerHeight;
-      progressFill.style.width=(max>0?Math.max(0,Math.min(100,window.scrollY/max*100)):0)+'%';
-      top.classList.toggle('is-visible',window.scrollY>420);
-    }
-    window.addEventListener('scroll',updateScroll,{passive:true});window.addEventListener('resize',updateScroll);updateScroll();
+    // Reading progress and back-to-top are owned by the primary global UI layer.
 
     // Reuse the single shared palette created by the unified navigation layer.
     // Keeping one input/results pair avoids duplicate IDs and competing Ctrl+K handlers.
