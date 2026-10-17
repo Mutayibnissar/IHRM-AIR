@@ -128,12 +128,14 @@
     var destinations=[
       {label:'Home / Flight deck',detail:'Overview and study progress',href:'index.html',terms:'home dashboard progress'},
       {label:'Course Units',detail:'Four units and full study notes',href:'units.html',terms:'units notes learning course'},
+      {label:'Full Course Notes',detail:'Expanded IHRM revision notes',href:'full-notes.html',terms:'full notes detailed chapter textbook revision'},
       {label:'Practice & Exam Centre',detail:'MCQs, mocks and answer review',href:'practice.html',terms:'practice mcq quiz mock exam test'},
       {label:'Study Tools',detail:'Focus timer, notes, checklist and recall',href:'tools.html',terms:'tools timer notes checklist recall'},
       {label:'Evidence & Sources',detail:'Core IHRM text and official labour guidance',href:'references.html',terms:'sources references bibliography academic research ILO OECD scholar'},
       {label:'Study Planner',detail:'Build a revision plan',href:'planner.html',terms:'planner revision schedule exam date'},
       {label:'Study Tracker',detail:'Focus timer and session history',href:'tracker.html',terms:'tracker timer focus sessions'},
-      {label:'Backup & Restore',detail:'Export or restore local study data',href:'backup.html',terms:'backup restore export import'}
+      {label:'Backup & Restore',detail:'Export or restore local study data',href:'backup.html',terms:'backup restore export import'},
+      {label:'Agent Crew',detail:'Study workflows and specialist agents',href:'agents.html',terms:'agents crew AI workflow study assistant'}
     ];
     var items=destinations.slice();
     document.querySelectorAll('main h1,main h2,main h3,section h1,section h2,section h3').forEach(function(h){
@@ -142,7 +144,16 @@
         items.push({label:label,detail:'Topic on this page',href:'#'+h.id,terms:label.toLowerCase()});
       }
     });
+    var activeIndex=-1;
+    function setActive(index){
+      var links=results.querySelectorAll('a.air-command-result');
+      if(!links.length){activeIndex=-1;return}
+      activeIndex=(index+links.length)%links.length;
+      links.forEach(function(link,i){link.setAttribute('aria-selected',String(i===activeIndex));});
+      links[activeIndex].scrollIntoView({block:'nearest'});
+    }
     function render(q){
+      activeIndex=-1;
       results.textContent='';
       var query=(q||'').trim().toLowerCase();
       var matches=items.filter(function(it){return !query||(it.label+' '+it.detail+' '+(it.terms||'')).toLowerCase().includes(query)}).slice(0,12);
@@ -158,9 +169,15 @@
         results.appendChild(a);
       });
     }
-    function openPalette(){palette.hidden=false;render(input.value);setTimeout(function(){input.focus()},30)}
-    function closePalette(){palette.hidden=true}
+    var lastFocus=null;
+    function openPalette(){lastFocus=document.activeElement;palette.hidden=false;render(input.value);setTimeout(function(){input.focus()},30)}
+    function closePalette(){palette.hidden=true;if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus()}
     input.addEventListener('input',function(){render(input.value)});
+    input.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){e.preventDefault();setActive(activeIndex+1)}
+      else if(e.key==='ArrowUp'){e.preventDefault();setActive(activeIndex<0?results.querySelectorAll('a.air-command-result').length-1:activeIndex-1)}
+      else if(e.key==='Enter'&&activeIndex>=0){e.preventDefault();var selected=results.querySelectorAll('a.air-command-result')[activeIndex];if(selected)selected.click()}
+    });
     close.addEventListener('click',closePalette);
     palette.addEventListener('click',function(e){if(e.target===palette)closePalette()});
     document.addEventListener('keydown',function(e){
