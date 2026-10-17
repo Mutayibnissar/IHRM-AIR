@@ -2,6 +2,12 @@
 (function(){
   'use strict';
   var root=document.documentElement;
+  // Repair legacy pages that may contain duplicate global-control IDs.
+  // Keep one canonical node per ID before any test or feature queries it.
+  ['siteReadingProgress','siteBackTop','airBackToTop'].forEach(function(id){
+    var nodes=document.querySelectorAll('[id="'+id+'"]');
+    for(var i=1;i<nodes.length;i++)nodes[i].remove();
+  });
   var path=(location.pathname.split('/').pop()||'index.html').toLowerCase();
   var wrap=document.querySelector('.site-nav-wrap');
   var toggle=wrap&&wrap.querySelector('.site-nav-toggle');
