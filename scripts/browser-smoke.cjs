@@ -9,6 +9,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push({ url: page.url(), message: error.message, stack: error.stack }));
 
+    console.log('SMOKE CHECKPOINT: home + global navigation');
     await page.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'networkidle' });
     assert.match(await page.title(), /IHRM Air/i);
     assert.equal(await page.locator('a[href="units.html"]').count() > 0, true, 'home should link to course units');
@@ -31,21 +32,25 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       await page.waitForFunction(() => window.scrollY < 20, null, { timeout: 5000 });
     }
 
+    console.log('SMOKE CHECKPOINT: course units');
     await page.goto('http://127.0.0.1:8765/units.html', { waitUntil: 'networkidle' });
     for (const unit of ['#u1', '#u2', '#u3', '#u4']) {
       assert.equal(await page.locator(unit).count() > 0, true, 'course notes should include ' + unit);
     }
 
+    console.log('SMOKE CHECKPOINT: references');
     await page.goto('http://127.0.0.1:8765/references.html', { waitUntil: 'networkidle' });
     assert.match(await page.locator('h1').innerText(), /Evidence & Sources/i);
     assert.equal(await page.locator('a[href^="https://www.ilo.org"]').count() > 0, true, 'source page should link to official ILO guidance');
     assert.equal((await page.locator('a[href^="https://www.oecd.org"]').count()) + (await page.locator('a[href^="https://doi.org"]').count()) > 0, true, 'source page should link to OECD guidance');
 
+    console.log('SMOKE CHECKPOINT: tools hub');
     await page.goto('http://127.0.0.1:8765/tools.html', { waitUntil: 'networkidle' });
     for (const target of ['planner.html', 'tracker.html', 'backup.html']) {
       assert.equal(await page.locator('a[href="' + target + '"]').count() > 0, true, 'tools hub should link to ' + target);
     }
 
+    console.log('SMOKE CHECKPOINT: planner');
     await page.goto('http://127.0.0.1:8765/planner.html', { waitUntil: 'networkidle' });
     await page.locator('#planForm').waitFor({ state: 'visible', timeout: 10000 });
     await page.locator('#examDate').fill(new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10));
@@ -56,6 +61,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#planTasks input[type="checkbox"]').first().check();
     assert.match(await page.locator('#planSummary').innerText(), /1 completed/, 'planner should persist task completion');
 
+    console.log('SMOKE CHECKPOINT: tracker');
     await page.goto('http://127.0.0.1:8765/tracker.html', { waitUntil: 'networkidle' });
     await page.locator('#timerDisplay').waitFor({ state: 'visible', timeout: 10000 });
     assert.equal(await page.locator('#timerDisplay').innerText(), '25:00', 'focus timer should initialise');
@@ -69,6 +75,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#finishTimer').click();
     assert.match(await page.locator('#sessionCount').innerText(), /1 sessions/, 'paused focus session should save elapsed time');
 
+    console.log('SMOKE CHECKPOINT: backup and restore');
     await page.goto('http://127.0.0.1:8765/backup.html', { waitUntil: 'networkidle' });
     await page.locator('#exportBackup').waitFor({ state: 'visible', timeout: 10000 });
     const downloadPromise = page.waitForEvent('download');
@@ -82,6 +89,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.waitForFunction(() => (document.getElementById('backupStatus')?.textContent || '').includes('Backup restored'), null, { timeout: 5000 });
     assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('air-study-plan-v1') || '{}').tasks?.[0]?.id), 'restored-task', 'backup restore should restore local data');
 
+    console.log('SMOKE CHECKPOINT: practice question loading');
     await page.goto('http://127.0.0.1:8765/practice.html', { waitUntil: 'networkidle' });
     const status = page.locator('#questionBankStatus');
     await status.waitFor({ state: 'visible', timeout: 10000 });
@@ -122,6 +130,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#examQuestionArea .exam-option').nth(correctIndex).click();
     await page.waitForFunction(() => Boolean(document.querySelector('#examQuestionArea .exam-option.correct')), null, { timeout: 5000 });
 
+    console.log('SMOKE CHECKPOINT: deterministic scoring');
     // Deterministic scoring regression: answer every Unit 1 practice question correctly.
     await page.reload({ waitUntil: 'networkidle' });
     await page.evaluate(() => localStorage.removeItem('air-exam-history'));
@@ -150,6 +159,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.equal(practiceHistory[0]?.total, 8, 'practice history should record eight questions');
     assert.equal(practiceHistory[0]?.score, 100, 'practice history should persist the calculated score');
 
+    console.log('SMOKE CHECKPOINT: mock exam history');
     // Mock exam completion and history persistence.
     await page.reload({ waitUntil: 'networkidle' });
     await page.selectOption('#examMode', 'mock');
@@ -162,6 +172,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     const history = await page.evaluate(() => JSON.parse(localStorage.getItem('air-exam-history') || '[]'));
     assert.equal(history.some(item => item.mode === 'mock'), true, 'timed mock should be recorded in exam history');
 
+    console.log('SMOKE CHECKPOINT: Agent Crew');
     await page.goto('http://127.0.0.1:8765/agents.html', { waitUntil: 'networkidle' });
     await page.locator('#agentStatus').waitFor({ state: 'visible', timeout: 10000 });
     await page.waitForFunction(() => { const s = document.getElementById('agentStatus')?.textContent || ''; return /\bready\b/i.test(s) || /could not be loaded|unavailable/i.test(s); }, null, { timeout: 15000 });
@@ -173,6 +184,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.waitForFunction(() => (document.getElementById('agentOutput')?.innerText || '').includes('study mission'), null, { timeout: 5000 });
     assert.equal(await page.locator('a[href="practice.html"]').count() > 0, true, 'Agent Crew should link back to practice');
  
+    console.log('SMOKE CHECKPOINT: service worker/offline navigation');
     const swReady = await page.evaluate(async () => {
       if (!('serviceWorker' in navigator)) return false;
       const registration = await Promise.race([navigator.serviceWorker.ready, new Promise(resolve => setTimeout(() => resolve(null), 8000))]);
@@ -185,6 +197,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.locator('#exam-centre').waitFor({ state: 'visible', timeout: 10000 });
     await page.context().setOffline(false);
 
+    console.log('SMOKE CHECKPOINT: mobile navigation and final checks');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('http://127.0.0.1:8765/index.html', { waitUntil: 'networkidle' });
     const menu = page.locator('.site-nav-toggle').first();
